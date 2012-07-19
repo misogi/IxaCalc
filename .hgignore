@@ -3,3 +3,4 @@ _ReSharper.IxaCalc/
 IxaCalc/obj/
 IxaCalc/bin/
 StyleCop.Cache
+*.suo
