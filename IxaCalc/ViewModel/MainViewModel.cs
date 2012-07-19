@@ -3,6 +3,8 @@ using IxaCalc.Model;
 
 namespace IxaCalc.ViewModel
 {
+    using System.Collections.ObjectModel;
+
     /// <summary>
     /// This class contains properties that the main View can data bind to.
     /// <para>
@@ -15,11 +17,6 @@ namespace IxaCalc.ViewModel
     public class MainViewModel : ViewModelBase
     {
         /// <summary>
-        /// The <see cref="WelcomeTitle" /> property's name.
-        /// </summary>
-        public const string WelcomeTitlePropertyName = "WelcomeTitle";
-
-        /// <summary>
         /// データ取得用オブジェクト
         /// </summary>
         private readonly IDataService _dataService;
@@ -27,7 +24,7 @@ namespace IxaCalc.ViewModel
         /// <summary>
         /// ウェルカム用タイトル
         /// </summary>
-        private string _welcomeTitle = string.Empty;
+        private ObservableCollection<Busho> _bushoList; 
 
         /// <summary>
         /// Initializes a new instance of the MainViewModel class.
@@ -39,7 +36,7 @@ namespace IxaCalc.ViewModel
         {
             _dataService = dataService;
             _dataService.GetData(
-                (item, error) =>
+                (items, error) =>
                 {
                     if (error != null)
                     {
@@ -47,7 +44,7 @@ namespace IxaCalc.ViewModel
                         return;
                     }
 
-                    WelcomeTitle = item.Title;
+                    BushoList = items;
                 });
         }
 
@@ -55,22 +52,17 @@ namespace IxaCalc.ViewModel
         /// Gets the WelcomeTitle property.
         /// Changes to that property's value raise the PropertyChanged event. 
         /// </summary>
-        public string WelcomeTitle
+        public ObservableCollection<Busho> BushoList
         {
             get
             {
-                return _welcomeTitle;
+                return _bushoList;
             }
 
             set
             {
-                if (_welcomeTitle == value)
-                {
-                    return;
-                }
-
-                _welcomeTitle = value;
-                RaisePropertyChanged(WelcomeTitlePropertyName);
+                _bushoList = value;
+                RaisePropertyChanged("BushoList");
             }
         }
 

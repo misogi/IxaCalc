@@ -18,14 +18,6 @@
     </UserControl.Resources>
 
     <Grid x:Name="LayoutRoot">
-
-        <TextBlock FontSize="36"
-                   FontWeight="Bold"
-                   Foreground="Purple"
-                   Text="{Binding WelcomeTitle}"
-                   VerticalAlignment="Center"
-                   HorizontalAlignment="Center"
-                   TextWrapping="Wrap" />
-
+        <ListBox Height="132" HorizontalAlignment="Left" Margin="99,63,0,0" Name="listBox1" VerticalAlignment="Top" Width="128" ItemsSource="{Binding BushoList}" />
     </Grid>
 </UserControl>

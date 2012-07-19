@@ -2,6 +2,8 @@
 
 namespace IxaCalc.Model
 {
+    using System.Collections.ObjectModel;
+
     /// <summary>
     /// 初期データ取得用インタフェース
     /// </summary>
@@ -13,6 +15,6 @@ namespace IxaCalc.Model
         /// <param name="callback">
         /// エラー時に使うコールバック
         /// </param>
-        void GetData(Action<DataItem, Exception> callback);
+        void GetData(Action<ObservableCollection<Busho>, Exception> callback);
     }
 }
