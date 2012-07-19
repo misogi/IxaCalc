@@ -3,7 +3,14 @@ using IxaCalc.Model;
 
 namespace IxaCalc.ViewModel
 {
+    using System;
     using System.Collections.ObjectModel;
+    using System.Windows.Controls;
+    using System.Windows.Input;
+
+    using GalaSoft.MvvmLight.Command;
+
+    using IxaCalc.Enums;
 
     /// <summary>
     /// This class contains properties that the main View can data bind to.
@@ -52,7 +59,43 @@ namespace IxaCalc.ViewModel
                     BushoList = items;
                 });
             _deck = new Busho[4];
+            SetDeckCommand = new RelayCommand<KeyEventArgs>(e =>
+                {
+                    var cnt = e.OriginalSource as ListBoxItem;
+                    if (cnt == null)
+                    {
+                        return;
+                    }
+
+                    var selBusho = cnt.Content as Busho;
+                    if (selBusho == null)
+                    {
+                        return;
+                    }
+
+                    if (e.Key == Key.D1)
+                    {
+                        Busho1 = selBusho;
+                    }
+                    else if (e.Key == Key.D2)
+                    {
+                        Busho2 = selBusho;
+                    }
+                    else if (e.Key == Key.D3)
+                    {
+                        Busho3 = selBusho;
+                    }
+                    else if (e.Key == Key.D4)
+                    {
+                        Busho4 = selBusho;
+                    }
+                });
         }
+
+        /// <summary>
+        /// 武将リストからデッキにキーボードで入れる
+        /// </summary>
+        public RelayCommand<KeyEventArgs> SetDeckCommand { get; private set; }
 
         /// <summary>
         /// Gets the WelcomeTitle property.
