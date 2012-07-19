@@ -3,7 +3,7 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-             xmlns:ignore="http://www.ignore.com"
+             xmlns:ignore="http://www.ignore.com" xmlns:Emit="clr-namespace:System.Reflection.Emit;assembly=mscorlib"
              mc:Ignorable="d ignore"
              Height="300"
              Width="300"
@@ -18,6 +18,15 @@
     </UserControl.Resources>
 
     <Grid x:Name="LayoutRoot">
-        <ListBox Height="132" HorizontalAlignment="Left" Margin="99,63,0,0" Name="listBox1" VerticalAlignment="Top" Width="128" ItemsSource="{Binding BushoList}" />
+        <ListBox Height="132" HorizontalAlignment="Left" Margin="99,63,0,0" Name="listBox1" VerticalAlignment="Top" Width="128" ItemsSource="{Binding BushoList}" >
+            <ListBox.ItemTemplate>
+                <DataTemplate>
+                    <StackPanel>
+                        <TextBlock Text="{Binding Name}" />
+                        <TextBlock Text="{Binding Rarity}" />
+                    </StackPanel>
+                </DataTemplate>
+            </ListBox.ItemTemplate>
+        </ListBox>
     </Grid>
 </UserControl>
