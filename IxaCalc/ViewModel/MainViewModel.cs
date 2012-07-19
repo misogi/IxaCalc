@@ -38,6 +38,8 @@ namespace IxaCalc.ViewModel
         /// </summary>
         private Busho[] _deck;
 
+        private int _allSoldier;
+
         /// <summary>
         /// Initializes a new instance of the MainViewModel class.
         /// </summary>
@@ -89,6 +91,7 @@ namespace IxaCalc.ViewModel
                     {
                         Busho4 = selBusho;
                     }
+                    AllSoldierNumber = this.TotalSoldierNum();
                 });
         }
 
@@ -201,6 +204,45 @@ namespace IxaCalc.ViewModel
                 _deck[3] = value;
                 RaisePropertyChanged("Busho4");
             }
+        }
+
+        /// <summary>
+        /// 部隊の合計兵士数
+        /// </summary>
+        public int AllSoldierNumber
+        {
+            get
+            {
+                return _allSoldier;
+            }
+
+            set
+            {
+                if (_allSoldier == value)
+                {
+                    return;
+                }
+
+                _allSoldier = value;
+                RaisePropertyChanged("AllSoldierNumber");
+            }
+        }
+
+        /// <summary>
+        /// 総兵数
+        /// </summary>
+        /// <returns>計算した総兵数</returns>
+        public int TotalSoldierNum()
+        {
+            int soldier = 0;
+            foreach (var busho in _deck)
+            {
+                if (busho != null)
+                {
+                    soldier += busho.SoldierNumber;
+                }
+            }
+            return soldier;
         }
 
         ////public override void Cleanup()

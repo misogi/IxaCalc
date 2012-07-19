@@ -52,5 +52,6 @@
                 <TextBlock Text="{Binding Rarity}" />
             </Grid>
         </StackPanel>
+        <TextBlock Height="25" HorizontalAlignment="Left" Margin="377,36,0,0" Name="textBlock1" Text="{Binding AllSoldierNumber}" VerticalAlignment="Top" Width="216" />
     </Grid>
 </UserControl>
