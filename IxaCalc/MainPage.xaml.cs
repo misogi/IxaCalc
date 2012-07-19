@@ -1,19 +1,16 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Net;
-using System.Windows;
-using System.Windows.Controls;
-using System.Windows.Documents;
-using System.Windows.Input;
-using System.Windows.Media;
-using System.Windows.Media.Animation;
-using System.Windows.Shapes;
-
-namespace IxaCalc
+﻿namespace IxaCalc
 {
-    public partial class MainPage : UserControl
+    using System.Windows.Controls;
+
+    /// <summary>
+    /// 最初に表示されるページ
+    /// </summary>
+    public partial class MainPage
     {
+        /// <summary>
+        /// Initializes a new instance of the <see cref="MainPage"/> class. 
+        /// コンストラクタ
+        /// </summary>
         public MainPage()
         {
             InitializeComponent();

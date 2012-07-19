@@ -11,8 +11,8 @@
 
 using GalaSoft.MvvmLight;
 using GalaSoft.MvvmLight.Ioc;
-using Microsoft.Practices.ServiceLocation;
 using IxaCalc.Model;
+using Microsoft.Practices.ServiceLocation;
 
 namespace IxaCalc.ViewModel
 {
@@ -29,6 +29,10 @@ namespace IxaCalc.ViewModel
     /// </summary>
     public class ViewModelLocator
     {
+        /// <summary>
+        /// Initializes static members of the <see cref="ViewModelLocator"/> class. 
+        /// ビューモデルを切り替える
+        /// </summary>
         static ViewModelLocator()
         {
             ServiceLocator.SetLocatorProvider(() => SimpleIoc.Default);

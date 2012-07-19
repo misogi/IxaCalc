@@ -14,14 +14,42 @@ namespace IxaCalc.ViewModel
     /// </summary>
     public class MainViewModel : ViewModelBase
     {
-        private readonly IDataService _dataService;
-
         /// <summary>
         /// The <see cref="WelcomeTitle" /> property's name.
         /// </summary>
         public const string WelcomeTitlePropertyName = "WelcomeTitle";
 
+        /// <summary>
+        /// データ取得用オブジェクト
+        /// </summary>
+        private readonly IDataService _dataService;
+
+        /// <summary>
+        /// ウェルカム用タイトル
+        /// </summary>
         private string _welcomeTitle = string.Empty;
+
+        /// <summary>
+        /// Initializes a new instance of the MainViewModel class.
+        /// </summary>
+        /// <param name="dataService">
+        /// The data Service.
+        /// </param>
+        public MainViewModel(IDataService dataService)
+        {
+            _dataService = dataService;
+            _dataService.GetData(
+                (item, error) =>
+                {
+                    if (error != null)
+                    {
+                        // Report error here
+                        return;
+                    }
+
+                    WelcomeTitle = item.Title;
+                });
+        }
 
         /// <summary>
         /// Gets the WelcomeTitle property.
@@ -44,25 +72,6 @@ namespace IxaCalc.ViewModel
                 _welcomeTitle = value;
                 RaisePropertyChanged(WelcomeTitlePropertyName);
             }
-        }
-
-        /// <summary>
-        /// Initializes a new instance of the MainViewModel class.
-        /// </summary>
-        public MainViewModel(IDataService dataService)
-        {
-            _dataService = dataService;
-            _dataService.GetData(
-                (item, error) =>
-                {
-                    if (error != null)
-                    {
-                        // Report error here
-                        return;
-                    }
-
-                    WelcomeTitle = item.Title;
-                });
         }
 
         ////public override void Cleanup()
