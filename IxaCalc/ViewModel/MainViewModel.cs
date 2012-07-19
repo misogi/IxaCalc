@@ -24,7 +24,12 @@ namespace IxaCalc.ViewModel
         /// <summary>
         /// ウェルカム用タイトル
         /// </summary>
-        private ObservableCollection<Busho> _bushoList; 
+        private ObservableCollection<Busho> _bushoList;
+
+        /// <summary>
+        /// デッキ用
+        /// </summary>
+        private Busho[] _deck;
 
         /// <summary>
         /// Initializes a new instance of the MainViewModel class.
@@ -46,6 +51,7 @@ namespace IxaCalc.ViewModel
 
                     BushoList = items;
                 });
+            _deck = new Busho[4];
         }
 
         /// <summary>
@@ -63,6 +69,94 @@ namespace IxaCalc.ViewModel
             {
                 _bushoList = value;
                 RaisePropertyChanged("BushoList");
+            }
+        }
+
+        /// <summary>
+        /// デッキに入った1番目の武将
+        /// </summary>
+        public Busho Busho1
+        {
+            get
+            {
+                return _deck[0];
+            }
+
+            set
+            {
+                if (_deck[0] == value)
+                {
+                    return;
+                }
+
+                _deck[0] = value;
+                RaisePropertyChanged("Busho1");
+            }
+        }
+
+        /// <summary>
+        /// デッキに入った2番目の武将
+        /// </summary>
+        public Busho Busho2
+        {
+            get
+            {
+                return _deck[1];
+            }
+
+            set
+            {
+                if (_deck[1] == value)
+                {
+                    return;
+                }
+
+                _deck[1] = value;
+                RaisePropertyChanged("Busho2");
+            }
+        }
+
+        /// <summary>
+        /// デッキに入った3番目の武将
+        /// </summary>
+        public Busho Busho3
+        {
+            get
+            {
+                return _deck[2];
+            }
+
+            set
+            {
+                if (_deck[2] == value)
+                {
+                    return;
+                }
+
+                _deck[2] = value;
+                RaisePropertyChanged("Busho3");
+            }
+        }
+
+        /// <summary>
+        /// デッキに入った1番目の武将
+        /// </summary>
+        public Busho Busho4
+        {
+            get
+            {
+                return _deck[3];
+            }
+
+            set
+            {
+                if (_deck[3] == value)
+                {
+                    return;
+                }
+
+                _deck[3] = value;
+                RaisePropertyChanged("Busho4");
             }
         }
 

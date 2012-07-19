@@ -5,8 +5,8 @@
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
              xmlns:ignore="http://www.ignore.com" xmlns:Emit="clr-namespace:System.Reflection.Emit;assembly=mscorlib"
              mc:Ignorable="d ignore"
-             Height="300"
-             Width="300"
+             Height="600"
+             Width="900"
              DataContext="{Binding Main, Source={StaticResource Locator}}">
 
     <UserControl.Resources>
@@ -18,7 +18,7 @@
     </UserControl.Resources>
 
     <Grid x:Name="LayoutRoot">
-        <ListBox Height="132" HorizontalAlignment="Left" Margin="99,63,0,0" Name="listBox1" VerticalAlignment="Top" Width="128" ItemsSource="{Binding BushoList}" >
+        <ListBox Height="132" HorizontalAlignment="Left" Margin="259,203,0,0" Name="listBox1" VerticalAlignment="Top" Width="128" ItemsSource="{Binding BushoList}">
             <ListBox.ItemTemplate>
                 <DataTemplate>
                     <StackPanel>
@@ -28,5 +28,11 @@
                 </DataTemplate>
             </ListBox.ItemTemplate>
         </ListBox>
+        <StackPanel Height="502" HorizontalAlignment="Left" Margin="480,98,0,0" Name="stackPanel1" VerticalAlignment="Top" Width="242">
+            <Grid Height="100" Name="grid1" Width="200" DataContext="{Binding Busho1}" />
+            <Grid Height="100" Name="grid2" Width="200" DataContext="{Binding Busho2}" />
+            <Grid Height="100" Name="grid3" Width="200" DataContext="{Binding Busho3}" />
+            <Grid Height="100" Name="grid4" Width="200" DataContext="{Binding Busho4}" />
+        </StackPanel>
     </Grid>
 </UserControl>
