@@ -1,6 +1,6 @@
 syntax: glob
 _ReSharper.IxaCalc/
 IxaCalc/obj/
-IxaCalc/bin/
 StyleCop.Cache
 *.suo
+IxaCalc/Bin/
