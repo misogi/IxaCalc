@@ -6,6 +6,11 @@
 
         private int _bushoNum = 0;
 
+        public Deck()
+        {
+            _bushos = new Busho[4];
+        }
+
         public Busho[] Bushos
         {
             get;
@@ -17,6 +22,14 @@
             if (_bushoNum <= 3)
             {
                 _bushos[_bushoNum++] = busho;
+            }
+        }
+
+        public int BushoNum
+        {
+            get
+            {
+                return _bushoNum;
             }
         }
 

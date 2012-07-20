@@ -4,3 +4,10 @@ IxaCalc/obj/
 StyleCop.Cache
 *.suo
 IxaCalc/Bin/
+bin/
+obj/
+TestResults/
+Local.testsettings
+TraceAndTestImpact.testsettings
+*.vsmdi
+~$*
