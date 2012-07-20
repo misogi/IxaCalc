@@ -94,7 +94,7 @@ namespace IxaCalc.ViewModel
             
             ChangeRarityCommand = new RelayCommand<string>(this.Execute);
 
-            this.Execute("極");
+            this.Execute("特");
         }
 
         public void Execute(Busho busho)
