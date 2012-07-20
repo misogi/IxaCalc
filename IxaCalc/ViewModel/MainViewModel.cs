@@ -6,6 +6,7 @@ namespace IxaCalc.ViewModel
     using System;
     using System.Collections.Generic;
     using System.Collections.ObjectModel;
+    using System.Linq;
     using System.Windows.Controls;
     using System.Windows.Input;
 
@@ -32,6 +33,11 @@ namespace IxaCalc.ViewModel
         /// <summary>
         /// ウェルカム用タイトル
         /// </summary>
+        private ObservableCollection<Busho> _allBushoList;
+
+        /// <summary>
+        /// ウェルカム用タイトル
+        /// </summary>
         private ObservableCollection<Busho> _bushoList;
 
         /// <summary>
@@ -46,6 +52,7 @@ namespace IxaCalc.ViewModel
         private int _allAttack;
 
         private List<Soldier> _soldierTypes;
+
         /// <summary>
         /// Initializes a new instance of the MainViewModel class.
         /// </summary>
@@ -64,7 +71,7 @@ namespace IxaCalc.ViewModel
                         return;
                     }
 
-                    BushoList = items;
+                    _allBushoList = items;
                 });
             SoldierTypes = _dataService.GetSoldierTypes();
             _soldier = SoldierTypes[0];
@@ -75,11 +82,18 @@ namespace IxaCalc.ViewModel
             RemoveDeckCommand = new RelayCommand<int>(this.Execute);
 
             ChangeSoldierCommand = new RelayCommand<Soldier>(this.Execute);
+            
+            ChangeRarityCommand = new RelayCommand<string>(this.Execute);
         }
 
         public void Execute(Busho busho)
         {
-            this._mainDeck.Add(busho);
+            var index = _allBushoList.IndexOf(busho);
+            if (index < 0)
+            {
+                return;
+            }
+            this._mainDeck.Add(_allBushoList[index]);
             UpdateAllSum();
             string[] keys = { "Busho1", "Busho2", "Busho3", "Busho4" };
             foreach (var key in keys)
@@ -105,6 +119,13 @@ namespace IxaCalc.ViewModel
             UpdateAllSum();
         }
 
+        public void Execute(string raritystr)
+        {
+            var rarity = RankDictionary.rarity[raritystr];
+            var list1 = from p in _allBushoList where p.Rarity == rarity orderby p.Id select p;
+            BushoList = new ObservableCollection<Busho>(list1);
+        }
+
         private void UpdateAllSum()
         {
             AllSoldierNumber = this._mainDeck.TotalSoldierNum();
@@ -120,6 +141,8 @@ namespace IxaCalc.ViewModel
         public RelayCommand<int> RemoveDeckCommand { get; private set; }
 
         public RelayCommand<Soldier> ChangeSoldierCommand { get; private set; }
+
+        public RelayCommand<string> ChangeRarityCommand { get; private set; }
         /// <summary>
         /// Gets the WelcomeTitle property.
         /// Changes to that property's value raise the PropertyChanged event. 

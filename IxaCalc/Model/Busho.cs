@@ -12,7 +12,6 @@
     /// </summary>
     public class Busho : INotifyPropertyChanged
     {
-        private LeadershipRank _currentLeadership;
 
         private ImageSource _image;
 
@@ -71,19 +70,6 @@
         /// <param name="horse">馬兵統率</param>
         /// <param name="bow">弓兵統率</param>
         /// <param name="weapon">兵器統率</param>
-        public Busho(string name, string rare, int soldiernum, double cost, string lance, string horse, string bow, string weapon)
-        {
-            Name = name;
-            SoldierNumber = soldiernum;
-            Cost = cost;
-            Rarity = RankDictionary.rarity[rare];
-            Bow = RankDictionary.rank[bow];
-            Weapon = RankDictionary.rank[weapon];
-            Horse = RankDictionary.rank[horse];
-            Lance = RankDictionary.rank[lance];
-            LoadImage();
-        }
-
         public Busho(int id, string rare, string name, double cost, int soldiernum, string lance, string bow, string horse, string weapon)
         {
             Id = id;
@@ -96,14 +82,6 @@
             Horse = RankDictionary.rank[horse];
             Lance = RankDictionary.rank[lance];
             LoadImage();
-        }
-
-        public string CurrentLeadership
-        {
-            get
-            {
-                return _currentLeadership.ToString();
-            }
         }
 
         public ImageSource Image
