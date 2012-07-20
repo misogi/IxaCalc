@@ -27,5 +27,13 @@
                 { "極", RarityRank.SuperRare },
                 { "天", RarityRank.UltraRare }
             };
+
+        public static Dictionary<string, Soldier> soldiers = new Dictionary<string, Soldier>
+            {
+                { "足軽", new Soldier("足軽", 11, 11)},
+                { "弓足軽", new Soldier("弓足軽", 10, 12)},
+                { "騎馬兵", new Soldier("騎馬兵", 12, 10)},
+                { "破壊槌", new Soldier("破壊槌", 8, 3)},
+            };
     }
 }

@@ -4,6 +4,7 @@ using IxaCalc.Model;
 namespace IxaCalc.ViewModel
 {
     using System;
+    using System.Collections.Generic;
     using System.Collections.ObjectModel;
     using System.Windows.Controls;
     using System.Windows.Input;
@@ -40,6 +41,11 @@ namespace IxaCalc.ViewModel
 
         private int _allSoldier;
 
+        private Soldier _soldier;
+
+        private int _allAttack;
+
+        private List<Soldier> _soldierTypes;
         /// <summary>
         /// Initializes a new instance of the MainViewModel class.
         /// </summary>
@@ -60,17 +66,20 @@ namespace IxaCalc.ViewModel
 
                     BushoList = items;
                 });
+            SoldierTypes = _dataService.GetSoldierTypes();
             _deck = new Deck();
 
             SetDeckCommand = new RelayCommand<Busho>(this.Execute);
 
             RemoveDeckCommand = new RelayCommand<int>(this.Execute);
+
+            ChangeSoldierCommand = new RelayCommand<Soldier>(this.Execute);
         }
 
         public void Execute(Busho busho)
         {
             _deck.Add(busho);
-            AllSoldierNumber = _deck.TotalSoldierNum();
+            UpdateAllSum();
             string[] keys = { "Busho1", "Busho2", "Busho3", "Busho4" };
             foreach (var key in keys)
             {
@@ -81,7 +90,7 @@ namespace IxaCalc.ViewModel
         public void Execute(int index)
         {
             _deck.Remove(index);
-            AllSoldierNumber = _deck.TotalSoldierNum();
+            UpdateAllSum();
             string[] keys = { "Busho1", "Busho2", "Busho3", "Busho4" };
             foreach (var key in keys)
             {
@@ -89,10 +98,26 @@ namespace IxaCalc.ViewModel
             }
         }
 
+        public void Execute(Soldier soldier)
+        {
+            _soldier = soldier;
+            UpdateAllSum();
+        }
+
+        private void UpdateAllSum()
+        {
+            AllSoldierNumber = _deck.TotalSoldierNum();
+            if (_soldier != null)
+            {
+                AllAttack = AllSoldierNumber * _soldier.Attack;
+            }
+        }
+
         public RelayCommand<Busho> SetDeckCommand { get; private set; }
 
         public RelayCommand<int> RemoveDeckCommand { get; private set; }
 
+        public RelayCommand<Soldier> ChangeSoldierCommand { get; private set; }
         /// <summary>
         /// Gets the WelcomeTitle property.
         /// Changes to that property's value raise the PropertyChanged event. 
@@ -237,6 +262,44 @@ namespace IxaCalc.ViewModel
             }
         }
 
+        /// <summary>
+        /// 部隊の合計兵士数
+        /// </summary>
+        public int AllAttack
+        {
+            get
+            {
+                return _allAttack;
+            }
+
+            set
+            {
+                if (_allAttack == value)
+                {
+                    return;
+                }
+
+                _allAttack = value;
+                RaisePropertyChanged("AllAttack");
+            }
+        }
+
+        /// <summary>
+        /// デッキに入った3番目の武将
+        /// </summary>
+        public List<Soldier> SoldierTypes
+        {
+            get
+            {
+                return _soldierTypes;
+            }
+
+            set
+            {
+                _soldierTypes = value;
+                RaisePropertyChanged("SoldierTypes");
+            }
+        }
         ////public override void Cleanup()
         ////{
         ////    // Clean up if needed

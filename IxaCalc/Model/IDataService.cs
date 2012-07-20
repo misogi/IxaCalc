@@ -2,6 +2,7 @@
 
 namespace IxaCalc.Model
 {
+    using System.Collections.Generic;
     using System.Collections.ObjectModel;
 
     /// <summary>
@@ -16,5 +17,7 @@ namespace IxaCalc.Model
         /// エラー時に使うコールバック
         /// </param>
         void GetData(Action<ObservableCollection<Busho>, Exception> callback);
+
+        List<Soldier> GetSoldierTypes();
     }
 }

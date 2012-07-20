@@ -2,6 +2,7 @@
 
 namespace IxaCalc.Model
 {
+    using System.Collections.Generic;
     using System.Collections.ObjectModel;
 
     using IxaCalc.Enums;
@@ -11,6 +12,18 @@ namespace IxaCalc.Model
     /// </summary>
     public class DataService : IDataService
     {
+
+        public List<Soldier> GetSoldierTypes()
+        {
+            var list = new List<Soldier>();
+            var items = RankDictionary.soldiers;
+            foreach (KeyValuePair<string, Soldier> pair in items)
+            {
+                list.Add(pair.Value);
+            }
+            return list;
+        }
+
         /// <summary>
         /// データ取得
         /// </summary>
