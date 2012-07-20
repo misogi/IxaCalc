@@ -38,9 +38,10 @@
             </i:Interaction.Triggers>
             <ListBox.ItemTemplate>
                 <DataTemplate>
-                    <StackPanel>
+                    <StackPanel Orientation="Horizontal">
+                        <Image Height="24" Width="24" Source="{Binding Image}" />
+                        <TextBlock Text="{Binding Id}" />
                         <TextBlock Text="{Binding Name}" />
-                        <TextBlock Text="{Binding Rarity}" />
                     </StackPanel>
                 </DataTemplate>
             </ListBox.ItemTemplate>
@@ -53,53 +54,66 @@
                     VerticalAlignment="Top">
             <Grid>
                 <Button Command="{Binding RemoveDeckCommand}" CommandParameter="0" />
-                <StackPanel Name="grid1"
+                <StackPanel Name="grid1" Orientation="Horizontal"
                       Width="200"
                       Height="100"
                       DataContext="{Binding Busho1}" IsHitTestVisible="False">
-                    <TextBlock Text="{Binding Name}" />
-                    <TextBlock Text="{Binding Rarity}" />
-                    <TextBlock Text="{Binding CurrentLeadership}" />
-                    <TextBlock Text="{Binding AllAttack}" />
+                    <Image Source="{Binding Image}" />
+                    <StackPanel>
+                        <TextBlock Text="{Binding Name}" />
+                        <TextBlock Text="{Binding Rarity}" />
+                        <TextBlock Text="{Binding CurrentLeadership}" />
+                        <TextBlock Text="{Binding AllAttack}" />
+                    </StackPanel>
                 </StackPanel>
             </Grid>
             <Grid>
                 <Button Command="{Binding RemoveDeckCommand}" CommandParameter="1" />
-                <StackPanel Name="grid2"
+                <StackPanel Orientation="Horizontal"
+                            Name="grid2"
                       Width="200"
                       Height="100"
                       IsHitTestVisible="False"
                       DataContext="{Binding Busho2}">
-                    <TextBlock Text="{Binding Name}" />
-                    <TextBlock Text="{Binding Rarity}" />
-                    <TextBlock Text="{Binding CurrentLeadership}" />
-                    <TextBlock Text="{Binding AllAttack}" />
+                    <Image Source="{Binding Image}" />
+                    <StackPanel>
+                        <TextBlock Text="{Binding Name}" />
+                        <TextBlock Text="{Binding Rarity}" />
+                        <TextBlock Text="{Binding CurrentLeadership}" />
+                        <TextBlock Text="{Binding AllAttack}" />
+                    </StackPanel>
                 </StackPanel>
             </Grid>
             <Grid Background="AntiqueWhite">
                 <Button Command="{Binding RemoveDeckCommand}" CommandParameter="2" />
-                <StackPanel Name="grid3"
+                <StackPanel Name="grid3" Orientation="Horizontal"
                       Width="200"
                       Height="100"
                       IsHitTestVisible="False"
                       DataContext="{Binding Busho3}">
-                    <TextBlock Text="{Binding Name}" />
-                    <TextBlock Text="{Binding Rarity}" />
-                    <TextBlock Text="{Binding CurrentLeadership}" />
-                    <TextBlock Text="{Binding AllAttack}" />
+                    <Image Source="{Binding Image}" />
+                    <StackPanel>
+                        <TextBlock Text="{Binding Name}" />
+                        <TextBlock Text="{Binding Rarity}" />
+                        <TextBlock Text="{Binding CurrentLeadership}" />
+                        <TextBlock Text="{Binding AllAttack}" />
+                    </StackPanel>
                 </StackPanel>
             </Grid>
             <Grid>
                 <Button Command="{Binding RemoveDeckCommand}" CommandParameter="3" />
-                <StackPanel Name="grid4"
+                <StackPanel  Name="grid4" Orientation="Horizontal"
                       Width="200"
                       Height="100"
                       IsHitTestVisible="False"
                       DataContext="{Binding Busho4}">
-                    <TextBlock Text="{Binding Name}" />
-                    <TextBlock Text="{Binding Rarity}" />
-                    <TextBlock Text="{Binding CurrentLeadership}" />
-                    <TextBlock Text="{Binding AllAttack}" />
+                    <Image Source="{Binding Image}" />
+                    <StackPanel>
+                        <TextBlock Text="{Binding Name}" />
+                        <TextBlock Text="{Binding Rarity}" />
+                        <TextBlock Text="{Binding CurrentLeadership}" />
+                        <TextBlock Text="{Binding AllAttack}" />
+                    </StackPanel>
                 </StackPanel>
             </Grid>
         </StackPanel>

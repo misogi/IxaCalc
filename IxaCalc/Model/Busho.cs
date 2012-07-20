@@ -1,6 +1,9 @@
 ﻿namespace IxaCalc.Model
 {
+    using System;
     using System.ComponentModel;
+    using System.Windows.Media;
+    using System.Windows.Media.Imaging;
 
     using IxaCalc.Enums;
 
@@ -14,6 +17,8 @@
         private LeadershipRank _currentLeadership;
 
         private double _allAttack;
+
+        private ImageSource _image;
 
         /// <summary>
         /// 名前
@@ -80,6 +85,7 @@
             Weapon = RankDictionary.rank[weapon];
             Horse = RankDictionary.rank[horse];
             Lance = RankDictionary.rank[lance];
+            LoadImage();
         }
 
         public Busho(int id, string rare, string name, double cost, int soldiernum, string lance, string bow, string horse, string weapon)
@@ -93,6 +99,7 @@
             Weapon = RankDictionary.rank[weapon];
             Horse = RankDictionary.rank[horse];
             Lance = RankDictionary.rank[lance];
+            LoadImage();
         }
 
         public string CurrentLeadership
@@ -100,6 +107,14 @@
             get
             {
                 return _currentLeadership.ToString();
+            }
+        }
+
+        public ImageSource Image
+        {
+            get
+            {
+                return _image;
             }
         }
 
@@ -147,6 +162,17 @@
                 }
 
                 _allAttack = value;
+            }
+        }
+
+        private void LoadImage()
+        {
+            if (Id != null)
+            {
+                var urlstr = string.Format("Images/{0}.jpg", Id);
+                var uri = new Uri(urlstr, UriKind.Relative);
+                var bmp = new BitmapImage(uri);
+                _image = bmp;
             }
         }
 
