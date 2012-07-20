@@ -30,13 +30,18 @@
 
         public static Dictionary<SoldierTypes, Soldier> soldiers = new Dictionary<SoldierTypes, Soldier>
             {
-                { SoldierTypes.Lance, new Soldier("足軽", 11, 11, SoldierTypes.Lance)},
+                { SoldierTypes.Spear, new Soldier("足軽", 11, 11, SoldierTypes.Spear)},
                 { SoldierTypes.Bow, new Soldier("弓足軽", 10, 12, SoldierTypes.Bow)},
                 { SoldierTypes.Horse, new Soldier("騎馬兵", 12, 10, SoldierTypes.Horse)},
-                { SoldierTypes.LongLance, new Soldier("長槍足軽", 11, 11, SoldierTypes.LongLance)},
-                { SoldierTypes.LongBow, new Soldier("長弓兵", 10, 12, SoldierTypes.LongBow)},
-                { SoldierTypes.EliteHorse, new Soldier("精鋭騎馬", 12, 10, SoldierTypes.EliteHorse)},
+                { SoldierTypes.LongSpear, new Soldier("長槍足軽", 16, 16, SoldierTypes.LongSpear)},
+                { SoldierTypes.LongBow, new Soldier("長弓兵", 15, 17, SoldierTypes.LongBow)},
+                { SoldierTypes.EliteHorse, new Soldier("精鋭騎馬", 17, 15, SoldierTypes.EliteHorse)},
+                { SoldierTypes.Samurai, new Soldier("武士", 18, 18, SoldierTypes.Samurai)},
+                { SoldierTypes.MountArcher, new Soldier("弓騎馬", 17, 19, SoldierTypes.MountArcher)},
+                { SoldierTypes.RedArms, new Soldier("赤備え", 21, 20, SoldierTypes.RedArms)},
                 { SoldierTypes.Hammer, new Soldier("破壊槌", 8, 3, SoldierTypes.Hammer)},
+                { SoldierTypes.Gun, new Soldier("鉄砲足軽", 18, 26, SoldierTypes.Gun)},
+                { SoldierTypes.Dragoon, new Soldier("騎馬鉄砲", 26, 18, SoldierTypes.Dragoon)}
             };
     }
 }

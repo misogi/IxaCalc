@@ -500,6 +500,19 @@
     <Resource Include="Images\2001.jpg" />
     <Resource Include="Images\2020.jpg" />
   </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Images\Bow.png" />
+    <Resource Include="Images\Dragoon.png" />
+    <Resource Include="Images\EliteHorse.png" />
+    <Resource Include="Images\Gun.png" />
+    <Resource Include="Images\Horse.png" />
+    <Resource Include="Images\LongBow.png" />
+    <Resource Include="Images\LongSpear.png" />
+    <Resource Include="Images\MountArcher.png" />
+    <Resource Include="Images\RedArms.png" />
+    <Resource Include="Images\Samurai.png" />
+    <Resource Include="Images\Spear.png" />
+  </ItemGroup>
   <Import Project="$(MSBuildExtensionsPath32)\Microsoft\Silverlight\$(SilverlightVersion)\Microsoft.Silverlight.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.

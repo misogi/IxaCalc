@@ -6,6 +6,7 @@
              xmlns:i="http://schemas.microsoft.com/expression/2010/interactivity"
              xmlns:ignore="http://www.ignore.com"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             xmlns:mye="clr-namespace:IxaCalc.Enums"
              Width="900"
              Height="600"
              DataContext="{Binding Main,
@@ -23,8 +24,8 @@
     <Grid x:Name="LayoutRoot">
         <ListBox Name="bushoList"
                  Width="195"
-                 Height="602"
-                 Margin="190,0,0,0"
+                 Height="543"
+                 Margin="190,59,0,0"
                  HorizontalAlignment="Left"
                  VerticalAlignment="Top"
                  ItemsSource="{Binding BushoList}">
@@ -36,8 +37,8 @@
             <ListBox.ItemTemplate>
                 <DataTemplate>
                     <StackPanel Orientation="Horizontal">
-                        <Image Width="24"
-                               Height="24"
+                        <Image Width="20"
+                               Height="20"
                                Source="{Binding Image}" />
                         <TextBlock Text="{Binding Id}" />
                         <TextBlock Text="{Binding Name}" />
@@ -183,26 +184,6 @@
                    HorizontalAlignment="Left"
                    VerticalAlignment="Top"
                    Text="{Binding AllSoldierNumber}" />
-        <ListBox Name="soldierTypeList"
-                 Width="149"
-                 Height="414"
-                 Margin="12,0,0,0"
-                 HorizontalAlignment="Left"
-                 VerticalAlignment="Top"
-                 ItemsSource="{Binding SoldierTypes}">
-            <i:Interaction.Triggers>
-                <i:EventTrigger EventName="SelectionChanged">
-                    <cmd:EventToCommand Command="{Binding ChangeSoldierCommand}" CommandParameter="{Binding ElementName=soldierTypeList, Path=SelectedItem}" />
-                </i:EventTrigger>
-            </i:Interaction.Triggers>
-            <ListBox.ItemTemplate>
-                <DataTemplate>
-                    <StackPanel>
-                        <TextBlock Text="{Binding Name}" />
-                    </StackPanel>
-                </DataTemplate>
-            </ListBox.ItemTemplate>
-        </ListBox>
         <TextBlock Name="textBlock2"
                    Height="23"
                    Margin="715,30,0,0"
@@ -250,6 +231,41 @@
                          Command="{Binding ChangeRarityCommand}"
                          CommandParameter="序"
                          Content="序" />
+        </StackPanel>
+        <StackPanel Orientation="Horizontal" Height="50" HorizontalAlignment="Left" Margin="2,9,0,0" Name="stackPanel2" VerticalAlignment="Top" Width="Auto" >
+            <RadioButton ClickMode="Press" Command="{Binding ChangeSoldierCommand}" CommandParameter="Spear">
+                <Image Width="40" Height="40" Source="Images/Spear.png" Margin="2"  />
+            </RadioButton>
+            <RadioButton ClickMode="Press" Command="{Binding ChangeSoldierCommand}" CommandParameter="LongSpear">
+                <Image Width="40" Height="40" Source="Images/LongSpear.png" Margin="2" />
+            </RadioButton>
+            <RadioButton ClickMode="Press" Command="{Binding ChangeSoldierCommand}" CommandParameter="Samurai">
+                <Image Width="40" Height="40" Source="Images/Samurai.png" Margin="2" />
+            </RadioButton>
+            <RadioButton ClickMode="Press" Command="{Binding ChangeSoldierCommand}" CommandParameter="Bow">
+                <Image Width="40" Height="40" Source="Images/Bow.png" Margin="2" />
+            </RadioButton>
+            <RadioButton ClickMode="Press" Command="{Binding ChangeSoldierCommand}" CommandParameter="LongBow">
+                <Image Width="40" Height="40" Source="Images/LongBow.png" Margin="2" />
+            </RadioButton>
+            <RadioButton ClickMode="Press" Command="{Binding ChangeSoldierCommand}" CommandParameter="MountArcher">
+                <Image Width="40" Height="40" Source="Images/MountArcher.png" Margin="2" />
+            </RadioButton>
+            <RadioButton ClickMode="Press" Command="{Binding ChangeSoldierCommand}" CommandParameter="Horse">
+                <Image Width="40" Height="40" Source="Images/Horse.png" Margin="2" />
+            </RadioButton>
+            <RadioButton ClickMode="Press" Command="{Binding ChangeSoldierCommand}" CommandParameter="EliteHorse">
+                <Image Width="40" Height="40" Source="Images/EliteHorse.png" Margin="2" />
+            </RadioButton>
+            <RadioButton ClickMode="Press" Command="{Binding ChangeSoldierCommand}" CommandParameter="RedArms">
+                <Image Width="40" Height="40" Source="Images/RedArms.png" Margin="2" />
+            </RadioButton>
+            <RadioButton ClickMode="Press" Command="{Binding ChangeSoldierCommand}" CommandParameter="Gun">
+                <Image Width="40" Height="40" Source="Images/Gun.png" Margin="2" />
+            </RadioButton>
+            <RadioButton ClickMode="Press" Command="{Binding ChangeSoldierCommand}" CommandParameter="Dragoon">
+                <Image Width="40" Height="40" Source="Images/Dragoon.png" Margin="2" />
+            </RadioButton>
         </StackPanel>
     </Grid>
 </UserControl>

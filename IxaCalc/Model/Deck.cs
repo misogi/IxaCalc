@@ -122,7 +122,7 @@
                 foreach (var busho in _bushos)
                 {
                     double percentage = 1.0;
-                    if (type == SoldierTypes.Lance || type == SoldierTypes.LongLance)
+                    if (type == SoldierTypes.Spear || type == SoldierTypes.LongSpear)
                     {
                         percentage = RankToPercentage(busho.Lance);
                     }
@@ -137,6 +137,26 @@
                     else if (type == SoldierTypes.Hammer)
                     {
                         percentage = RankToPercentage(busho.Weapon);
+                    }
+                    else if (type == SoldierTypes.MountArcher)
+                    {
+                        percentage = (RankToPercentage(busho.Horse) + RankToPercentage(busho.Bow)) / 2;
+                    }
+                    else if (type == SoldierTypes.RedArms)
+                    {
+                        percentage = (RankToPercentage(busho.Bow) + RankToPercentage(busho.Lance)) / 2;
+                    }
+                    else if (type == SoldierTypes.Samurai)
+                    {
+                        percentage = (RankToPercentage(busho.Horse) + RankToPercentage(busho.Lance)) / 2;
+                    }
+                    else if (type == SoldierTypes.Gun)
+                    {
+                        percentage = (RankToPercentage(busho.Weapon) + RankToPercentage(busho.Lance)) / 2;
+                    }
+                    else if (type == SoldierTypes.Dragoon)
+                    {
+                        percentage = (RankToPercentage(busho.Weapon) + RankToPercentage(busho.Horse)) / 2;
                     }
 
                     _percent[i] = percentage;

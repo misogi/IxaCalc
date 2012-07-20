@@ -90,7 +90,7 @@ namespace IxaCalc.ViewModel
 
             RemoveDeckCommand = new RelayCommand<int>(this.Execute);
 
-            ChangeSoldierCommand = new RelayCommand<Soldier>(this.Execute);
+            ChangeSoldierCommand = new RelayCommand<string>(this.ChangeSoldierExecute);
             
             ChangeRarityCommand = new RelayCommand<string>(this.Execute);
 
@@ -123,9 +123,10 @@ namespace IxaCalc.ViewModel
             }
         }
 
-        public void Execute(Soldier soldier)
+        public void ChangeSoldierExecute(string str)
         {
-            _soldier = soldier;
+            var type = (SoldierTypes)Enum.Parse(typeof(SoldierTypes), str, false);
+            _soldier = RankDictionary.soldiers[type];
             UpdateAllSum();
         }
 
@@ -150,7 +151,7 @@ namespace IxaCalc.ViewModel
 
         public RelayCommand<int> RemoveDeckCommand { get; private set; }
 
-        public RelayCommand<Soldier> ChangeSoldierCommand { get; private set; }
+        public RelayCommand<string> ChangeSoldierCommand { get; private set; }
 
         public RelayCommand<string> ChangeRarityCommand { get; private set; }
         /// <summary>

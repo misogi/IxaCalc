@@ -2,13 +2,18 @@
 {
     public enum SoldierTypes
     {
-        Lance,
-        LongLance,
+        Spear,
+        LongSpear,
+        Samurai,
         Bow,
         LongBow,
+        MountArcher,
         Horse,
         EliteHorse,
+        RedArms,
         Hammer,
-        Scaffold
+        Scaffold,
+        Gun,
+        Dragoon
     }
 }
