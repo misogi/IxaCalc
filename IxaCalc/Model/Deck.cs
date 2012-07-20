@@ -1,35 +1,37 @@
 ﻿namespace IxaCalc.Model
 {
+    using System.Collections.Generic;
+
     public class Deck
     {
-        private Busho[] _bushos;
-
-        private int _bushoNum = 0;
+        private List<Busho> _bushos;
 
         public Deck()
         {
-            _bushos = new Busho[4];
+            _bushos = new List<Busho>(4);
         }
 
-        public Busho[] Bushos
+        public List<Busho> Bushos
         {
-            get;
-            set;
+            get
+            {
+                return _bushos;
+            }
         }
 
         public void Add(Busho busho)
         {
-            if (_bushoNum <= 3)
+            if (Bushos.Count < 4)
             {
-                _bushos[_bushoNum++] = busho;
+                Bushos.Add(busho);
             }
         }
 
-        public int BushoNum
+        public void Remove(int index)
         {
-            get
+            if (index < Bushos.Count)
             {
-                return _bushoNum;
+                Bushos.RemoveAt(index);
             }
         }
 

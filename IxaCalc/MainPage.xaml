@@ -1,14 +1,16 @@
 ﻿<UserControl x:Class="IxaCalc.MainPage"
              xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
-             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-             xmlns:ignore="http://www.ignore.com" xmlns:i="http://schemas.microsoft.com/expression/2010/interactivity"
              xmlns:cmd="clr-namespace:GalaSoft.MvvmLight.Command;assembly=GalaSoft.MvvmLight.Extras.SL5"
-             mc:Ignorable="d ignore"
-             Height="600"
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+             xmlns:i="http://schemas.microsoft.com/expression/2010/interactivity"
+             xmlns:ignore="http://www.ignore.com"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
              Width="900"
-             DataContext="{Binding Main, Source={StaticResource Locator}}">
+             Height="600"
+             DataContext="{Binding Main,
+                                   Source={StaticResource Locator}}"
+             mc:Ignorable="d ignore">
 
     <UserControl.Resources>
         <ResourceDictionary>
@@ -19,10 +21,19 @@
     </UserControl.Resources>
 
     <Grid x:Name="LayoutRoot">
-        <ListBox Height="132" HorizontalAlignment="Left" Margin="259,203,0,0" Name="listBox1" VerticalAlignment="Top" Width="128" ItemsSource="{Binding BushoList}">
+        <ListBox Name="bushoList"
+                 Width="128"
+                 Height="132"
+                 Margin="259,203,0,0"
+                 HorizontalAlignment="Left"
+                 VerticalAlignment="Top"
+                 ItemsSource="{Binding BushoList}">
             <i:Interaction.Triggers>
-                <i:EventTrigger EventName="KeyDown">
-                    <cmd:EventToCommand Command="{Binding SetDeckCommand, Mode=OneWay}" PassEventArgsToCommand="True" />
+                <i:EventTrigger EventName="SelectionChanged">
+                    <cmd:EventToCommand Command="{Binding SetDeckCommand}"
+                                        CommandParameter="{Binding ElementName=bushoList,
+                                                                   Path=SelectedItem}"
+                                        PassEventArgsToCommand="True" />
                 </i:EventTrigger>
             </i:Interaction.Triggers>
             <ListBox.ItemTemplate>
@@ -34,24 +45,59 @@
                 </DataTemplate>
             </ListBox.ItemTemplate>
         </ListBox>
-        <StackPanel Height="502" HorizontalAlignment="Left" Margin="480,98,0,0" Name="stackPanel1" VerticalAlignment="Top" Width="242">
-            <Grid Height="100" Name="grid1" Width="200" DataContext="{Binding Busho1}" >
-                <TextBlock Text="{Binding Name}" />
-                <TextBlock Text="{Binding Rarity}" />
+        <StackPanel Name="stackPanel1"
+                    Width="242"
+                    Height="502"
+                    Margin="480,98,0,0"
+                    HorizontalAlignment="Left"
+                    VerticalAlignment="Top">
+            <Grid>
+                <Button Command="{Binding RemoveDeckCommand}" CommandParameter="0" />
+                <Grid Name="grid1"
+                      Width="200"
+                      Height="100"
+                      DataContext="{Binding Busho1}" IsHitTestVisible="False">
+                    <TextBlock Text="{Binding Name}" />
+                    <TextBlock Text="{Binding Rarity}" />
+                </Grid>
             </Grid>
-            <Grid Height="100" Name="grid2" Width="200" DataContext="{Binding Busho2}" >
-                <TextBlock Text="{Binding Name}" />
-                <TextBlock Text="{Binding Rarity}" />
+            <Grid>
+                <Button Command="{Binding RemoveDeckCommand}" CommandParameter="1" />
+                <Grid Name="grid2"
+                      Width="200"
+                      Height="100"
+                      DataContext="{Binding Busho2}">
+                    <TextBlock Text="{Binding Name}" />
+                    <TextBlock Text="{Binding Rarity}" />
+                </Grid>
             </Grid>
-            <Grid Height="100" Name="grid3" Width="200" DataContext="{Binding Busho3}" >
-                <TextBlock Text="{Binding Name}" />
-                <TextBlock Text="{Binding Rarity}" />
+            <Grid Background="AntiqueWhite">
+                <Button Command="{Binding RemoveDeckCommand}" CommandParameter="2" />
+                <Grid Name="grid3"
+                      Width="200"
+                      Height="100"
+                      DataContext="{Binding Busho3}">
+                    <TextBlock Text="{Binding Name}" />
+                    <TextBlock Text="{Binding Rarity}" />
+                </Grid>
             </Grid>
-            <Grid Height="100" Name="grid4" Width="200" DataContext="{Binding Busho4}" >
-                <TextBlock Text="{Binding Name}" />
-                <TextBlock Text="{Binding Rarity}" />
+            <Grid>
+                <Button Command="{Binding RemoveDeckCommand}" CommandParameter="3" />
+                <Grid Name="grid4"
+                      Width="200"
+                      Height="100"
+                      DataContext="{Binding Busho4}">
+                    <TextBlock Text="{Binding Name}" />
+                    <TextBlock Text="{Binding Rarity}" />
+                </Grid>
             </Grid>
         </StackPanel>
-        <TextBlock Height="25" HorizontalAlignment="Left" Margin="377,36,0,0" Name="textBlock1" Text="{Binding AllSoldierNumber}" VerticalAlignment="Top" Width="216" />
+        <TextBlock Name="textBlock1"
+                   Width="216"
+                   Height="25"
+                   Margin="377,36,0,0"
+                   HorizontalAlignment="Left"
+                   VerticalAlignment="Top"
+                   Text="{Binding AllSoldierNumber}" />
     </Grid>
 </UserControl>
