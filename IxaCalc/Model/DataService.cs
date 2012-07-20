@@ -17,7 +17,7 @@ namespace IxaCalc.Model
         {
             var list = new List<Soldier>();
             var items = RankDictionary.soldiers;
-            foreach (KeyValuePair<string, Soldier> pair in items)
+            foreach (KeyValuePair<SoldierTypes, Soldier> pair in items)
             {
                 list.Add(pair.Value);
             }

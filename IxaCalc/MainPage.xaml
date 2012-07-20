@@ -60,6 +60,7 @@
                     <TextBlock Text="{Binding Name}" />
                     <TextBlock Text="{Binding Rarity}" />
                     <TextBlock Text="{Binding CurrentLeadership}" />
+                    <TextBlock Text="{Binding AllAttack}" />
                 </StackPanel>
             </Grid>
             <Grid>
@@ -72,6 +73,7 @@
                     <TextBlock Text="{Binding Name}" />
                     <TextBlock Text="{Binding Rarity}" />
                     <TextBlock Text="{Binding CurrentLeadership}" />
+                    <TextBlock Text="{Binding AllAttack}" />
                 </StackPanel>
             </Grid>
             <Grid Background="AntiqueWhite">
@@ -84,6 +86,7 @@
                     <TextBlock Text="{Binding Name}" />
                     <TextBlock Text="{Binding Rarity}" />
                     <TextBlock Text="{Binding CurrentLeadership}" />
+                    <TextBlock Text="{Binding AllAttack}" />
                 </StackPanel>
             </Grid>
             <Grid>
@@ -96,6 +99,7 @@
                     <TextBlock Text="{Binding Name}" />
                     <TextBlock Text="{Binding Rarity}" />
                     <TextBlock Text="{Binding CurrentLeadership}" />
+                    <TextBlock Text="{Binding AllAttack}" />
                 </StackPanel>
             </Grid>
         </StackPanel>

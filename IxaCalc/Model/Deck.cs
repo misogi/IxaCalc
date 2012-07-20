@@ -2,6 +2,8 @@
 {
     using System.Collections.Generic;
 
+    using IxaCalc.Enums;
+
     public class Deck
     {
         private List<Busho> _bushos;
@@ -50,6 +52,19 @@
                 }
             }
             return soldier;
+        }
+
+
+        /// <summary>
+        /// 総兵数
+        /// </summary>
+        /// <returns>計算した総兵数</returns>
+        public void SwithSoldierType(SoldierTypes type)
+        {
+            foreach (var busho in _bushos)
+            {
+                busho.CurrentSoldierType = type;
+            }
         }
     }
 }

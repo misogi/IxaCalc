@@ -7,6 +7,8 @@
         Bow,
         LongBow,
         Horse,
-        EliteHorse
+        EliteHorse,
+        Hammer,
+        Scaffold
     }
 }

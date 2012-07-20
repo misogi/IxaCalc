@@ -28,12 +28,15 @@
                 { "天", RarityRank.UltraRare }
             };
 
-        public static Dictionary<string, Soldier> soldiers = new Dictionary<string, Soldier>
+        public static Dictionary<SoldierTypes, Soldier> soldiers = new Dictionary<SoldierTypes, Soldier>
             {
-                { "足軽", new Soldier("足軽", 11, 11)},
-                { "弓足軽", new Soldier("弓足軽", 10, 12)},
-                { "騎馬兵", new Soldier("騎馬兵", 12, 10)},
-                { "破壊槌", new Soldier("破壊槌", 8, 3)},
+                { SoldierTypes.Lance, new Soldier("足軽", 11, 11, SoldierTypes.Lance)},
+                { SoldierTypes.Bow, new Soldier("弓足軽", 10, 12, SoldierTypes.Bow)},
+                { SoldierTypes.Horse, new Soldier("騎馬兵", 12, 10, SoldierTypes.Horse)},
+                { SoldierTypes.LongLance, new Soldier("長槍足軽", 11, 11, SoldierTypes.LongLance)},
+                { SoldierTypes.LongBow, new Soldier("長弓兵", 10, 12, SoldierTypes.LongBow)},
+                { SoldierTypes.EliteHorse, new Soldier("精鋭騎馬", 12, 10, SoldierTypes.EliteHorse)},
+                { SoldierTypes.Hammer, new Soldier("破壊槌", 8, 3, SoldierTypes.Hammer)},
             };
     }
 }

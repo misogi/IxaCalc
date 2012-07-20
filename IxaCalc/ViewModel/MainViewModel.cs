@@ -101,6 +101,7 @@ namespace IxaCalc.ViewModel
         public void Execute(Soldier soldier)
         {
             _soldier = soldier;
+            _deck.SwithSoldierType(_soldier.SoldierType);
             UpdateAllSum();
         }
 

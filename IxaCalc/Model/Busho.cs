@@ -9,6 +9,8 @@
     {
         private SoldierTypes _soldierType;
 
+        private double _allAttack;
+
         /// <summary>
         /// 名前
         /// </summary>
@@ -104,6 +106,76 @@
                     default:
                         return "null";
                 }
+            }
+        }
+
+        public SoldierTypes CurrentSoldierType
+        {
+            set
+            {
+                _soldierType = value;
+                var soldier = RankDictionary.soldiers[_soldierType];
+                LeadershipRank rank;
+                switch (_soldierType)
+                {
+                    case SoldierTypes.Lance:
+                        rank = Lance;
+                        break;
+                    case SoldierTypes.Bow:
+                        rank = Bow;
+                        break;
+                    case SoldierTypes.Horse:
+                        rank = Horse;
+                        break;
+                    default:
+                        rank = Lance;
+                        break;
+                }
+                AllAttack = SoldierNumber * soldier.Attack * RankToPercentage(rank);
+            }
+        }
+
+        public double AllAttack
+        {
+
+            get
+            {
+                return _allAttack;
+            }
+
+            set
+            {
+                if (_allAttack == value)
+                {
+                    return;
+                }
+
+                _allAttack = value;
+            }
+        }
+
+        private double RankToPercentage(LeadershipRank rank)
+        {
+            switch (rank)
+            {
+                case LeadershipRank.F:
+                    return 0.8;
+                case LeadershipRank.E:
+                    return 0.85;
+                case LeadershipRank.D:
+                    return 0.9;
+                case LeadershipRank.C:
+                    return 0.95;
+                case LeadershipRank.B:
+                    return 1.0;
+                case LeadershipRank.A:
+                    return 1.05;
+                case LeadershipRank.S:
+                    return 1.1;
+                case LeadershipRank.SS:
+                    return 1.15;
+                default:
+                    return 1.0;
             }
         }
     }
