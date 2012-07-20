@@ -41,14 +41,23 @@ namespace IxaCalc.ViewModel
         private ObservableCollection<Busho> _bushoList;
 
         /// <summary>
-        /// デッキ用
+        /// メインデッキ
         /// </summary>
         private Deck _mainDeck;
 
+        /// <summary>
+        /// 全ての兵士数
+        /// </summary>
         private int _allSoldier;
 
+        /// <summary>
+        /// 現在指定している兵士タイプ
+        /// </summary>
         private Soldier _soldier;
 
+        /// <summary>
+        /// 全ての攻撃力
+        /// </summary>
         private int _allAttack;
 
         private List<Soldier> _soldierTypes;

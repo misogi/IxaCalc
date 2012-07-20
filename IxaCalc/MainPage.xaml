@@ -6,7 +6,7 @@
              xmlns:i="http://schemas.microsoft.com/expression/2010/interactivity"
              xmlns:ignore="http://www.ignore.com"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-              Width="900"
+             Width="900"
              Height="600"
              DataContext="{Binding Main,
                                    Source={StaticResource Locator}}"
@@ -24,21 +24,21 @@
         <ListBox Name="bushoList"
                  Width="195"
                  Height="602"
-                 Margin="190,-2,0,0"
+                 Margin="190,0,0,0"
                  HorizontalAlignment="Left"
                  VerticalAlignment="Top"
                  ItemsSource="{Binding BushoList}">
             <i:Interaction.Triggers>
                 <i:EventTrigger EventName="SelectionChanged">
-                    <cmd:EventToCommand Command="{Binding SetDeckCommand}"
-                                        CommandParameter="{Binding ElementName=bushoList,
-                                                                   Path=SelectedItem}" />
+                    <cmd:EventToCommand Command="{Binding SetDeckCommand}" CommandParameter="{Binding ElementName=bushoList, Path=SelectedItem}" />
                 </i:EventTrigger>
             </i:Interaction.Triggers>
             <ListBox.ItemTemplate>
                 <DataTemplate>
                     <StackPanel Orientation="Horizontal">
-                        <Image Height="24" Width="24" Source="{Binding Image}" />
+                        <Image Width="24"
+                               Height="24"
+                               Source="{Binding Image}" />
                         <TextBlock Text="{Binding Id}" />
                         <TextBlock Text="{Binding Name}" />
                     </StackPanel>
@@ -54,14 +54,16 @@
             <Grid>
                 <Button Command="{Binding RemoveDeckCommand}" CommandParameter="0" />
                 <StackPanel IsHitTestVisible="False">
-                <TextBlock Text="{Binding MainDeck.Percent[0]}" />
-                <TextBlock Text="{Binding MainDeck.ActualLeadership[0]}" />
+                    <TextBlock Text="{Binding MainDeck.Percent[0]}" />
+                    <TextBlock Text="{Binding MainDeck.ActualLeadership[0]}" />
                     <TextBlock Text="{Binding MainDeck.PerCost[0]}" />
                 </StackPanel>
-                <StackPanel Name="grid1" Orientation="Horizontal"
-                      Width="200"
-                      Height="100"
-                      DataContext="{Binding Busho1}" IsHitTestVisible="False">
+                <StackPanel Name="grid1"
+                            Width="200"
+                            Height="100"
+                            DataContext="{Binding Busho1}"
+                            IsHitTestVisible="False"
+                            Orientation="Horizontal">
                     <Image Source="{Binding Image}" />
                     <StackPanel>
                         <TextBlock Text="{Binding Name}" />
@@ -83,16 +85,16 @@
             <Grid>
                 <Button Command="{Binding RemoveDeckCommand}" CommandParameter="1" />
                 <StackPanel IsHitTestVisible="False">
-                <TextBlock Text="{Binding MainDeck.Percent[1]}" />
-                <TextBlock Text="{Binding MainDeck.ActualLeadership[1]}" />
+                    <TextBlock Text="{Binding MainDeck.Percent[1]}" />
+                    <TextBlock Text="{Binding MainDeck.ActualLeadership[1]}" />
                     <TextBlock Text="{Binding MainDeck.PerCost[1]}" />
                 </StackPanel>
-                <StackPanel Orientation="Horizontal"
-                            Name="grid2"
-                      Width="200"
-                      Height="100"
-                      IsHitTestVisible="False"
-                      DataContext="{Binding Busho2}">
+                <StackPanel Name="grid2"
+                            Width="200"
+                            Height="100"
+                            DataContext="{Binding Busho2}"
+                            IsHitTestVisible="False"
+                            Orientation="Horizontal">
                     <Image Source="{Binding Image}" />
                     <StackPanel>
                         <TextBlock Text="{Binding Name}" />
@@ -114,15 +116,16 @@
             <Grid Background="AntiqueWhite">
                 <Button Command="{Binding RemoveDeckCommand}" CommandParameter="2" />
                 <StackPanel IsHitTestVisible="False">
-                <TextBlock Text="{Binding MainDeck.Percent[2]}" />
-                <TextBlock Text="{Binding MainDeck.ActualLeadership[2]}" />
+                    <TextBlock Text="{Binding MainDeck.Percent[2]}" />
+                    <TextBlock Text="{Binding MainDeck.ActualLeadership[2]}" />
                     <TextBlock Text="{Binding MainDeck.PerCost[2]}" />
                 </StackPanel>
-                <StackPanel Name="grid3" Orientation="Horizontal"
-                      Width="200"
-                      Height="100"
-                      IsHitTestVisible="False"
-                      DataContext="{Binding Busho3}">
+                <StackPanel Name="grid3"
+                            Width="200"
+                            Height="100"
+                            DataContext="{Binding Busho3}"
+                            IsHitTestVisible="False"
+                            Orientation="Horizontal">
                     <Image Source="{Binding Image}" />
                     <StackPanel>
                         <TextBlock Text="{Binding Name}" />
@@ -145,14 +148,15 @@
                 <Button Command="{Binding RemoveDeckCommand}" CommandParameter="3" />
                 <StackPanel IsHitTestVisible="False">
                     <TextBlock Text="{Binding MainDeck.Percent[3]}" />
-                <TextBlock Text="{Binding MainDeck.ActualLeadership[3]}" />
+                    <TextBlock Text="{Binding MainDeck.ActualLeadership[3]}" />
                     <TextBlock Text="{Binding MainDeck.PerCost[3]}" />
                 </StackPanel>
-                <StackPanel  Name="grid4" Orientation="Horizontal"
-                      Width="200"
-                      Height="100"
-                      IsHitTestVisible="False"
-                      DataContext="{Binding Busho4}">
+                <StackPanel Name="grid4"
+                            Width="200"
+                            Height="100"
+                            DataContext="{Binding Busho4}"
+                            IsHitTestVisible="False"
+                            Orientation="Horizontal">
                     <Image Source="{Binding Image}" />
                     <StackPanel>
                         <TextBlock Text="{Binding Name}" />
@@ -179,12 +183,16 @@
                    HorizontalAlignment="Left"
                    VerticalAlignment="Top"
                    Text="{Binding AllSoldierNumber}" />
-        <ListBox Height="414" HorizontalAlignment="Left" Margin="12,0,0,0" Name="soldierTypeList" VerticalAlignment="Top" Width="149" ItemsSource="{Binding SoldierTypes}" >
+        <ListBox Name="soldierTypeList"
+                 Width="149"
+                 Height="414"
+                 Margin="12,0,0,0"
+                 HorizontalAlignment="Left"
+                 VerticalAlignment="Top"
+                 ItemsSource="{Binding SoldierTypes}">
             <i:Interaction.Triggers>
                 <i:EventTrigger EventName="SelectionChanged">
-                    <cmd:EventToCommand Command="{Binding ChangeSoldierCommand}"
-                                        CommandParameter="{Binding ElementName=soldierTypeList,
-                                                                   Path=SelectedItem}" />
+                    <cmd:EventToCommand Command="{Binding ChangeSoldierCommand}" CommandParameter="{Binding ElementName=soldierTypeList, Path=SelectedItem}" />
                 </i:EventTrigger>
             </i:Interaction.Triggers>
             <ListBox.ItemTemplate>
@@ -195,14 +203,53 @@
                 </DataTemplate>
             </ListBox.ItemTemplate>
         </ListBox>
-        <TextBlock Height="23" HorizontalAlignment="Left" Margin="715,30,0,0" Name="textBlock2" VerticalAlignment="Top" 
+        <TextBlock Name="textBlock2"
+                   Height="23"
+                   Margin="715,30,0,0"
+                   HorizontalAlignment="Left"
+                   VerticalAlignment="Top"
                    Text="{Binding MainDeck.TotalAttack}" />
         <StackPanel Name="rarityPanel" Margin="53,450,739,59">
-            <RadioButton Content="天" Height="16" HorizontalAlignment="Left" Margin="0" Name="ultraRare" VerticalAlignment="Top" Command="{Binding ChangeRarityCommand}" CommandParameter="天" />
-            <RadioButton Content="極" Height="16" HorizontalAlignment="Left" Margin="0" Name="superRare" VerticalAlignment="Top" Command="{Binding ChangeRarityCommand}" CommandParameter="極" />
-            <RadioButton Content="特" Height="16" HorizontalAlignment="Left" Margin="0" Name="rare" VerticalAlignment="Top" Command="{Binding ChangeRarityCommand}" CommandParameter="特" />
-            <RadioButton Content="上" Height="16" HorizontalAlignment="Left" Margin="0" Name="uncommon" VerticalAlignment="Top" Command="{Binding ChangeRarityCommand}" CommandParameter="上" />
-            <RadioButton Content="序" Height="16" HorizontalAlignment="Left" Margin="0" Name="common" VerticalAlignment="Top" Command="{Binding ChangeRarityCommand}" CommandParameter="序" />
+            <RadioButton Name="ultraRare"
+                         Height="16"
+                         Margin="0"
+                         HorizontalAlignment="Left"
+                         VerticalAlignment="Top"
+                         Command="{Binding ChangeRarityCommand}"
+                         CommandParameter="天"
+                         Content="天" />
+            <RadioButton Name="superRare"
+                         Height="16"
+                         Margin="0"
+                         HorizontalAlignment="Left"
+                         VerticalAlignment="Top"
+                         Command="{Binding ChangeRarityCommand}"
+                         CommandParameter="極"
+                         Content="極" />
+            <RadioButton Name="rare"
+                         Height="16"
+                         Margin="0"
+                         HorizontalAlignment="Left"
+                         VerticalAlignment="Top"
+                         Command="{Binding ChangeRarityCommand}"
+                         CommandParameter="特"
+                         Content="特" />
+            <RadioButton Name="uncommon"
+                         Height="16"
+                         Margin="0"
+                         HorizontalAlignment="Left"
+                         VerticalAlignment="Top"
+                         Command="{Binding ChangeRarityCommand}"
+                         CommandParameter="上"
+                         Content="上" />
+            <RadioButton Name="common"
+                         Height="16"
+                         Margin="0"
+                         HorizontalAlignment="Left"
+                         VerticalAlignment="Top"
+                         Command="{Binding ChangeRarityCommand}"
+                         CommandParameter="序"
+                         Content="序" />
         </StackPanel>
     </Grid>
 </UserControl>
