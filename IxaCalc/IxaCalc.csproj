@@ -93,6 +93,7 @@
     <Compile Include="Model\Busho.cs" />
     <Compile Include="Model\DataItem.cs" />
     <Compile Include="Model\DataService.cs" />
+    <Compile Include="Model\Deck.cs" />
     <Compile Include="Model\IDataService.cs" />
     <Compile Include="Model\RankDictionary.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
