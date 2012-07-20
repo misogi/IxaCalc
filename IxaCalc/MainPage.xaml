@@ -181,7 +181,7 @@
                    Text="{Binding AllSoldierNumber}" />
         <ListBox Height="414" HorizontalAlignment="Left" Margin="12,0,0,0" Name="soldierTypeList" VerticalAlignment="Top" Width="149" ItemsSource="{Binding SoldierTypes}" >
             <i:Interaction.Triggers>
-                <i:EventTrigger EventName="MouseDown">
+                <i:EventTrigger EventName="SelectionChanged">
                     <cmd:EventToCommand Command="{Binding ChangeSoldierCommand}"
                                         CommandParameter="{Binding ElementName=soldierTypeList,
                                                                    Path=SelectedItem}" />
@@ -200,7 +200,7 @@
         <StackPanel Name="rarityPanel" Margin="53,450,739,59">
             <RadioButton Content="天" Height="16" HorizontalAlignment="Left" Margin="0" Name="ultraRare" VerticalAlignment="Top" Command="{Binding ChangeRarityCommand}" CommandParameter="天" />
             <RadioButton Content="極" Height="16" HorizontalAlignment="Left" Margin="0" Name="superRare" VerticalAlignment="Top" Command="{Binding ChangeRarityCommand}" CommandParameter="極" />
-            <RadioButton Content="特" Height="16" HorizontalAlignment="Left" Margin="0" Name="rare" VerticalAlignment="Top" Command="{Binding ChangeRarityCommand}" CommandParameter="特"  />
+            <RadioButton Content="特" Height="16" HorizontalAlignment="Left" Margin="0" Name="rare" VerticalAlignment="Top" Command="{Binding ChangeRarityCommand}" CommandParameter="特" />
             <RadioButton Content="上" Height="16" HorizontalAlignment="Left" Margin="0" Name="uncommon" VerticalAlignment="Top" Command="{Binding ChangeRarityCommand}" CommandParameter="上" />
             <RadioButton Content="序" Height="16" HorizontalAlignment="Left" Margin="0" Name="common" VerticalAlignment="Top" Command="{Binding ChangeRarityCommand}" CommandParameter="序" />
         </StackPanel>

@@ -31,12 +31,12 @@ namespace IxaCalc.ViewModel
         private readonly IDataService _dataService;
 
         /// <summary>
-        /// ウェルカム用タイトル
+        /// すべての武将リスト
         /// </summary>
         private ObservableCollection<Busho> _allBushoList;
 
         /// <summary>
-        /// ウェルカム用タイトル
+        /// 
         /// </summary>
         private ObservableCollection<Busho> _bushoList;
 
@@ -84,16 +84,17 @@ namespace IxaCalc.ViewModel
             ChangeSoldierCommand = new RelayCommand<Soldier>(this.Execute);
             
             ChangeRarityCommand = new RelayCommand<string>(this.Execute);
+
+            this.Execute("極");
         }
 
         public void Execute(Busho busho)
         {
-            var index = _allBushoList.IndexOf(busho);
-            if (index < 0)
+            if(busho == null)
             {
                 return;
             }
-            this._mainDeck.Add(_allBushoList[index]);
+            this._mainDeck.Add(busho);
             UpdateAllSum();
             string[] keys = { "Busho1", "Busho2", "Busho3", "Busho4" };
             foreach (var key in keys)
