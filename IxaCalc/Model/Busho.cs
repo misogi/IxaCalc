@@ -10,6 +10,11 @@
         /// <summary>
         /// 名前
         /// </summary>
+        public int Id { get; set; }
+
+        /// <summary>
+        /// 名前
+        /// </summary>
         public string Name { get; set; }
 
         /// <summary>
@@ -59,6 +64,19 @@
         /// <param name="weapon">兵器統率</param>
         public Busho(string name, string rare, int soldiernum, double cost, string lance, string horse, string bow, string weapon)
         {
+            Name = name;
+            SoldierNumber = soldiernum;
+            Cost = cost;
+            Rarity = RankDictionary.rarity[rare];
+            Bow = RankDictionary.rank[bow];
+            Weapon = RankDictionary.rank[weapon];
+            Horse = RankDictionary.rank[horse];
+            Lance = RankDictionary.rank[lance];
+        }
+
+        public Busho(int id, string rare, string name, double cost, int soldiernum, string lance, string bow, string horse, string weapon)
+        {
+            Id = id;
             Name = name;
             SoldierNumber = soldiernum;
             Cost = cost;
