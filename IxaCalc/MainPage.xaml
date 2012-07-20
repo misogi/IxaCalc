@@ -59,6 +59,7 @@
                       DataContext="{Binding Busho1}" IsHitTestVisible="False">
                     <TextBlock Text="{Binding Name}" />
                     <TextBlock Text="{Binding Rarity}" />
+                    <TextBlock Text="{Binding CurrentLeadership}" />
                 </StackPanel>
             </Grid>
             <Grid>
@@ -70,6 +71,7 @@
                       DataContext="{Binding Busho2}">
                     <TextBlock Text="{Binding Name}" />
                     <TextBlock Text="{Binding Rarity}" />
+                    <TextBlock Text="{Binding CurrentLeadership}" />
                 </StackPanel>
             </Grid>
             <Grid Background="AntiqueWhite">
@@ -81,6 +83,7 @@
                       DataContext="{Binding Busho3}">
                     <TextBlock Text="{Binding Name}" />
                     <TextBlock Text="{Binding Rarity}" />
+                    <TextBlock Text="{Binding CurrentLeadership}" />
                 </StackPanel>
             </Grid>
             <Grid>
@@ -92,6 +95,7 @@
                       DataContext="{Binding Busho4}">
                     <TextBlock Text="{Binding Name}" />
                     <TextBlock Text="{Binding Rarity}" />
+                    <TextBlock Text="{Binding CurrentLeadership}" />
                 </StackPanel>
             </Grid>
         </StackPanel>
@@ -115,7 +119,6 @@
                 <DataTemplate>
                     <StackPanel>
                         <TextBlock Text="{Binding Name}" />
-                        <TextBlock Text="{Binding Rarity}" />
                     </StackPanel>
                 </DataTemplate>
             </ListBox.ItemTemplate>

@@ -7,6 +7,8 @@
     /// </summary>
     public class Busho
     {
+        private SoldierTypes _soldierType;
+
         /// <summary>
         /// 名前
         /// </summary>
@@ -85,6 +87,24 @@
             Weapon = RankDictionary.rank[weapon];
             Horse = RankDictionary.rank[horse];
             Lance = RankDictionary.rank[lance];
+        }
+
+        public string CurrentLeadership
+        {
+            get
+            {
+                switch (_soldierType)
+                {
+                    case SoldierTypes.Lance:
+                        return Lance.ToString();
+                    case SoldierTypes.Bow:
+                        return Bow.ToString();
+                    case SoldierTypes.Horse:
+                        return Horse.ToString();
+                    default:
+                        return "null";
+                }
+            }
         }
     }
 }
