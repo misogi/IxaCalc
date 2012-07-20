@@ -1,13 +1,17 @@
 ﻿namespace IxaCalc.Model
 {
+    using System.ComponentModel;
+
     using IxaCalc.Enums;
 
     /// <summary>
     /// 武将データクラス
     /// </summary>
-    public class Busho
+    public class Busho : INotifyPropertyChanged
     {
         private SoldierTypes _soldierType;
+
+        private LeadershipRank _currentLeadership;
 
         private double _allAttack;
 
@@ -95,17 +99,7 @@
         {
             get
             {
-                switch (_soldierType)
-                {
-                    case SoldierTypes.Lance:
-                        return Lance.ToString();
-                    case SoldierTypes.Bow:
-                        return Bow.ToString();
-                    case SoldierTypes.Horse:
-                        return Horse.ToString();
-                    default:
-                        return "null";
-                }
+                return _currentLeadership.ToString();
             }
         }
 
@@ -115,23 +109,25 @@
             {
                 _soldierType = value;
                 var soldier = RankDictionary.soldiers[_soldierType];
-                LeadershipRank rank;
-                switch (_soldierType)
+                if (_soldierType == SoldierTypes.Lance || _soldierType == SoldierTypes.LongLance)
                 {
-                    case SoldierTypes.Lance:
-                        rank = Lance;
-                        break;
-                    case SoldierTypes.Bow:
-                        rank = Bow;
-                        break;
-                    case SoldierTypes.Horse:
-                        rank = Horse;
-                        break;
-                    default:
-                        rank = Lance;
-                        break;
+                    _currentLeadership = Lance;
                 }
-                AllAttack = SoldierNumber * soldier.Attack * RankToPercentage(rank);
+                else if (_soldierType == SoldierTypes.Bow || _soldierType == SoldierTypes.LongBow)
+                {
+                    _currentLeadership = Bow;
+                }
+                else if (_soldierType == SoldierTypes.Horse || _soldierType == SoldierTypes.EliteHorse)
+                {
+                    _currentLeadership = Horse;
+                }
+                else if (_soldierType == SoldierTypes.Hammer)
+                {
+                    _currentLeadership = Weapon;
+                }
+                AllAttack = SoldierNumber * soldier.Attack * RankToPercentage(_currentLeadership);
+                OnPropertyChanged("CurrentLeadership");
+                OnPropertyChanged("AllAttack");
             }
         }
 
@@ -177,6 +173,15 @@
                 default:
                     return 1.0;
             }
+        }
+
+        public event PropertyChangedEventHandler PropertyChanged;
+
+        protected virtual void OnPropertyChanged(string propertyName)
+        {
+            PropertyChangedEventHandler handler = this.PropertyChanged;
+            if (handler != null)
+                handler(this, new PropertyChangedEventArgs(propertyName));
         }
     }
 }

@@ -67,6 +67,7 @@ namespace IxaCalc.ViewModel
                     BushoList = items;
                 });
             SoldierTypes = _dataService.GetSoldierTypes();
+            _soldier = SoldierTypes[0];
             _deck = new Deck();
 
             SetDeckCommand = new RelayCommand<Busho>(this.Execute);
@@ -101,7 +102,6 @@ namespace IxaCalc.ViewModel
         public void Execute(Soldier soldier)
         {
             _soldier = soldier;
-            _deck.SwithSoldierType(_soldier.SoldierType);
             UpdateAllSum();
         }
 
@@ -110,6 +110,7 @@ namespace IxaCalc.ViewModel
             AllSoldierNumber = _deck.TotalSoldierNum();
             if (_soldier != null)
             {
+                _deck.SwithSoldierType(_soldier.SoldierType);
                 AllAttack = AllSoldierNumber * _soldier.Attack;
             }
         }
