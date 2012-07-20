@@ -12,11 +12,7 @@
     /// </summary>
     public class Busho : INotifyPropertyChanged
     {
-        private SoldierTypes _soldierType;
-
         private LeadershipRank _currentLeadership;
-
-        private double _allAttack;
 
         private ImageSource _image;
 
@@ -118,53 +114,6 @@
             }
         }
 
-        public SoldierTypes CurrentSoldierType
-        {
-            set
-            {
-                _soldierType = value;
-                var soldier = RankDictionary.soldiers[_soldierType];
-                if (_soldierType == SoldierTypes.Lance || _soldierType == SoldierTypes.LongLance)
-                {
-                    _currentLeadership = Lance;
-                }
-                else if (_soldierType == SoldierTypes.Bow || _soldierType == SoldierTypes.LongBow)
-                {
-                    _currentLeadership = Bow;
-                }
-                else if (_soldierType == SoldierTypes.Horse || _soldierType == SoldierTypes.EliteHorse)
-                {
-                    _currentLeadership = Horse;
-                }
-                else if (_soldierType == SoldierTypes.Hammer)
-                {
-                    _currentLeadership = Weapon;
-                }
-                AllAttack = SoldierNumber * soldier.Attack * RankToPercentage(_currentLeadership);
-                OnPropertyChanged("CurrentLeadership");
-                OnPropertyChanged("AllAttack");
-            }
-        }
-
-        public double AllAttack
-        {
-
-            get
-            {
-                return _allAttack;
-            }
-
-            set
-            {
-                if (_allAttack == value)
-                {
-                    return;
-                }
-
-                _allAttack = value;
-            }
-        }
-
         private void LoadImage()
         {
             if (Id != null)
@@ -173,31 +122,6 @@
                 var uri = new Uri(urlstr, UriKind.Relative);
                 var bmp = new BitmapImage(uri);
                 _image = bmp;
-            }
-        }
-
-        private double RankToPercentage(LeadershipRank rank)
-        {
-            switch (rank)
-            {
-                case LeadershipRank.F:
-                    return 0.8;
-                case LeadershipRank.E:
-                    return 0.85;
-                case LeadershipRank.D:
-                    return 0.9;
-                case LeadershipRank.C:
-                    return 0.95;
-                case LeadershipRank.B:
-                    return 1.0;
-                case LeadershipRank.A:
-                    return 1.05;
-                case LeadershipRank.S:
-                    return 1.1;
-                case LeadershipRank.SS:
-                    return 1.15;
-                default:
-                    return 1.0;
             }
         }
 

@@ -37,7 +37,7 @@ namespace IxaCalc.ViewModel
         /// <summary>
         /// デッキ用
         /// </summary>
-        private Deck _deck;
+        private Deck _mainDeck;
 
         private int _allSoldier;
 
@@ -68,7 +68,7 @@ namespace IxaCalc.ViewModel
                 });
             SoldierTypes = _dataService.GetSoldierTypes();
             _soldier = SoldierTypes[0];
-            _deck = new Deck();
+            this._mainDeck = new Deck();
 
             SetDeckCommand = new RelayCommand<Busho>(this.Execute);
 
@@ -79,7 +79,7 @@ namespace IxaCalc.ViewModel
 
         public void Execute(Busho busho)
         {
-            _deck.Add(busho);
+            this._mainDeck.Add(busho);
             UpdateAllSum();
             string[] keys = { "Busho1", "Busho2", "Busho3", "Busho4" };
             foreach (var key in keys)
@@ -90,7 +90,7 @@ namespace IxaCalc.ViewModel
 
         public void Execute(int index)
         {
-            _deck.Remove(index);
+            this._mainDeck.Remove(index);
             UpdateAllSum();
             string[] keys = { "Busho1", "Busho2", "Busho3", "Busho4" };
             foreach (var key in keys)
@@ -107,10 +107,10 @@ namespace IxaCalc.ViewModel
 
         private void UpdateAllSum()
         {
-            AllSoldierNumber = _deck.TotalSoldierNum();
+            AllSoldierNumber = this._mainDeck.TotalSoldierNum();
             if (_soldier != null)
             {
-                _deck.SwithSoldierType(_soldier.SoldierType);
+                this._mainDeck.SwitchSoldierType(_soldier.SoldierType);
                 AllAttack = AllSoldierNumber * _soldier.Attack;
             }
         }
@@ -145,21 +145,21 @@ namespace IxaCalc.ViewModel
         {
             get
             {
-                if(_deck.Bushos.Count < 1)
+                if(this._mainDeck.Bushos.Count < 1)
                 {
                     return null;
                 }
-                return _deck.Bushos[0];
+                return this._mainDeck.Bushos[0];
             }
 
             set
             {
-                if (_deck.Bushos[0] == value)
+                if (this._mainDeck.Bushos[0] == value)
                 {
                     return;
                 }
 
-                _deck.Bushos[0] = value;
+                this._mainDeck.Bushos[0] = value;
                 RaisePropertyChanged("Busho1");
             }
         }
@@ -171,21 +171,21 @@ namespace IxaCalc.ViewModel
         {
             get
             {
-                if (_deck.Bushos.Count < 2)
+                if (this._mainDeck.Bushos.Count < 2)
                 {
                     return null;
                 }
-                return _deck.Bushos[1];
+                return this._mainDeck.Bushos[1];
             }
 
             set
             {
-                if (_deck.Bushos[1] == value)
+                if (this._mainDeck.Bushos[1] == value)
                 {
                     return;
                 }
 
-                _deck.Bushos[1] = value;
+                this._mainDeck.Bushos[1] = value;
                 RaisePropertyChanged("Busho2");
             }
         }
@@ -197,21 +197,21 @@ namespace IxaCalc.ViewModel
         {
             get
             {
-                if (_deck.Bushos.Count < 3)
+                if (this._mainDeck.Bushos.Count < 3)
                 {
                     return null;
                 }
-                return _deck.Bushos[2];
+                return this._mainDeck.Bushos[2];
             }
 
             set
             {
-                if (_deck.Bushos[2] == value)
+                if (this._mainDeck.Bushos[2] == value)
                 {
                     return;
                 }
 
-                _deck.Bushos[2] = value;
+                this._mainDeck.Bushos[2] = value;
                 RaisePropertyChanged("Busho3");
             }
         }
@@ -223,21 +223,21 @@ namespace IxaCalc.ViewModel
         {
             get
             {
-                if (_deck.Bushos.Count < 4)
+                if (this._mainDeck.Bushos.Count < 4)
                 {
                     return null;
                 }
-                return _deck.Bushos[3];
+                return this._mainDeck.Bushos[3];
             }
 
             set
             {
-                if (_deck.Bushos[3] == value)
+                if (this._mainDeck.Bushos[3] == value)
                 {
                     return;
                 }
 
-                _deck.Bushos[3] = value;
+                this._mainDeck.Bushos[3] = value;
                 RaisePropertyChanged("Busho4");
             }
         }
@@ -300,6 +300,17 @@ namespace IxaCalc.ViewModel
             {
                 _soldierTypes = value;
                 RaisePropertyChanged("SoldierTypes");
+            }
+        }
+
+        /// <summary>
+        /// デッキに入った3番目の武将
+        /// </summary>
+        public Deck MainDeck
+        {
+            get
+            {
+                return this._mainDeck;
             }
         }
         ////public override void Cleanup()
