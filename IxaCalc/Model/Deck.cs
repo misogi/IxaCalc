@@ -19,6 +19,10 @@
 
         private double _totalAttack;
 
+        private double _totalDefence;
+
+        private double _totalCost;
+
         public Deck()
         {
             _bushos = new List<Busho>(4);
@@ -37,7 +41,7 @@
             if (Bushos.Count < 4 && !this.IsContain(busho))
             {
                 Bushos.Add(busho);
-                TotalAttack = this.CalculateTotalAttack();
+                this.CalculateTotalStatus();
             }
         }
 
@@ -49,7 +53,7 @@
                 _perCost = new double[4];
                 _percent = new double[4];
                 Bushos.RemoveAt(index);
-                TotalAttack = this.CalculateTotalAttack();
+                this.CalculateTotalStatus();
             }
         }
 
@@ -88,6 +92,43 @@
             }
         }
 
+        /// <summary>
+        /// 総攻撃力
+        /// </summary>
+        /// <returns>計算した総兵数</returns>
+        public double TotalDefence
+        {
+            get
+            {
+                return _totalDefence;
+            }
+
+            set
+            {
+                _totalDefence = value;
+                OnPropertyChanged("TotalDefence");
+            }
+        }
+
+        /// <summary>
+        /// 総攻撃力
+        /// </summary>
+        /// <returns>計算した総兵数</returns>
+        public double TotalCost
+        {
+            get
+            {
+                return _totalCost;
+            }
+
+            set
+            {
+                _totalCost = value;
+                OnPropertyChanged("TotalCost");
+            }
+        }
+
+
         public double[] Percent
         {
             get
@@ -112,9 +153,11 @@
             }
         }
 
-        private double CalculateTotalAttack()
+        private void CalculateTotalStatus()
         {
-            double total = 0;
+            double totalAtk = 0;
+            double totalDef = 0;
+            double totalCost = 0;
             var type = _currentSoldierType;
             if (_currentSoldierType != null)
             {
@@ -162,14 +205,18 @@
                     _percent[i] = percentage;
                     _actualLeadership[i] = busho.SoldierNumber * percentage;
                     _perCost[i] = busho.SoldierNumber * percentage / busho.Cost;
-                    total += busho.SoldierNumber * percentage * RankDictionary.soldiers[type].Attack;
+                    totalAtk += busho.SoldierNumber * percentage * RankDictionary.soldiers[type].Attack;
+                    totalDef += busho.SoldierNumber * percentage * RankDictionary.soldiers[type].Defence;
+                    totalCost += busho.Cost;
                     i++;
                 }
             }
             OnPropertyChanged("PerCost");
             OnPropertyChanged("Percent");
             OnPropertyChanged("ActualLeadership");
-            return total;
+            TotalAttack = totalAtk;
+            TotalDefence = totalDef;
+            TotalCost = totalCost;
         }
 
         private bool IsContain(Busho cmpBusho)
@@ -219,7 +266,7 @@
         public void SwitchSoldierType(SoldierTypes type)
         {
             _currentSoldierType = type;
-            TotalAttack = this.CalculateTotalAttack();
+            this.CalculateTotalStatus();
         }
 
         public event PropertyChangedEventHandler PropertyChanged;

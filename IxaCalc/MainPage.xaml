@@ -48,8 +48,8 @@
         </ListBox>
         <StackPanel Name="stackPanel1"
                     Width="242"
-                    Height="502"
-                    Margin="480,98,0,0"
+                    Height="433"
+                    Margin="589,9,0,0"
                     HorizontalAlignment="Left"
                     VerticalAlignment="Top">
             <Grid>
@@ -180,16 +180,29 @@
         <TextBlock Name="textBlock1"
                    Width="216"
                    Height="25"
-                   Margin="480,27,0,0"
+                   Margin="438,527,0,0"
                    HorizontalAlignment="Left"
                    VerticalAlignment="Top"
                    Text="{Binding AllSoldierNumber}" />
-        <TextBlock Name="textBlock2"
-                   Height="23"
-                   Margin="715,30,0,0"
+        <TextBlock Name="deckCost"
+                   Width="216"
+                   Height="25"
+                   Margin="438,489,0,0"
                    HorizontalAlignment="Left"
                    VerticalAlignment="Top"
-                   Text="{Binding MainDeck.TotalAttack}" />
+                   Text="{Binding MainDeck.TotalCost}" />
+        <TextBlock Name="deckAtk"
+                   Height="23"
+                   Margin="0,30,0,0"
+                   HorizontalAlignment="Right"
+                   VerticalAlignment="Bottom"
+                   Text="{Binding MainDeck.TotalAttack}" FontSize="20" FontWeight="Bold" />
+        <TextBlock Name="dechDef"
+                   Height="23"
+                   Margin="0,30,0,60"
+                   HorizontalAlignment="Right"
+                   VerticalAlignment="Bottom"
+                   Text="{Binding MainDeck.TotalDefence}" FontSize="20" FontWeight="Bold" />
         <StackPanel Name="rarityPanel" Margin="53,450,739,59">
             <RadioButton Name="ultraRare"
                          Height="16"
@@ -233,37 +246,37 @@
                          Content="序" />
         </StackPanel>
         <StackPanel Orientation="Horizontal" Height="50" HorizontalAlignment="Left" Margin="2,9,0,0" Name="stackPanel2" VerticalAlignment="Top" Width="Auto" >
-            <RadioButton ClickMode="Press" Command="{Binding ChangeSoldierCommand}" CommandParameter="Spear">
+            <RadioButton ClickMode="Press" Command="{Binding ChangeSoldierCommand}" CommandParameter="Spear" Template="{StaticResource ShortCutButton}">
                 <Image Width="40" Height="40" Source="Images/Spear.png" Margin="2"  />
             </RadioButton>
-            <RadioButton ClickMode="Press" Command="{Binding ChangeSoldierCommand}" CommandParameter="LongSpear">
+            <RadioButton ClickMode="Press" Command="{Binding ChangeSoldierCommand}" CommandParameter="LongSpear" Template="{StaticResource ShortCutButton}">
                 <Image Width="40" Height="40" Source="Images/LongSpear.png" Margin="2" />
             </RadioButton>
-            <RadioButton ClickMode="Press" Command="{Binding ChangeSoldierCommand}" CommandParameter="Samurai">
+            <RadioButton ClickMode="Press" Command="{Binding ChangeSoldierCommand}" CommandParameter="Samurai" Template="{StaticResource ShortCutButton}">
                 <Image Width="40" Height="40" Source="Images/Samurai.png" Margin="2" />
             </RadioButton>
-            <RadioButton ClickMode="Press" Command="{Binding ChangeSoldierCommand}" CommandParameter="Bow">
+            <RadioButton ClickMode="Press" Command="{Binding ChangeSoldierCommand}" CommandParameter="Bow" Template="{StaticResource ShortCutButton}">
                 <Image Width="40" Height="40" Source="Images/Bow.png" Margin="2" />
             </RadioButton>
-            <RadioButton ClickMode="Press" Command="{Binding ChangeSoldierCommand}" CommandParameter="LongBow">
+            <RadioButton ClickMode="Press" Command="{Binding ChangeSoldierCommand}" CommandParameter="LongBow" Template="{StaticResource ShortCutButton}">
                 <Image Width="40" Height="40" Source="Images/LongBow.png" Margin="2" />
             </RadioButton>
-            <RadioButton ClickMode="Press" Command="{Binding ChangeSoldierCommand}" CommandParameter="MountArcher">
+            <RadioButton ClickMode="Press" Command="{Binding ChangeSoldierCommand}" CommandParameter="MountArcher" Template="{StaticResource ShortCutButton}">
                 <Image Width="40" Height="40" Source="Images/MountArcher.png" Margin="2" />
             </RadioButton>
-            <RadioButton ClickMode="Press" Command="{Binding ChangeSoldierCommand}" CommandParameter="Horse">
+            <RadioButton ClickMode="Press" Command="{Binding ChangeSoldierCommand}" CommandParameter="Horse" Template="{StaticResource ShortCutButton}">
                 <Image Width="40" Height="40" Source="Images/Horse.png" Margin="2" />
             </RadioButton>
-            <RadioButton ClickMode="Press" Command="{Binding ChangeSoldierCommand}" CommandParameter="EliteHorse">
+            <RadioButton ClickMode="Press" Command="{Binding ChangeSoldierCommand}" CommandParameter="EliteHorse" Template="{StaticResource ShortCutButton}">
                 <Image Width="40" Height="40" Source="Images/EliteHorse.png" Margin="2" />
             </RadioButton>
-            <RadioButton ClickMode="Press" Command="{Binding ChangeSoldierCommand}" CommandParameter="RedArms">
+            <RadioButton ClickMode="Press" Command="{Binding ChangeSoldierCommand}" CommandParameter="RedArms" Template="{StaticResource ShortCutButton}">
                 <Image Width="40" Height="40" Source="Images/RedArms.png" Margin="2" />
             </RadioButton>
-            <RadioButton ClickMode="Press" Command="{Binding ChangeSoldierCommand}" CommandParameter="Gun">
+            <RadioButton ClickMode="Press" Command="{Binding ChangeSoldierCommand}" CommandParameter="Gun" Template="{StaticResource ShortCutButton}">
                 <Image Width="40" Height="40" Source="Images/Gun.png" Margin="2" />
             </RadioButton>
-            <RadioButton ClickMode="Press" Command="{Binding ChangeSoldierCommand}" CommandParameter="Dragoon">
+            <RadioButton ClickMode="Press" Command="{Binding ChangeSoldierCommand}" CommandParameter="Dragoon" Template="{StaticResource ShortCutButton}">
                 <Image Width="40" Height="40" Source="Images/Dragoon.png" Margin="2" />
             </RadioButton>
         </StackPanel>
