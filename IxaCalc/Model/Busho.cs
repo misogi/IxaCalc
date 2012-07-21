@@ -60,6 +60,13 @@
         /// </summary>
         public LeadershipRank Weapon { get; set; }
 
+        public int Attack { get; set; }
+        public int Defence { get; set; }
+        public int AttackGrowth { get; set; }
+        public int DefenceGrowth { get; set; }
+        public double Tactics { get; set; }
+        public double TacticsGrowth { get; set; }
+
         /// <summary>
         /// コンストラクタ
         /// </summary>
@@ -70,7 +77,7 @@
         /// <param name="horse">馬兵統率</param>
         /// <param name="bow">弓兵統率</param>
         /// <param name="weapon">兵器統率</param>
-        public Busho(int id, string rare, string name, double cost, int soldiernum, string lance, string bow, string horse, string weapon)
+        public Busho(int id, string rare, string name, double cost, int soldiernum, string lance, string bow, string horse, string weapon, int atk , int def, double tac, int atkgrow, int defgrow, double tacgrow)
         {
             Id = id;
             Name = name;
@@ -81,6 +88,12 @@
             Weapon = RankDictionary.rank[weapon];
             Horse = RankDictionary.rank[horse];
             Lance = RankDictionary.rank[lance];
+            Attack = atk;
+            Defence = def;
+            Tactics = tac;
+            AttackGrowth = atkgrow;
+            DefenceGrowth = defgrow;
+            TacticsGrowth = tacgrow;
             LoadImage();
         }
 

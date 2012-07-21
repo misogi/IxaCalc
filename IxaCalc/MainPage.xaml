@@ -53,35 +53,56 @@
                     HorizontalAlignment="Left"
                     VerticalAlignment="Top">
             <Grid>
-                <Button Command="{Binding RemoveDeckCommand}" CommandParameter="0" />
-                <StackPanel IsHitTestVisible="False">
-                    <TextBlock Text="{Binding MainDeck.Percent[0]}" />
-                    <TextBlock Text="{Binding MainDeck.ActualLeadership[0]}" />
-                    <TextBlock Text="{Binding MainDeck.PerCost[0]}" />
-                </StackPanel>
-                <StackPanel Name="grid1"
-                            Width="200"
-                            Height="100"
-                            DataContext="{Binding Busho1}"
-                            IsHitTestVisible="False"
-                            Orientation="Horizontal">
-                    <Image Source="{Binding Image}" />
-                    <StackPanel>
-                        <TextBlock Text="{Binding Name}" />
-                        <TextBlock Text="{Binding Rarity}" />
-                        <StackPanel Orientation="Horizontal">
-                            <TextBlock Text="槍" />
-                            <TextBlock Text="{Binding Lance}" />
-                            <TextBlock Text="弓" />
-                            <TextBlock Text="{Binding Bow}" />
-                            <TextBlock Text="馬" />
-                            <TextBlock Text="{Binding Horse}" />
-                            <TextBlock Text="器" />
-                            <TextBlock Text="{Binding Weapon}" />
+                <Button Command="{Binding RemoveDeckCommand}" CommandParameter="0" Template="{StaticResource DeckCardButton}" Foreground="White" Margin="5" >
+                    <Grid>
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="Auto" />
+                            <ColumnDefinition />
+                        </Grid.ColumnDefinitions>
+                        <Image Source="{Binding Image}" Grid.Row="0" Grid.Column="0" 
+                            DataContext="{Binding Busho1}" Height="100" Width="80" Margin="10" />
+                        <StackPanel Grid.Column="1">
+                            <StackPanel 
+                            DataContext="{Binding Busho1}" >
+                                <TextBlock Text="{Binding Name}" Foreground="#FF96FFFF" />
+                                <TextBlock Text="{Binding Rarity}" />
+                                <StackPanel Orientation="Horizontal">
+                                    <TextBlock Text="槍" />
+                                    <TextBlock Text="{Binding Lance}" />
+                                    <TextBlock Text="弓" />
+                                    <TextBlock Text="{Binding Bow}" />
+                                    <TextBlock Text="馬" />
+                                    <TextBlock Text="{Binding Horse}" />
+                                    <TextBlock Text="器" />
+                                    <TextBlock Text="{Binding Weapon}" />
+                                </StackPanel>
+                                <StackPanel Orientation="Horizontal">
+                                    <TextBlock Text="指揮兵数 : " />
+                                    <TextBlock Text="{Binding SoldierNumber}" />
+                                </StackPanel>
+                                <Border BorderThickness="0,0,0,1" Padding="2" BorderBrush="White">
+                                    <TextBlock Text="ステータス" />
+                                </Border>
+                                <StackPanel Orientation="Horizontal">
+                                    <Image Width="16" Height="16" Source="Images/Attack.png" Margin="2" />
+                                    <TextBlock Text="{Binding Attack}" />
+                                </StackPanel>
+                                <StackPanel Orientation="Horizontal">
+                                    <Image Width="16" Height="16" Source="Images/Defence.png" Margin="2" />
+                                    <TextBlock Text="{Binding Defence}" />
+                                </StackPanel>
+                            </StackPanel>
+                            <StackPanel Grid.Row="1" Grid.Column="1" Grid.ColumnSpan="2">
+                                <Border BorderThickness="0,0,0,1" Padding="2" BorderBrush="White">
+                                    <TextBlock Text="統計" />
+                                </Border>
+                                <TextBlock Text="{Binding MainDeck.Percent[0]}" />
+                                <TextBlock Text="{Binding MainDeck.ActualLeadership[0]}" />
+                                <TextBlock Text="{Binding MainDeck.PerCost[0]}" />
+                            </StackPanel>
                         </StackPanel>
-                        <TextBlock Text="{Binding SoldierNumber}" />
-                    </StackPanel>
-                </StackPanel>
+                    </Grid>
+                </Button>
             </Grid>
             <Grid>
                 <Button Command="{Binding RemoveDeckCommand}" CommandParameter="1" />

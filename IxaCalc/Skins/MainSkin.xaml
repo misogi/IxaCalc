@@ -41,4 +41,11 @@
 			</ContentPresenter>
 		</Grid>
 	</ControlTemplate>
+
+
+    <ControlTemplate x:Key="DeckCardButton" TargetType="Button">
+        <Border Background="Black" >
+            <ContentPresenter />
+        </Border>
+    </ControlTemplate>
 </ResourceDictionary>
