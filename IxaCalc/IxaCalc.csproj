@@ -536,6 +536,13 @@
     <Resource Include="Images\UltraRare.png" />
     <Resource Include="Images\Uncommon.png" />
   </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Images\LeadershipBow.png" />
+    <Resource Include="Images\LeadershipHorse.png" />
+    <Resource Include="Images\LeadershipSpear.png" />
+    <Resource Include="Images\LeadershipWeapon.png" />
+    <Resource Include="Images\SoldierNumber.png" />
+  </ItemGroup>
   <Import Project="$(MSBuildExtensionsPath32)\Microsoft\Silverlight\$(SilverlightVersion)\Microsoft.Silverlight.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.

@@ -25,7 +25,7 @@
                    Margin="0"
                    Source="{Binding OriginBusho.Image}"
                    d:LayoutOverrides="Width" />
-            <StackPanel VerticalAlignment="Top" Orientation="Vertical" Margin="12,5,0,5" Width="120">
+            <StackPanel VerticalAlignment="Top" Orientation="Vertical" Margin="12,5,0,5" Width="100">
                 <TextBlock HorizontalAlignment="Left"
                            Foreground="#FF96FFFF"
                            Text="{Binding OriginBusho.Name}" FontSize="16"/>
@@ -36,18 +36,31 @@
                     <TextBlock HorizontalAlignment="Left" Text="{Binding OriginBusho.Cost}" />
                 </StackPanel>
             </StackPanel>
-            <StackPanel Margin="12,5,0,5" d:LayoutOverrides="Height" Width="90">
+            <StackPanel Margin="12,5,0,5" d:LayoutOverrides="Height" Width="110">
                 <StackPanel Orientation="Horizontal">
-                    <TextBlock Text="槍" />
+                    <Image Width="18"
+                           Height="18"
+                           Source="Images/LeadershipSpear.png" />
                     <TextBlock Text="{Binding OriginBusho.Lance}" />
-                    <TextBlock Text="弓" />
+                    <Image Width="18"
+                           Height="18"
+                           Source="Images/LeadershipBow.png" />
                     <TextBlock Text="{Binding OriginBusho.Bow}" />
-                    <TextBlock Text="馬" />
+                    <Image Width="18"
+                           Height="18"
+                           Source="Images/LeadershipHorse.png" />
                     <TextBlock Text="{Binding OriginBusho.Horse}" />
-                    <TextBlock Text="器" />
+                    <Image Width="18"
+                           Height="18"
+                           Source="Images/LeadershipWeapon.png" />
                     <TextBlock Text="{Binding OriginBusho.Weapon}" />
                 </StackPanel>
-                <TextBlock Text="{Binding OriginBusho.SoldierNumber}" />
+                <StackPanel Orientation="Horizontal">
+                    <Image Width="18"
+                           Height="18"
+                           Source="Images/SoldierNumber.png" />
+                    <TextBlock Text="{Binding OriginBusho.SoldierNumber}" />
+                </StackPanel>
                 <StackPanel Orientation="Horizontal">
                     <Image Width="16"
                            Height="16"
