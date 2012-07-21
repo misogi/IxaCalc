@@ -1,11 +1,29 @@
 ﻿namespace IxaCalc.Model
 {
+    using System;
     using System.Collections.Generic;
+    using System.Windows.Media;
+    using System.Windows.Media.Imaging;
 
     using IxaCalc.Enums;
 
     public class RankDictionary
     {
+
+        static RankDictionary()
+        {
+            rarityImage = new Dictionary<RarityRank,ImageSource>();
+            var strs = new string[]{"Common", "Uncommon", "Rare", "SuperRare", "UltraRare"};
+            foreach(var str in strs)
+            {
+                var urlstr = string.Format("Images/{0}.png", str);
+                var uri = new Uri(urlstr, UriKind.Relative);
+                var bmp = new BitmapImage(uri);
+                var type = (RarityRank)Enum.Parse(typeof(RarityRank), str, false);
+                rarityImage[type] = bmp;
+            }
+        }
+
         public static Dictionary<string, LeadershipRank> rank = new Dictionary<string, LeadershipRank>
             {
                 { "F", LeadershipRank.F },
@@ -43,5 +61,7 @@
                 { SoldierTypes.Gun, new Soldier("鉄砲足軽", 18, 26, SoldierTypes.Gun)},
                 { SoldierTypes.Dragoon, new Soldier("騎馬鉄砲", 26, 18, SoldierTypes.Dragoon)}
             };
+
+        public static Dictionary<RarityRank, ImageSource> rarityImage;
     }
 }

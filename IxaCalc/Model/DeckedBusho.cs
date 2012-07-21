@@ -262,6 +262,14 @@ namespace IxaCalc.Model
             }
         }
 
+        public ImageSource RarityImage
+        {
+            get
+            {
+                return RankDictionary.rarityImage[OriginBusho.Rarity];
+            }
+        }
+
         public event PropertyChangedEventHandler PropertyChanged;
 
         protected virtual void OnPropertyChanged(string propertyName)

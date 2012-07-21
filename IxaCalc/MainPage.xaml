@@ -50,10 +50,22 @@
         <StackPanel Name="stackPanel1" Margin="220,61,0,0"
                     HorizontalAlignment="Left"
                     VerticalAlignment="Top">
-            <my:DeckBushoView DataContext="{Binding MainDeck.DeckedBushos[0]}" />
-            <my:DeckBushoView DataContext="{Binding MainDeck.DeckedBushos[1]}" />
-            <my:DeckBushoView DataContext="{Binding MainDeck.DeckedBushos[2]}" />
-            <my:DeckBushoView DataContext="{Binding MainDeck.DeckedBushos[3]}" />
+            <Grid>
+                <my:DeckBushoView DataContext="{Binding MainDeck.DeckedBushos[0]}" />
+                <Button Command="{Binding RemoveDeckCommand}" CommandParameter="0" Opacity="0" ClickMode="Press" />
+            </Grid>
+            <Grid>
+                <my:DeckBushoView DataContext="{Binding MainDeck.DeckedBushos[1]}" />
+                <Button Command="{Binding RemoveDeckCommand}" CommandParameter="1" Opacity="0" ClickMode="Press" />
+            </Grid>
+            <Grid>
+                <my:DeckBushoView DataContext="{Binding MainDeck.DeckedBushos[2]}" />
+                <Button Command="{Binding RemoveDeckCommand}" CommandParameter="2" Opacity="0" ClickMode="Press" />
+            </Grid>
+            <Grid>
+                <my:DeckBushoView DataContext="{Binding MainDeck.DeckedBushos[3]}" />
+                <Button Command="{Binding RemoveDeckCommand}" CommandParameter="3" Opacity="0" ClickMode="Press" />
+            </Grid>
         </StackPanel>
         <TextBlock Name="textBlock1"
                    Width="216"
