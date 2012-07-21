@@ -7,13 +7,7 @@
 
     public class Deck : INotifyPropertyChanged
     {
-        private List<Busho> _bushos;
-
-        private double[] _actualLeadership = new double[4];
-
-        private double[] _perCost = new double[4];
-
-        private double[] _percent = new double[4];
+        private List<DeckedBusho> _deckedBushos;
 
         private SoldierTypes _currentSoldierType;
 
@@ -25,35 +19,35 @@
 
         public Deck()
         {
-            _bushos = new List<Busho>(4);
+            _deckedBushos = new List<DeckedBusho>(4);
         }
 
-        public List<Busho> Bushos
+        public List<DeckedBusho> DeckedBushos
         {
             get
             {
-                return _bushos;
+                return _deckedBushos;
             }
         }
 
         public void Add(Busho busho)
         {
-            if (Bushos.Count < 4 && !this.IsContain(busho))
+            if (DeckedBushos.Count < 4 && !this.IsContain(busho))
             {
-                Bushos.Add(busho);
+                var decked = new DeckedBusho(busho, _currentSoldierType);
+                DeckedBushos.Add(decked);
                 this.CalculateTotalStatus();
+                OnPropertyChanged("DeckedBushos");
             }
         }
 
         public void Remove(int index)
         {
-            if (index < Bushos.Count)
+            if (index < DeckedBushos.Count)
             {
-                _actualLeadership = new double[4];
-                _perCost = new double[4];
-                _percent = new double[4];
-                Bushos.RemoveAt(index);
+                DeckedBushos.RemoveAt(index);
                 this.CalculateTotalStatus();
+                OnPropertyChanged("DeckedBushos");
             }
         }
 
@@ -64,11 +58,11 @@
         public int TotalSoldierNum()
         {
             int soldier = 0;
-            foreach (var busho in _bushos)
+            foreach (var busho in DeckedBushos)
             {
                 if (busho != null)
                 {
-                    soldier += busho.SoldierNumber;
+                    soldier += busho.OriginBusho.SoldierNumber;
                 }
             }
             return soldier;
@@ -128,31 +122,6 @@
             }
         }
 
-
-        public double[] Percent
-        {
-            get
-            {
-                return _percent;
-            }
-        }
-
-        public double[] PerCost
-        {
-            get
-            {
-                return _perCost;
-            }
-        }
-
-        public double[] ActualLeadership
-        {
-            get
-            {
-                return _actualLeadership;
-            }
-        }
-
         private void CalculateTotalStatus()
         {
             double totalAtk = 0;
@@ -162,58 +131,13 @@
             if (_currentSoldierType != null)
             {
                 int i = 0;
-                foreach (var busho in _bushos)
+                foreach (var decked in DeckedBushos)
                 {
-                    double percentage = 1.0;
-                    if (type == SoldierTypes.Spear || type == SoldierTypes.LongSpear)
-                    {
-                        percentage = RankToPercentage(busho.Lance);
-                    }
-                    else if (type == SoldierTypes.Bow || type == SoldierTypes.LongBow)
-                    {
-                        percentage = RankToPercentage(busho.Bow);
-                    }
-                    else if (type == SoldierTypes.Horse || type == SoldierTypes.EliteHorse)
-                    {
-                        percentage = RankToPercentage(busho.Horse);
-                    }
-                    else if (type == SoldierTypes.Hammer)
-                    {
-                        percentage = RankToPercentage(busho.Weapon);
-                    }
-                    else if (type == SoldierTypes.MountArcher)
-                    {
-                        percentage = (RankToPercentage(busho.Horse) + RankToPercentage(busho.Bow)) / 2;
-                    }
-                    else if (type == SoldierTypes.RedArms)
-                    {
-                        percentage = (RankToPercentage(busho.Bow) + RankToPercentage(busho.Lance)) / 2;
-                    }
-                    else if (type == SoldierTypes.Samurai)
-                    {
-                        percentage = (RankToPercentage(busho.Horse) + RankToPercentage(busho.Lance)) / 2;
-                    }
-                    else if (type == SoldierTypes.Gun)
-                    {
-                        percentage = (RankToPercentage(busho.Weapon) + RankToPercentage(busho.Lance)) / 2;
-                    }
-                    else if (type == SoldierTypes.Dragoon)
-                    {
-                        percentage = (RankToPercentage(busho.Weapon) + RankToPercentage(busho.Horse)) / 2;
-                    }
-
-                    _percent[i] = percentage;
-                    _actualLeadership[i] = busho.SoldierNumber * percentage;
-                    _perCost[i] = busho.SoldierNumber * percentage / busho.Cost;
-                    totalAtk += busho.SoldierNumber * percentage * RankDictionary.soldiers[type].Attack;
-                    totalDef += busho.SoldierNumber * percentage * RankDictionary.soldiers[type].Defence;
-                    totalCost += busho.Cost;
-                    i++;
+                    totalAtk += decked.ActualAttack;
+                    totalDef += decked.ActualDefence;
+                    totalCost += decked.OriginBusho.Cost;
                 }
             }
-            OnPropertyChanged("PerCost");
-            OnPropertyChanged("Percent");
-            OnPropertyChanged("ActualLeadership");
             TotalAttack = totalAtk;
             TotalDefence = totalDef;
             TotalCost = totalCost;
@@ -222,9 +146,9 @@
         private bool IsContain(Busho cmpBusho)
         {
             bool cond = false;
-            foreach (var busho in _bushos)
+            foreach (var decked in DeckedBushos)
             {
-                if(busho.Id == cmpBusho.Id)
+                if (decked.OriginBusho.Id == cmpBusho.Id)
                 {
                     cond = true;
                     break;
@@ -233,39 +157,13 @@
             return cond;
         }
 
-        private double RankToPercentage(LeadershipRank rank)
-        {
-            switch (rank)
-            {
-                case LeadershipRank.F:
-                    return 0.8;
-                case LeadershipRank.E:
-                    return 0.85;
-                case LeadershipRank.D:
-                    return 0.9;
-                case LeadershipRank.C:
-                    return 0.95;
-                case LeadershipRank.B:
-                    return 1.0;
-                case LeadershipRank.A:
-                    return 1.05;
-                case LeadershipRank.S:
-                    return 1.1;
-                case LeadershipRank.SS:
-                    return 1.15;
-                case LeadershipRank.SSS:
-                    return 1.15;
-                default:
-                    return 1.0;
-            }
-        }
-
-        /// <summary>
-        /// 総兵数
-        /// </summary>
         public void SwitchSoldierType(SoldierTypes type)
         {
             _currentSoldierType = type;
+            foreach (var decked in DeckedBushos)
+            {
+                decked.CurrentSoldierType = _currentSoldierType;
+            }
             this.CalculateTotalStatus();
         }
 

@@ -48,4 +48,10 @@
             <ContentPresenter />
         </Border>
     </ControlTemplate>
+	
+	<ControlTemplate x:Key="DeckedCardButton" TargetType="Button">
+        <Border Background="DarkSlateBlue" >
+            <ContentPresenter />
+        </Border>
+    </ControlTemplate>
 </ResourceDictionary>
