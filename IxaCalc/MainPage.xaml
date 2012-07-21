@@ -191,59 +191,71 @@
                    HorizontalAlignment="Left"
                    VerticalAlignment="Top"
                    Text="{Binding MainDeck.TotalCost}" />
-        <TextBlock Name="deckAtk"
+        <StackPanel Orientation="Horizontal" HorizontalAlignment="Right" VerticalAlignment="Bottom" Margin="0,0,0,50">
+            <Image Width="40" Height="40" Source="Images/Attack.png" Margin="2" />
+            <TextBlock Name="deckAtk"
                    Height="23"
-                   Margin="0,30,0,0"
                    HorizontalAlignment="Right"
                    VerticalAlignment="Bottom"
-                   Text="{Binding MainDeck.TotalAttack}" FontSize="20" FontWeight="Bold" />
+                   Text="{Binding MainDeck.TotalAttack}" FontSize="20" FontWeight="Bold" Foreground="#FFB81C1C" />
+        </StackPanel>
+        <StackPanel Orientation="Horizontal" HorizontalAlignment="Right" VerticalAlignment="Bottom">
+        <Image Width="40" Height="40" Source="Images/Defence.png" Margin="2" />
         <TextBlock Name="dechDef"
                    Height="23"
-                   Margin="0,30,0,60"
                    HorizontalAlignment="Right"
                    VerticalAlignment="Bottom"
-                   Text="{Binding MainDeck.TotalDefence}" FontSize="20" FontWeight="Bold" />
-        <StackPanel Name="rarityPanel" Margin="53,450,739,59">
+                   Text="{Binding MainDeck.TotalDefence}" FontSize="20" FontWeight="Bold" Foreground="#FF1717B4" />
+        </StackPanel>
+        <StackPanel Name="rarityPanel" Margin="26,257,826,119">
             <RadioButton Name="ultraRare"
-                         Height="16"
                          Margin="0"
                          HorizontalAlignment="Left"
                          VerticalAlignment="Top"
+                         Template="{StaticResource ShortCutButton}"
                          Command="{Binding ChangeRarityCommand}"
                          CommandParameter="天"
-                         Content="天" />
+                         >
+                <Image Width="40" Height="40" Source="Images/UltraRare.png" Margin="2" />
+                
+            </RadioButton>
             <RadioButton Name="superRare"
-                         Height="16"
                          Margin="0"
                          HorizontalAlignment="Left"
                          VerticalAlignment="Top"
+                         Template="{StaticResource ShortCutButton}"
                          Command="{Binding ChangeRarityCommand}"
-                         CommandParameter="極"
-                         Content="極" />
-            <RadioButton Name="rare"
-                         Height="16"
-                         Margin="0"
+                         CommandParameter="極">
+                <Image Width="40" Height="40" Source="Images/SuperRare.png" Margin="2" />
+            </RadioButton>
+            <RadioButton Name="rare" Margin="0"
                          HorizontalAlignment="Left"
                          VerticalAlignment="Top"
+                         Template="{StaticResource ShortCutButton}"
                          Command="{Binding ChangeRarityCommand}"
-                         CommandParameter="特"
-                         Content="特" />
+                         CommandParameter="特" >
+                <Image Width="40" Height="40" Source="Images/Rare.png" Margin="2" />
+            </RadioButton>
             <RadioButton Name="uncommon"
-                         Height="16"
                          Margin="0"
                          HorizontalAlignment="Left"
                          VerticalAlignment="Top"
+                         Template="{StaticResource ShortCutButton}"
                          Command="{Binding ChangeRarityCommand}"
-                         CommandParameter="上"
-                         Content="上" />
+                         CommandParameter="上" >
+                <Image Width="40" Height="40" Source="Images/Uncommon.png" Margin="2" />
+                
+            </RadioButton>
             <RadioButton Name="common"
-                         Height="16"
                          Margin="0"
                          HorizontalAlignment="Left"
                          VerticalAlignment="Top"
+                         Template="{StaticResource ShortCutButton}"
                          Command="{Binding ChangeRarityCommand}"
-                         CommandParameter="序"
-                         Content="序" />
+                         CommandParameter="序">
+
+                <Image Width="40" Height="40" Source="Images/Common.png" Margin="2" />
+            </RadioButton>
         </StackPanel>
         <StackPanel Orientation="Horizontal" Height="50" HorizontalAlignment="Left" Margin="2,9,0,0" Name="stackPanel2" VerticalAlignment="Top" Width="Auto" >
             <RadioButton ClickMode="Press" Command="{Binding ChangeSoldierCommand}" CommandParameter="Spear" Template="{StaticResource ShortCutButton}">
