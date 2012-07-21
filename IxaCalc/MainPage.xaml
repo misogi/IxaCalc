@@ -23,6 +23,7 @@
     </UserControl.Resources>
 
     <Grid x:Name="LayoutRoot">
+        <Image HorizontalAlignment="Stretch" Name="image1" Stretch="Fill" VerticalAlignment="Stretch" Source="/IxaCalc;component/Images/wallpaper.jpg" />
         <ListBox Name="bushoList"
                  Width="176"
                  Height="598"

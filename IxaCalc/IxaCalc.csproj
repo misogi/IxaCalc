@@ -88,6 +88,7 @@
     <Compile Include="App.xaml.cs">
       <DependentUpon>App.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Converters\RarityToBrushConverter.cs" />
     <Compile Include="DeckBushoView.xaml.cs">
       <DependentUpon>DeckBushoView.xaml</DependentUpon>
     </Compile>
@@ -542,6 +543,9 @@
     <Resource Include="Images\LeadershipSpear.png" />
     <Resource Include="Images\LeadershipWeapon.png" />
     <Resource Include="Images\SoldierNumber.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Images\wallpaper.jpg" />
   </ItemGroup>
   <Import Project="$(MSBuildExtensionsPath32)\Microsoft\Silverlight\$(SilverlightVersion)\Microsoft.Silverlight.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

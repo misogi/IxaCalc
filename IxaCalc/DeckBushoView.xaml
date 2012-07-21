@@ -3,6 +3,7 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             xmlns:myc="clr-namespace:IxaCalc.Converters"
              d:DesignHeight="100"
              d:DesignWidth="500"
              mc:Ignorable="d">
@@ -11,12 +12,12 @@
             <ResourceDictionary.MergedDictionaries>
                 <ResourceDictionary Source="Skins/MainSkin.xaml" />
             </ResourceDictionary.MergedDictionaries>
+            <myc:RarityToBrushConverter x:Key="brushConverter" />
         </ResourceDictionary>
     </UserControl.Resources>
-    <Button Height="100"
+    <Grid Height="100"
             Margin="5"
-            Foreground="White"
-            Template="{StaticResource DeckCardButton}">
+            Background="{Binding OriginBusho.Rarity, Converter={StaticResource brushConverter}}">
         <StackPanel Margin="0"
                     Orientation="Horizontal"
                     d:LayoutOverrides="Width">
@@ -86,5 +87,5 @@
                 <TextBlock Foreground="#FF212121" Text="{Binding ActualDefence, StringFormat=\{0:F1\}}" />
             </StackPanel>
         </StackPanel>
-    </Button>
+    </Grid>
 </UserControl>
