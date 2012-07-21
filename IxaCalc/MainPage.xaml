@@ -23,9 +23,9 @@
 
     <Grid x:Name="LayoutRoot">
         <ListBox Name="bushoList"
-                 Width="195"
+                 Width="176"
                  Height="543"
-                 Margin="190,59,0,0"
+                 Margin="46,55,0,0"
                  HorizontalAlignment="Left"
                  VerticalAlignment="Top"
                  ItemsSource="{Binding BushoList}">
@@ -46,157 +46,298 @@
                 </DataTemplate>
             </ListBox.ItemTemplate>
         </ListBox>
-        <StackPanel Name="stackPanel1"
-                    Width="242"
-                    Height="433"
-                    Margin="589,9,0,0"
+        <StackPanel Name="stackPanel1" Margin="220,61,0,0"
                     HorizontalAlignment="Left"
-                    VerticalAlignment="Top">
-            <Grid>
-                <Button Command="{Binding RemoveDeckCommand}" CommandParameter="0" Template="{StaticResource DeckCardButton}" Foreground="White" Margin="5" >
-                    <Grid>
-                        <Grid.ColumnDefinitions>
-                            <ColumnDefinition Width="Auto" />
-                            <ColumnDefinition />
-                        </Grid.ColumnDefinitions>
-                        <Image Source="{Binding Image}" Grid.Row="0" Grid.Column="0" 
-                            DataContext="{Binding Busho1}" Height="100" Width="80" Margin="10" />
-                        <StackPanel Grid.Column="1">
-                            <StackPanel 
-                            DataContext="{Binding Busho1}" >
-                                <TextBlock Text="{Binding Name}" Foreground="#FF96FFFF" />
-                                <TextBlock Text="{Binding Rarity}" />
-                                <StackPanel Orientation="Horizontal">
-                                    <TextBlock Text="槍" />
-                                    <TextBlock Text="{Binding Lance}" />
-                                    <TextBlock Text="弓" />
-                                    <TextBlock Text="{Binding Bow}" />
-                                    <TextBlock Text="馬" />
-                                    <TextBlock Text="{Binding Horse}" />
-                                    <TextBlock Text="器" />
-                                    <TextBlock Text="{Binding Weapon}" />
-                                </StackPanel>
-                                <StackPanel Orientation="Horizontal">
-                                    <TextBlock Text="指揮兵数 : " />
-                                    <TextBlock Text="{Binding SoldierNumber}" />
-                                </StackPanel>
-                                <Border BorderThickness="0,0,0,1" Padding="2" BorderBrush="White">
-                                    <TextBlock Text="ステータス" />
-                                </Border>
-                                <StackPanel Orientation="Horizontal">
-                                    <Image Width="16" Height="16" Source="Images/Attack.png" Margin="2" />
-                                    <TextBlock Text="{Binding Attack}" />
-                                </StackPanel>
-                                <StackPanel Orientation="Horizontal">
-                                    <Image Width="16" Height="16" Source="Images/Defence.png" Margin="2" />
-                                    <TextBlock Text="{Binding Defence}" />
-                                </StackPanel>
+                    VerticalAlignment="Top"
+                    Orientation="Horizontal">
+            <Button Margin="5"
+                    Command="{Binding RemoveDeckCommand}"
+                    CommandParameter="0"
+                    Foreground="White"
+                    Template="{StaticResource DeckCardButton}">
+                <Grid>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="Auto" />
+                        <ColumnDefinition />
+                    </Grid.ColumnDefinitions>
+                    <Border Grid.Row="0"
+                            Grid.Column="0"
+                            Margin="5"
+                            Background="White">
+                        <Image Width="80"
+                               Height="100"
+                               DataContext="{Binding Busho1}"
+                               Source="{Binding Image}" />
+                    </Border>
+                    <StackPanel Grid.Column="1">
+                        <StackPanel DataContext="{Binding Busho1}">
+                            <TextBlock Foreground="#FF96FFFF" Text="{Binding Name}" />
+                            <TextBlock Text="{Binding Rarity}" />
+                            <StackPanel Orientation="Horizontal">
+                                <TextBlock Text="槍" />
+                                <TextBlock Text="{Binding Lance}" />
+                                <TextBlock Text="弓" />
+                                <TextBlock Text="{Binding Bow}" />
+                                <TextBlock Text="馬" />
+                                <TextBlock Text="{Binding Horse}" />
+                                <TextBlock Text="器" />
+                                <TextBlock Text="{Binding Weapon}" />
                             </StackPanel>
-                            <StackPanel Grid.Row="1" Grid.Column="1" Grid.ColumnSpan="2">
-                                <Border BorderThickness="0,0,0,1" Padding="2" BorderBrush="White">
-                                    <TextBlock Text="統計" />
-                                </Border>
-                                <TextBlock Text="{Binding MainDeck.Percent[0]}" />
-                                <TextBlock Text="{Binding MainDeck.ActualLeadership[0]}" />
-                                <TextBlock Text="{Binding MainDeck.PerCost[0]}" />
+                            <StackPanel Orientation="Horizontal">
+                                <TextBlock Text="指揮兵数 : " />
+                                <TextBlock Text="{Binding SoldierNumber}" />
+                            </StackPanel>
+                            <Border BorderBrush="White"
+                                    BorderThickness="0,0,0,1"
+                                    Padding="2">
+                                <TextBlock Text="ステータス" />
+                            </Border>
+                            <StackPanel Orientation="Horizontal">
+                                <Image Width="16"
+                                       Height="16"
+                                       Margin="2"
+                                       Source="Images/Attack.png" />
+                                <TextBlock Text="{Binding Attack}" />
+                            </StackPanel>
+                            <StackPanel Orientation="Horizontal">
+                                <Image Width="16"
+                                       Height="16"
+                                       Margin="2"
+                                       Source="Images/Defence.png" />
+                                <TextBlock Text="{Binding Defence}" />
                             </StackPanel>
                         </StackPanel>
-                    </Grid>
-                </Button>
-            </Grid>
-            <Grid>
-                <Button Command="{Binding RemoveDeckCommand}" CommandParameter="1" />
-                <StackPanel IsHitTestVisible="False">
-                    <TextBlock Text="{Binding MainDeck.Percent[1]}" />
-                    <TextBlock Text="{Binding MainDeck.ActualLeadership[1]}" />
-                    <TextBlock Text="{Binding MainDeck.PerCost[1]}" />
-                </StackPanel>
-                <StackPanel Name="grid2"
-                            Width="200"
-                            Height="100"
-                            DataContext="{Binding Busho2}"
-                            IsHitTestVisible="False"
-                            Orientation="Horizontal">
-                    <Image Source="{Binding Image}" />
-                    <StackPanel>
-                        <TextBlock Text="{Binding Name}" />
-                        <TextBlock Text="{Binding Rarity}" />
-                        <StackPanel Orientation="Horizontal">
-                            <TextBlock Text="槍" />
-                            <TextBlock Text="{Binding Lance}" />
-                            <TextBlock Text="弓" />
-                            <TextBlock Text="{Binding Bow}" />
-                            <TextBlock Text="馬" />
-                            <TextBlock Text="{Binding Horse}" />
-                            <TextBlock Text="器" />
-                            <TextBlock Text="{Binding Weapon}" />
+                        <StackPanel Grid.Row="1"
+                                    Grid.Column="1"
+                                    Grid.ColumnSpan="2">
+                            <Border BorderBrush="White"
+                                    BorderThickness="0,0,0,1"
+                                    Padding="2">
+                                <TextBlock Text="統計" />
+                            </Border>
+                            <TextBlock Text="{Binding MainDeck.Percent[0]}" />
+                            <TextBlock Text="{Binding MainDeck.ActualLeadership[0]}" />
+                            <TextBlock Text="{Binding MainDeck.PerCost[0], StringFormat=\{0:F1\}}" />
                         </StackPanel>
-                        <TextBlock Text="{Binding SoldierNumber}" />
                     </StackPanel>
-                </StackPanel>
-            </Grid>
-            <Grid Background="AntiqueWhite">
-                <Button Command="{Binding RemoveDeckCommand}" CommandParameter="2" />
-                <StackPanel IsHitTestVisible="False">
-                    <TextBlock Text="{Binding MainDeck.Percent[2]}" />
-                    <TextBlock Text="{Binding MainDeck.ActualLeadership[2]}" />
-                    <TextBlock Text="{Binding MainDeck.PerCost[2]}" />
-                </StackPanel>
-                <StackPanel Name="grid3"
-                            Width="200"
-                            Height="100"
-                            DataContext="{Binding Busho3}"
-                            IsHitTestVisible="False"
-                            Orientation="Horizontal">
-                    <Image Source="{Binding Image}" />
-                    <StackPanel>
-                        <TextBlock Text="{Binding Name}" />
-                        <TextBlock Text="{Binding Rarity}" />
-                        <StackPanel Orientation="Horizontal">
-                            <TextBlock Text="槍" />
-                            <TextBlock Text="{Binding Lance}" />
-                            <TextBlock Text="弓" />
-                            <TextBlock Text="{Binding Bow}" />
-                            <TextBlock Text="馬" />
-                            <TextBlock Text="{Binding Horse}" />
-                            <TextBlock Text="器" />
-                            <TextBlock Text="{Binding Weapon}" />
+                </Grid>
+            </Button>
+            <Button Margin="5"
+                    Command="{Binding RemoveDeckCommand}"
+                    CommandParameter="0"
+                    Foreground="White"
+                    Template="{StaticResource DeckCardButton}">
+                <Grid>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="Auto" />
+                        <ColumnDefinition />
+                    </Grid.ColumnDefinitions>
+                    <Border Grid.Row="0"
+                            Grid.Column="0"
+                            Margin="5"
+                            Background="White">
+                        <Image Width="80"
+                               Height="100"
+                               DataContext="{Binding Busho2}"
+                               Source="{Binding Image}" />
+                    </Border>
+                    <StackPanel Grid.Column="1">
+                        <StackPanel DataContext="{Binding Busho2}">
+                            <TextBlock Foreground="#FF96FFFF" Text="{Binding Name}" />
+                            <TextBlock Text="{Binding Rarity}" />
+                            <StackPanel Orientation="Horizontal">
+                                <TextBlock Text="槍" />
+                                <TextBlock Text="{Binding Lance}" />
+                                <TextBlock Text="弓" />
+                                <TextBlock Text="{Binding Bow}" />
+                                <TextBlock Text="馬" />
+                                <TextBlock Text="{Binding Horse}" />
+                                <TextBlock Text="器" />
+                                <TextBlock Text="{Binding Weapon}" />
+                            </StackPanel>
+                            <StackPanel Orientation="Horizontal">
+                                <TextBlock Text="指揮兵数 : " />
+                                <TextBlock Text="{Binding SoldierNumber}" />
+                            </StackPanel>
+                            <Border BorderBrush="White"
+                                    BorderThickness="0,0,0,1"
+                                    Padding="2">
+                                <TextBlock Text="ステータス" />
+                            </Border>
+                            <StackPanel Orientation="Horizontal">
+                                <Image Width="16"
+                                       Height="16"
+                                       Margin="2"
+                                       Source="Images/Attack.png" />
+                                <TextBlock Text="{Binding Attack}" />
+                            </StackPanel>
+                            <StackPanel Orientation="Horizontal">
+                                <Image Width="16"
+                                       Height="16"
+                                       Margin="2"
+                                       Source="Images/Defence.png" />
+                                <TextBlock Text="{Binding Defence}" />
+                            </StackPanel>
                         </StackPanel>
-                        <TextBlock Text="{Binding SoldierNumber}" />
-                    </StackPanel>
-                </StackPanel>
-            </Grid>
-            <Grid>
-                <Button Command="{Binding RemoveDeckCommand}" CommandParameter="3" />
-                <StackPanel IsHitTestVisible="False">
-                    <TextBlock Text="{Binding MainDeck.Percent[3]}" />
-                    <TextBlock Text="{Binding MainDeck.ActualLeadership[3]}" />
-                    <TextBlock Text="{Binding MainDeck.PerCost[3]}" />
-                </StackPanel>
-                <StackPanel Name="grid4"
-                            Width="200"
-                            Height="100"
-                            DataContext="{Binding Busho4}"
-                            IsHitTestVisible="False"
-                            Orientation="Horizontal">
-                    <Image Source="{Binding Image}" />
-                    <StackPanel>
-                        <TextBlock Text="{Binding Name}" />
-                        <TextBlock Text="{Binding Rarity}" />
-                        <StackPanel Orientation="Horizontal">
-                            <TextBlock Text="槍" />
-                            <TextBlock Text="{Binding Lance}" />
-                            <TextBlock Text="弓" />
-                            <TextBlock Text="{Binding Bow}" />
-                            <TextBlock Text="馬" />
-                            <TextBlock Text="{Binding Horse}" />
-                            <TextBlock Text="器" />
-                            <TextBlock Text="{Binding Weapon}" />
+                        <StackPanel Grid.Row="1"
+                                    Grid.Column="1"
+                                    Grid.ColumnSpan="2">
+                            <Border BorderBrush="White"
+                                    BorderThickness="0,0,0,1"
+                                    Padding="2">
+                                <TextBlock Text="統計" />
+                            </Border>
+                            <TextBlock Text="{Binding MainDeck.Percent[1]}" />
+                            <TextBlock Text="{Binding MainDeck.ActualLeadership[1]}" />
+                            <TextBlock Text="{Binding MainDeck.PerCost[1], StringFormat=\{0:F1\}}" />
                         </StackPanel>
-                        <TextBlock Text="{Binding SoldierNumber}" />
                     </StackPanel>
-                </StackPanel>
-            </Grid>
+                </Grid>
+            </Button>
+            <Button Margin="5"
+                    Command="{Binding RemoveDeckCommand}"
+                    CommandParameter="0"
+                    Foreground="White"
+                    Template="{StaticResource DeckCardButton}">
+                <Grid>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="Auto" />
+                        <ColumnDefinition />
+                    </Grid.ColumnDefinitions>
+                    <Border Grid.Row="0"
+                            Grid.Column="0"
+                            Margin="5"
+                            Background="White">
+                        <Image Width="80"
+                               Height="100"
+                               DataContext="{Binding Busho3}"
+                               Source="{Binding Image}" />
+                    </Border>
+                    <StackPanel Grid.Column="1">
+                        <StackPanel DataContext="{Binding Busho3}">
+                            <TextBlock Foreground="#FF96FFFF" Text="{Binding Name}" />
+                            <TextBlock Text="{Binding Rarity}" />
+                            <StackPanel Orientation="Horizontal">
+                                <TextBlock Text="槍" />
+                                <TextBlock Text="{Binding Lance}" />
+                                <TextBlock Text="弓" />
+                                <TextBlock Text="{Binding Bow}" />
+                                <TextBlock Text="馬" />
+                                <TextBlock Text="{Binding Horse}" />
+                                <TextBlock Text="器" />
+                                <TextBlock Text="{Binding Weapon}" />
+                            </StackPanel>
+                            <StackPanel Orientation="Horizontal">
+                                <TextBlock Text="指揮兵数 : " />
+                                <TextBlock Text="{Binding SoldierNumber}" />
+                            </StackPanel>
+                            <Border BorderBrush="White"
+                                    BorderThickness="0,0,0,1"
+                                    Padding="2">
+                                <TextBlock Text="ステータス" />
+                            </Border>
+                            <StackPanel Orientation="Horizontal">
+                                <Image Width="16"
+                                       Height="16"
+                                       Margin="2"
+                                       Source="Images/Attack.png" />
+                                <TextBlock Text="{Binding Attack}" />
+                            </StackPanel>
+                            <StackPanel Orientation="Horizontal">
+                                <Image Width="16"
+                                       Height="16"
+                                       Margin="2"
+                                       Source="Images/Defence.png" />
+                                <TextBlock Text="{Binding Defence}" />
+                            </StackPanel>
+                        </StackPanel>
+                        <StackPanel Grid.Row="1"
+                                    Grid.Column="1"
+                                    Grid.ColumnSpan="2">
+                            <Border BorderBrush="White"
+                                    BorderThickness="0,0,0,1"
+                                    Padding="2">
+                                <TextBlock Text="統計" />
+                            </Border>
+                            <TextBlock Text="{Binding MainDeck.Percent[2]}" />
+                            <TextBlock Text="{Binding MainDeck.ActualLeadership[2]}" />
+                            <TextBlock Text="{Binding MainDeck.PerCost[2], StringFormat=\{0:F1\}}" />
+                        </StackPanel>
+                    </StackPanel>
+                </Grid>
+            </Button>
+            <Button Margin="5"
+                    Command="{Binding RemoveDeckCommand}"
+                    CommandParameter="0"
+                    Foreground="White"
+                    Template="{StaticResource DeckCardButton}">
+                <Grid>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="Auto" />
+                        <ColumnDefinition />
+                    </Grid.ColumnDefinitions>
+                    <Border Grid.Row="0"
+                            Grid.Column="0"
+                            Margin="5"
+                            Background="White">
+                        <Image Width="80"
+                               Height="100"
+                               DataContext="{Binding Busho4}"
+                               Source="{Binding Image}" />
+                    </Border>
+                    <StackPanel Grid.Column="1">
+                        <StackPanel DataContext="{Binding Busho4}">
+                            <TextBlock Foreground="#FF96FFFF" Text="{Binding Name}" />
+                            <TextBlock Text="{Binding Rarity}" />
+                            <StackPanel Orientation="Horizontal">
+                                <TextBlock Text="槍" />
+                                <TextBlock Text="{Binding Lance}" />
+                                <TextBlock Text="弓" />
+                                <TextBlock Text="{Binding Bow}" />
+                                <TextBlock Text="馬" />
+                                <TextBlock Text="{Binding Horse}" />
+                                <TextBlock Text="器" />
+                                <TextBlock Text="{Binding Weapon}" />
+                            </StackPanel>
+                            <StackPanel Orientation="Horizontal">
+                                <TextBlock Text="指揮兵数 : " />
+                                <TextBlock Text="{Binding SoldierNumber}" />
+                            </StackPanel>
+                            <Border BorderBrush="White"
+                                    BorderThickness="0,0,0,1"
+                                    Padding="2">
+                                <TextBlock Text="ステータス" />
+                            </Border>
+                            <StackPanel Orientation="Horizontal">
+                                <Image Width="16"
+                                       Height="16"
+                                       Margin="2"
+                                       Source="Images/Attack.png" />
+                                <TextBlock Text="{Binding Attack}" />
+                            </StackPanel>
+                            <StackPanel Orientation="Horizontal">
+                                <Image Width="16"
+                                       Height="16"
+                                       Margin="2"
+                                       Source="Images/Defence.png" />
+                                <TextBlock Text="{Binding Defence}" />
+                            </StackPanel>
+                        </StackPanel>
+                        <StackPanel Grid.Row="1"
+                                    Grid.Column="1"
+                                    Grid.ColumnSpan="2">
+                            <Border BorderBrush="White"
+                                    BorderThickness="0,0,0,1"
+                                    Padding="2">
+                                <TextBlock Text="統計" />
+                            </Border>
+                            <TextBlock Text="{Binding MainDeck.Percent[3]}" />
+                            <TextBlock Text="{Binding MainDeck.ActualLeadership[3]}" />
+                            <TextBlock Text="{Binding MainDeck.PerCost[3], StringFormat=\{0:F1\}}" />
+                        </StackPanel>
+                    </StackPanel>
+                </Grid>
+            </Button>
         </StackPanel>
         <TextBlock Name="textBlock1"
                    Width="216"
@@ -212,105 +353,209 @@
                    HorizontalAlignment="Left"
                    VerticalAlignment="Top"
                    Text="{Binding MainDeck.TotalCost}" />
-        <StackPanel Orientation="Horizontal" HorizontalAlignment="Right" VerticalAlignment="Bottom" Margin="0,0,0,50">
-            <Image Width="20" Height="20" Source="Images/Attack.png" Margin="2" />
+        <StackPanel Margin="0,0,0,50"
+                    HorizontalAlignment="Right"
+                    VerticalAlignment="Bottom"
+                    Orientation="Horizontal">
+            <Image Width="20"
+                   Height="20"
+                   Margin="2"
+                   Source="Images/Attack.png" />
             <TextBlock Name="deckAtk"
-                   Height="23"
-                   HorizontalAlignment="Right"
-                   VerticalAlignment="Bottom"
-                   Text="{Binding MainDeck.TotalAttack}" FontSize="20" FontWeight="Bold" Foreground="#FFB81C1C" />
+                       Height="23"
+                       HorizontalAlignment="Right"
+                       VerticalAlignment="Bottom"
+                       FontSize="20"
+                       FontWeight="Bold"
+                       Foreground="#FFB81C1C"
+                       Text="{Binding MainDeck.TotalAttack}" />
         </StackPanel>
-        <StackPanel Orientation="Horizontal" HorizontalAlignment="Right" VerticalAlignment="Bottom">
-        <Image Width="20" Height="20" Source="Images/Defence.png" Margin="2" />
-        <TextBlock Name="dechDef"
-                   Height="23"
-                   HorizontalAlignment="Right"
-                   VerticalAlignment="Bottom"
-                   Text="{Binding MainDeck.TotalDefence}" FontSize="20" FontWeight="Bold" Foreground="#FF1717B4" />
+        <StackPanel HorizontalAlignment="Right"
+                    VerticalAlignment="Bottom"
+                    Orientation="Horizontal">
+            <Image Width="20"
+                   Height="20"
+                   Margin="2"
+                   Source="Images/Defence.png" />
+            <TextBlock Name="dechDef"
+                       Height="23"
+                       HorizontalAlignment="Right"
+                       VerticalAlignment="Bottom"
+                       FontSize="20"
+                       FontWeight="Bold"
+                       Foreground="#FF1717B4"
+                       Text="{Binding MainDeck.TotalDefence}" />
         </StackPanel>
         <StackPanel Name="rarityPanel" Margin="2,59,856,343">
             <RadioButton Name="ultraRare"
                          Margin="0"
                          HorizontalAlignment="Left"
                          VerticalAlignment="Top"
-                         Template="{StaticResource ShortCutButton}"
                          Command="{Binding ChangeRarityCommand}"
                          CommandParameter="天"
-                         >
-                <Image Width="30" Height="30" Source="Images/UltraRare.png" Margin="2" />
-                
+                         Template="{StaticResource ShortCutButton}">
+                <Image Width="30"
+                       Height="30"
+                       Margin="2"
+                       Source="Images/UltraRare.png" />
+
             </RadioButton>
             <RadioButton Name="superRare"
                          Margin="0"
                          HorizontalAlignment="Left"
                          VerticalAlignment="Top"
-                         Template="{StaticResource ShortCutButton}"
                          Command="{Binding ChangeRarityCommand}"
-                         CommandParameter="極">
-                <Image Width="30" Height="30" Source="Images/SuperRare.png" Margin="2" />
+                         CommandParameter="極"
+                         Template="{StaticResource ShortCutButton}">
+                <Image Width="30"
+                       Height="30"
+                       Margin="2"
+                       Source="Images/SuperRare.png" />
             </RadioButton>
-            <RadioButton Name="rare" Margin="0"
+            <RadioButton Name="rare"
+                         Margin="0"
                          HorizontalAlignment="Left"
                          VerticalAlignment="Top"
-                         Template="{StaticResource ShortCutButton}"
                          Command="{Binding ChangeRarityCommand}"
-                         CommandParameter="特" >
-                <Image Width="30" Height="30" Source="Images/Rare.png" Margin="2" />
+                         CommandParameter="特"
+                         Template="{StaticResource ShortCutButton}">
+                <Image Width="30"
+                       Height="30"
+                       Margin="2"
+                       Source="Images/Rare.png" />
             </RadioButton>
             <RadioButton Name="uncommon"
                          Margin="0"
                          HorizontalAlignment="Left"
                          VerticalAlignment="Top"
-                         Template="{StaticResource ShortCutButton}"
                          Command="{Binding ChangeRarityCommand}"
-                         CommandParameter="上" >
-                <Image Width="30" Height="30" Source="Images/Uncommon.png" Margin="2" />
-                
+                         CommandParameter="上"
+                         Template="{StaticResource ShortCutButton}">
+                <Image Width="30"
+                       Height="30"
+                       Margin="2"
+                       Source="Images/Uncommon.png" />
+
             </RadioButton>
             <RadioButton Name="common"
                          Margin="0"
                          HorizontalAlignment="Left"
                          VerticalAlignment="Top"
-                         Template="{StaticResource ShortCutButton}"
                          Command="{Binding ChangeRarityCommand}"
-                         CommandParameter="序">
+                         CommandParameter="序"
+                         Template="{StaticResource ShortCutButton}">
 
-                <Image Width="30" Height="30" Source="Images/Common.png" Margin="2" />
+                <Image Width="30"
+                       Height="30"
+                       Margin="2"
+                       Source="Images/Common.png" />
             </RadioButton>
         </StackPanel>
-        <StackPanel Orientation="Horizontal" Height="50" HorizontalAlignment="Left" Margin="2,9,0,0" Name="stackPanel2" VerticalAlignment="Top" Width="Auto" >
-            <RadioButton ClickMode="Press" Command="{Binding ChangeSoldierCommand}" CommandParameter="Spear" Template="{StaticResource ShortCutButton}">
-                <Image Width="40" Height="40" Source="Images/Spear.png" Margin="2"  />
+        <StackPanel Name="stackPanel2"
+                    Width="Auto"
+                    Height="50"
+                    Margin="2,9,0,0"
+                    HorizontalAlignment="Left"
+                    VerticalAlignment="Top"
+                    Orientation="Horizontal">
+            <RadioButton ClickMode="Press"
+                         Command="{Binding ChangeSoldierCommand}"
+                         CommandParameter="Spear"
+                         Template="{StaticResource ShortCutButton}">
+                <Image Width="40"
+                       Height="40"
+                       Margin="2"
+                       Source="Images/Spear.png" />
             </RadioButton>
-            <RadioButton ClickMode="Press" Command="{Binding ChangeSoldierCommand}" CommandParameter="LongSpear" Template="{StaticResource ShortCutButton}">
-                <Image Width="40" Height="40" Source="Images/LongSpear.png" Margin="2" />
+            <RadioButton ClickMode="Press"
+                         Command="{Binding ChangeSoldierCommand}"
+                         CommandParameter="LongSpear"
+                         Template="{StaticResource ShortCutButton}">
+                <Image Width="40"
+                       Height="40"
+                       Margin="2"
+                       Source="Images/LongSpear.png" />
             </RadioButton>
-            <RadioButton ClickMode="Press" Command="{Binding ChangeSoldierCommand}" CommandParameter="Samurai" Template="{StaticResource ShortCutButton}">
-                <Image Width="40" Height="40" Source="Images/Samurai.png" Margin="2" />
+            <RadioButton ClickMode="Press"
+                         Command="{Binding ChangeSoldierCommand}"
+                         CommandParameter="Samurai"
+                         Template="{StaticResource ShortCutButton}">
+                <Image Width="40"
+                       Height="40"
+                       Margin="2"
+                       Source="Images/Samurai.png" />
             </RadioButton>
-            <RadioButton ClickMode="Press" Command="{Binding ChangeSoldierCommand}" CommandParameter="Bow" Template="{StaticResource ShortCutButton}">
-                <Image Width="40" Height="40" Source="Images/Bow.png" Margin="2" />
+            <RadioButton ClickMode="Press"
+                         Command="{Binding ChangeSoldierCommand}"
+                         CommandParameter="Bow"
+                         Template="{StaticResource ShortCutButton}">
+                <Image Width="40"
+                       Height="40"
+                       Margin="2"
+                       Source="Images/Bow.png" />
             </RadioButton>
-            <RadioButton ClickMode="Press" Command="{Binding ChangeSoldierCommand}" CommandParameter="LongBow" Template="{StaticResource ShortCutButton}">
-                <Image Width="40" Height="40" Source="Images/LongBow.png" Margin="2" />
+            <RadioButton ClickMode="Press"
+                         Command="{Binding ChangeSoldierCommand}"
+                         CommandParameter="LongBow"
+                         Template="{StaticResource ShortCutButton}">
+                <Image Width="40"
+                       Height="40"
+                       Margin="2"
+                       Source="Images/LongBow.png" />
             </RadioButton>
-            <RadioButton ClickMode="Press" Command="{Binding ChangeSoldierCommand}" CommandParameter="MountArcher" Template="{StaticResource ShortCutButton}">
-                <Image Width="40" Height="40" Source="Images/MountArcher.png" Margin="2" />
+            <RadioButton ClickMode="Press"
+                         Command="{Binding ChangeSoldierCommand}"
+                         CommandParameter="MountArcher"
+                         Template="{StaticResource ShortCutButton}">
+                <Image Width="40"
+                       Height="40"
+                       Margin="2"
+                       Source="Images/MountArcher.png" />
             </RadioButton>
-            <RadioButton ClickMode="Press" Command="{Binding ChangeSoldierCommand}" CommandParameter="Horse" Template="{StaticResource ShortCutButton}">
-                <Image Width="40" Height="40" Source="Images/Horse.png" Margin="2" />
+            <RadioButton ClickMode="Press"
+                         Command="{Binding ChangeSoldierCommand}"
+                         CommandParameter="Horse"
+                         Template="{StaticResource ShortCutButton}">
+                <Image Width="40"
+                       Height="40"
+                       Margin="2"
+                       Source="Images/Horse.png" />
             </RadioButton>
-            <RadioButton ClickMode="Press" Command="{Binding ChangeSoldierCommand}" CommandParameter="EliteHorse" Template="{StaticResource ShortCutButton}">
-                <Image Width="40" Height="40" Source="Images/EliteHorse.png" Margin="2" />
+            <RadioButton ClickMode="Press"
+                         Command="{Binding ChangeSoldierCommand}"
+                         CommandParameter="EliteHorse"
+                         Template="{StaticResource ShortCutButton}">
+                <Image Width="40"
+                       Height="40"
+                       Margin="2"
+                       Source="Images/EliteHorse.png" />
             </RadioButton>
-            <RadioButton ClickMode="Press" Command="{Binding ChangeSoldierCommand}" CommandParameter="RedArms" Template="{StaticResource ShortCutButton}">
-                <Image Width="40" Height="40" Source="Images/RedArms.png" Margin="2" />
+            <RadioButton ClickMode="Press"
+                         Command="{Binding ChangeSoldierCommand}"
+                         CommandParameter="RedArms"
+                         Template="{StaticResource ShortCutButton}">
+                <Image Width="40"
+                       Height="40"
+                       Margin="2"
+                       Source="Images/RedArms.png" />
             </RadioButton>
-            <RadioButton ClickMode="Press" Command="{Binding ChangeSoldierCommand}" CommandParameter="Gun" Template="{StaticResource ShortCutButton}">
-                <Image Width="40" Height="40" Source="Images/Gun.png" Margin="2" />
+            <RadioButton ClickMode="Press"
+                         Command="{Binding ChangeSoldierCommand}"
+                         CommandParameter="Gun"
+                         Template="{StaticResource ShortCutButton}">
+                <Image Width="40"
+                       Height="40"
+                       Margin="2"
+                       Source="Images/Gun.png" />
             </RadioButton>
-            <RadioButton ClickMode="Press" Command="{Binding ChangeSoldierCommand}" CommandParameter="Dragoon" Template="{StaticResource ShortCutButton}">
-                <Image Width="40" Height="40" Source="Images/Dragoon.png" Margin="2" />
+            <RadioButton ClickMode="Press"
+                         Command="{Binding ChangeSoldierCommand}"
+                         CommandParameter="Dragoon"
+                         Template="{StaticResource ShortCutButton}">
+                <Image Width="40"
+                       Height="40"
+                       Margin="2"
+                       Source="Images/Dragoon.png" />
             </RadioButton>
         </StackPanel>
     </Grid>

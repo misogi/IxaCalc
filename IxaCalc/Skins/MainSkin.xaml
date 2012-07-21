@@ -44,7 +44,7 @@
 
 
     <ControlTemplate x:Key="DeckCardButton" TargetType="Button">
-        <Border Background="Black" >
+        <Border Background="DarkSlateBlue" >
             <ContentPresenter />
         </Border>
     </ControlTemplate>
