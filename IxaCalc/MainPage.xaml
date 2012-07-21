@@ -25,8 +25,8 @@
     <Grid x:Name="LayoutRoot">
         <ListBox Name="bushoList"
                  Width="176"
-                 Height="543"
-                 Margin="46,55,0,0"
+                 Height="598"
+                 Margin="46,0,0,0"
                  HorizontalAlignment="Left"
                  VerticalAlignment="Top"
                  ItemsSource="{Binding BushoList}">
@@ -47,7 +47,7 @@
                 </DataTemplate>
             </ListBox.ItemTemplate>
         </ListBox>
-        <StackPanel Name="stackPanel1" Margin="220,61,0,0"
+        <StackPanel Name="deckPanel" Margin="236,56,0,0"
                     HorizontalAlignment="Left"
                     VerticalAlignment="Top">
             <Grid>
@@ -67,54 +67,57 @@
                 <Button Command="{Binding RemoveDeckCommand}" CommandParameter="3" Opacity="0" ClickMode="Press" />
             </Grid>
         </StackPanel>
-        <TextBlock Name="textBlock1"
-                   Width="216"
-                   Height="25"
-                   Margin="438,527,0,0"
-                   HorizontalAlignment="Left"
-                   VerticalAlignment="Top"
-                   Text="{Binding AllSoldierNumber}" />
-        <TextBlock Name="deckCost"
-                   Width="216"
-                   Height="25"
-                   Margin="438,489,0,0"
-                   HorizontalAlignment="Left"
-                   VerticalAlignment="Top"
-                   Text="{Binding MainDeck.TotalCost}" />
-        <StackPanel Margin="0,0,0,50"
-                    HorizontalAlignment="Right"
-                    VerticalAlignment="Bottom"
-                    Orientation="Horizontal">
-            <Image Width="20"
-                   Height="20"
-                   Margin="2"
-                   Source="Images/Attack.png" />
-            <TextBlock Name="deckAtk"
-                       Height="23"
-                       HorizontalAlignment="Right"
-                       VerticalAlignment="Bottom"
-                       FontSize="20"
-                       FontWeight="Bold"
-                       Foreground="#FFB81C1C"
-                       Text="{Binding MainDeck.TotalAttack}" />
-        </StackPanel>
-        <StackPanel HorizontalAlignment="Right"
-                    VerticalAlignment="Bottom"
-                    Orientation="Horizontal">
-            <Image Width="20"
-                   Height="20"
-                   Margin="2"
-                   Source="Images/Defence.png" />
-            <TextBlock Name="dechDef"
-                       Height="23"
-                       HorizontalAlignment="Right"
-                       VerticalAlignment="Bottom"
-                       FontSize="20"
-                       FontWeight="Bold"
-                       Foreground="#FF1717B4"
-                       Text="{Binding MainDeck.TotalDefence}" />
-        </StackPanel>
-        <StackPanel Name="rarityPanel" Margin="2,59,856,343">
+        <Grid Height="100" Margin="236,0,0,0" VerticalAlignment="Bottom" Background="#FF5874E0">
+        	<StackPanel HorizontalAlignment="Right">
+        		<StackPanel Orientation="Horizontal" HorizontalAlignment="Right">
+        			<TextBlock TextWrapping="Wrap" Text="Cost " Width="96" VerticalAlignment="Top"/>
+        			<TextBlock x:Name="deckCost"
+        				Width="216"
+        				HorizontalAlignment="Left"
+        				VerticalAlignment="Top"
+        				Text="{Binding MainDeck.TotalCost}" />
+        		</StackPanel>
+        		<StackPanel Orientation="Horizontal" HorizontalAlignment="Right">
+        			<TextBlock TextWrapping="Wrap" Width="106" VerticalAlignment="Top" Text="総兵数 "/>
+        			<TextBlock x:Name="textBlock1"
+        				Width="216"
+        				HorizontalAlignment="Left"
+        				VerticalAlignment="Top"
+        				Text="{Binding AllSoldierNumber}"  />
+        		</StackPanel>
+        		<StackPanel
+        			Orientation="Horizontal" d:LayoutOverrides="Height">
+        			<Image Width="20"
+        				Height="20"
+        				Margin="2"
+        				Source="Images/Defence.png" />
+        			<TextBlock x:Name="dechDef"
+        				Height="23"
+        				HorizontalAlignment="Right"
+        				VerticalAlignment="Bottom"
+        				FontSize="20"
+        				FontWeight="Bold"
+        				Foreground="#FF0D0D7A"
+        				Text="{Binding MainDeck.TotalDefence, StringFormat=\{0:F1\}}" Width="144" TextAlignment="Right" />
+        		</StackPanel>
+        		<StackPanel Margin="0"
+        			Orientation="Horizontal" d:LayoutOverrides="Height">
+        			<Image Width="20"
+        				Height="20"
+        				Margin="2"
+        				Source="Images/Attack.png" />
+        			<TextBlock x:Name="deckAtk"
+        				Height="23"
+        				HorizontalAlignment="Right"
+        				VerticalAlignment="Bottom"
+        				FontSize="20"
+        				FontWeight="Bold"
+        				Foreground="#FFD81B1B"
+        				Text="{Binding MainDeck.TotalAttack, StringFormat=\{0:F1\}}" Width="144" TextAlignment="Right" />
+        		</StackPanel>
+        	</StackPanel>
+        </Grid>
+        <StackPanel Name="rarityPanel" Margin="0,0,858,402">
             <RadioButton Name="ultraRare"
                          Margin="0"
                          HorizontalAlignment="Left"
@@ -179,10 +182,10 @@
                        Source="Images/Common.png" />
             </RadioButton>
         </StackPanel>
-        <StackPanel Name="stackPanel2"
+        <StackPanel Name="soldierType"
                     Width="Auto"
                     Height="50"
-                    Margin="2,9,0,0"
+                    Margin="236,2,0,0"
                     HorizontalAlignment="Left"
                     VerticalAlignment="Top"
                     Orientation="Horizontal">
