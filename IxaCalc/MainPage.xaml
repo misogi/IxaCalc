@@ -55,7 +55,7 @@
         <StackPanel Name="deckPanel"
                     Margin="236,56,0,0"
                     HorizontalAlignment="Left"
-                    VerticalAlignment="Top">
+                    VerticalAlignment="Top" Width="600">
             <StackPanel Orientation="Horizontal">
                 <Grid>
                     <my:DeckBushoView DataContext="{Binding MainDeck.DeckedBushos[0]}" />

@@ -83,12 +83,27 @@
             </StackPanel>
             <StackPanel Margin="7"
                         VerticalAlignment="Top"
-                        Background="White" Width="80">
-                <TextBlock Foreground="#FF212121" Text="{Binding Percent}" />
-                <TextBlock Foreground="#FF212121" Text="{Binding ActualLeadership}" />
-                <TextBlock Foreground="#FF212121" Text="{Binding PerCost, StringFormat=\{0:F1\}}" />
-                <TextBlock Foreground="#FF212121" Text="{Binding ActualAttack, StringFormat=\{0:F1\}}" />
-                <TextBlock Foreground="#FF212121" Text="{Binding ActualDefence, StringFormat=\{0:F1\}}" />
+                        Background="White" Width="110">
+                <StackPanel Orientation="Horizontal">
+                    <TextBlock HorizontalAlignment="Left" Text="統率力 " FontSize="10" />
+                    <TextBlock Foreground="#FF212121" Text="{Binding Percent}" />
+                </StackPanel>
+                <StackPanel Orientation="Horizontal">
+                    <TextBlock HorizontalAlignment="Left" Text="実指揮 " FontSize="10" />
+                    <TextBlock Foreground="#FF212121" Text="{Binding ActualLeadership}" />
+                </StackPanel>
+                <StackPanel Orientation="Horizontal">
+                    <TextBlock HorizontalAlignment="Left" Text="コス比 " FontSize="10" />
+                    <TextBlock Foreground="#FF212121" Text="{Binding PerCost, StringFormat=\{0:F1\}}" />
+                </StackPanel>
+                <StackPanel Orientation="Horizontal">
+                    <TextBlock HorizontalAlignment="Left" Text="総攻撃 " FontSize="10" />
+                    <TextBlock Foreground="#FF212121" Text="{Binding ActualAttack, StringFormat=\{0:F1\}}" />
+                </StackPanel>
+                <StackPanel Orientation="Horizontal">
+                    <TextBlock HorizontalAlignment="Left" Text="総防御 " FontSize="10" />
+                    <TextBlock Foreground="#FF212121" Text="{Binding ActualDefence, StringFormat=\{0:F1\}}" />
+                </StackPanel>
             </StackPanel>
         </StackPanel>
     </Grid>
