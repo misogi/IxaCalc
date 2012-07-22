@@ -36,6 +36,10 @@
                            Source="{Binding RarityImage}" />
                     <TextBlock HorizontalAlignment="Left" Text="{Binding OriginBusho.Cost}" />
                 </StackPanel>
+                <StackPanel Orientation="Horizontal">
+                    <TextBlock HorizontalAlignment="Left" Text="Lv.20 ★" />
+                    <TextBlock HorizontalAlignment="Left" Text="{Binding Rank}" />
+                </StackPanel>
             </StackPanel>
             <StackPanel Margin="12,5,0,5" d:LayoutOverrides="Height" Width="110">
                 <StackPanel Orientation="Horizontal">

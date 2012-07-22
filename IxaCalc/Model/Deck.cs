@@ -51,6 +51,17 @@
             }
         }
 
+        public void RankUp(int index)
+        {
+            DeckedBushos[index].RankUp();
+            this.CalculateTotalStatus();
+        }
+
+        public void RankDown(int index)
+        {
+            DeckedBushos[index].RankDown();
+            this.CalculateTotalStatus();
+        }
         /// <summary>
         /// 総兵数
         /// </summary>

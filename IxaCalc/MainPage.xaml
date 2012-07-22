@@ -6,8 +6,8 @@
              xmlns:i="http://schemas.microsoft.com/expression/2010/interactivity"
              xmlns:ignore="http://www.ignore.com"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-             xmlns:mye="clr-namespace:IxaCalc.Enums"
              xmlns:my="clr-namespace:IxaCalc"
+             xmlns:mye="clr-namespace:IxaCalc.Enums"
              Width="900"
              Height="600"
              DataContext="{Binding Main,
@@ -23,7 +23,11 @@
     </UserControl.Resources>
 
     <Grid x:Name="LayoutRoot">
-        <Image HorizontalAlignment="Stretch" Name="image1" Stretch="Fill" VerticalAlignment="Stretch" Source="/IxaCalc;component/Images/wallpaper.jpg" />
+        <Image Name="image1"
+               HorizontalAlignment="Stretch"
+               VerticalAlignment="Stretch"
+               Source="/IxaCalc;component/Images/wallpaper.jpg"
+               Stretch="Fill" />
         <ListBox Name="bushoList"
                  Width="176"
                  Height="598"
@@ -48,75 +52,151 @@
                 </DataTemplate>
             </ListBox.ItemTemplate>
         </ListBox>
-        <StackPanel Name="deckPanel" Margin="236,56,0,0"
+        <StackPanel Name="deckPanel"
+                    Margin="236,56,0,0"
                     HorizontalAlignment="Left"
                     VerticalAlignment="Top">
-            <Grid>
-                <my:DeckBushoView DataContext="{Binding MainDeck.DeckedBushos[0]}" />
-                <Button Command="{Binding RemoveDeckCommand}" CommandParameter="0" Opacity="0" ClickMode="Press" />
-            </Grid>
-            <Grid>
-                <my:DeckBushoView DataContext="{Binding MainDeck.DeckedBushos[1]}" />
-                <Button Command="{Binding RemoveDeckCommand}" CommandParameter="1" Opacity="0" ClickMode="Press" />
-            </Grid>
-            <Grid>
-                <my:DeckBushoView DataContext="{Binding MainDeck.DeckedBushos[2]}" />
-                <Button Command="{Binding RemoveDeckCommand}" CommandParameter="2" Opacity="0" ClickMode="Press" />
-            </Grid>
-            <Grid>
-                <my:DeckBushoView DataContext="{Binding MainDeck.DeckedBushos[3]}" />
-                <Button Command="{Binding RemoveDeckCommand}" CommandParameter="3" Opacity="0" ClickMode="Press" />
-            </Grid>
+            <StackPanel Orientation="Horizontal">
+                <Grid>
+                    <my:DeckBushoView DataContext="{Binding MainDeck.DeckedBushos[0]}" />
+                    <Button ClickMode="Press"
+                            Command="{Binding RemoveDeckCommand}"
+                            CommandParameter="0"
+                            Opacity="0" />
+                </Grid>
+                <StackPanel>
+                    <Button ClickMode="Press"
+                            Command="{Binding RankUpCommand}"
+                            CommandParameter="0"
+                            Content="★↑" />
+                    <Button ClickMode="Press"
+                            Command="{Binding RankDownCommand}"
+                            CommandParameter="0"
+                            Content="★↓" />
+                </StackPanel>
+            </StackPanel>
+            <StackPanel Orientation="Horizontal">
+                <Grid>
+                    <my:DeckBushoView DataContext="{Binding MainDeck.DeckedBushos[1]}" />
+                    <Button ClickMode="Press"
+                            Command="{Binding RemoveDeckCommand}"
+                            CommandParameter="1"
+                            Opacity="0" />
+                </Grid>
+                <StackPanel>
+                    <Button ClickMode="Press"
+                                Command="{Binding RankUpCommand}"
+                                CommandParameter="1"
+                                Content="★↑" />
+                    <Button ClickMode="Press"
+                                Command="{Binding RankDownCommand}"
+                                CommandParameter="1"
+                                Content="★↓" />
+                </StackPanel>
+            </StackPanel>
+            <StackPanel Orientation="Horizontal">
+                <Grid>
+                    <my:DeckBushoView DataContext="{Binding MainDeck.DeckedBushos[2]}" />
+                    <Button ClickMode="Press"
+                            Command="{Binding RemoveDeckCommand}"
+                            CommandParameter="2"
+                            Opacity="0" />
+                </Grid>
+                <StackPanel>
+                    <Button ClickMode="Press"
+                                Command="{Binding RankUpCommand}"
+                                CommandParameter="2"
+                                Content="★↑" />
+                    <Button ClickMode="Press"
+                                Command="{Binding RankDownCommand}"
+                                CommandParameter="2"
+                                Content="★↓" />
+                </StackPanel>
+            </StackPanel>
+            <StackPanel Orientation="Horizontal">
+                <Grid>
+                    <my:DeckBushoView DataContext="{Binding MainDeck.DeckedBushos[3]}" />
+                    <Button ClickMode="Press"
+                            Command="{Binding RemoveDeckCommand}"
+                            CommandParameter="3"
+                            Opacity="0" />
+                </Grid>
+                <StackPanel>
+                    <Button ClickMode="Press"
+                                Command="{Binding RankUpCommand}"
+                                CommandParameter="3"
+                                Content="★↑" />
+                    <Button ClickMode="Press"
+                                Command="{Binding RankDownCommand}"
+                                CommandParameter="3"
+                                Content="★↓" />
+                </StackPanel>
+            </StackPanel>
         </StackPanel>
-        <Grid Height="100" Margin="236,0,0,0" VerticalAlignment="Bottom" Background="#FF5874E0">
-        	<StackPanel HorizontalAlignment="Right">
-        		<StackPanel Orientation="Horizontal" HorizontalAlignment="Right">
-        			<TextBlock TextWrapping="Wrap" Text="Cost " Width="96" VerticalAlignment="Top"/>
-        			<TextBlock x:Name="deckCost"
-        				Width="216"
-        				HorizontalAlignment="Left"
-        				VerticalAlignment="Top"
-        				Text="{Binding MainDeck.TotalCost}" />
-        		</StackPanel>
-        		<StackPanel Orientation="Horizontal" HorizontalAlignment="Right">
-        			<TextBlock TextWrapping="Wrap" Width="106" VerticalAlignment="Top" Text="総兵数 "/>
-        			<TextBlock x:Name="textBlock1"
-        				Width="216"
-        				HorizontalAlignment="Left"
-        				VerticalAlignment="Top"
-        				Text="{Binding AllSoldierNumber}"  />
-        		</StackPanel>
-        		<StackPanel
-        			Orientation="Horizontal" d:LayoutOverrides="Height">
-        			<Image Width="20"
-        				Height="20"
-        				Margin="2"
-        				Source="Images/Defence.png" />
-        			<TextBlock x:Name="dechDef"
-        				Height="23"
-        				HorizontalAlignment="Right"
-        				VerticalAlignment="Bottom"
-        				FontSize="20"
-        				FontWeight="Bold"
-        				Foreground="#FF0D0D7A"
-        				Text="{Binding MainDeck.TotalDefence, StringFormat=\{0:F1\}}" Width="144" TextAlignment="Right" />
-        		</StackPanel>
-        		<StackPanel Margin="0"
-        			Orientation="Horizontal" d:LayoutOverrides="Height">
-        			<Image Width="20"
-        				Height="20"
-        				Margin="2"
-        				Source="Images/Attack.png" />
-        			<TextBlock x:Name="deckAtk"
-        				Height="23"
-        				HorizontalAlignment="Right"
-        				VerticalAlignment="Bottom"
-        				FontSize="20"
-        				FontWeight="Bold"
-        				Foreground="#FFD81B1B"
-        				Text="{Binding MainDeck.TotalAttack, StringFormat=\{0:F1\}}" Width="144" TextAlignment="Right" />
-        		</StackPanel>
-        	</StackPanel>
+        <Grid Height="100"
+              Margin="236,0,0,0"
+              VerticalAlignment="Bottom"
+              Background="#FF5874E0">
+            <StackPanel HorizontalAlignment="Right">
+                <StackPanel HorizontalAlignment="Right" Orientation="Horizontal">
+                    <TextBlock Width="96"
+                               VerticalAlignment="Top"
+                               Text="Cost "
+                               TextWrapping="Wrap" />
+                    <TextBlock x:Name="deckCost"
+                               Width="216"
+                               HorizontalAlignment="Left"
+                               VerticalAlignment="Top"
+                               Text="{Binding MainDeck.TotalCost}" />
+                </StackPanel>
+                <StackPanel HorizontalAlignment="Right" Orientation="Horizontal">
+                    <TextBlock Width="106"
+                               VerticalAlignment="Top"
+                               Text="総兵数 "
+                               TextWrapping="Wrap" />
+                    <TextBlock x:Name="textBlock1"
+                               Width="216"
+                               HorizontalAlignment="Left"
+                               VerticalAlignment="Top"
+                               Text="{Binding AllSoldierNumber}" />
+                </StackPanel>
+                <StackPanel Margin="0"
+                            Orientation="Horizontal"
+                            d:LayoutOverrides="Height">
+                    <Image Width="20"
+                           Height="20"
+                           Margin="2"
+                           Source="Images/Attack.png" />
+                    <TextBlock x:Name="deckAtk"
+                               Width="144"
+                               Height="23"
+                               HorizontalAlignment="Right"
+                               VerticalAlignment="Bottom"
+                               FontSize="20"
+                               FontWeight="Bold"
+                               Foreground="#FFD81B1B"
+                               Text="{Binding MainDeck.TotalAttack,
+                                              StringFormat=\{0:F1\}}"
+                               TextAlignment="Right" />
+                </StackPanel>
+                <StackPanel Orientation="Horizontal" d:LayoutOverrides="Height">
+                    <Image Width="20"
+                           Height="20"
+                           Margin="2"
+                           Source="Images/Defence.png" />
+                    <TextBlock x:Name="dechDef"
+                               Width="144"
+                               Height="23"
+                               HorizontalAlignment="Right"
+                               VerticalAlignment="Bottom"
+                               FontSize="20"
+                               FontWeight="Bold"
+                               Foreground="#FF0D0D7A"
+                               Text="{Binding MainDeck.TotalDefence,
+                                              StringFormat=\{0:F1\}}"
+                               TextAlignment="Right" />
+                </StackPanel>
+            </StackPanel>
         </Grid>
         <StackPanel Name="rarityPanel" Margin="0,0,858,402">
             <RadioButton Name="ultraRare"

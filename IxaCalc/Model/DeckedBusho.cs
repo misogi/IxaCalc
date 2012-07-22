@@ -26,7 +26,7 @@ namespace IxaCalc.Model
 
         private double _actualDefence;
 
-        private int _rankUp;
+        private int _rank;
 
         private double _actualLeadership;
 
@@ -40,7 +40,7 @@ namespace IxaCalc.Model
         {
             _originBusho = origin;
             _currentSoldierType = type;
-            _rankUp = 1;
+            _rank = 0;
             this.UpdateDeckedInfo();
         }
 
@@ -49,10 +49,27 @@ namespace IxaCalc.Model
             Percent = CalculatePercent(_originBusho);
             ActualLeadership = _originBusho.SoldierNumber * Percent;
             PerCost = ActualLeadership / _originBusho.Cost;
-            BushoAttack = _originBusho.Attack + (_originBusho.AttackGrowth * 80 * _rankUp);
-            BushoDefence = _originBusho.Defence + (_originBusho.DefenceGrowth * 80 * _rankUp);
-            ActualAttack = (BushoAttack + (ActualLeadership * RankDictionary.soldiers[CurrentSoldierType].Attack)) * Percent;
-            ActualDefence = (BushoDefence + (ActualLeadership * RankDictionary.soldiers[CurrentSoldierType].Defence)) * Percent;
+            BushoAttack = _originBusho.Attack + (_originBusho.AttackGrowth * RankToBonusPoint(Rank));
+            BushoDefence = _originBusho.Defence + (_originBusho.DefenceGrowth * RankToBonusPoint(Rank));
+            ActualAttack = (BushoAttack + (_originBusho.SoldierNumber * RankDictionary.soldiers[CurrentSoldierType].Attack)) * Percent;
+            ActualDefence = (BushoDefence + (_originBusho.SoldierNumber * RankDictionary.soldiers[CurrentSoldierType].Defence)) * Percent;
+        }
+
+        private int RankToBonusPoint(int rank)
+        {
+            int point = 80 * (Rank + 1);
+
+            if (Rank >= 2)
+            {
+                point += (Rank - 1) * 20;
+            }
+
+            if (Rank >= 4)
+            {
+                point += (Rank - 3) * 20;
+            }
+
+            return point;
         }
 
         private double CalculatePercent(Busho busho)
@@ -61,42 +78,65 @@ namespace IxaCalc.Model
             double percentage = 1.0;
             if (type == SoldierTypes.Spear || type == SoldierTypes.LongSpear)
             {
-                percentage = RankToPercentage(busho.Lance);
+                percentage = RankToPercentage(busho.Lance) + (Rank * 0.05);
             }
             else if (type == SoldierTypes.Bow || type == SoldierTypes.LongBow)
             {
-                percentage = RankToPercentage(busho.Bow);
+                percentage = RankToPercentage(busho.Bow) + (Rank * 0.05);
             }
             else if (type == SoldierTypes.Horse || type == SoldierTypes.EliteHorse)
             {
-                percentage = RankToPercentage(busho.Horse);
+                percentage = RankToPercentage(busho.Horse) + (Rank * 0.05);
             }
             else if (type == SoldierTypes.Hammer)
             {
-                percentage = RankToPercentage(busho.Weapon);
+                percentage = RankToPercentage(busho.Weapon) + (Rank * 0.05);
             }
             else if (type == SoldierTypes.MountArcher)
             {
-                percentage = (RankToPercentage(busho.Horse) + RankToPercentage(busho.Bow)) / 2;
+                percentage = (RankToPercentage(busho.Horse) + RankToPercentage(busho.Bow) + (Rank * 0.05)) / 2;
             }
             else if (type == SoldierTypes.RedArms)
             {
-                percentage = (RankToPercentage(busho.Bow) + RankToPercentage(busho.Lance)) / 2;
+                percentage = (RankToPercentage(busho.Bow) + RankToPercentage(busho.Lance) + (Rank * 0.05)) / 2;
             }
             else if (type == SoldierTypes.Samurai)
             {
-                percentage = (RankToPercentage(busho.Horse) + RankToPercentage(busho.Lance)) / 2;
+                percentage = (RankToPercentage(busho.Horse) + RankToPercentage(busho.Lance) + (Rank * 0.05)) / 2;
             }
             else if (type == SoldierTypes.Gun)
             {
-                percentage = (RankToPercentage(busho.Weapon) + RankToPercentage(busho.Lance)) / 2;
+                percentage = (RankToPercentage(busho.Weapon) + RankToPercentage(busho.Lance) + (Rank * 0.05)) / 2;
             }
             else if (type == SoldierTypes.Dragoon)
             {
-                percentage = (RankToPercentage(busho.Weapon) + RankToPercentage(busho.Horse)) / 2;
+                percentage = (RankToPercentage(busho.Weapon) + RankToPercentage(busho.Horse) + (Rank * 0.05)) / 2;
+            }
+
+            if (percentage >= 1.20)
+            {
+                percentage = 1.20;
             }
 
             return percentage;
+        }
+
+        public void RankUp()
+        {
+            if (_rank < 5)
+            {
+                Rank += 1;
+                this.UpdateDeckedInfo();
+            }
+        }
+
+        public void RankDown()
+        {
+            if (_rank > 0)
+            {
+                Rank -= 1;
+                this.UpdateDeckedInfo();
+            }
         }
 
         private double RankToPercentage(LeadershipRank rank)
@@ -238,6 +278,22 @@ namespace IxaCalc.Model
             }
         }
 
+        public int Rank
+        {
+            get
+            {
+                return _rank;
+            }
+            set
+            {
+                if (_rank != value)
+                {
+                    _rank = value;
+                    OnPropertyChanged("Rank");
+                }
+            }
+        }
+
         public SoldierTypes CurrentSoldierType
         {
             get
@@ -254,6 +310,7 @@ namespace IxaCalc.Model
                 }
             }
         }
+
         public Busho OriginBusho
         {
             get

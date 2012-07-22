@@ -94,6 +94,9 @@ namespace IxaCalc.ViewModel
             
             ChangeRarityCommand = new RelayCommand<string>(this.Execute);
 
+            RankUpCommand = new RelayCommand<int>(this.RankUpExecute);
+            RankDownCommand = new RelayCommand<int>(this.RankDownExecute);
+
             this.Execute("特");
         }
 
@@ -110,6 +113,16 @@ namespace IxaCalc.ViewModel
             {
                 RaisePropertyChanged(key);
             }
+        }
+
+        public void RankUpExecute(int index)
+        {
+            MainDeck.RankUp(index);
+        }
+
+        public void RankDownExecute(int index)
+        {
+            MainDeck.RankDown(index);
         }
 
         public void Execute(int index)
@@ -154,6 +167,11 @@ namespace IxaCalc.ViewModel
         public RelayCommand<string> ChangeSoldierCommand { get; private set; }
 
         public RelayCommand<string> ChangeRarityCommand { get; private set; }
+
+        public RelayCommand<int> RankUpCommand { get; private set; }
+
+        public RelayCommand<int> RankDownCommand { get; private set; }
+
         /// <summary>
         /// Gets the WelcomeTitle property.
         /// Changes to that property's value raise the PropertyChanged event. 
