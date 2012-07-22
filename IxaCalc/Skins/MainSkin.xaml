@@ -42,16 +42,23 @@
 		</Grid>
 	</ControlTemplate>
 
-
-    <ControlTemplate x:Key="DeckCardButton" TargetType="Button">
-        <Border Background="DarkSlateBlue" >
-            <ContentPresenter />
-        </Border>
-    </ControlTemplate>
-	
-	<ControlTemplate x:Key="DeckedCardButton" TargetType="Button">
-        <Border Background="DarkSlateBlue" >
-            <ContentPresenter />
-        </Border>
-    </ControlTemplate>
+    <Style TargetType="Button" x:Key="RankButtonStyle">
+        <Style.Setters>
+            <Setter Property="FontSize" Value="15" />
+            <Setter Property="Width" Value="40" />
+            <Setter Property="Margin" Value="4" />
+            <Setter Property="Height" Value="40" />
+            <Setter Property="Foreground" Value="White" />
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="Button">
+                        <Border Background="Gray" >
+                            <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center" />
+                        </Border>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+        </Style.Setters>
+    </Style>
+    
 </ResourceDictionary>

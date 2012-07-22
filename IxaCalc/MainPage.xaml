@@ -68,11 +68,13 @@
                     <Button ClickMode="Press"
                             Command="{Binding RankUpCommand}"
                             CommandParameter="0"
-                            Content="★↑" />
+                            Content="★↑"
+                            Style="{StaticResource RankButtonStyle}" />
                     <Button ClickMode="Press"
                             Command="{Binding RankDownCommand}"
                             CommandParameter="0"
-                            Content="★↓" />
+                            Content="★↓"
+                            Style="{StaticResource RankButtonStyle}" />
                 </StackPanel>
             </StackPanel>
             <StackPanel Orientation="Horizontal">
@@ -85,13 +87,15 @@
                 </Grid>
                 <StackPanel>
                     <Button ClickMode="Press"
-                                Command="{Binding RankUpCommand}"
-                                CommandParameter="1"
-                                Content="★↑" />
+                            Command="{Binding RankUpCommand}"
+                            CommandParameter="1"
+                            Content="★↑"
+                            Style="{StaticResource RankButtonStyle}" />
                     <Button ClickMode="Press"
-                                Command="{Binding RankDownCommand}"
-                                CommandParameter="1"
-                                Content="★↓" />
+                            Command="{Binding RankDownCommand}"
+                            CommandParameter="1"
+                            Content="★↓"
+                            Style="{StaticResource RankButtonStyle}" />
                 </StackPanel>
             </StackPanel>
             <StackPanel Orientation="Horizontal">
@@ -104,13 +108,15 @@
                 </Grid>
                 <StackPanel>
                     <Button ClickMode="Press"
-                                Command="{Binding RankUpCommand}"
-                                CommandParameter="2"
-                                Content="★↑" />
+                            Command="{Binding RankUpCommand}"
+                            CommandParameter="2"
+                            Content="★↑"
+                            Style="{StaticResource RankButtonStyle}" />
                     <Button ClickMode="Press"
-                                Command="{Binding RankDownCommand}"
-                                CommandParameter="2"
-                                Content="★↓" />
+                            Command="{Binding RankDownCommand}"
+                            CommandParameter="2"
+                            Content="★↓"
+                            Style="{StaticResource RankButtonStyle}" />
                 </StackPanel>
             </StackPanel>
             <StackPanel Orientation="Horizontal">
@@ -123,13 +129,15 @@
                 </Grid>
                 <StackPanel>
                     <Button ClickMode="Press"
-                                Command="{Binding RankUpCommand}"
-                                CommandParameter="3"
-                                Content="★↑" />
+                            Command="{Binding RankUpCommand}"
+                            CommandParameter="3"
+                            Content="★↑"
+                            Style="{StaticResource RankButtonStyle}" />
                     <Button ClickMode="Press"
-                                Command="{Binding RankDownCommand}"
-                                CommandParameter="3"
-                                Content="★↓" />
+                            Command="{Binding RankDownCommand}"
+                            CommandParameter="3"
+                            Content="★↓"
+                            Style="{StaticResource RankButtonStyle}" />
                 </StackPanel>
             </StackPanel>
         </StackPanel>
