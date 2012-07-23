@@ -89,6 +89,9 @@
       <DependentUpon>App.xaml</DependentUpon>
     </Compile>
     <Compile Include="Converters\RarityToBrushConverter.cs" />
+    <Compile Include="DataStore\DataStore\DataStore.xaml.cs">
+      <DependentUpon>DataStore.xaml</DependentUpon>
+    </Compile>
     <Compile Include="DeckBushoView.xaml.cs">
       <DependentUpon>DeckBushoView.xaml</DependentUpon>
     </Compile>
@@ -121,6 +124,10 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </ApplicationDefinition>
+    <Page Include="DataStore\DataStore\DataStore.xaml">
+      <Generator>MSBuild:MarkupCompilePass1</Generator>
+      <SubType>Designer</SubType>
+    </Page>
     <Page Include="DeckBushoView.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -135,6 +142,7 @@
     </Page>
   </ItemGroup>
   <ItemGroup>
+    <DesignTimeOnly Include="DataStore\DataStore\DataStore.xsd" />
     <None Include="Properties\AppManifest.xml" />
   </ItemGroup>
   <ItemGroup>

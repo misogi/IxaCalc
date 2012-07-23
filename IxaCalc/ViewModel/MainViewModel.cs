@@ -46,16 +46,6 @@ namespace IxaCalc.ViewModel
         /// </summary>
         private Deck _mainDeck;
 
-        /// <summary>
-        /// 全ての兵士数
-        /// </summary>
-        private int _allSoldier;
-
-        /// <summary>
-        /// 全ての攻撃力
-        /// </summary>
-        private int _allAttack;
-
         private List<Soldier> _soldierTypes;
 
         /// <summary>
@@ -90,6 +80,7 @@ namespace IxaCalc.ViewModel
             ChangeRarityCommand = new RelayCommand<string>(this.Execute);
 
             RankUpCommand = new RelayCommand<int>(this.RankUpExecute);
+			
             RankDownCommand = new RelayCommand<int>(this.RankDownExecute);
 
             this.Execute("特");
@@ -118,7 +109,7 @@ namespace IxaCalc.ViewModel
         {
             MainDeck.RankDown(index);
         }
-
+		
         public void RemoveDeckExecute(int index)
         {
             this._mainDeck.Remove(index);
@@ -145,7 +136,7 @@ namespace IxaCalc.ViewModel
         public RelayCommand<Busho> SetDeckCommand { get; private set; }
 
         public RelayCommand<int> RemoveDeckCommand { get; private set; }
-
+		
         public RelayCommand<string> ChangeSoldierCommand { get; private set; }
 
         public RelayCommand<string> ChangeRarityCommand { get; private set; }
@@ -199,6 +190,7 @@ namespace IxaCalc.ViewModel
                 return this._mainDeck;
             }
         }
+
         ////public override void Cleanup()
         ////{
         ////    // Clean up if needed

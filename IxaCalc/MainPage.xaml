@@ -8,10 +8,10 @@
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
              xmlns:my="clr-namespace:IxaCalc"
              xmlns:mye="clr-namespace:IxaCalc.Enums"
-             xmlns:ei="http://schemas.microsoft.com/expression/2010/interactions" x:Class="IxaCalc.MainPage"
+             xmlns:ei="http://schemas.microsoft.com/expression/2010/interactions" x:Name="userControl" x:Class="IxaCalc.MainPage"
              Width="900"
              Height="600"
-             mc:Ignorable="d ignore">
+             mc:Ignorable="d ignore" >
 
     <UserControl.Resources>
         <ResourceDictionary>
@@ -23,6 +23,73 @@
 			</Style>
         </ResourceDictionary>
     </UserControl.Resources>
+	<i:Interaction.Triggers>
+		<ei:KeyTrigger Key="H">
+			<ei:ChangePropertyAction TargetName="helpLayer" PropertyName="Visibility" >
+				<ei:ChangePropertyAction.Value>
+					<Visibility>Visible</Visibility>
+				</ei:ChangePropertyAction.Value>
+			</ei:ChangePropertyAction>
+		</ei:KeyTrigger>
+		<ei:KeyTrigger Key="Escape">
+			<ei:ChangePropertyAction TargetName="helpLayer" PropertyName="Visibility" >
+				<ei:ChangePropertyAction.Value>
+					<Visibility>Collapsed</Visibility>
+				</ei:ChangePropertyAction.Value>
+			</ei:ChangePropertyAction>
+		</ei:KeyTrigger>
+		<ei:KeyTrigger Key="D1">
+			<cmd:EventToCommand Command="{Binding ChangeSoldierCommand}" CommandParameter="Spear"/>
+		</ei:KeyTrigger>
+		<ei:KeyTrigger Key="D2">
+			<cmd:EventToCommand Command="{Binding ChangeSoldierCommand}" CommandParameter="LongSpear"/>
+		</ei:KeyTrigger>
+		<ei:KeyTrigger Key="D3">
+			<cmd:EventToCommand Command="{Binding ChangeSoldierCommand}" CommandParameter="Samurai"/>
+		</ei:KeyTrigger>
+		<ei:KeyTrigger Key="D4">
+			<cmd:EventToCommand Command="{Binding ChangeSoldierCommand}" CommandParameter="Bow"/>
+		</ei:KeyTrigger>
+		<ei:KeyTrigger Key="D5">
+			<cmd:EventToCommand Command="{Binding ChangeSoldierCommand}" CommandParameter="LongBow"/>
+		</ei:KeyTrigger>
+		<ei:KeyTrigger Key="D6">
+			<cmd:EventToCommand Command="{Binding ChangeSoldierCommand}" CommandParameter="MountArcher"/>
+		</ei:KeyTrigger>
+		<ei:KeyTrigger Key="D7">
+			<cmd:EventToCommand Command="{Binding ChangeSoldierCommand}" CommandParameter="Horse"/>
+		</ei:KeyTrigger>
+		<ei:KeyTrigger Key="D8">
+			<cmd:EventToCommand Command="{Binding ChangeSoldierCommand}" CommandParameter="EliteHorse"/>
+		</ei:KeyTrigger>
+		<ei:KeyTrigger Key="D9">
+			<cmd:EventToCommand Command="{Binding ChangeSoldierCommand}" CommandParameter="RedArms"/>
+		</ei:KeyTrigger>
+		<ei:KeyTrigger Key="D0">
+			<cmd:EventToCommand Command="{Binding ChangeSoldierCommand}" CommandParameter="Gun"/>
+		</ei:KeyTrigger>
+		<ei:KeyTrigger Key="P">
+			<cmd:EventToCommand Command="{Binding ChangeSoldierCommand}" CommandParameter="Dragoon"/>
+		</ei:KeyTrigger>
+		<ei:KeyTrigger Key="Delete">
+			<cmd:EventToCommand Command="{Binding RemoveDeckCommand}" />
+		</ei:KeyTrigger>
+		<ei:KeyTrigger Key="Q">
+			<cmd:EventToCommand Command="{Binding ChangeRarityCommand}" CommandParameter="天"/>
+		</ei:KeyTrigger>
+		<ei:KeyTrigger Key="W">
+			<cmd:EventToCommand Command="{Binding ChangeRarityCommand}" CommandParameter="極"/>
+		</ei:KeyTrigger>
+		<ei:KeyTrigger Key="E">
+			<cmd:EventToCommand Command="{Binding ChangeRarityCommand}" CommandParameter="特"/>
+		</ei:KeyTrigger>
+		<ei:KeyTrigger Key="R">
+			<cmd:EventToCommand Command="{Binding ChangeRarityCommand}" CommandParameter="上"/>
+		</ei:KeyTrigger>
+		<ei:KeyTrigger Key="T">
+			<cmd:EventToCommand Command="{Binding ChangeRarityCommand}" CommandParameter="序"/>
+		</ei:KeyTrigger>
+	</i:Interaction.Triggers>
 
 	<UserControl.DataContext>
 		<Binding Path="Main" Source="{StaticResource Locator}"/>
@@ -190,8 +257,12 @@
         					HorizontalAlignment="Right"
         					VerticalAlignment="Center"
         					Text="{Binding MainDeck.TotalSoldierNumberPerCost, StringFormat=\{0:F1\}}" Margin="0" />
-        			</Grid>
-        		</StackPanel>
+                    </Grid>
+                    <TextBlock
+        					HorizontalAlignment="Right"
+        					VerticalAlignment="Center"
+        					Text="{Binding MainDeck.CurrentSoldierTypeName}" Margin="0" />
+                </StackPanel>
         		<StackPanel x:Name="TotalAtk" HorizontalAlignment="Right" Width="126" Margin="0,5,5,5">
         			<Grid Height="23">
         				<Image
@@ -243,19 +314,20 @@
         <StackPanel x:Name="rarityPanel" Margin="0" Background="#FF3B3B3B" HorizontalAlignment="Left" VerticalAlignment="Top">
             <RadioButton x:Name="ultraRare"
                          Margin="0"
+                         Tag="Q"
                          VerticalAlignment="Top"
                          Command="{Binding ChangeRarityCommand}"
                          CommandParameter="天"
                          Template="{StaticResource RarityButton}" Width="53">
-                <Image Width="30"
-                       Height="30"
-                       Margin="2"
-                       Source="Images/UltraRare.png" />
-
+            		<Image Width="30"
+            			Height="30"
+            			Margin="2"
+            			Source="Images/UltraRare.png" />
             </RadioButton>
             <RadioButton x:Name="superRare"
                          Margin="0"
                          VerticalAlignment="Top"
+                         Tag="W"
                          Command="{Binding ChangeRarityCommand}"
                          CommandParameter="極"
                          Template="{StaticResource RarityButton}" Width="53">
@@ -267,6 +339,7 @@
             <RadioButton x:Name="rare"
                          Margin="0"
                          VerticalAlignment="Top"
+                         Tag="E"
                          Command="{Binding ChangeRarityCommand}"
                          CommandParameter="特"
                          Template="{StaticResource RarityButton}" Width="53" IsChecked="True">
@@ -278,6 +351,7 @@
             <RadioButton x:Name="uncommon"
                          Margin="0"
                          VerticalAlignment="Top"
+                         Tag="R"
                          Command="{Binding ChangeRarityCommand}"
                          CommandParameter="上"
                          Template="{StaticResource RarityButton}" Width="53">
@@ -290,6 +364,7 @@
             <RadioButton x:Name="common"
                          Margin="0"
                          VerticalAlignment="Top"
+                         Tag="T"
                          Command="{Binding ChangeRarityCommand}"
                          CommandParameter="序"
                          Template="{StaticResource RarityButton}" Width="53">
@@ -307,27 +382,30 @@
                     HorizontalAlignment="Left"
                     VerticalAlignment="Top"
                     Orientation="Horizontal" Background="#FF2F2F2F">
-            <RadioButton ClickMode="Press"
+            <RadioButton x:Name="SpearButton" ClickMode="Press"
                          Command="{Binding ChangeSoldierCommand}"
                          CommandParameter="Spear"
-                         Template="{StaticResource ShortCutButton}" IsChecked="True">
+						 Tag="1"
+                         Template="{StaticResource ShortCutButton}" >
                 <Image Width="40"
                        Height="40"
                        Margin="2"
                        Source="Images/Spear.png" />
             </RadioButton>
-            <RadioButton ClickMode="Press"
+            <RadioButton x:Name="LongSpearButton" ClickMode="Press"
                          Command="{Binding ChangeSoldierCommand}"
                          CommandParameter="LongSpear"
+						 Tag="2"
                          Template="{StaticResource ShortCutButton}">
                 <Image Width="40"
                        Height="40"
                        Margin="2"
                        Source="Images/LongSpear.png" />
             </RadioButton>
-            <RadioButton ClickMode="Press"
+            <RadioButton x:Name="SamuraiButton" ClickMode="Press"
                          Command="{Binding ChangeSoldierCommand}"
                          CommandParameter="Samurai"
+						 Tag="3"
                          Template="{StaticResource ShortCutButton}">
                 <Image Width="40"
                        Height="40"
@@ -337,6 +415,8 @@
             <RadioButton ClickMode="Press"
                          Command="{Binding ChangeSoldierCommand}"
                          CommandParameter="Bow"
+                         IsChecked="{Binding IsChecked[Bow]}"
+						 Tag="4"
                          Template="{StaticResource ShortCutButton}">
                 <Image Width="40"
                        Height="40"
@@ -346,6 +426,8 @@
             <RadioButton ClickMode="Press"
                          Command="{Binding ChangeSoldierCommand}"
                          CommandParameter="LongBow"
+                         IsChecked="{Binding IsChecked[LongBow]}"
+						 Tag="5"
                          Template="{StaticResource ShortCutButton}">
                 <Image Width="40"
                        Height="40"
@@ -355,6 +437,7 @@
             <RadioButton ClickMode="Press"
                          Command="{Binding ChangeSoldierCommand}"
                          CommandParameter="MountArcher"
+						 Tag="6"
                          Template="{StaticResource ShortCutButton}">
                 <Image Width="40"
                        Height="40"
@@ -364,6 +447,7 @@
             <RadioButton ClickMode="Press"
                          Command="{Binding ChangeSoldierCommand}"
                          CommandParameter="Horse"
+						 Tag="7"
                          Template="{StaticResource ShortCutButton}">
                 <Image Width="40"
                        Height="40"
@@ -373,6 +457,8 @@
             <RadioButton ClickMode="Press"
                          Command="{Binding ChangeSoldierCommand}"
                          CommandParameter="EliteHorse"
+                         IsChecked="{Binding IsChecked[EliteHorse]}"
+						 Tag="8"
                          Template="{StaticResource ShortCutButton}">
                 <Image Width="40"
                        Height="40"
@@ -382,6 +468,7 @@
             <RadioButton ClickMode="Press"
                          Command="{Binding ChangeSoldierCommand}"
                          CommandParameter="RedArms"
+						 Tag="9"
                          Template="{StaticResource ShortCutButton}">
                 <Image Width="40"
                        Height="40"
@@ -391,6 +478,7 @@
             <RadioButton ClickMode="Press"
                          Command="{Binding ChangeSoldierCommand}"
                          CommandParameter="Gun"
+						 Tag="0"
                          Template="{StaticResource ShortCutButton}">
                 <Image Width="40"
                        Height="40"
@@ -400,6 +488,7 @@
             <RadioButton ClickMode="Press"
                          Command="{Binding ChangeSoldierCommand}"
                          CommandParameter="Dragoon"
+						 Tag="P"
                          Template="{StaticResource ShortCutButton}">
                 <Image Width="40"
                        Height="40"
@@ -407,5 +496,37 @@
                        Source="Images/Dragoon.png" />
             </RadioButton>
         </StackPanel>
+        <Border BorderThickness="1" Height="100" HorizontalAlignment="Left" Margin="818,23,0,0" Name="border1" VerticalAlignment="Top" Width="70" Background="#7A000000">
+            <TextBlock  Name="textBlock2" Text="DEL 削除    H ヘルプ" TextWrapping="Wrap" />
+        </Border>
+        <Grid x:Name="helpLayer" Margin="0" Background="#97000000" Visibility="Collapsed">
+        	<i:Interaction.Triggers>
+        		<i:EventTrigger EventName="MouseLeftButtonDown">
+        			<ei:ChangePropertyAction TargetName="helpLayer" PropertyName="Visibility">
+        				<ei:ChangePropertyAction.Value>
+        					<Visibility>Collapsed</Visibility>
+        				</ei:ChangePropertyAction.Value>
+        			</ei:ChangePropertyAction>
+        		</i:EventTrigger>
+        	</i:Interaction.Triggers>
+        	<Rectangle HorizontalAlignment="Left" Height="199" Stroke="#FF660000" VerticalAlignment="Top" Width="47" RadiusX="5" RadiusY="5" Margin="2,1,0,0" StrokeThickness="4"/>
+        	<Rectangle HorizontalAlignment="Left" Stroke="#FF660000" Width="173" RadiusX="5" RadiusY="5" Margin="62,0,0,0" StrokeThickness="4"/>
+        	<Border BorderBrush="Black" BorderThickness="1" HorizontalAlignment="Left" Margin="8,204,0,295" Width="91" Background="Black">
+        		<TextBlock Margin="7" TextWrapping="Wrap"><Run Text="表示する武将"/><Run Text="を絞り込みます。"/></TextBlock>
+        	</Border>
+        	<Border BorderBrush="Black" BorderThickness="1" HorizontalAlignment="Left" Margin="86,0,0,141" Width="149" Background="Black" Height="101" VerticalAlignment="Bottom">
+        		<TextBlock Margin="7" TextWrapping="Wrap" Text="デッキに入れる武将を左クリックで選択します。"/>
+        	</Border>
+        	<Border BorderBrush="Black" BorderThickness="1" HorizontalAlignment="Right" Margin="0,8,105,0" Width="149" Background="Black" Height="67" VerticalAlignment="Top">
+        		<TextBlock Margin="7" TextWrapping="Wrap" Text="部隊の兵種を選択します。（全武将が同じ兵種になります。）"/>
+        	</Border>
+        	<Rectangle Stroke="#FF660000" RadiusX="5" RadiusY="5" Margin="239,1,258,0" StrokeThickness="4" Height="58" VerticalAlignment="Top"/>
+        	<Border BorderBrush="Black" BorderThickness="1" Margin="420,178,283,295" Background="Black">
+        		<TextBlock Margin="7" TextWrapping="Wrap" Text="武将を左クリックでデッキから外せます。"/>
+        	</Border>
+        	<Border BorderBrush="Black" BorderThickness="1" Margin="0,224,21,249" Background="Black" HorizontalAlignment="Right" Width="139">
+        		<TextBlock Margin="7" TextWrapping="Wrap" Text="武将のランクアップを指定できます。"/>
+        	</Border>
+        </Grid>
     </Grid>
 </UserControl>

@@ -54,6 +54,9 @@
 					<ei:ExtendedVisualStateManager/>
 				</VisualStateManager.CustomVisualStateManager>
 			</ContentPresenter>
+                <Border Background="#A2000000" Opacity="0.99" Width="16" Height="16" HorizontalAlignment="Left" VerticalAlignment="Top" >
+            			<TextBlock Text="{TemplateBinding Tag}" TextAlignment="Center" VerticalAlignment="Center" Foreground="White" />
+            	</Border>
 		</Grid>
 	</ControlTemplate>
 	
@@ -105,8 +108,11 @@
 				<VisualStateManager.CustomVisualStateManager>
 					<ei:ExtendedVisualStateManager/>
 				</VisualStateManager.CustomVisualStateManager>
-			</ContentPresenter>
-		</Grid>
+            </ContentPresenter>
+            <Border Background="#A2000000" Opacity="0.99" Width="16" Height="16" HorizontalAlignment="Left" VerticalAlignment="Top" >
+                <TextBlock Text="{TemplateBinding Tag}" TextAlignment="Center" VerticalAlignment="Center" Foreground="White" />
+            </Border>
+        </Grid>
 	</ControlTemplate>
 	
     <Style TargetType="Button" x:Key="RankButtonStyle">

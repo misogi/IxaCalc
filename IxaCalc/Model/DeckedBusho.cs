@@ -30,6 +30,8 @@ namespace IxaCalc.Model
 
         private double _actualDefenceBar;
 
+        private double _actualDefencePerCost;
+
         private int _rank;
 
         private double _actualLeadershipAttack;
@@ -59,12 +61,13 @@ namespace IxaCalc.Model
             BushoDefence = _originBusho.Defence + (_originBusho.DefenceGrowth * RankToBonusPoint(Rank));
             ActualAttack = (BushoAttack + (_originBusho.SoldierNumber * RankDictionary.soldiers[CurrentSoldierType].Attack)) * Percent;
             ActualDefence = (BushoDefence + (_originBusho.SoldierNumber * RankDictionary.soldiers[CurrentSoldierType].Defence)) * Percent;
+            ActualDefencePerCost = ActualDefence / _originBusho.Cost;
             ActualAttackBar = ActualAttack > 100000 ? 1.0 : ActualAttack / 100000;
             ActualLeadershipAttack = ActualAttack / RankDictionary.soldiers[CurrentSoldierType].Attack;
             ActualLeadershipDefence = ActualDefence / RankDictionary.soldiers[CurrentSoldierType].Defence;
             PerCostAttack = ActualLeadershipAttack / _originBusho.Cost;
             PerCostDefence = ActualLeadershipDefence / _originBusho.Cost;
-            ActualDefenceBar = PerCostDefence > 1500 ? 1.0 : ((PerCostDefence - 500) / 1000);
+            ActualDefenceBar = ActualDefencePerCost > 40000 ? 1.0 : ActualDefencePerCost / 40000;
         }
 
         private int RankToBonusPoint(int rank)
@@ -273,7 +276,22 @@ namespace IxaCalc.Model
                 }
             }
         }
-        
+
+        public double ActualDefencePerCost
+        {
+            get
+            {
+                return _actualDefencePerCost;
+            }
+            set
+            {
+                if (_actualDefencePerCost != value)
+                {
+                    _actualDefencePerCost = value;
+                    OnPropertyChanged("ActualDefencePerCost");
+                }
+            }
+        }
         public double ActualAttack
         {
             get

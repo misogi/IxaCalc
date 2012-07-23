@@ -99,6 +99,31 @@
             }
         }
 
+        public SoldierTypes CurrentSoldierType
+        {
+            get
+            {
+                return _currentSoldierType;
+            }
+
+            set
+            {
+                if (_currentSoldierType != value)
+                {
+                    _currentSoldierType = value;
+                    OnPropertyChanged("CurrentSoldierType");
+                    OnPropertyChanged("CurrentSoldierTypeName");
+                }
+            }
+        }
+
+        public string CurrentSoldierTypeName
+        {
+            get
+            {
+                return RankDictionary.soldiers[_currentSoldierType].Name;
+            }
+        }
         /// <summary>
         /// 総攻撃力
         /// </summary>
@@ -270,8 +295,8 @@
             double totalDef = 0;
             double totalCost = 0;
             int soldier = 0;
-            var type = _currentSoldierType;
-            if (_currentSoldierType != null)
+            var type = CurrentSoldierType;
+            if (CurrentSoldierType != null)
             {
                 int i = 0;
                 foreach (var decked in DeckedBushos)
@@ -309,7 +334,7 @@
 
         public void SwitchSoldierType(SoldierTypes type)
         {
-            _currentSoldierType = type;
+            CurrentSoldierType = type;
             foreach (var decked in DeckedBushos)
             {
                 decked.CurrentSoldierType = _currentSoldierType;
