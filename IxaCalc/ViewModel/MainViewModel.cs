@@ -12,6 +12,7 @@ namespace IxaCalc.ViewModel
     using System.Windows.Input;
 
     using GalaSoft.MvvmLight.Command;
+    using GalaSoft.MvvmLight.Messaging;
 
     using IxaCalc.Enums;
 
@@ -80,7 +81,7 @@ namespace IxaCalc.ViewModel
             ChangeRarityCommand = new RelayCommand<string>(this.Execute);
 
             RankUpCommand = new RelayCommand<int>(this.RankUpExecute);
-			
+            
             RankDownCommand = new RelayCommand<int>(this.RankDownExecute);
 
             this.Execute("特");
@@ -88,11 +89,13 @@ namespace IxaCalc.ViewModel
 
         public void SetDeckExecute(Busho busho)
         {
+
             if(busho == null)
             {
                 return;
             }
             this._mainDeck.Add(busho);
+            MessengerInstance.Send(new DialogMessage("click", result => { }));
             string[] keys = { "Busho1", "Busho2", "Busho3", "Busho4" };
             foreach (var key in keys)
             {
@@ -103,16 +106,19 @@ namespace IxaCalc.ViewModel
         public void RankUpExecute(int index)
         {
             MainDeck.RankUp(index);
+            MessengerInstance.Send(new DialogMessage("up", result => { }));
         }
 
         public void RankDownExecute(int index)
         {
             MainDeck.RankDown(index);
+            MessengerInstance.Send(new DialogMessage("down", result => { }));
         }
-		
+        
         public void RemoveDeckExecute(int index)
         {
             this._mainDeck.Remove(index);
+            MessengerInstance.Send(new DialogMessage("cancel", result => { }));
             string[] keys = { "Busho1", "Busho2", "Busho3", "Busho4" };
             foreach (var key in keys)
             {
@@ -124,6 +130,7 @@ namespace IxaCalc.ViewModel
         {
             var type = (SoldierTypes)Enum.Parse(typeof(SoldierTypes), str, false);
             MainDeck.SwitchSoldierType(type);
+            MessengerInstance.Send(new DialogMessage("click", result => { }));
         }
 
         public void Execute(string raritystr)
@@ -131,12 +138,13 @@ namespace IxaCalc.ViewModel
             var rarity = RankDictionary.rarity[raritystr];
             var list1 = from p in _allBushoList where p.Rarity == rarity orderby p.Id select p;
             BushoList = new ObservableCollection<Busho>(list1);
+            MessengerInstance.Send(new DialogMessage("click", result => { }));
         }
 
         public RelayCommand<Busho> SetDeckCommand { get; private set; }
 
         public RelayCommand<int> RemoveDeckCommand { get; private set; }
-		
+        
         public RelayCommand<string> ChangeSoldierCommand { get; private set; }
 
         public RelayCommand<string> ChangeRarityCommand { get; private set; }

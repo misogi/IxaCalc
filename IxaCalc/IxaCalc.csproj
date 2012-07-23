@@ -89,9 +89,6 @@
       <DependentUpon>App.xaml</DependentUpon>
     </Compile>
     <Compile Include="Converters\RarityToBrushConverter.cs" />
-    <Compile Include="DataStore\DataStore\DataStore.xaml.cs">
-      <DependentUpon>DataStore.xaml</DependentUpon>
-    </Compile>
     <Compile Include="DeckBushoView.xaml.cs">
       <DependentUpon>DeckBushoView.xaml</DependentUpon>
     </Compile>
@@ -124,10 +121,6 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </ApplicationDefinition>
-    <Page Include="DataStore\DataStore\DataStore.xaml">
-      <Generator>MSBuild:MarkupCompilePass1</Generator>
-      <SubType>Designer</SubType>
-    </Page>
     <Page Include="DeckBushoView.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -142,7 +135,6 @@
     </Page>
   </ItemGroup>
   <ItemGroup>
-    <DesignTimeOnly Include="DataStore\DataStore\DataStore.xsd" />
     <None Include="Properties\AppManifest.xml" />
   </ItemGroup>
   <ItemGroup>
@@ -559,6 +551,20 @@
     <Resource Include="Images\3038.jpg" />
     <Resource Include="Images\3085.jpg" />
     <Resource Include="Images\4072.jpg" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Sounds\cancel.mp3">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Sounds\click.mp3">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <EmbeddedResource Include="Sounds\down.mp3">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Sounds\up.mp3">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </EmbeddedResource>
   </ItemGroup>
   <Import Project="$(MSBuildExtensionsPath32)\Microsoft\Silverlight\$(SilverlightVersion)\Microsoft.Silverlight.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

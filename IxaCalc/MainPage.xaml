@@ -528,5 +528,9 @@
         		<TextBlock Margin="7" TextWrapping="Wrap" Text="武将のランクアップを指定できます。"/>
         	</Border>
         </Grid>
+        <MediaElement x:Name="click_mp3" AutoPlay="False" HorizontalAlignment="Left" Height="0" Source="/Sounds/click.mp3" Stretch="Fill" VerticalAlignment="Top" Width="0"/>
+        <MediaElement x:Name="up_mp3" AutoPlay="False" HorizontalAlignment="Left" Height="0" Source="/Sounds/up.mp3" Stretch="Fill" VerticalAlignment="Top" Width="0"/>
+        <MediaElement x:Name="down_mp3" AutoPlay="False" HorizontalAlignment="Left" Height="0" Source="/Sounds/down.mp3" Stretch="Fill" VerticalAlignment="Top" Width="0"/>
+        <MediaElement x:Name="cancel_mp3" AutoPlay="False" HorizontalAlignment="Left" Height="0" Source="/Sounds/cancel.mp3" Stretch="Fill" VerticalAlignment="Top" Width="0"/>
     </Grid>
 </UserControl>

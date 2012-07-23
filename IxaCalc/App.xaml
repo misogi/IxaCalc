@@ -7,7 +7,6 @@
              x:Class="IxaCalc.App"
              mc:Ignorable="d">
     <Application.Resources>
-    	<DataStore:DataStore x:Key="DataStore" d:IsDataSource="True"/>
         <!--Global View Model Locator-->
         <vm:ViewModelLocator x:Key="Locator"
                              d:IsDataSource="True" />
