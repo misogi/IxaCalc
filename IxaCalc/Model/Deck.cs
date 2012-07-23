@@ -16,6 +16,10 @@
 
         private double _totalDefence;
 
+        private double _totalAttackPerCost;
+
+        private double _totalDefencePerCost;
+
         private double _totalCost;
 
         private Visibility[] _deckedVisibility = new Visibility[4];
@@ -125,6 +129,42 @@
         /// 総攻撃力
         /// </summary>
         /// <returns>計算した総兵数</returns>
+        public double TotalAttackPerCost
+        {
+            get
+            {
+                return _totalAttackPerCost;
+            }
+
+            set
+            {
+                _totalAttackPerCost = value;
+                OnPropertyChanged("TotalAttackPerCost");
+            }
+        }
+
+        /// <summary>
+        /// 総攻撃力
+        /// </summary>
+        /// <returns>計算した総兵数</returns>
+        public double TotalDefencePerCost
+        {
+            get
+            {
+                return _totalDefencePerCost;
+            }
+
+            set
+            {
+                _totalDefencePerCost = value;
+                OnPropertyChanged("TotalDefencePerCost");
+            }
+        }
+
+        /// <summary>
+        /// 総攻撃力
+        /// </summary>
+        /// <returns>計算した総兵数</returns>
         public double TotalCost
         {
             get
@@ -179,6 +219,8 @@
             TotalAttack = totalAtk;
             TotalDefence = totalDef;
             TotalCost = totalCost;
+            TotalAttackPerCost = TotalAttack / TotalCost;
+            TotalDefencePerCost = TotalDefence / TotalCost;
         }
 
         private bool IsContain(Busho cmpBusho)
