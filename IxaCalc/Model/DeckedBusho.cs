@@ -60,11 +60,11 @@ namespace IxaCalc.Model
             ActualAttack = (BushoAttack + (_originBusho.SoldierNumber * RankDictionary.soldiers[CurrentSoldierType].Attack)) * Percent;
             ActualDefence = (BushoDefence + (_originBusho.SoldierNumber * RankDictionary.soldiers[CurrentSoldierType].Defence)) * Percent;
             ActualAttackBar = ActualAttack > 100000 ? 1.0 : ActualAttack / 100000;
-            ActualDefenceBar = ActualDefence > 100000 ? 1.0 : ActualDefence / 100000;
             ActualLeadershipAttack = ActualAttack / RankDictionary.soldiers[CurrentSoldierType].Attack;
             ActualLeadershipDefence = ActualDefence / RankDictionary.soldiers[CurrentSoldierType].Defence;
             PerCostAttack = ActualLeadershipAttack / _originBusho.Cost;
             PerCostDefence = ActualLeadershipDefence / _originBusho.Cost;
+            ActualDefenceBar = PerCostDefence > 1500 ? 1.0 : ((PerCostDefence - 500) / 1000);
         }
 
         private int RankToBonusPoint(int rank)

@@ -547,6 +547,11 @@
   <ItemGroup>
     <Resource Include="Images\wallpaper.jpg" />
   </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Images\3038.jpg" />
+    <Resource Include="Images\3085.jpg" />
+    <Resource Include="Images\4072.jpg" />
+  </ItemGroup>
   <Import Project="$(MSBuildExtensionsPath32)\Microsoft\Silverlight\$(SilverlightVersion)\Microsoft.Silverlight.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.
