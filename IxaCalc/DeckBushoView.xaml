@@ -4,7 +4,7 @@
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
              xmlns:myc="clr-namespace:IxaCalc.Converters"
-             d:DesignHeight="100"
+             d:DesignHeight="110"
              d:DesignWidth="588"
              mc:Ignorable="d">
     <UserControl.Resources>
@@ -25,11 +25,10 @@
         <StackPanel Margin="0"
                     Orientation="Horizontal"
                     d:LayoutOverrides="Width">
-            <Image Width="80"
+            <Image Width="71"
                    Height="100"
                    Margin="0"
-                   Source="{Binding OriginBusho.Image}"
-                   d:LayoutOverrides="Width" />
+                   Source="{Binding OriginBusho.Image}" />
             <StackPanel Width="100"
                         Margin="12,5,0,5"
                         VerticalAlignment="Top"
@@ -42,7 +41,7 @@
                     <Image Width="20"
                            Height="20"
                            Source="{Binding RarityImage}" />
-                    <TextBlock HorizontalAlignment="Left" Text="{Binding OriginBusho.Cost}" />
+                    <TextBlock HorizontalAlignment="Left" Text="{Binding OriginBusho.Cost}" Margin="6,0,0,0" VerticalAlignment="Center" />
                 </StackPanel>
                 <StackPanel Orientation="Horizontal">
                     <TextBlock HorizontalAlignment="Left" Text="Lv.20 ★" />
@@ -86,13 +85,13 @@
             <StackPanel Width="110"
                         Margin="7"
                         VerticalAlignment="Top">
-                <StackPanel Orientation="Horizontal">
-                    <Image Width="16"
-                           Height="16"
-                           Margin="2"
-                           Source="Images/Attack.png" />
-                    <TextBlock Text="{Binding BushoAttack}" />
-                </StackPanel>
+                <Grid Height="20">
+            		<Image Width="16"
+            			Height="16"
+            			Margin="2,2,0,2"
+            			Source="Images/Attack.png" HorizontalAlignment="Left" />
+            		<TextBlock Text="{Binding BushoAttack}" HorizontalAlignment="Right" TextAlignment="Right" VerticalAlignment="Center" />
+            	</Grid>
                 <Grid>
                     <TextBlock HorizontalAlignment="Left"
                                FontSize="10"
@@ -121,7 +120,7 @@
                            Margin="2"
                            HorizontalAlignment="Left"
                            Source="Images/Defence.png" />
-                    <TextBlock Text="{Binding BushoDefence}" TextAlignment="Right" />
+                    <TextBlock Text="{Binding BushoDefence}" TextAlignment="Right" VerticalAlignment="Center" />
                 </Grid>
                 <Grid>
                     <TextBlock HorizontalAlignment="Left"
