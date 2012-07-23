@@ -20,19 +20,19 @@ namespace IxaCalc.Converters
             switch(rarity)
             {
                 case RarityRank.Common:
-                    col = Color.FromArgb(255, 70, 70, 140);
+                    col = Color.FromArgb(255, 40, 40, 100);
                     break;
                 case RarityRank.Uncommon:
-                    col = Color.FromArgb(255, 150, 150, 80);
+                    col = Color.FromArgb(255, 120, 120, 60);
                     break;
                 case RarityRank.Rare:
-                    col = Color.FromArgb(255, 140, 80, 80);
+                    col = Color.FromArgb(255, 100, 50, 50);
                     break;
                 case RarityRank.SuperRare:
-                    col = Color.FromArgb(255, 30, 30, 30);
+                    col = Color.FromArgb(255, 40, 40, 40);
                     break;
                 case RarityRank.UltraRare:
-                    col = Color.FromArgb(255, 120, 120, 120);
+                    col = Color.FromArgb(255, 110, 110, 112);
                     break;
             }
 
