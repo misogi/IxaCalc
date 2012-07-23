@@ -26,6 +26,10 @@ namespace IxaCalc.Model
 
         private double _actualDefence;
 
+        private double _actualAttackBar;
+
+        private double _actualDefenceBar;
+
         private int _rank;
 
         private double _actualLeadershipAttack;
@@ -55,6 +59,8 @@ namespace IxaCalc.Model
             BushoDefence = _originBusho.Defence + (_originBusho.DefenceGrowth * RankToBonusPoint(Rank));
             ActualAttack = (BushoAttack + (_originBusho.SoldierNumber * RankDictionary.soldiers[CurrentSoldierType].Attack)) * Percent;
             ActualDefence = (BushoDefence + (_originBusho.SoldierNumber * RankDictionary.soldiers[CurrentSoldierType].Defence)) * Percent;
+            ActualAttackBar = ActualAttack > 100000 ? 1.0 : ActualAttack / 100000;
+            ActualDefenceBar = ActualDefence > 100000 ? 1.0 : ActualDefence / 100000;
             ActualLeadershipAttack = ActualAttack / RankDictionary.soldiers[CurrentSoldierType].Attack;
             ActualLeadershipDefence = ActualDefence / RankDictionary.soldiers[CurrentSoldierType].Defence;
             PerCostAttack = ActualLeadershipAttack / _originBusho.Cost;
@@ -280,6 +286,38 @@ namespace IxaCalc.Model
                 {
                     _actualAttack = value;
                     OnPropertyChanged("ActualAttack");
+                }
+            }
+        }
+
+        public double ActualDefenceBar
+        {
+            get
+            {
+                return _actualDefenceBar;
+            }
+            set
+            {
+                if (_actualDefenceBar != value)
+                {
+                    _actualDefenceBar = value;
+                    OnPropertyChanged("ActualDefenceBar");
+                }
+            }
+        }
+
+        public double ActualAttackBar
+        {
+            get
+            {
+                return _actualAttackBar;
+            }
+            set
+            {
+                if (_actualAttackBar != value)
+                {
+                    _actualAttackBar = value;
+                    OnPropertyChanged("ActualAttackBar");
                 }
             }
         }

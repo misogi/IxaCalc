@@ -16,11 +16,19 @@
 
         private double _totalDefence;
 
+        private double _totalAttackBar;
+
+        private double _totalDefenceBar;
+		
         private double _totalAttackPerCost;
 
         private double _totalDefencePerCost;
 
         private double _totalCost;
+
+        private int _totalSoldierNumber;
+
+        private double _totalSoldierNumberPerCost;
 
         private Visibility[] _deckedVisibility = new Visibility[4];
 
@@ -72,22 +80,6 @@
             DeckedBushos[index].RankDown();
             this.CalculateTotalStatus();
         }
-        /// <summary>
-        /// 総兵数
-        /// </summary>
-        /// <returns>計算した総兵数</returns>
-        public int TotalSoldierNum()
-        {
-            int soldier = 0;
-            foreach (var busho in DeckedBushos)
-            {
-                if (busho != null)
-                {
-                    soldier += busho.OriginBusho.SoldierNumber;
-                }
-            }
-            return soldier;
-        }
 
         /// <summary>
         /// 総攻撃力
@@ -129,6 +121,42 @@
         /// 総攻撃力
         /// </summary>
         /// <returns>計算した総兵数</returns>
+        public double TotalAttackBar
+        {
+            get
+            {
+                return _totalAttackBar;
+            }
+
+            set
+            {
+                _totalAttackBar = value;
+                OnPropertyChanged("TotalAttackBar");
+            }
+        }
+
+        /// <summary>
+        /// 総攻撃力
+        /// </summary>
+        /// <returns>計算した総兵数</returns>
+        public double TotalDefenceBar
+        {
+            get
+            {
+                return _totalDefenceBar;
+            }
+
+            set
+            {
+                _totalDefenceBar = value;
+                OnPropertyChanged("TotalDefenceBar");
+            }
+        }
+
+        /// <summary>
+        /// 総攻撃力
+        /// </summary>
+        /// <returns>計算した総兵数</returns>
         public double TotalAttackPerCost
         {
             get
@@ -140,6 +168,42 @@
             {
                 _totalAttackPerCost = value;
                 OnPropertyChanged("TotalAttackPerCost");
+            }
+        }
+
+        /// <summary>
+        /// 総攻撃力
+        /// </summary>
+        /// <returns>計算した総兵数</returns>
+        public int TotalSoldierNumber
+        {
+            get
+            {
+                return _totalSoldierNumber;
+            }
+
+            set
+            {
+                _totalSoldierNumber = value;
+                OnPropertyChanged("TotalSoldierNumber");
+            }
+        }
+
+        /// <summary>
+        /// 総攻撃力
+        /// </summary>
+        /// <returns>計算した総兵数</returns>
+        public double TotalSoldierNumberPerCost
+        {
+            get
+            {
+                return _totalSoldierNumberPerCost;
+            }
+
+            set
+            {
+                _totalSoldierNumberPerCost = value;
+                OnPropertyChanged("TotalSoldierNumberPerCost");
             }
         }
 
@@ -205,12 +269,14 @@
             double totalAtk = 0;
             double totalDef = 0;
             double totalCost = 0;
+            int soldier = 0;
             var type = _currentSoldierType;
             if (_currentSoldierType != null)
             {
                 int i = 0;
                 foreach (var decked in DeckedBushos)
                 {
+                    soldier += decked.OriginBusho.SoldierNumber;
                     totalAtk += decked.ActualAttack;
                     totalDef += decked.ActualDefence;
                     totalCost += decked.OriginBusho.Cost;
@@ -218,7 +284,11 @@
             }
             TotalAttack = totalAtk;
             TotalDefence = totalDef;
+            TotalAttackBar = TotalAttack > 400000 ? 1.0 : TotalAttack / 400000;
+            TotalDefenceBar = TotalDefence > 400000 ? 1.0 : TotalDefence / 400000;
             TotalCost = totalCost;
+            TotalSoldierNumber = soldier;
+            TotalSoldierNumberPerCost = TotalSoldierNumber / TotalCost;
             TotalAttackPerCost = TotalAttack / TotalCost;
             TotalDefencePerCost = TotalDefence / TotalCost;
         }

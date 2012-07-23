@@ -28,12 +28,7 @@
 		<Binding Path="Main" Source="{StaticResource Locator}"/>
 	</UserControl.DataContext>
 
-    <Grid x:Name="LayoutRoot">
-        <Image x:Name="image1"
-               HorizontalAlignment="Stretch"
-               VerticalAlignment="Stretch"
-               Source="/IxaCalc;component/Images/wallpaper.jpg"
-               Stretch="Fill" />
+    <Grid x:Name="LayoutRoot" Background="#FF494949">
         <ListBox x:Name="bushoList"
                  Width="176"
                  Height="598"
@@ -151,83 +146,97 @@
               Margin="236,0,0,0"
               VerticalAlignment="Bottom"
               Background="#FF272727">
+        	<Grid Height="Auto" Margin="0">
+        		<Grid.RowDefinitions>
+        			<RowDefinition Height="0.5*"/>
+        			<RowDefinition Height="0.5*"/>
+        		</Grid.RowDefinitions>
+        		<Border BorderThickness="1" Margin="0" Background="#FF4D1111" RenderTransformOrigin="1,0.5" Grid.RowSpan="1">
+        			<Border.RenderTransform>
+        				<CompositeTransform ScaleX="{Binding MainDeck.TotalAttackBar}"/>
+        			</Border.RenderTransform>
+        		</Border>
+        		<Border BorderThickness="1" Margin="0" Background="#FF171635" RenderTransformOrigin="1,0.5" Grid.RowSpan="1" Grid.Row="1">
+        			<Border.RenderTransform>
+        				<CompositeTransform ScaleX="{Binding MainDeck.TotalDefenceBar}"/>
+        			</Border.RenderTransform>
+        		</Border>
+        	</Grid>
         	<StackPanel Orientation="Horizontal" d:LayoutOverrides="Height">
-        		<StackPanel>
-        			<StackPanel HorizontalAlignment="Right" Orientation="Horizontal">
-        				<TextBlock
-        					VerticalAlignment="Top"
-        					Text="Cost "
-        					TextWrapping="Wrap" />
-        				<TextBlock x:Name="deckCost"
-        					HorizontalAlignment="Left"
-        					VerticalAlignment="Top"
-        					Text="{Binding MainDeck.TotalCost}" />
-        			</StackPanel>
-        			<StackPanel HorizontalAlignment="Right" Orientation="Horizontal">
+        		<StackPanel Margin="180,5,23,5" Width="96">
+        			<Grid Height="16">
         				<TextBlock
         					VerticalAlignment="Top"
         					Text="総兵数 "
-        					TextWrapping="Wrap" />
+        					TextWrapping="Wrap" d:LayoutOverrides="Width" />
         				<TextBlock x:Name="textBlock1"
-        					HorizontalAlignment="Left"
+        					HorizontalAlignment="Right"
         					VerticalAlignment="Top"
-        					Text="{Binding AllSoldierNumber}" />
-        			</StackPanel>
-        			<TextBlock TextWrapping="Wrap" Text="コス比"/>
+        					Text="{Binding MainDeck.TotalSoldierNumber}" Margin="37,0,0,0" TextAlignment="Right" />
+        			</Grid>
+        			<Grid Height="16">
         				<TextBlock
-        					HorizontalAlignment="Left"
         					VerticalAlignment="Top"
-        					Text="{Binding AllSoldierNumberPerCost}" />
+        					Text="総コスト"
+        					TextWrapping="Wrap" />
+        				<TextBlock x:Name="deckCost"
+        					HorizontalAlignment="Right"
+        					VerticalAlignment="Top"
+        					Text="{Binding MainDeck.TotalCost}" Margin="29,0,0,0" TextAlignment="Right" />
+        			</Grid>
+        			<Grid Height="16">
+        				<TextBlock TextWrapping="Wrap" Text="コス比" d:LayoutOverrides="Width, Height" VerticalAlignment="Center"/>
+        				<TextBlock
+        					HorizontalAlignment="Right"
+        					VerticalAlignment="Center"
+        					Text="{Binding MainDeck.TotalSoldierNumberPerCost, StringFormat=\{0:F1\}}" Margin="0" />
+        			</Grid>
         		</StackPanel>
-        		<StackPanel Height="100" d:LayoutOverrides="Width">
-        			<StackPanel Margin="0"
-        				Orientation="Horizontal"
-        				d:LayoutOverrides="Height">
-        				<Image Width="20"
-        					Height="20"
-        					Margin="2"
-        					Source="Images/Attack.png" />
+        		<StackPanel x:Name="TotalAtk" HorizontalAlignment="Right" Width="126" Margin="0,5,5,5">
+        			<Grid Height="23">
+        				<Image
+        					Margin="0"
+        					Source="Images/Attack.png" HorizontalAlignment="Left" VerticalAlignment="Center" />
         				<TextBlock x:Name="deckAtk"
-        					Width="144"
         					Height="23"
         					HorizontalAlignment="Right"
-        					VerticalAlignment="Bottom"
-        					FontSize="20"
+        					VerticalAlignment="Center"
+        					FontSize="19"
         					FontWeight="Bold"
         					Foreground="#FFFF6767"
         					Text="{Binding MainDeck.TotalAttack, StringFormat=\{0:F1\}}"
         					TextAlignment="Right" />
-        			</StackPanel>
-        			<TextBlock TextWrapping="Wrap" Text="コス比" Width="168"/>
+        			</Grid>
+        			<Grid Height="16">
+        				<TextBlock TextWrapping="Wrap" Text="コス比" HorizontalAlignment="Left" d:LayoutOverrides="Height"/>
         				<TextBlock 
-        					Width="216"
-        					HorizontalAlignment="Left"
+        					HorizontalAlignment="Right"
         					VerticalAlignment="Top"
-        					Text="{Binding MainDeck.TotalAttackPerCost, StringFormat=\{0:F1\}}" />
+        					Text="{Binding MainDeck.TotalAttackPerCost, StringFormat=\{0:F1\}}" Margin="52,0,0,0" TextAlignment="Right" />
+        			</Grid>
         		</StackPanel>
-        		<StackPanel Orientation="Vertical" VerticalAlignment="Top" Width="168">
-        			<StackPanel Orientation="Horizontal" d:LayoutOverrides="Width">
-        				<Image Width="20"
-        					Height="20"
-        					Margin="2"
-        					Source="Images/Defence.png" />
+        		<StackPanel x:Name="TotalDef" Orientation="Vertical" Width="137" VerticalAlignment="Top" Margin="0,5,5,5">
+        			<Grid>
+        				<Image
+        					Margin="0"
+        					Source="Images/Defence.png" HorizontalAlignment="Left" Width="23" VerticalAlignment="Center" Height="23" />
         				<TextBlock x:Name="dechDef"
-        					Width="144"
         					Height="23"
         					HorizontalAlignment="Right"
-        					VerticalAlignment="Bottom"
-        					FontSize="20"
+        					VerticalAlignment="Center"
+        					FontSize="19"
         					FontWeight="Bold"
         					Foreground="#FF6B6BFF"
         					Text="{Binding MainDeck.TotalDefence, StringFormat=\{0:F1\}}"
         					TextAlignment="Right" />
-        			</StackPanel>
-        			<TextBlock TextWrapping="Wrap" Text="コス比"/>
-        				<TextBlock 
-        					Width="216"
-        					HorizontalAlignment="Left"
-        					VerticalAlignment="Top"
-        					Text="{Binding MainDeck.TotalDefencePerCost, StringFormat=\{0:F1\}}" />
+        			</Grid>
+        			<Grid>
+        				<TextBlock TextWrapping="Wrap" Text="コス比" HorizontalAlignment="Left" VerticalAlignment="Center"/>
+        				<TextBlock
+        					HorizontalAlignment="Right"
+        					VerticalAlignment="Center"
+        					Text="{Binding MainDeck.TotalDefencePerCost, StringFormat=\{0:F1\}}" Margin="0" TextAlignment="Right" />
+        			</Grid>
         		</StackPanel>
         	</StackPanel>
         </Grid>

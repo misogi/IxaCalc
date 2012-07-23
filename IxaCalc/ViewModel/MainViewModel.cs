@@ -52,11 +52,6 @@ namespace IxaCalc.ViewModel
         private int _allSoldier;
 
         /// <summary>
-        /// 現在指定している兵士タイプ
-        /// </summary>
-        private Soldier _soldier;
-
-        /// <summary>
         /// 全ての攻撃力
         /// </summary>
         private int _allAttack;
@@ -84,12 +79,11 @@ namespace IxaCalc.ViewModel
                     _allBushoList = items;
                 });
             SoldierTypes = _dataService.GetSoldierTypes();
-            _soldier = SoldierTypes[0];
             this._mainDeck = new Deck();
 
-            SetDeckCommand = new RelayCommand<Busho>(this.Execute);
+            SetDeckCommand = new RelayCommand<Busho>(this.SetDeckExecute);
 
-            RemoveDeckCommand = new RelayCommand<int>(this.Execute);
+            RemoveDeckCommand = new RelayCommand<int>(this.RemoveDeckExecute);
 
             ChangeSoldierCommand = new RelayCommand<string>(this.ChangeSoldierExecute);
             
@@ -101,14 +95,13 @@ namespace IxaCalc.ViewModel
             this.Execute("特");
         }
 
-        public void Execute(Busho busho)
+        public void SetDeckExecute(Busho busho)
         {
             if(busho == null)
             {
                 return;
             }
             this._mainDeck.Add(busho);
-            UpdateAllSum();
             string[] keys = { "Busho1", "Busho2", "Busho3", "Busho4" };
             foreach (var key in keys)
             {
@@ -126,10 +119,9 @@ namespace IxaCalc.ViewModel
             MainDeck.RankDown(index);
         }
 
-        public void Execute(int index)
+        public void RemoveDeckExecute(int index)
         {
             this._mainDeck.Remove(index);
-            UpdateAllSum();
             string[] keys = { "Busho1", "Busho2", "Busho3", "Busho4" };
             foreach (var key in keys)
             {
@@ -140,8 +132,7 @@ namespace IxaCalc.ViewModel
         public void ChangeSoldierExecute(string str)
         {
             var type = (SoldierTypes)Enum.Parse(typeof(SoldierTypes), str, false);
-            _soldier = RankDictionary.soldiers[type];
-            UpdateAllSum();
+            MainDeck.SwitchSoldierType(type);
         }
 
         public void Execute(string raritystr)
@@ -149,16 +140,6 @@ namespace IxaCalc.ViewModel
             var rarity = RankDictionary.rarity[raritystr];
             var list1 = from p in _allBushoList where p.Rarity == rarity orderby p.Id select p;
             BushoList = new ObservableCollection<Busho>(list1);
-        }
-
-        private void UpdateAllSum()
-        {
-            AllSoldierNumber = this._mainDeck.TotalSoldierNum();
-            if (_soldier != null)
-            {
-                this._mainDeck.SwitchSoldierType(_soldier.SoldierType);
-                AllAttack = AllSoldierNumber * _soldier.Attack;
-            }
         }
 
         public RelayCommand<Busho> SetDeckCommand { get; private set; }
@@ -188,50 +169,6 @@ namespace IxaCalc.ViewModel
             {
                 _bushoList = value;
                 RaisePropertyChanged("BushoList");
-            }
-        }
-
-        /// <summary>
-        /// 部隊の合計兵士数
-        /// </summary>
-        public int AllSoldierNumber
-        {
-            get
-            {
-                return _allSoldier;
-            }
-
-            set
-            {
-                if (_allSoldier == value)
-                {
-                    return;
-                }
-
-                _allSoldier = value;
-                RaisePropertyChanged("AllSoldierNumber");
-            }
-        }
-
-        /// <summary>
-        /// 部隊の合計兵士数
-        /// </summary>
-        public int AllAttack
-        {
-            get
-            {
-                return _allAttack;
-            }
-
-            set
-            {
-                if (_allAttack == value)
-                {
-                    return;
-                }
-
-                _allAttack = value;
-                RaisePropertyChanged("AllAttack");
             }
         }
 
