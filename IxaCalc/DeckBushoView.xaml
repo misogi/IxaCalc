@@ -5,7 +5,7 @@
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
              xmlns:myc="clr-namespace:IxaCalc.Converters"
              d:DesignHeight="100"
-             d:DesignWidth="500"
+             d:DesignWidth="588"
              mc:Ignorable="d">
     <UserControl.Resources>
         <ResourceDictionary>
@@ -67,43 +67,55 @@
                     <TextBlock Text="{Binding OriginBusho.SoldierNumber}" />
                 </StackPanel>
                 <StackPanel Orientation="Horizontal">
-                    <Image Width="16"
-                           Height="16"
-                           Margin="2"
-                           Source="Images/Attack.png" />
-                    <TextBlock Text="{Binding BushoAttack}" />
-                </StackPanel>
-                <StackPanel Orientation="Horizontal">
-                    <Image Width="16"
-                           Height="16"
-                           Margin="2"
-                           Source="Images/Defence.png" />
-                    <TextBlock Text="{Binding BushoDefence}" />
+                	<TextBlock HorizontalAlignment="Left" Text="統率力 " FontSize="10" />
+                	<TextBlock Foreground="#FF212121" Text="{Binding Percent}" />
                 </StackPanel>
             </StackPanel>
             <StackPanel Margin="7"
                         VerticalAlignment="Top"
                         Background="White" Width="110">
                 <StackPanel Orientation="Horizontal">
-                    <TextBlock HorizontalAlignment="Left" Text="統率力 " FontSize="10" />
-                    <TextBlock Foreground="#FF212121" Text="{Binding Percent}" />
+                	<Image Width="16"
+                		Height="16"
+                		Margin="2"
+                		Source="Images/Attack.png" />
+                	<TextBlock Text="{Binding BushoAttack}" />
                 </StackPanel>
                 <StackPanel Orientation="Horizontal">
                     <TextBlock HorizontalAlignment="Left" Text="実指揮 " FontSize="10" />
-                    <TextBlock Foreground="#FF212121" Text="{Binding ActualLeadership}" />
+                    <TextBlock Foreground="#FF212121" Text="{Binding ActualLeadershipAttack}" />
                 </StackPanel>
                 <StackPanel Orientation="Horizontal">
                     <TextBlock HorizontalAlignment="Left" Text="コス比 " FontSize="10" />
-                    <TextBlock Foreground="#FF212121" Text="{Binding PerCost, StringFormat=\{0:F1\}}" />
+                    <TextBlock Foreground="#FF212121" Text="{Binding PerCostAttack, StringFormat=\{0:F1\}}" />
                 </StackPanel>
                 <StackPanel Orientation="Horizontal">
                     <TextBlock HorizontalAlignment="Left" Text="総攻撃 " FontSize="10" />
                     <TextBlock Foreground="#FF212121" Text="{Binding ActualAttack, StringFormat=\{0:F1\}}" />
                 </StackPanel>
-                <StackPanel Orientation="Horizontal">
-                    <TextBlock HorizontalAlignment="Left" Text="総防御 " FontSize="10" />
-                    <TextBlock Foreground="#FF212121" Text="{Binding ActualDefence, StringFormat=\{0:F1\}}" />
-                </StackPanel>
+            </StackPanel>
+            <StackPanel Margin="7,7,7,0"
+            	VerticalAlignment="Top"
+            	Background="White" Width="110">
+            	<StackPanel Orientation="Horizontal">
+            		<Image Width="16"
+            			Height="16"
+            			Margin="2"
+            			Source="Images/Defence.png" />
+            		<TextBlock Text="{Binding BushoDefence}" />
+            	</StackPanel>
+            	<StackPanel Orientation="Horizontal">
+            		<TextBlock HorizontalAlignment="Left" Text="実指揮 " FontSize="10" />
+            		<TextBlock Foreground="#FF212121" Text="{Binding ActualLeadershipDefence}" />
+            	</StackPanel>
+            	<StackPanel Orientation="Horizontal">
+            		<TextBlock HorizontalAlignment="Left" Text="コス比 " FontSize="10" />
+            		<TextBlock Foreground="#FF212121" Text="{Binding PerCostDefence, StringFormat=\{0:F1\}}" />
+            	</StackPanel>
+            	<StackPanel Orientation="Horizontal">
+            		<TextBlock HorizontalAlignment="Left" Text="総防御 " FontSize="10" />
+            		<TextBlock Foreground="#FF212121" Text="{Binding ActualDefence, StringFormat=\{0:F1\}}" />
+            	</StackPanel>
             </StackPanel>
         </StackPanel>
     </Grid>
