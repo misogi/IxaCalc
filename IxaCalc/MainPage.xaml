@@ -59,7 +59,7 @@
                     Margin="236,56,0,0"
                     HorizontalAlignment="Left"
                     VerticalAlignment="Top" Width="600">
-            <StackPanel Orientation="Horizontal">
+            <StackPanel Orientation="Horizontal" Visibility="{Binding MainDeck.DeckedVisibility[0]}">
                 <Grid>
                     <my:DeckBushoView DataContext="{Binding MainDeck.DeckedBushos[0]}" />
                     <Button ClickMode="Press"
@@ -80,7 +80,7 @@
                             Style="{StaticResource RankButtonStyle}" />
                 </StackPanel>
             </StackPanel>
-            <StackPanel Orientation="Horizontal">
+            <StackPanel Orientation="Horizontal" Visibility="{Binding MainDeck.DeckedVisibility[1]}">
                 <Grid>
                     <my:DeckBushoView DataContext="{Binding MainDeck.DeckedBushos[1]}" />
                     <Button ClickMode="Press"
@@ -101,7 +101,7 @@
                             Style="{StaticResource RankButtonStyle}" />
                 </StackPanel>
             </StackPanel>
-            <StackPanel Orientation="Horizontal">
+            <StackPanel Orientation="Horizontal" Visibility="{Binding MainDeck.DeckedVisibility[2]}">
                 <Grid>
                     <my:DeckBushoView DataContext="{Binding MainDeck.DeckedBushos[2]}" />
                     <Button ClickMode="Press"
@@ -122,7 +122,7 @@
                             Style="{StaticResource RankButtonStyle}" />
                 </StackPanel>
             </StackPanel>
-            <StackPanel Orientation="Horizontal">
+            <StackPanel Orientation="Horizontal" Visibility="{Binding MainDeck.DeckedVisibility[3]}">
                 <Grid>
                     <my:DeckBushoView DataContext="{Binding MainDeck.DeckedBushos[3]}" />
                     <Button ClickMode="Press"
@@ -236,7 +236,7 @@
                          VerticalAlignment="Top"
                          Command="{Binding ChangeRarityCommand}"
                          CommandParameter="特"
-                         Template="{StaticResource RarityButton}" Width="53">
+                         Template="{StaticResource RarityButton}" Width="53" IsChecked="True">
                 <Image Width="30"
                        Height="30"
                        Margin="2"
@@ -277,7 +277,7 @@
             <RadioButton ClickMode="Press"
                          Command="{Binding ChangeSoldierCommand}"
                          CommandParameter="Spear"
-                         Template="{StaticResource ShortCutButton}">
+                         Template="{StaticResource ShortCutButton}" IsChecked="True">
                 <Image Width="40"
                        Height="40"
                        Margin="2"

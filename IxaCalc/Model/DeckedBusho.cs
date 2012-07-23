@@ -28,9 +28,13 @@ namespace IxaCalc.Model
 
         private int _rank;
 
-        private double _actualLeadership;
+        private double _actualLeadershipAttack;
 
-        private double _perCost;
+        private double _perCostAttack;
+
+        private double _actualLeadershipDefence;
+
+        private double _perCostDefence;
 
         private double _percent;
 
@@ -47,12 +51,14 @@ namespace IxaCalc.Model
         private void UpdateDeckedInfo()
         {
             Percent = CalculatePercent(_originBusho);
-            ActualLeadership = _originBusho.SoldierNumber * Percent;
-            PerCost = ActualLeadership / _originBusho.Cost;
             BushoAttack = _originBusho.Attack + (_originBusho.AttackGrowth * RankToBonusPoint(Rank));
             BushoDefence = _originBusho.Defence + (_originBusho.DefenceGrowth * RankToBonusPoint(Rank));
             ActualAttack = (BushoAttack + (_originBusho.SoldierNumber * RankDictionary.soldiers[CurrentSoldierType].Attack)) * Percent;
             ActualDefence = (BushoDefence + (_originBusho.SoldierNumber * RankDictionary.soldiers[CurrentSoldierType].Defence)) * Percent;
+            ActualLeadershipAttack = ActualAttack / RankDictionary.soldiers[CurrentSoldierType].Attack;
+            ActualLeadershipDefence = ActualDefence / RankDictionary.soldiers[CurrentSoldierType].Defence;
+            PerCostAttack = ActualLeadershipAttack / _originBusho.Cost;
+            PerCostDefence = ActualLeadershipDefence / _originBusho.Cost;
         }
 
         private int RankToBonusPoint(int rank)
@@ -166,18 +172,34 @@ namespace IxaCalc.Model
             }
         }
 
-        public double PerCost
+        public double PerCostDefence
         {
             get
             {
-                return _perCost;
+                return _perCostDefence;
             }
             set
             {
-                if (_perCost != value)
+                if (_perCostDefence != value)
                 {
-                    _perCost = value;
-                    OnPropertyChanged("PerCost");
+                    _perCostDefence = value;
+                    OnPropertyChanged("PerCostDefence");
+                }
+            }
+        }
+
+        public double PerCostAttack
+        {
+            get
+            {
+                return _perCostAttack;
+            }
+            set
+            {
+                if (_perCostAttack != value)
+                {
+                    _perCostAttack = value;
+                    OnPropertyChanged("PerCostAttack");
                 }
             }
         }
@@ -198,18 +220,34 @@ namespace IxaCalc.Model
             }
         }
 
-        public double ActualLeadership
+        public double ActualLeadershipAttack
         {
             get
             {
-                return _actualLeadership;
+                return _actualLeadershipAttack;
             }
             set
             {
-                if (_actualLeadership != value)
+                if (_actualLeadershipAttack != value)
                 {
-                    _actualLeadership = value;
-                    OnPropertyChanged("ActualLeadership");
+                    _actualLeadershipAttack = value;
+                    OnPropertyChanged("ActualLeadershipAttack");
+                }
+            }
+        }
+
+        public double ActualLeadershipDefence
+        {
+            get
+            {
+                return _actualLeadershipDefence;
+            }
+            set
+            {
+                if (_actualLeadershipDefence != value)
+                {
+                    _actualLeadershipDefence = value;
+                    OnPropertyChanged("ActualLeadershipDefence");
                 }
             }
         }

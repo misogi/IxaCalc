@@ -1,5 +1,6 @@
 ﻿namespace IxaCalc.Model
 {
+    using System.Windows;
     using System.Collections.Generic;
     using System.ComponentModel;
 
@@ -17,9 +18,12 @@
 
         private double _totalCost;
 
+        private Visibility[] _deckedVisibility = new Visibility[4];
+
         public Deck()
         {
             _deckedBushos = new List<DeckedBusho>(4);
+            UpdateDeckVisibility();
         }
 
         public List<DeckedBusho> DeckedBushos
@@ -37,6 +41,7 @@
                 var decked = new DeckedBusho(busho, _currentSoldierType);
                 DeckedBushos.Add(decked);
                 this.CalculateTotalStatus();
+                UpdateDeckVisibility();
                 OnPropertyChanged("DeckedBushos");
             }
         }
@@ -47,6 +52,7 @@
             {
                 DeckedBushos.RemoveAt(index);
                 this.CalculateTotalStatus();
+                UpdateDeckVisibility();
                 OnPropertyChanged("DeckedBushos");
             }
         }
@@ -131,6 +137,27 @@
                 _totalCost = value;
                 OnPropertyChanged("TotalCost");
             }
+        }
+
+        /// <summary>
+        /// デッキに入った3番目の武将
+        /// </summary>
+        public Visibility[] DeckedVisibility
+        {
+            get
+            {
+                return _deckedVisibility;
+            }
+        }
+
+        private void UpdateDeckVisibility()
+        {
+            var bushonum = DeckedBushos.Count;
+            for (int i = 0; i < 4; i++)
+            {
+                _deckedVisibility[i] = i < bushonum ? Visibility.Visible : Visibility.Collapsed;
+            }
+            OnPropertyChanged("DeckedVisibility");
         }
 
         private void CalculateTotalStatus()
