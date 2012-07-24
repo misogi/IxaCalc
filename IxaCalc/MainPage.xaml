@@ -89,6 +89,9 @@
 		<ei:KeyTrigger Key="T">
 			<cmd:EventToCommand Command="{Binding ChangeRarityCommand}" CommandParameter="序"/>
 		</ei:KeyTrigger>
+		<ei:KeyTrigger Key="S">
+			<ei:CallMethodAction MethodName="ToggleSoundButton"/>
+		</ei:KeyTrigger>
 	</i:Interaction.Triggers>
 
 	<UserControl.DataContext>
@@ -496,8 +499,8 @@
                        Source="Images/Dragoon.png" />
             </RadioButton>
         </StackPanel>
-        <Border BorderThickness="1" Height="100" HorizontalAlignment="Left" Margin="818,23,0,0" Name="border1" VerticalAlignment="Top" Width="70" Background="#7A000000">
-            <TextBlock  Name="textBlock2" Text="DEL 削除    H ヘルプ" TextWrapping="Wrap" />
+        <Border BorderThickness="1" Height="100" HorizontalAlignment="Left" Margin="830,2,0,0" Name="border1" VerticalAlignment="Top" Width="70" Background="#7A000000">
+            <TextBlock  Name="textBlock2" Text="DEL 削除    H ヘルプ      S サウンド" TextWrapping="Wrap" Margin="0" />
         </Border>
         <Grid x:Name="helpLayer" Margin="0" Background="#97000000" Visibility="Collapsed">
         	<i:Interaction.Triggers>
@@ -532,5 +535,6 @@
         <MediaElement x:Name="up_mp3" AutoPlay="False" HorizontalAlignment="Left" Height="0" Source="/Sounds/up.mp3" Stretch="Fill" VerticalAlignment="Top" Width="0"/>
         <MediaElement x:Name="down_mp3" AutoPlay="False" HorizontalAlignment="Left" Height="0" Source="/Sounds/down.mp3" Stretch="Fill" VerticalAlignment="Top" Width="0"/>
         <MediaElement x:Name="cancel_mp3" AutoPlay="False" HorizontalAlignment="Left" Height="0" Source="/Sounds/cancel.mp3" Stretch="Fill" VerticalAlignment="Top" Width="0"/>
+        <CheckBox x:Name="isSoundButton" Content="CheckBox" HorizontalAlignment="Right" Height="34" Margin="0,68,0,0" VerticalAlignment="Top" Width="26" Template="{StaticResource SoundButton}" ClickMode="Press"/>
     </Grid>
 </UserControl>

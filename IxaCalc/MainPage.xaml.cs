@@ -19,8 +19,15 @@
             Messenger.Default.Register(this, (Action<DialogMessage>)ShowMessage);
         }
 
+        public void ToggleSoundButton()
+        {
+            this.isSoundButton.IsChecked = this.isSoundButton.IsChecked == true ? false : true;
+        }
+        
         private void ShowMessage(DialogMessage msg)
         {
+            if (this.isSoundButton.IsChecked == true)
+            {
             switch (msg.Content)
             {
                 case "up":
@@ -41,6 +48,7 @@
                     break;
             }
             msg.Callback(System.Windows.MessageBoxResult.OK);
+            }
         }
     }
 }

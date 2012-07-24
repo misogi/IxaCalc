@@ -115,6 +115,53 @@
         </Grid>
 	</ControlTemplate>
 	
+	<ControlTemplate x:Key="SoundButton" TargetType="CheckBox">
+		<Viewbox>
+			<VisualStateManager.VisualStateGroups>
+				<VisualStateGroup x:Name="CheckStates">
+					<VisualState x:Name="Indeterminate"/>
+					<VisualState x:Name="Unchecked">
+						<Storyboard>
+							<ObjectAnimationUsingKeyFrames Storyboard.TargetProperty="(UIElement.Visibility)" Storyboard.TargetName="soundOnGrid">
+								<DiscreteObjectKeyFrame KeyTime="0">
+									<DiscreteObjectKeyFrame.Value>
+										<Visibility>Collapsed</Visibility>
+									</DiscreteObjectKeyFrame.Value>
+								</DiscreteObjectKeyFrame>
+							</ObjectAnimationUsingKeyFrames>
+						</Storyboard>
+					</VisualState>
+					<VisualState x:Name="Checked">
+						<Storyboard>
+							<ObjectAnimationUsingKeyFrames Storyboard.TargetProperty="(UIElement.Visibility)" Storyboard.TargetName="soundOffGrid">
+								<DiscreteObjectKeyFrame KeyTime="0">
+									<DiscreteObjectKeyFrame.Value>
+										<Visibility>Collapsed</Visibility>
+									</DiscreteObjectKeyFrame.Value>
+								</DiscreteObjectKeyFrame>
+							</ObjectAnimationUsingKeyFrames>
+						</Storyboard>
+					</VisualState>
+				</VisualStateGroup>
+			</VisualStateManager.VisualStateGroups>
+			<Grid d:DesignWidth="40" d:DesignHeight="37.5" Background="#22000000" >
+				<Path Data="M6.75,13.5 L6.75,24 L12.75,24 L12.75,13.5 z" Fill="#FFF4F4F5" HorizontalAlignment="Left" Margin="6.25,12.5,0,13.5" Stretch="Fill" UseLayoutRounding="False" Width="7"/>
+				<Path Data="M14.75,13.5 L14.75,23.5 14.75,23.5 21.5,32.5 21.5,30.25 C21.5,28 21.5,3.999939 21.5,3.999939 z" Fill="#FFF4F4F5" Margin="14.25,3.5,18,4.389" Stretch="Fill" UseLayoutRounding="False"/>
+				<Grid x:Name="soundOnGrid" HorizontalAlignment="Right" Margin="0,8,5,8" Width="11">
+					<Path Data="M25.75,12.5 C25.75,12.5 30.75,18.5 25.75,24.5" HorizontalAlignment="Left" Margin="0,4.5" Stretch="Fill" Stroke="White" UseLayoutRounding="False" Width="3.222" StrokeThickness="2"/>
+					<Path Data="M32.25,28.75 C32.25,28.75 37.75,17.75 32.25,8.75" HorizontalAlignment="Right" Margin="0,0,0.334,0" Stretch="Fill" Stroke="White" StrokeThickness="3" UseLayoutRounding="False" Width="4.444"/>
+				</Grid>
+				<Grid x:Name="soundOffGrid" HorizontalAlignment="Right" Margin="0,12,1,11" Width="16">
+					<Path Data="M23.75,15.25 L35.25,26.75 L38.5,23.5 L26.5,11.5 L23,15 z" Fill="#FFF4F4F5" Margin="0,0,0.5,-0.25" Stretch="Fill" UseLayoutRounding="False"/>
+					<Path Data="M23.25,23.75 L34.75,12.25 L37.75,15.25 L26.75,26.25 z" Fill="#FFF4F4F5" Margin="1,1,0.5,0" Stretch="Fill" UseLayoutRounding="False"/>
+				</Grid>
+            <Border Background="#A2000000" Opacity="0.99" Width="16" Height="16" HorizontalAlignment="Left" VerticalAlignment="Top" >
+                <TextBlock Text="S" TextAlignment="Center" VerticalAlignment="Center" Foreground="White" />
+            </Border>
+			</Grid>
+		</Viewbox>
+	</ControlTemplate>
+		
     <Style TargetType="Button" x:Key="RankButtonStyle">
         <Style.Setters>
             <Setter Property="FontSize" Value="15" />
