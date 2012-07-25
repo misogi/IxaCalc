@@ -89,6 +89,8 @@
       <DependentUpon>App.xaml</DependentUpon>
     </Compile>
     <Compile Include="Converters\RarityToBrushConverter.cs" />
+    <Compile Include="Converters\RarityToCheckedConverter.cs" />
+    <Compile Include="Converters\SoldierTypeToCheckedConverter.cs" />
     <Compile Include="DeckBushoView.xaml.cs">
       <DependentUpon>DeckBushoView.xaml</DependentUpon>
     </Compile>

@@ -8,6 +8,7 @@
              xmlns:ignore="http://www.ignore.com"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
              xmlns:my="clr-namespace:IxaCalc"
+             xmlns:myc="clr-namespace:IxaCalc.Converters"
              xmlns:mye="clr-namespace:IxaCalc.Enums"
              x:Name="userControl"
              Width="900"
@@ -22,6 +23,8 @@
             <Style TargetType="TextBlock">
                 <Setter Property="Foreground" Value="White" />
             </Style>
+            <myc:RarityToCheckedConverter x:Key="rarityConverter" />
+            <myc:SoldierTypeToCheckedConverter x:Key="soldierConverter" />
         </ResourceDictionary>
     </UserControl.Resources>
     <i:Interaction.Triggers>
@@ -110,12 +113,12 @@
                  Width="176"
                  Height="598"
                  Margin="60,0,0,0"
-                 SelectionChanged="bushoList_SelectionChanged"
                  HorizontalAlignment="Left"
                  VerticalAlignment="Top"
                  Background="#FF272727"
                  Foreground="White"
-                 ItemsSource="{Binding BushoList}">
+                 ItemsSource="{Binding BushoList}"
+                 SelectionChanged="bushoList_SelectionChanged">
             <i:Interaction.Triggers>
                 <ei:KeyTrigger Key="Enter">
                     <cmd:EventToCommand Command="{Binding SetDeckCommand}" CommandParameter="{Binding SelectedItem, ElementName=bushoList}" />
@@ -129,23 +132,23 @@
                                 <Border BorderBrush="Gray" BorderThickness="0,0,0,1">
                                     <VisualStateManager.VisualStateGroups>
                                         <VisualStateGroup x:Name="SelectionStates">
-                                            <VisualState x:Name="SelectedUnfocused" >
+                                            <VisualState x:Name="SelectedUnfocused">
                                                 <Storyboard>
                                                     <ColorAnimation d:IsOptimized="True"
-                                                    Duration="0"
-                                                    Storyboard.TargetName="grid"
-                                                    Storyboard.TargetProperty="(Panel.Background).(SolidColorBrush.Color)"
-                                                    To="#FFA3A3A3" />
+                                                                    Duration="0"
+                                                                    Storyboard.TargetName="grid"
+                                                                    Storyboard.TargetProperty="(Panel.Background).(SolidColorBrush.Color)"
+                                                                    To="#FFA3A3A3" />
                                                 </Storyboard>
                                             </VisualState>
                                             <VisualState x:Name="Unselected" />
                                             <VisualState x:Name="Selected">
                                                 <Storyboard>
                                                     <ColorAnimation d:IsOptimized="True"
-                                                    Duration="0"
-                                                    Storyboard.TargetName="grid"
-                                                    Storyboard.TargetProperty="(Panel.Background).(SolidColorBrush.Color)"
-                                                    To="#FF939393" />
+                                                                    Duration="0"
+                                                                    Storyboard.TargetName="grid"
+                                                                    Storyboard.TargetProperty="(Panel.Background).(SolidColorBrush.Color)"
+                                                                    To="#FF939393" />
                                                 </Storyboard>
                                             </VisualState>
                                         </VisualStateGroup>
@@ -417,74 +420,88 @@
                     HorizontalAlignment="Left"
                     VerticalAlignment="Top"
                     Background="#FF3B3B3B">
-            <RadioButton x:Name="ultraRare"
-                         Width="53"
-                         Margin="0"
-                         VerticalAlignment="Top"
-                         Command="{Binding ChangeRarityCommand}"
-                         CommandParameter="天"
-                         Tag="Q"
-                         Template="{StaticResource RarityButton}">
+            <CheckBox x:Name="ultraRare"
+                      Width="53"
+                      Margin="0"
+                      VerticalAlignment="Top"
+                      Command="{Binding ChangeRarityCommand}"
+                      CommandParameter="天"
+                      IsChecked="{Binding CurrentRarity,
+                                          Converter={StaticResource rarityConverter},
+                                          ConverterParameter=UltraRare}"
+                      Tag="Q"
+                      Template="{StaticResource RarityButton}">
                 <Image Width="30"
                        Height="30"
                        Margin="2"
                        Source="Images/UltraRare.png" />
-            </RadioButton>
-            <RadioButton x:Name="superRare"
-                         Width="53"
-                         Margin="0"
-                         VerticalAlignment="Top"
-                         Command="{Binding ChangeRarityCommand}"
-                         CommandParameter="極"
-                         Tag="W"
-                         Template="{StaticResource RarityButton}">
+            </CheckBox>
+            <CheckBox x:Name="superRare"
+                      Width="53"
+                      Margin="0"
+                      VerticalAlignment="Top"
+                      Command="{Binding ChangeRarityCommand}"
+                      CommandParameter="極"
+                      IsChecked="{Binding CurrentRarity,
+                                          Converter={StaticResource rarityConverter},
+                                          ConverterParameter=SuperRare}"
+                      Tag="W"
+                      Template="{StaticResource RarityButton}">
                 <Image Width="30"
                        Height="30"
                        Margin="2"
                        Source="Images/SuperRare.png" />
-            </RadioButton>
-            <RadioButton x:Name="rare"
-                         Width="53"
-                         Margin="0"
-                         VerticalAlignment="Top"
-                         Command="{Binding ChangeRarityCommand}"
-                         CommandParameter="特"
-                         IsChecked="True"
-                         Tag="E"
-                         Template="{StaticResource RarityButton}">
+            </CheckBox>
+            <CheckBox x:Name="rare"
+                      Width="53"
+                      Margin="0"
+                      VerticalAlignment="Top"
+                      Command="{Binding ChangeRarityCommand}"
+                      CommandParameter="特"
+                      IsChecked="{Binding CurrentRarity,
+                                          Converter={StaticResource rarityConverter},
+                                          ConverterParameter=Rare}"
+                      Tag="E"
+                      Template="{StaticResource RarityButton}">
                 <Image Width="30"
                        Height="30"
                        Margin="2"
                        Source="Images/Rare.png" />
-            </RadioButton>
-            <RadioButton x:Name="uncommon"
-                         Width="53"
-                         Margin="0"
-                         VerticalAlignment="Top"
-                         Command="{Binding ChangeRarityCommand}"
-                         CommandParameter="上"
-                         Tag="R"
-                         Template="{StaticResource RarityButton}">
+            </CheckBox>
+            <CheckBox x:Name="uncommon"
+                      Width="53"
+                      Margin="0"
+                      VerticalAlignment="Top"
+                      Command="{Binding ChangeRarityCommand}"
+                      CommandParameter="上"
+                      IsChecked="{Binding CurrentRarity,
+                                          Converter={StaticResource rarityConverter},
+                                          ConverterParameter=Uncommon}"
+                      Tag="R"
+                      Template="{StaticResource RarityButton}">
                 <Image Width="30"
                        Height="30"
                        Margin="2"
                        Source="Images/Uncommon.png" />
 
-            </RadioButton>
-            <RadioButton x:Name="common"
-                         Width="53"
-                         Margin="0"
-                         VerticalAlignment="Top"
-                         Command="{Binding ChangeRarityCommand}"
-                         CommandParameter="序"
-                         Tag="T"
-                         Template="{StaticResource RarityButton}">
+            </CheckBox>
+            <CheckBox x:Name="common"
+                      Width="53"
+                      Margin="0"
+                      VerticalAlignment="Top"
+                      Command="{Binding ChangeRarityCommand}"
+                      CommandParameter="序"
+                      IsChecked="{Binding CurrentRarity,
+                                          Converter={StaticResource rarityConverter},
+                                          ConverterParameter=Common}"
+                      Tag="T"
+                      Template="{StaticResource RarityButton}">
 
                 <Image Width="30"
                        Height="30"
                        Margin="2"
                        Source="Images/Common.png" />
-            </RadioButton>
+            </CheckBox>
         </StackPanel>
         <StackPanel x:Name="soldierType"
                     Width="Auto"
@@ -494,122 +511,152 @@
                     VerticalAlignment="Top"
                     Background="#FF2F2F2F"
                     Orientation="Horizontal">
-            <RadioButton x:Name="SpearButton"
+            <CheckBox x:Name="SpearButton"
                          ClickMode="Press"
                          Command="{Binding ChangeSoldierCommand}"
                          CommandParameter="Spear"
+                         IsChecked="{Binding MainDeck.CurrentSoldierType,
+                                             Converter={StaticResource soldierConverter},
+                                             ConverterParameter=Spear}"
                          Tag="1"
                          Template="{StaticResource ShortCutButton}">
                 <Image Width="40"
                        Height="40"
                        Margin="2"
                        Source="Images/Spear.png" />
-            </RadioButton>
-            <RadioButton x:Name="LongSpearButton"
+            </CheckBox>
+            <CheckBox x:Name="LongSpearButton"
                          ClickMode="Press"
                          Command="{Binding ChangeSoldierCommand}"
                          CommandParameter="LongSpear"
+                         IsChecked="{Binding MainDeck.CurrentSoldierType,
+                                             Converter={StaticResource soldierConverter},
+                                             ConverterParameter=LongSpear}"
                          Tag="2"
                          Template="{StaticResource ShortCutButton}">
                 <Image Width="40"
                        Height="40"
                        Margin="2"
                        Source="Images/LongSpear.png" />
-            </RadioButton>
-            <RadioButton x:Name="SamuraiButton"
+            </CheckBox>
+            <CheckBox x:Name="SamuraiButton"
                          ClickMode="Press"
                          Command="{Binding ChangeSoldierCommand}"
                          CommandParameter="Samurai"
+                         IsChecked="{Binding MainDeck.CurrentSoldierType,
+                                             Converter={StaticResource soldierConverter},
+                                             ConverterParameter=Samurai}"
                          Tag="3"
                          Template="{StaticResource ShortCutButton}">
                 <Image Width="40"
                        Height="40"
                        Margin="2"
                        Source="Images/Samurai.png" />
-            </RadioButton>
-            <RadioButton ClickMode="Press"
+            </CheckBox>
+            <CheckBox ClickMode="Press"
                          Command="{Binding ChangeSoldierCommand}"
                          CommandParameter="Bow"
-                         IsChecked="{Binding IsChecked[Bow]}"
+                         IsChecked="{Binding MainDeck.CurrentSoldierType,
+                                             Converter={StaticResource soldierConverter},
+                                             ConverterParameter=Bow}"
                          Tag="4"
                          Template="{StaticResource ShortCutButton}">
                 <Image Width="40"
                        Height="40"
                        Margin="2"
                        Source="Images/Bow.png" />
-            </RadioButton>
-            <RadioButton ClickMode="Press"
+            </CheckBox>
+            <CheckBox ClickMode="Press"
                          Command="{Binding ChangeSoldierCommand}"
                          CommandParameter="LongBow"
-                         IsChecked="{Binding IsChecked[LongBow]}"
+                         IsChecked="{Binding MainDeck.CurrentSoldierType,
+                                             Converter={StaticResource soldierConverter},
+                                             ConverterParameter=LongBow}"
                          Tag="5"
                          Template="{StaticResource ShortCutButton}">
                 <Image Width="40"
                        Height="40"
                        Margin="2"
                        Source="Images/LongBow.png" />
-            </RadioButton>
-            <RadioButton ClickMode="Press"
+            </CheckBox>
+            <CheckBox ClickMode="Press"
                          Command="{Binding ChangeSoldierCommand}"
                          CommandParameter="MountArcher"
+                         IsChecked="{Binding MainDeck.CurrentSoldierType,
+                                             Converter={StaticResource soldierConverter},
+                                             ConverterParameter=MountArcher}"
                          Tag="6"
                          Template="{StaticResource ShortCutButton}">
                 <Image Width="40"
                        Height="40"
                        Margin="2"
                        Source="Images/MountArcher.png" />
-            </RadioButton>
-            <RadioButton ClickMode="Press"
+            </CheckBox>
+            <CheckBox ClickMode="Press"
                          Command="{Binding ChangeSoldierCommand}"
                          CommandParameter="Horse"
+                         IsChecked="{Binding MainDeck.CurrentSoldierType,
+                                             Converter={StaticResource soldierConverter},
+                                             ConverterParameter=Horse}"
                          Tag="7"
                          Template="{StaticResource ShortCutButton}">
                 <Image Width="40"
                        Height="40"
                        Margin="2"
                        Source="Images/Horse.png" />
-            </RadioButton>
-            <RadioButton ClickMode="Press"
+            </CheckBox>
+            <CheckBox ClickMode="Press"
                          Command="{Binding ChangeSoldierCommand}"
                          CommandParameter="EliteHorse"
-                         IsChecked="{Binding IsChecked[EliteHorse]}"
+                         IsChecked="{Binding MainDeck.CurrentSoldierType,
+                                             Converter={StaticResource soldierConverter},
+                                             ConverterParameter=EliteHorse}"
                          Tag="8"
                          Template="{StaticResource ShortCutButton}">
                 <Image Width="40"
                        Height="40"
                        Margin="2"
                        Source="Images/EliteHorse.png" />
-            </RadioButton>
-            <RadioButton ClickMode="Press"
+            </CheckBox>
+            <CheckBox ClickMode="Press"
                          Command="{Binding ChangeSoldierCommand}"
                          CommandParameter="RedArms"
+                         IsChecked="{Binding MainDeck.CurrentSoldierType,
+                                             Converter={StaticResource soldierConverter},
+                                             ConverterParameter=RedArms}"
                          Tag="9"
                          Template="{StaticResource ShortCutButton}">
                 <Image Width="40"
                        Height="40"
                        Margin="2"
                        Source="Images/RedArms.png" />
-            </RadioButton>
-            <RadioButton ClickMode="Press"
+            </CheckBox>
+            <CheckBox ClickMode="Press"
                          Command="{Binding ChangeSoldierCommand}"
                          CommandParameter="Gun"
+                         IsChecked="{Binding MainDeck.CurrentSoldierType,
+                                             Converter={StaticResource soldierConverter},
+                                             ConverterParameter=Gun}"
                          Tag="0"
                          Template="{StaticResource ShortCutButton}">
                 <Image Width="40"
                        Height="40"
                        Margin="2"
                        Source="Images/Gun.png" />
-            </RadioButton>
-            <RadioButton ClickMode="Press"
+            </CheckBox>
+            <CheckBox ClickMode="Press"
                          Command="{Binding ChangeSoldierCommand}"
                          CommandParameter="Dragoon"
+                         IsChecked="{Binding MainDeck.CurrentSoldierType,
+                                             Converter={StaticResource soldierConverter},
+                                             ConverterParameter=Dragoon}"
                          Tag="P"
                          Template="{StaticResource ShortCutButton}">
                 <Image Width="40"
                        Height="40"
                        Margin="2"
                        Source="Images/Dragoon.png" />
-            </RadioButton>
+            </CheckBox>
         </StackPanel>
         <Border Name="border1"
                 Width="70"
@@ -621,7 +668,7 @@
                 BorderThickness="1">
             <TextBlock Name="textBlock2"
                        Margin="0"
-                       Text="DEL 削除    H ヘルプ      S サウンド"
+                       Text="Enter 追加&#13;DEL 削除&#13;H ヘルプ&#13;S サウンド"
                        TextWrapping="Wrap" />
         </Border>
         <Grid x:Name="helpLayer"
@@ -747,9 +794,9 @@
         <MediaElement x:Name="selchange_mp3"
                       Width="0"
                       Height="0"
-                      AutoPlay="False"
                       HorizontalAlignment="Left"
                       VerticalAlignment="Top"
+                      AutoPlay="False"
                       Source="/Sounds/selchange.mp3"
                       Stretch="Fill" />
         <CheckBox x:Name="isSoundButton"

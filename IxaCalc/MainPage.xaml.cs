@@ -107,7 +107,10 @@
 
         public void ResetBushoListSelection()
         {
-            this.bushoList.SelectedIndex = 0;
+            if (this.bushoList.Items.Count > 0)
+            {
+                this.bushoList.SelectedIndex = 0;
+            }
         }
 
     }

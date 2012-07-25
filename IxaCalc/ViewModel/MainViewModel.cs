@@ -32,6 +32,8 @@ namespace IxaCalc.ViewModel
         /// </summary>
         private readonly IDataService _dataService;
 
+        private RarityRank _currentRarity;
+
         /// <summary>
         /// すべての武将リスト
         /// </summary>
@@ -135,8 +137,8 @@ namespace IxaCalc.ViewModel
 
         public void Execute(string raritystr)
         {
-            var rarity = RankDictionary.rarity[raritystr];
-            var list1 = from p in _allBushoList where p.Rarity == rarity orderby p.Id select p;
+            CurrentRarity = RankDictionary.rarity[raritystr];
+            var list1 = from p in _allBushoList where p.Rarity == CurrentRarity orderby p.Id select p;
             BushoList = new ObservableCollection<Busho>(list1);
             MessengerInstance.Send(new DialogMessage("busholist", result => { }));
         }
@@ -183,8 +185,31 @@ namespace IxaCalc.ViewModel
 
             set
             {
-                _soldierTypes = value;
-                RaisePropertyChanged("SoldierTypes");
+                if (_soldierTypes != value)
+                {
+                    _soldierTypes = value;
+                    RaisePropertyChanged("SoldierTypes");
+                }
+            }
+        }
+
+        /// <summary>
+        /// デッキに入った3番目の武将
+        /// </summary>
+        public RarityRank CurrentRarity
+        {
+            get
+            {
+                return _currentRarity;
+            }
+
+            set
+            {
+                if (_currentRarity != value)
+                {
+                    _currentRarity = value;
+                    RaisePropertyChanged("CurrentRarity");
+                }
             }
         }
 
