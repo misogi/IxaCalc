@@ -298,7 +298,6 @@
             var type = CurrentSoldierType;
             if (CurrentSoldierType != null)
             {
-                int i = 0;
                 foreach (var decked in DeckedBushos)
                 {
                     soldier += decked.OriginBusho.SoldierNumber;

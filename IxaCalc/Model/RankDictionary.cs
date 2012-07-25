@@ -31,6 +31,8 @@
                 var bmp = new BitmapImage(uri);
                 leadershipImage[r.Value] = bmp;
             }
+
+            leadershipImage[LeadershipRank.Nothing] = null;
         }
 
         public static Dictionary<string, LeadershipRank> rank = new Dictionary<string, LeadershipRank>

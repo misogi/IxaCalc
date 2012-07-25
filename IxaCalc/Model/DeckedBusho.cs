@@ -34,6 +34,10 @@ namespace IxaCalc.Model
 
         private int _rank;
 
+        private LeadershipRank _actualLeadership1;
+
+        private LeadershipRank _actualLeadership2;
+
         private double _actualLeadershipAttack;
 
         private double _perCostAttack;
@@ -94,38 +98,56 @@ namespace IxaCalc.Model
             if (type == SoldierTypes.Spear || type == SoldierTypes.LongSpear)
             {
                 percentage = RankToPercentage(busho.Lance) + (Rank * 0.05);
+                ActualLeadershipFirst = AddRankLeadership(busho.Lance, Rank);
+                ActualLeadershipSecond = LeadershipRank.Nothing;
             }
             else if (type == SoldierTypes.Bow || type == SoldierTypes.LongBow)
             {
                 percentage = RankToPercentage(busho.Bow) + (Rank * 0.05);
+                ActualLeadershipFirst = AddRankLeadership(busho.Bow, Rank);
+                ActualLeadershipSecond = LeadershipRank.Nothing;
             }
             else if (type == SoldierTypes.Horse || type == SoldierTypes.EliteHorse)
             {
                 percentage = RankToPercentage(busho.Horse) + (Rank * 0.05);
+                ActualLeadershipFirst = AddRankLeadership(busho.Horse, Rank);
+                ActualLeadershipSecond = LeadershipRank.Nothing;
             }
             else if (type == SoldierTypes.Hammer)
             {
                 percentage = RankToPercentage(busho.Weapon) + (Rank * 0.05);
+                ActualLeadershipFirst = AddRankLeadership(busho.Weapon, Rank);
+                ActualLeadershipSecond = LeadershipRank.Nothing;
             }
             else if (type == SoldierTypes.MountArcher)
             {
                 percentage = (RankToPercentage(busho.Horse) + RankToPercentage(busho.Bow) + (Rank * 0.05)) / 2;
+                ActualLeadershipFirst = AddRankLeadership(busho.Bow, Rank);
+                ActualLeadershipSecond = busho.Horse;
             }
             else if (type == SoldierTypes.RedArms)
             {
                 percentage = (RankToPercentage(busho.Horse) + RankToPercentage(busho.Lance) + (Rank * 0.05)) / 2;
+                ActualLeadershipFirst = AddRankLeadership(busho.Horse, Rank);
+                ActualLeadershipSecond = busho.Lance;
             }
             else if (type == SoldierTypes.Samurai)
             {
                 percentage = (RankToPercentage(busho.Bow) + RankToPercentage(busho.Lance) + (Rank * 0.05)) / 2;
+                ActualLeadershipFirst = AddRankLeadership(busho.Lance, Rank);
+                ActualLeadershipSecond = busho.Bow;
             }
             else if (type == SoldierTypes.Gun)
             {
                 percentage = (RankToPercentage(busho.Weapon) + RankToPercentage(busho.Lance) + (Rank * 0.05)) / 2;
+                ActualLeadershipFirst = AddRankLeadership(busho.Weapon, Rank);
+                ActualLeadershipSecond = busho.Lance;
             }
             else if (type == SoldierTypes.Dragoon)
             {
                 percentage = (RankToPercentage(busho.Weapon) + RankToPercentage(busho.Horse) + (Rank * 0.05)) / 2;
+                ActualLeadershipFirst = AddRankLeadership(busho.Weapon, Rank);
+                ActualLeadershipSecond = busho.Horse;
             }
 
             if (percentage >= 1.20)
@@ -134,6 +156,12 @@ namespace IxaCalc.Model
             }
 
             return percentage;
+        }
+
+        private LeadershipRank AddRankLeadership(LeadershipRank rank, int up)
+        {
+            int upedRank = (int)rank + up;
+            return (LeadershipRank)upedRank > LeadershipRank.SSS ? LeadershipRank.SSS : (LeadershipRank)upedRank;
         }
 
         public void RankUp()
@@ -304,6 +332,40 @@ namespace IxaCalc.Model
                 {
                     _actualAttack = value;
                     OnPropertyChanged("ActualAttack");
+                }
+            }
+        }
+
+        public LeadershipRank ActualLeadershipFirst
+        {
+            get
+            {
+                return _actualLeadership1;
+            }
+            set
+            {
+
+                if (_actualLeadership1 != value)
+                {
+                    _actualLeadership1 = value;
+                    OnPropertyChanged("ActualLeadershipFirst");
+                }
+            }
+        }
+
+        public LeadershipRank ActualLeadershipSecond
+        {
+            get
+            {
+                return _actualLeadership2;
+            }
+            set
+            {
+
+                if (_actualLeadership2 != value)
+                {
+                    _actualLeadership2 = value;
+                    OnPropertyChanged("ActualLeadershipSecond");
                 }
             }
         }
