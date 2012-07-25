@@ -33,6 +33,7 @@
 									<CircleEase EasingMode="EaseOut"/>
 								</DoubleAnimation.EasingFunction>
 							</DoubleAnimation>
+							<ColorAnimation Duration="0" To="#A2B40000" Storyboard.TargetProperty="(Border.Background).(SolidColorBrush.Color)" Storyboard.TargetName="border1" d:IsOptimized="True"/>
 						</Storyboard>
 					</VisualState>
 					<VisualState x:Name="Unchecked"/>
@@ -54,7 +55,7 @@
 					<ei:ExtendedVisualStateManager/>
 				</VisualStateManager.CustomVisualStateManager>
 			</ContentPresenter>
-                <Border Background="#A2000000" Opacity="0.99" Width="16" Height="16" HorizontalAlignment="Left" VerticalAlignment="Top" >
+                <Border x:Name="border1" Background="#A2000000" Opacity="0.99" Width="16" Height="16" HorizontalAlignment="Left" VerticalAlignment="Top" >
             			<TextBlock Text="{TemplateBinding Tag}" TextAlignment="Center" VerticalAlignment="Center" Foreground="White" />
             	</Border>
 		</Grid>
@@ -89,6 +90,7 @@
 						<Storyboard>
 							<DoubleAnimation Duration="0" To="1.3" Storyboard.TargetProperty="(UIElement.RenderTransform).(CompositeTransform.ScaleX)" Storyboard.TargetName="contentPresenter" d:IsOptimized="True"/>
 							<DoubleAnimation Duration="0" To="1.3" Storyboard.TargetProperty="(UIElement.RenderTransform).(CompositeTransform.ScaleY)" Storyboard.TargetName="contentPresenter" d:IsOptimized="True"/>
+							<ColorAnimation Duration="0" To="#A2C41C1C" Storyboard.TargetProperty="(Border.Background).(SolidColorBrush.Color)" Storyboard.TargetName="border" d:IsOptimized="True"/>
 						</Storyboard>
 					</VisualState>
 					<VisualState x:Name="Unchecked"/>
@@ -109,7 +111,7 @@
 					<ei:ExtendedVisualStateManager/>
 				</VisualStateManager.CustomVisualStateManager>
             </ContentPresenter>
-            <Border Background="#A2000000" Opacity="0.99" Width="16" Height="16" HorizontalAlignment="Left" VerticalAlignment="Top" >
+            <Border x:Name="border" Background="#A2000000" Opacity="0.99" Width="16" Height="16" HorizontalAlignment="Left" VerticalAlignment="Top" >
                 <TextBlock Text="{TemplateBinding Tag}" TextAlignment="Center" VerticalAlignment="Center" Foreground="White" />
             </Border>
         </Grid>

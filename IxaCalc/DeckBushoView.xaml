@@ -56,7 +56,7 @@
                            Foreground="#FFB7B7B7"
                            Text="{Binding OriginBusho.Id}" />
             </StackPanel>
-            <StackPanel Width="100"
+            <StackPanel Width="85"
                         Margin="12,5,0,5"
                         d:LayoutOverrides="Height">
                 <StackPanel Orientation="Horizontal">
@@ -85,18 +85,20 @@
                            Source="Images/SoldierNumber.png" />
                     <TextBlock Text="{Binding OriginBusho.SoldierNumber}" />
                 </StackPanel>
-                <StackPanel Orientation="Horizontal">
-                    <TextBlock HorizontalAlignment="Left"
-                               VerticalAlignment="Center"
-                               FontSize="10"
-                               Text="統率 " />
-                    <Image Width="18" Height="18" VerticalAlignment="Center" Source="{Binding ActualLeadershipFirst, Converter={StaticResource leadershipConverter}}" />
-                    <Image Width="18" Height="18" VerticalAlignment="Center" Source="{Binding ActualLeadershipSecond, Converter={StaticResource leadershipConverter}}" />
-                </StackPanel>
-                <StackPanel Orientation="Horizontal">
-                <TextBlock Margin="15,0,0,0" Text="×" />
-                    <TextBlock Margin="0,0,0,0" Text="{Binding Percent}" />
-                </StackPanel>
+            </StackPanel>
+            <StackPanel VerticalAlignment="Top" Width="70" Margin="0,8,0,0">
+            	<StackPanel Orientation="Horizontal" Width="100" d:LayoutOverrides="Height">
+            		<TextBlock HorizontalAlignment="Left"
+            			VerticalAlignment="Center"
+            			FontSize="10"
+            			Text="統率 " />
+            		<Image Width="18" Height="18" VerticalAlignment="Center" Source="{Binding ActualLeadershipFirst, Converter={StaticResource leadershipConverter}}" />
+            		<Image Width="18" Height="18" VerticalAlignment="Center" Source="{Binding ActualLeadershipSecond, Converter={StaticResource leadershipConverter}}" />
+            	</StackPanel>
+            	<StackPanel Orientation="Horizontal" Width="100" Margin="0" d:LayoutOverrides="Height">
+            		<TextBlock Margin="0" Text="×" />
+            		<TextBlock Margin="0,0,0,0" Text="{Binding Percent}" />
+            	</StackPanel>
             </StackPanel>
             <StackPanel Width="110"
                         Margin="7"
