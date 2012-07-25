@@ -88,6 +88,7 @@
     <Compile Include="App.xaml.cs">
       <DependentUpon>App.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Converters\LeadershipToImageConverter.cs" />
     <Compile Include="Converters\RarityToBrushConverter.cs" />
     <Compile Include="Converters\RarityToCheckedConverter.cs" />
     <Compile Include="Converters\SoldierTypeToCheckedConverter.cs" />
@@ -555,6 +556,15 @@
     <Resource Include="Images\4072.jpg" />
   </ItemGroup>
   <ItemGroup>
+    <Resource Include="Images\Leadership\A.png" />
+    <Resource Include="Images\Leadership\B.png" />
+    <Resource Include="Images\Leadership\C.png" />
+    <Resource Include="Images\Leadership\D.png" />
+    <Resource Include="Images\Leadership\E.png" />
+    <Resource Include="Images\Leadership\F.png" />
+    <Resource Include="Images\Leadership\S.png" />
+    <Resource Include="Images\Leadership\SS.png" />
+    <Resource Include="Images\Leadership\SSS.png" />
     <Content Include="Sounds\cancel.mp3">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>

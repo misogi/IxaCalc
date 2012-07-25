@@ -1,8 +1,9 @@
-﻿using System.Windows.Data;
+﻿
 
 namespace IxaCalc.Converters
 {
     using System;
+    using System.Windows.Data;
     using System.Windows.Media;
     using System.Globalization;
     using IxaCalc.Enums;

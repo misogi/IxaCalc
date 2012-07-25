@@ -12,7 +12,8 @@
 
         static RankDictionary()
         {
-            rarityImage = new Dictionary<RarityRank,ImageSource>();
+            rarityImage = new Dictionary<RarityRank, ImageSource>();
+            leadershipImage = new Dictionary<LeadershipRank, ImageSource>();
             var strs = new string[]{"Common", "Uncommon", "Rare", "SuperRare", "UltraRare"};
             foreach(var str in strs)
             {
@@ -21,6 +22,14 @@
                 var bmp = new BitmapImage(uri);
                 var type = (RarityRank)Enum.Parse(typeof(RarityRank), str, false);
                 rarityImage[type] = bmp;
+            }
+
+            foreach (KeyValuePair<string, LeadershipRank> r in rank)
+            {
+                var urlstr = string.Format("Images/Leadership/{0}.png", r.Value.ToString());
+                var uri = new Uri(urlstr, UriKind.Relative);
+                var bmp = new BitmapImage(uri);
+                leadershipImage[r.Value] = bmp;
             }
         }
 
@@ -63,5 +72,7 @@
             };
 
         public static Dictionary<RarityRank, ImageSource> rarityImage;
+
+        public static Dictionary<LeadershipRank, ImageSource> leadershipImage;
     }
 }

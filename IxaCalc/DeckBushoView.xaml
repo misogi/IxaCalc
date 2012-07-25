@@ -13,6 +13,7 @@
                 <ResourceDictionary Source="Skins/MainSkin.xaml" />
             </ResourceDictionary.MergedDictionaries>
             <myc:RarityToBrushConverter x:Key="brushConverter" />
+            <myc:LeadershipToImageConverter x:Key="leadershipConverter" />
             <Style TargetType="TextBlock">
                 <Setter Property="Foreground" Value="White" />
             </Style>
@@ -22,162 +23,184 @@
           Margin="5"
           Background="{Binding OriginBusho.Rarity,
                                Converter={StaticResource brushConverter}}">
-    	<StackPanel Margin="0"
-    		Orientation="Horizontal"
-    		d:LayoutOverrides="Width">
-    		<Image Width="71"
-    			Height="100"
-    			Margin="0"
-    			Source="{Binding OriginBusho.Image}" />
-    		<StackPanel Width="100"
-    			Margin="12,5,0,5"
-    			VerticalAlignment="Top"
-    			Orientation="Vertical">
+        <StackPanel Margin="0"
+                    Orientation="Horizontal"
+                    d:LayoutOverrides="Width">
+            <Image Width="71"
+                   Height="100"
+                   Margin="0"
+                   Source="{Binding OriginBusho.Image}" />
+            <StackPanel Width="100"
+                        Margin="12,5,0,5"
+                        VerticalAlignment="Top"
+                        Orientation="Vertical">
                 <TextBlock HorizontalAlignment="Left"
-    				FontSize="16"
-    				Foreground="#FF96FFFF"
-    				Text="{Binding OriginBusho.Name}" />
-    			<StackPanel Orientation="Horizontal">
-    				<Image Width="20"
-    					Height="20"
-    					Source="{Binding RarityImage}" />
-    				<TextBlock HorizontalAlignment="Left" Text="{Binding OriginBusho.Cost}" Margin="6,0,0,0" VerticalAlignment="Center" />
-    			</StackPanel>
-    			<StackPanel Orientation="Horizontal">
-    				<TextBlock HorizontalAlignment="Left" Text="Lv.20 ★" />
-    				<TextBlock HorizontalAlignment="Left" Text="{Binding Rank}" />
+                           FontSize="16"
+                           Foreground="#FF96FFFF"
+                           Text="{Binding OriginBusho.Name}" />
+                <StackPanel Orientation="Horizontal">
+                    <Image Width="20"
+                           Height="20"
+                           Source="{Binding RarityImage}" />
+                    <TextBlock Margin="6,0,0,0"
+                               HorizontalAlignment="Left"
+                               VerticalAlignment="Center"
+                               Text="{Binding OriginBusho.Cost}" />
+                </StackPanel>
+                <StackPanel Orientation="Horizontal">
+                    <TextBlock HorizontalAlignment="Left" Text="Lv.20 ★" />
+                    <TextBlock HorizontalAlignment="Left" Text="{Binding Rank}" />
                 </StackPanel>
                 <TextBlock HorizontalAlignment="Left"
-    				FontSize="8"
-    				Text="{Binding OriginBusho.Id}" Foreground="#FFB7B7B7" />
+                           FontSize="8"
+                           Foreground="#FFB7B7B7"
+                           Text="{Binding OriginBusho.Id}" />
             </StackPanel>
-    		<StackPanel Width="110"
-    			Margin="12,5,0,5"
-    			d:LayoutOverrides="Height">
-    			<StackPanel Orientation="Horizontal">
-    				<Image Width="18"
-    					Height="18"
-    					Source="Images/LeadershipSpear.png" />
-    				<TextBlock Text="{Binding OriginBusho.Lance}" />
-    				<Image Width="18"
-    					Height="18"
-    					Source="Images/LeadershipBow.png" />
-    				<TextBlock Text="{Binding OriginBusho.Bow}" />
-    				<Image Width="18"
-    					Height="18"
-    					Source="Images/LeadershipHorse.png" />
-    				<TextBlock Text="{Binding OriginBusho.Horse}" />
-    				<Image Width="18"
-    					Height="18"
-    					Source="Images/LeadershipWeapon.png" />
-    				<TextBlock Text="{Binding OriginBusho.Weapon}" />
-    			</StackPanel>
-    			<StackPanel Orientation="Horizontal">
-    				<Image Width="18"
-    					Height="18"
-    					Source="Images/SoldierNumber.png" />
-    				<TextBlock Text="{Binding OriginBusho.SoldierNumber}" />
-    			</StackPanel>
-    			<StackPanel Orientation="Horizontal">
-    				<TextBlock HorizontalAlignment="Left"
-    					FontSize="10"
-    					Text="統率力 " />
-    				<TextBlock Text="{Binding Percent}" />
-    			</StackPanel>
-    		</StackPanel>
-    		<StackPanel Width="110"
-    			Margin="7"
-    			VerticalAlignment="Top">
-    			<Grid Height="20">
-    				<Image Width="16"
-    					Height="16"
-    					Margin="2,2,0,2"
-    					Source="Images/Attack.png" HorizontalAlignment="Left" />
-    				<TextBlock Text="{Binding BushoAttack}" HorizontalAlignment="Right" TextAlignment="Right" VerticalAlignment="Center" />
-    			</Grid>
-    			<Grid>
-    				<TextBlock HorizontalAlignment="Left"
-    					FontSize="10"
-    					Text="実指揮 " />
-    				<TextBlock Text="{Binding ActualLeadershipAttack, StringFormat=\{0:F1\}}" TextAlignment="Right" />
-    			</Grid>
-    			<Grid>
-    				<TextBlock HorizontalAlignment="Left"
-    					FontSize="10"
-    					Text="コス比 " />
-    				<TextBlock Text="{Binding PerCostAttack, StringFormat=\{0:F1\}}" TextAlignment="Right" />
-    			</Grid>
-    			<Grid>
-    				<TextBlock HorizontalAlignment="Left"
-    					FontSize="10"
-    					Text="総攻撃 " />
-    				<TextBlock Text="{Binding ActualAttack, StringFormat=\{0:F1\}}" TextAlignment="Right" />
-    			</Grid>
-    			<Grid Height="7" Background="#FF2B2B2B">
-    				<Border BorderThickness="1" HorizontalAlignment="Right" x:Name="border1" RenderTransformOrigin="1,0.5" Width="110" >
-    					<Border.Background>
-    						<LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
-    							<GradientStop Color="#FFFF7C7C" Offset="0"/>
-    							<GradientStop Color="#FFF53F3F" Offset="1"/>
-    							<GradientStop Color="#FF370000" Offset="0.474"/>
-    							<GradientStop Color="#FFFF3D3D" Offset="0.526"/>
-    						</LinearGradientBrush>
-    					</Border.Background>
-    					<Border.RenderTransform>
-    						<CompositeTransform ScaleX="{Binding ActualAttackBar}"/>
-    					</Border.RenderTransform>
-    				</Border>
-    			</Grid>
-    		</StackPanel>
-    		<StackPanel Width="110"
-    			Margin="7,7,7,0"
-    			VerticalAlignment="Top">
-    			<Grid>
-    				<Image Width="16"
-    					Height="16"
-    					Margin="2"
-    					HorizontalAlignment="Left"
-    					Source="Images/Defence.png" />
-    				<TextBlock Text="{Binding BushoDefence}" TextAlignment="Right" VerticalAlignment="Center" />
-    			</Grid>
-    			<Grid>
-    				<TextBlock HorizontalAlignment="Left"
-    					FontSize="10"
-    					Text="実指揮 " />
-    				<TextBlock Text="{Binding ActualLeadershipDefence, StringFormat=\{0:F1\}}" TextAlignment="Right" />
-    			</Grid>
-    			<Grid>
-    				<TextBlock HorizontalAlignment="Left"
-    					FontSize="10"
-    					Text="指揮C比 " />
-    				<TextBlock Text="{Binding PerCostDefence, StringFormat=\{0:F1\}}" TextAlignment="Right" />
-                </Grid>
-                <Grid>
-    				<TextBlock HorizontalAlignment="Left"
-    					FontSize="10"
-    					Text="総防御 " />
-    				<TextBlock Text="{Binding ActualDefence, StringFormat=\{0:F1\}}" TextAlignment="Right" />
+            <StackPanel Width="110"
+                        Margin="12,5,0,5"
+                        d:LayoutOverrides="Height">
+                <StackPanel Orientation="Horizontal">
+                    <Image Width="18"
+                           Height="18"
+                           Source="Images/LeadershipSpear.png" />
+                    <Image  Width="18" Height="18" Source="{Binding OriginBusho.Lance, Converter={StaticResource leadershipConverter}}" />
+                    <Image Width="18"
+                           Height="18"
+                           Source="Images/LeadershipHorse.png" />
+                    <Image Width="18" Height="18"  Source="{Binding OriginBusho.Horse, Converter={StaticResource leadershipConverter}}" />
+                </StackPanel>
+                <StackPanel Orientation="Horizontal">
+                    <Image Width="18"
+                           Height="18"
+                           Source="Images/LeadershipBow.png" />
+                    <Image Width="18" Height="18"  Source="{Binding OriginBusho.Bow, Converter={StaticResource leadershipConverter}}" />
+                    <Image Width="18"
+                           Height="18"
+                           Source="Images/LeadershipWeapon.png" />
+                    <Image Width="18" Height="18"  Source="{Binding OriginBusho.Weapon, Converter={StaticResource leadershipConverter}}" />
+                </StackPanel>
+                <StackPanel Orientation="Horizontal">
+                    <Image Width="18"
+                           Height="18"
+                           Source="Images/SoldierNumber.png" />
+                    <TextBlock Text="{Binding OriginBusho.SoldierNumber}" />
+                </StackPanel>
+                <StackPanel Orientation="Horizontal">
+                    <TextBlock HorizontalAlignment="Left"
+                               FontSize="10"
+                               Text="統率力 " />
+                    <TextBlock Text="{Binding Percent}" />
+                </StackPanel>
+            </StackPanel>
+            <StackPanel Width="110"
+                        Margin="7"
+                        VerticalAlignment="Top">
+                <Grid Height="20">
+                    <Image Width="16"
+                           Height="16"
+                           Margin="2,2,0,2"
+                           HorizontalAlignment="Left"
+                           Source="Images/Attack.png" />
+                    <TextBlock HorizontalAlignment="Right"
+                               VerticalAlignment="Center"
+                               Text="{Binding BushoAttack}"
+                               TextAlignment="Right" />
                 </Grid>
                 <Grid>
                     <TextBlock HorizontalAlignment="Left"
-    					FontSize="10"
-    					Text="防御C比 " />
-                    <TextBlock Text="{Binding ActualDefencePerCost, StringFormat=\{0:F1\}}" TextAlignment="Right" />
+                               FontSize="10"
+                               Text="実指揮 " />
+                    <TextBlock Text="{Binding ActualLeadershipAttack, StringFormat=\{0:F1\}}" TextAlignment="Right" />
                 </Grid>
-                <Grid Height="7" Background="#FF1B1B1B">
-                    <Border BorderThickness="1" Height="7" HorizontalAlignment="Right" x:Name="border2" VerticalAlignment="Top" RenderTransformOrigin="1,0.5" Width="110" >
+                <Grid>
+                    <TextBlock HorizontalAlignment="Left"
+                               FontSize="10"
+                               Text="コス比 " />
+                    <TextBlock Text="{Binding PerCostAttack, StringFormat=\{0:F1\}}" TextAlignment="Right" />
+                </Grid>
+                <Grid>
+                    <TextBlock HorizontalAlignment="Left"
+                               FontSize="10"
+                               Text="総攻撃 " />
+                    <TextBlock Text="{Binding ActualAttack, StringFormat=\{0:F1\}}" TextAlignment="Right" />
+                </Grid>
+                <Grid Height="7" Background="#FF2B2B2B">
+                    <Border x:Name="border1"
+                            Width="110"
+                            HorizontalAlignment="Right"
+                            BorderThickness="1"
+                            RenderTransformOrigin="1,0.5">
                         <Border.Background>
-                            <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
-                                <GradientStop Color="#FF294680" Offset="0"/>
-                                <GradientStop Color="#FF4E89FF" Offset="1"/>
+                            <LinearGradientBrush StartPoint="0.5,0" EndPoint="0.5,1">
+                                <GradientStop Offset="0" Color="#FFFF7C7C" />
+                                <GradientStop Offset="1" Color="#FFF53F3F" />
+                                <GradientStop Offset="0.474" Color="#FF370000" />
+                                <GradientStop Offset="0.526" Color="#FFFF3D3D" />
                             </LinearGradientBrush>
                         </Border.Background>
                         <Border.RenderTransform>
-                            <CompositeTransform ScaleX="{Binding ActualDefenceBar}"/>
+                            <CompositeTransform ScaleX="{Binding ActualAttackBar}" />
                         </Border.RenderTransform>
                     </Border>
                 </Grid>
             </StackPanel>
-    	</StackPanel>
+            <StackPanel Width="110"
+                        Margin="7,7,7,0"
+                        VerticalAlignment="Top">
+                <Grid>
+                    <Image Width="16"
+                           Height="16"
+                           Margin="2"
+                           HorizontalAlignment="Left"
+                           Source="Images/Defence.png" />
+                    <TextBlock VerticalAlignment="Center"
+                               Text="{Binding BushoDefence}"
+                               TextAlignment="Right" />
+                </Grid>
+                <Grid>
+                    <TextBlock HorizontalAlignment="Left"
+                               FontSize="10"
+                               Text="実指揮 " />
+                    <TextBlock Text="{Binding ActualLeadershipDefence, StringFormat=\{0:F1\}}" TextAlignment="Right" />
+                </Grid>
+                <Grid>
+                    <TextBlock HorizontalAlignment="Left"
+                               FontSize="10"
+                               Text="指揮C比 " />
+                    <TextBlock Text="{Binding PerCostDefence, StringFormat=\{0:F1\}}" TextAlignment="Right" />
+                </Grid>
+                <Grid>
+                    <TextBlock HorizontalAlignment="Left"
+                               FontSize="10"
+                               Text="総防御 " />
+                    <TextBlock Text="{Binding ActualDefence, StringFormat=\{0:F1\}}" TextAlignment="Right" />
+                </Grid>
+                <Grid>
+                    <TextBlock HorizontalAlignment="Left"
+                               FontSize="10"
+                               Text="防御C比 " />
+                    <TextBlock Text="{Binding ActualDefencePerCost, StringFormat=\{0:F1\}}" TextAlignment="Right" />
+                </Grid>
+                <Grid Height="7" Background="#FF1B1B1B">
+                    <Border x:Name="border2"
+                            Width="110"
+                            Height="7"
+                            HorizontalAlignment="Right"
+                            VerticalAlignment="Top"
+                            BorderThickness="1"
+                            RenderTransformOrigin="1,0.5">
+                        <Border.Background>
+                            <LinearGradientBrush StartPoint="0.5,0" EndPoint="0.5,1">
+                                <GradientStop Offset="0" Color="#FF294680" />
+                                <GradientStop Offset="1" Color="#FF4E89FF" />
+                            </LinearGradientBrush>
+                        </Border.Background>
+                        <Border.RenderTransform>
+                            <CompositeTransform ScaleX="{Binding ActualDefenceBar}" />
+                        </Border.RenderTransform>
+                    </Border>
+                </Grid>
+            </StackPanel>
+        </StackPanel>
     </Grid>
 </UserControl>
