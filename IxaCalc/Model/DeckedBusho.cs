@@ -113,11 +113,11 @@ namespace IxaCalc.Model
             }
             else if (type == SoldierTypes.RedArms)
             {
-                percentage = (RankToPercentage(busho.Bow) + RankToPercentage(busho.Lance) + (Rank * 0.05)) / 2;
+                percentage = (RankToPercentage(busho.Horse) + RankToPercentage(busho.Lance) + (Rank * 0.05)) / 2;
             }
             else if (type == SoldierTypes.Samurai)
             {
-                percentage = (RankToPercentage(busho.Horse) + RankToPercentage(busho.Lance) + (Rank * 0.05)) / 2;
+                percentage = (RankToPercentage(busho.Bow) + RankToPercentage(busho.Lance) + (Rank * 0.05)) / 2;
             }
             else if (type == SoldierTypes.Gun)
             {
