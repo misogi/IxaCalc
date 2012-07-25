@@ -107,9 +107,9 @@
                  VerticalAlignment="Top"
                  ItemsSource="{Binding BushoList}" Background="#FF272727" Foreground="White">
             <i:Interaction.Triggers>
-            	<i:EventTrigger EventName="SelectionChanged">
-            		<cmd:EventToCommand Command="{Binding SetDeckCommand}" CommandParameter="{Binding SelectedItem, ElementName=bushoList}" />
-            	</i:EventTrigger>
+                <ei:KeyTrigger Key="Enter">
+                    <cmd:EventToCommand Command="{Binding SetDeckCommand}" CommandParameter="{Binding SelectedItem, ElementName=bushoList}" />
+                </ei:KeyTrigger>
             </i:Interaction.Triggers>
             <ListBox.ItemTemplate>
                 <DataTemplate>
