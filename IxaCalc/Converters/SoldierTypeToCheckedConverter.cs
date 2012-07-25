@@ -23,9 +23,8 @@
 
         public object ConvertBack(object value, Type targetType, object parameter, CultureInfo culture)
         {
-
-            throw new NotImplementedException();
-
+            var soldierType = (SoldierTypes)Enum.Parse(typeof(SoldierTypes), (string)parameter, false);
+            return soldierType;
         }
     }
 }

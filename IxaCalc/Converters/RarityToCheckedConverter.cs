@@ -22,9 +22,8 @@
 
         public object ConvertBack(object value, Type targetType, object parameter, CultureInfo culture)
         {
-
-            throw new NotImplementedException();
-
+            var rarity = (RarityRank)Enum.Parse(typeof(RarityRank), (string)parameter, false);
+            return rarity;
         }
     }
 }
