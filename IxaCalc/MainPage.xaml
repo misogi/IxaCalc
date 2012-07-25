@@ -1,132 +1,190 @@
-﻿<UserControl
+﻿<UserControl x:Class="IxaCalc.MainPage"
              xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:cmd="clr-namespace:GalaSoft.MvvmLight.Command;assembly=GalaSoft.MvvmLight.Extras.SL5"
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+             xmlns:ei="http://schemas.microsoft.com/expression/2010/interactions"
              xmlns:i="http://schemas.microsoft.com/expression/2010/interactivity"
              xmlns:ignore="http://www.ignore.com"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
              xmlns:my="clr-namespace:IxaCalc"
              xmlns:mye="clr-namespace:IxaCalc.Enums"
-             xmlns:ei="http://schemas.microsoft.com/expression/2010/interactions" x:Name="userControl" x:Class="IxaCalc.MainPage"
+             x:Name="userControl"
              Width="900"
              Height="600"
-             mc:Ignorable="d ignore" >
+             mc:Ignorable="d ignore">
 
     <UserControl.Resources>
         <ResourceDictionary>
             <ResourceDictionary.MergedDictionaries>
                 <ResourceDictionary Source="Skins/MainSkin.xaml" />
             </ResourceDictionary.MergedDictionaries>
-			<Style TargetType="TextBlock">
-				<Setter Property="Foreground"  Value="White" />
-			</Style>
+            <Style TargetType="TextBlock">
+                <Setter Property="Foreground" Value="White" />
+            </Style>
         </ResourceDictionary>
     </UserControl.Resources>
-	<i:Interaction.Triggers>
-		<ei:KeyTrigger Key="H">
-			<ei:ChangePropertyAction TargetName="helpLayer" PropertyName="Visibility" >
-				<ei:ChangePropertyAction.Value>
-					<Visibility>Visible</Visibility>
-				</ei:ChangePropertyAction.Value>
-			</ei:ChangePropertyAction>
-		</ei:KeyTrigger>
-		<ei:KeyTrigger Key="Escape">
-			<ei:ChangePropertyAction TargetName="helpLayer" PropertyName="Visibility" >
-				<ei:ChangePropertyAction.Value>
-					<Visibility>Collapsed</Visibility>
-				</ei:ChangePropertyAction.Value>
-			</ei:ChangePropertyAction>
-		</ei:KeyTrigger>
-		<ei:KeyTrigger Key="D1">
-			<cmd:EventToCommand Command="{Binding ChangeSoldierCommand}" CommandParameter="Spear"/>
-		</ei:KeyTrigger>
-		<ei:KeyTrigger Key="D2">
-			<cmd:EventToCommand Command="{Binding ChangeSoldierCommand}" CommandParameter="LongSpear"/>
-		</ei:KeyTrigger>
-		<ei:KeyTrigger Key="D3">
-			<cmd:EventToCommand Command="{Binding ChangeSoldierCommand}" CommandParameter="Samurai"/>
-		</ei:KeyTrigger>
-		<ei:KeyTrigger Key="D4">
-			<cmd:EventToCommand Command="{Binding ChangeSoldierCommand}" CommandParameter="Bow"/>
-		</ei:KeyTrigger>
-		<ei:KeyTrigger Key="D5">
-			<cmd:EventToCommand Command="{Binding ChangeSoldierCommand}" CommandParameter="LongBow"/>
-		</ei:KeyTrigger>
-		<ei:KeyTrigger Key="D6">
-			<cmd:EventToCommand Command="{Binding ChangeSoldierCommand}" CommandParameter="MountArcher"/>
-		</ei:KeyTrigger>
-		<ei:KeyTrigger Key="D7">
-			<cmd:EventToCommand Command="{Binding ChangeSoldierCommand}" CommandParameter="Horse"/>
-		</ei:KeyTrigger>
-		<ei:KeyTrigger Key="D8">
-			<cmd:EventToCommand Command="{Binding ChangeSoldierCommand}" CommandParameter="EliteHorse"/>
-		</ei:KeyTrigger>
-		<ei:KeyTrigger Key="D9">
-			<cmd:EventToCommand Command="{Binding ChangeSoldierCommand}" CommandParameter="RedArms"/>
-		</ei:KeyTrigger>
-		<ei:KeyTrigger Key="D0">
-			<cmd:EventToCommand Command="{Binding ChangeSoldierCommand}" CommandParameter="Gun"/>
-		</ei:KeyTrigger>
-		<ei:KeyTrigger Key="P">
-			<cmd:EventToCommand Command="{Binding ChangeSoldierCommand}" CommandParameter="Dragoon"/>
-		</ei:KeyTrigger>
-		<ei:KeyTrigger Key="Delete">
-			<cmd:EventToCommand Command="{Binding RemoveDeckCommand}" />
-		</ei:KeyTrigger>
-		<ei:KeyTrigger Key="Q">
-			<cmd:EventToCommand Command="{Binding ChangeRarityCommand}" CommandParameter="天"/>
-		</ei:KeyTrigger>
-		<ei:KeyTrigger Key="W">
-			<cmd:EventToCommand Command="{Binding ChangeRarityCommand}" CommandParameter="極"/>
-		</ei:KeyTrigger>
-		<ei:KeyTrigger Key="E">
-			<cmd:EventToCommand Command="{Binding ChangeRarityCommand}" CommandParameter="特"/>
-		</ei:KeyTrigger>
-		<ei:KeyTrigger Key="R">
-			<cmd:EventToCommand Command="{Binding ChangeRarityCommand}" CommandParameter="上"/>
-		</ei:KeyTrigger>
-		<ei:KeyTrigger Key="T">
-			<cmd:EventToCommand Command="{Binding ChangeRarityCommand}" CommandParameter="序"/>
-		</ei:KeyTrigger>
-		<ei:KeyTrigger Key="S">
-			<ei:CallMethodAction MethodName="ToggleSoundButton"/>
-		</ei:KeyTrigger>
-	</i:Interaction.Triggers>
+    <i:Interaction.Triggers>
+        <ei:KeyTrigger Key="H">
+            <ei:ChangePropertyAction PropertyName="Visibility" TargetName="helpLayer">
+                <ei:ChangePropertyAction.Value>
+                    <Visibility>Visible</Visibility>
+                </ei:ChangePropertyAction.Value>
+            </ei:ChangePropertyAction>
+        </ei:KeyTrigger>
+        <ei:KeyTrigger Key="Escape">
+            <ei:ChangePropertyAction PropertyName="Visibility" TargetName="helpLayer">
+                <ei:ChangePropertyAction.Value>
+                    <Visibility>Collapsed</Visibility>
+                </ei:ChangePropertyAction.Value>
+            </ei:ChangePropertyAction>
+        </ei:KeyTrigger>
+        <ei:KeyTrigger Key="D1">
+            <cmd:EventToCommand Command="{Binding ChangeSoldierCommand}" CommandParameter="Spear" />
+        </ei:KeyTrigger>
+        <ei:KeyTrigger Key="D2">
+            <cmd:EventToCommand Command="{Binding ChangeSoldierCommand}" CommandParameter="LongSpear" />
+        </ei:KeyTrigger>
+        <ei:KeyTrigger Key="D3">
+            <cmd:EventToCommand Command="{Binding ChangeSoldierCommand}" CommandParameter="Samurai" />
+        </ei:KeyTrigger>
+        <ei:KeyTrigger Key="D4">
+            <cmd:EventToCommand Command="{Binding ChangeSoldierCommand}" CommandParameter="Bow" />
+        </ei:KeyTrigger>
+        <ei:KeyTrigger Key="D5">
+            <cmd:EventToCommand Command="{Binding ChangeSoldierCommand}" CommandParameter="LongBow" />
+        </ei:KeyTrigger>
+        <ei:KeyTrigger Key="D6">
+            <cmd:EventToCommand Command="{Binding ChangeSoldierCommand}" CommandParameter="MountArcher" />
+        </ei:KeyTrigger>
+        <ei:KeyTrigger Key="D7">
+            <cmd:EventToCommand Command="{Binding ChangeSoldierCommand}" CommandParameter="Horse" />
+        </ei:KeyTrigger>
+        <ei:KeyTrigger Key="D8">
+            <cmd:EventToCommand Command="{Binding ChangeSoldierCommand}" CommandParameter="EliteHorse" />
+        </ei:KeyTrigger>
+        <ei:KeyTrigger Key="D9">
+            <cmd:EventToCommand Command="{Binding ChangeSoldierCommand}" CommandParameter="RedArms" />
+        </ei:KeyTrigger>
+        <ei:KeyTrigger Key="D0">
+            <cmd:EventToCommand Command="{Binding ChangeSoldierCommand}" CommandParameter="Gun" />
+        </ei:KeyTrigger>
+        <ei:KeyTrigger Key="P">
+            <cmd:EventToCommand Command="{Binding ChangeSoldierCommand}" CommandParameter="Dragoon" />
+        </ei:KeyTrigger>
+        <ei:KeyTrigger Key="Delete">
+            <cmd:EventToCommand Command="{Binding RemoveDeckCommand}" />
+        </ei:KeyTrigger>
+        <ei:KeyTrigger Key="Q">
+            <cmd:EventToCommand Command="{Binding ChangeRarityCommand}" CommandParameter="天" />
+        </ei:KeyTrigger>
+        <ei:KeyTrigger Key="W">
+            <cmd:EventToCommand Command="{Binding ChangeRarityCommand}" CommandParameter="極" />
+        </ei:KeyTrigger>
+        <ei:KeyTrigger Key="E">
+            <cmd:EventToCommand Command="{Binding ChangeRarityCommand}" CommandParameter="特" />
+        </ei:KeyTrigger>
+        <ei:KeyTrigger Key="R">
+            <cmd:EventToCommand Command="{Binding ChangeRarityCommand}" CommandParameter="上" />
+        </ei:KeyTrigger>
+        <ei:KeyTrigger Key="T">
+            <cmd:EventToCommand Command="{Binding ChangeRarityCommand}" CommandParameter="序" />
+        </ei:KeyTrigger>
+        <ei:KeyTrigger Key="S">
+            <ei:CallMethodAction MethodName="ToggleSoundButton" />
+        </ei:KeyTrigger>
+        <ei:KeyTrigger Key="Up">
+            <ei:CallMethodAction MethodName="ChangeBushoListSelectionUp" />
+        </ei:KeyTrigger>
+        <ei:KeyTrigger Key="Down">
+            <ei:CallMethodAction MethodName="ChangeBushoListSelectionDown" />
+        </ei:KeyTrigger>
+    </i:Interaction.Triggers>
 
-	<UserControl.DataContext>
-		<Binding Path="Main" Source="{StaticResource Locator}"/>
-	</UserControl.DataContext>
+    <UserControl.DataContext>
+        <Binding Path="Main" Source="{StaticResource Locator}" />
+    </UserControl.DataContext>
 
     <Grid x:Name="LayoutRoot" Background="#FF494949">
         <ListBox x:Name="bushoList"
                  Width="176"
                  Height="598"
                  Margin="60,0,0,0"
+                 SelectionChanged="bushoList_SelectionChanged"
                  HorizontalAlignment="Left"
                  VerticalAlignment="Top"
-                 ItemsSource="{Binding BushoList}" Background="#FF272727" Foreground="White">
+                 Background="#FF272727"
+                 Foreground="White"
+                 ItemsSource="{Binding BushoList}">
             <i:Interaction.Triggers>
                 <ei:KeyTrigger Key="Enter">
                     <cmd:EventToCommand Command="{Binding SetDeckCommand}" CommandParameter="{Binding SelectedItem, ElementName=bushoList}" />
                 </ei:KeyTrigger>
             </i:Interaction.Triggers>
+            <ListBox.ItemContainerStyle>
+                <Style TargetType="ListBoxItem">
+                    <Setter Property="Template">
+                        <Setter.Value>
+                            <ControlTemplate TargetType="ListBoxItem">
+                                <Border BorderBrush="Gray" BorderThickness="0,0,0,1">
+                                    <VisualStateManager.VisualStateGroups>
+                                        <VisualStateGroup x:Name="SelectionStates">
+                                            <VisualState x:Name="SelectedUnfocused" >
+                                                <Storyboard>
+                                                    <ColorAnimation d:IsOptimized="True"
+                                                    Duration="0"
+                                                    Storyboard.TargetName="grid"
+                                                    Storyboard.TargetProperty="(Panel.Background).(SolidColorBrush.Color)"
+                                                    To="#FFA3A3A3" />
+                                                </Storyboard>
+                                            </VisualState>
+                                            <VisualState x:Name="Unselected" />
+                                            <VisualState x:Name="Selected">
+                                                <Storyboard>
+                                                    <ColorAnimation d:IsOptimized="True"
+                                                    Duration="0"
+                                                    Storyboard.TargetName="grid"
+                                                    Storyboard.TargetProperty="(Panel.Background).(SolidColorBrush.Color)"
+                                                    To="#FF939393" />
+                                                </Storyboard>
+                                            </VisualState>
+                                        </VisualStateGroup>
+                                    </VisualStateManager.VisualStateGroups>
+                                    <Grid x:Name="grid"
+                                          Width="Auto"
+                                          Height="Auto"
+                                          HorizontalAlignment="Stretch"
+                                          VerticalAlignment="Stretch"
+                                          Background="Black"
+                                          MouseLeftButtonDown="bushoList_MouseLeftButtonDown">
+                                        <ContentPresenter />
+                                    </Grid>
+                                </Border>
+                            </ControlTemplate>
+                        </Setter.Value>
+
+                    </Setter>
+                </Style>
+            </ListBox.ItemContainerStyle>
             <ListBox.ItemTemplate>
                 <DataTemplate>
-                    <StackPanel Orientation="Horizontal">
-                        <Image Width="20"
-                               Height="20"
-                               Source="{Binding Image}" />
-                        <TextBlock Text="{Binding Id}" />
-                        <TextBlock Text="{Binding Name}" />
-                    </StackPanel>
+                    <Grid Name="grid">
+                        <StackPanel Orientation="Horizontal">
+                            <Image Width="20"
+                                   Height="20"
+                                   Source="{Binding Image}" />
+                            <TextBlock Name="bushoId" Text="{Binding Id}" />
+                            <TextBlock Text="{Binding Name}" />
+                        </StackPanel>
+                    </Grid>
                 </DataTemplate>
             </ListBox.ItemTemplate>
         </ListBox>
         <StackPanel x:Name="deckPanel"
+                    Width="600"
                     Margin="236,56,0,0"
                     HorizontalAlignment="Left"
-                    VerticalAlignment="Top" Width="600">
+                    VerticalAlignment="Top">
             <StackPanel Orientation="Horizontal" Visibility="{Binding MainDeck.DeckedVisibility[0]}">
                 <Grid>
                     <my:DeckBushoView DataContext="{Binding MainDeck.DeckedBushos[0]}" />
@@ -212,152 +270,201 @@
                 </StackPanel>
             </StackPanel>
         </StackPanel>
-        <Grid x:Name="resultGrid" Height="100"
+        <Grid x:Name="resultGrid"
+              Height="100"
               Margin="236,0,0,0"
               VerticalAlignment="Bottom"
               Background="#FF272727">
-        	<Grid Height="Auto" Margin="0">
-        		<Grid.RowDefinitions>
-        			<RowDefinition Height="0.5*"/>
-        			<RowDefinition Height="0.5*"/>
-        		</Grid.RowDefinitions>
-        		<Border BorderThickness="1" Margin="0" Background="#FF4D1111" RenderTransformOrigin="1,0.5" Grid.RowSpan="1">
-        			<Border.RenderTransform>
-        				<CompositeTransform ScaleX="{Binding MainDeck.TotalAttackBar}"/>
-        			</Border.RenderTransform>
-        		</Border>
-        		<Border BorderThickness="1" Margin="0" Background="#FF171635" RenderTransformOrigin="1,0.5" Grid.RowSpan="1" Grid.Row="1">
-        			<Border.RenderTransform>
-        				<CompositeTransform ScaleX="{Binding MainDeck.TotalDefenceBar}"/>
-        			</Border.RenderTransform>
-        		</Border>
-        	</Grid>
-        	<StackPanel Orientation="Horizontal" d:LayoutOverrides="Height">
-        		<StackPanel Margin="180,5,23,5" Width="96">
-        			<Grid Height="16">
-        				<TextBlock
-        					VerticalAlignment="Top"
-        					Text="総兵数 "
-        					TextWrapping="Wrap" d:LayoutOverrides="Width" />
-        				<TextBlock x:Name="textBlock1"
-        					HorizontalAlignment="Right"
-        					VerticalAlignment="Top"
-        					Text="{Binding MainDeck.TotalSoldierNumber}" Margin="37,0,0,0" TextAlignment="Right" />
-        			</Grid>
-        			<Grid Height="16">
-        				<TextBlock
-        					VerticalAlignment="Top"
-        					Text="総コスト"
-        					TextWrapping="Wrap" />
-        				<TextBlock x:Name="deckCost"
-        					HorizontalAlignment="Right"
-        					VerticalAlignment="Top"
-        					Text="{Binding MainDeck.TotalCost}" Margin="29,0,0,0" TextAlignment="Right" />
-        			</Grid>
-        			<Grid Height="16">
-        				<TextBlock TextWrapping="Wrap" Text="コス比" d:LayoutOverrides="Width, Height" VerticalAlignment="Center"/>
-        				<TextBlock
-        					HorizontalAlignment="Right"
-        					VerticalAlignment="Center"
-        					Text="{Binding MainDeck.TotalSoldierNumberPerCost, StringFormat=\{0:F1\}}" Margin="0" />
+            <Grid Height="Auto" Margin="0">
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="0.5*" />
+                    <RowDefinition Height="0.5*" />
+                </Grid.RowDefinitions>
+                <Border Grid.RowSpan="1"
+                        Margin="0"
+                        Background="#FF4D1111"
+                        BorderThickness="1"
+                        RenderTransformOrigin="1,0.5">
+                    <Border.RenderTransform>
+                        <CompositeTransform ScaleX="{Binding MainDeck.TotalAttackBar}" />
+                    </Border.RenderTransform>
+                </Border>
+                <Border Grid.Row="1"
+                        Grid.RowSpan="1"
+                        Margin="0"
+                        Background="#FF171635"
+                        BorderThickness="1"
+                        RenderTransformOrigin="1,0.5">
+                    <Border.RenderTransform>
+                        <CompositeTransform ScaleX="{Binding MainDeck.TotalDefenceBar}" />
+                    </Border.RenderTransform>
+                </Border>
+            </Grid>
+            <StackPanel Orientation="Horizontal" d:LayoutOverrides="Height">
+                <StackPanel Width="96" Margin="180,5,23,5">
+                    <Grid Height="16">
+                        <TextBlock VerticalAlignment="Top"
+                                   Text="総兵数 "
+                                   TextWrapping="Wrap"
+                                   d:LayoutOverrides="Width" />
+                        <TextBlock x:Name="textBlock1"
+                                   Margin="37,0,0,0"
+                                   HorizontalAlignment="Right"
+                                   VerticalAlignment="Top"
+                                   Text="{Binding MainDeck.TotalSoldierNumber}"
+                                   TextAlignment="Right" />
                     </Grid>
-                    <TextBlock
-        					HorizontalAlignment="Right"
-        					VerticalAlignment="Center"
-        					Text="{Binding MainDeck.CurrentSoldierTypeName}" Margin="0" />
+                    <Grid Height="16">
+                        <TextBlock VerticalAlignment="Top"
+                                   Text="総コスト"
+                                   TextWrapping="Wrap" />
+                        <TextBlock x:Name="deckCost"
+                                   Margin="29,0,0,0"
+                                   HorizontalAlignment="Right"
+                                   VerticalAlignment="Top"
+                                   Text="{Binding MainDeck.TotalCost}"
+                                   TextAlignment="Right" />
+                    </Grid>
+                    <Grid Height="16">
+                        <TextBlock VerticalAlignment="Center"
+                                   Text="コス比"
+                                   TextWrapping="Wrap"
+                                   d:LayoutOverrides="Width, Height" />
+                        <TextBlock Margin="0"
+                                   HorizontalAlignment="Right"
+                                   VerticalAlignment="Center"
+                                   Text="{Binding MainDeck.TotalSoldierNumberPerCost,
+                                                  StringFormat=\{0:F1\}}" />
+                    </Grid>
+                    <TextBlock Margin="0"
+                               HorizontalAlignment="Right"
+                               VerticalAlignment="Center"
+                               Text="{Binding MainDeck.CurrentSoldierTypeName}" />
                 </StackPanel>
-        		<StackPanel x:Name="TotalAtk" HorizontalAlignment="Right" Width="126" Margin="0,5,5,5">
-        			<Grid Height="23">
-        				<Image
-        					Margin="0"
-        					Source="Images/Attack.png" HorizontalAlignment="Left" VerticalAlignment="Center" />
-        				<TextBlock x:Name="deckAtk"
-        					Height="23"
-        					HorizontalAlignment="Right"
-        					VerticalAlignment="Center"
-        					FontSize="19"
-        					FontWeight="Bold"
-        					Foreground="#FFFF6767"
-        					Text="{Binding MainDeck.TotalAttack, StringFormat=\{0:F1\}}"
-        					TextAlignment="Right" />
-        			</Grid>
-        			<Grid Height="16">
-        				<TextBlock TextWrapping="Wrap" Text="コス比" HorizontalAlignment="Left" d:LayoutOverrides="Height"/>
-        				<TextBlock 
-        					HorizontalAlignment="Right"
-        					VerticalAlignment="Top"
-        					Text="{Binding MainDeck.TotalAttackPerCost, StringFormat=\{0:F1\}}" Margin="52,0,0,0" TextAlignment="Right" />
-        			</Grid>
-        		</StackPanel>
-        		<StackPanel x:Name="TotalDef" Orientation="Vertical" Width="137" VerticalAlignment="Top" Margin="0,5,5,5">
-        			<Grid>
-        				<Image
-        					Margin="0"
-        					Source="Images/Defence.png" HorizontalAlignment="Left" Width="23" VerticalAlignment="Center" Height="23" />
-        				<TextBlock x:Name="dechDef"
-        					Height="23"
-        					HorizontalAlignment="Right"
-        					VerticalAlignment="Center"
-        					FontSize="19"
-        					FontWeight="Bold"
-        					Foreground="#FF6B6BFF"
-        					Text="{Binding MainDeck.TotalDefence, StringFormat=\{0:F1\}}"
-        					TextAlignment="Right" />
-        			</Grid>
-        			<Grid>
-        				<TextBlock TextWrapping="Wrap" Text="コス比" HorizontalAlignment="Left" VerticalAlignment="Center"/>
-        				<TextBlock
-        					HorizontalAlignment="Right"
-        					VerticalAlignment="Center"
-        					Text="{Binding MainDeck.TotalDefencePerCost, StringFormat=\{0:F1\}}" Margin="0" TextAlignment="Right" />
-        			</Grid>
-        		</StackPanel>
-        	</StackPanel>
+                <StackPanel x:Name="TotalAtk"
+                            Width="126"
+                            Margin="0,5,5,5"
+                            HorizontalAlignment="Right">
+                    <Grid Height="23">
+                        <Image Margin="0"
+                               HorizontalAlignment="Left"
+                               VerticalAlignment="Center"
+                               Source="Images/Attack.png" />
+                        <TextBlock x:Name="deckAtk"
+                                   Height="23"
+                                   HorizontalAlignment="Right"
+                                   VerticalAlignment="Center"
+                                   FontSize="19"
+                                   FontWeight="Bold"
+                                   Foreground="#FFFF6767"
+                                   Text="{Binding MainDeck.TotalAttack,
+                                                  StringFormat=\{0:F1\}}"
+                                   TextAlignment="Right" />
+                    </Grid>
+                    <Grid Height="16">
+                        <TextBlock HorizontalAlignment="Left"
+                                   Text="コス比"
+                                   TextWrapping="Wrap"
+                                   d:LayoutOverrides="Height" />
+                        <TextBlock Margin="52,0,0,0"
+                                   HorizontalAlignment="Right"
+                                   VerticalAlignment="Top"
+                                   Text="{Binding MainDeck.TotalAttackPerCost,
+                                                  StringFormat=\{0:F1\}}"
+                                   TextAlignment="Right" />
+                    </Grid>
+                </StackPanel>
+                <StackPanel x:Name="TotalDef"
+                            Width="137"
+                            Margin="0,5,5,5"
+                            VerticalAlignment="Top"
+                            Orientation="Vertical">
+                    <Grid>
+                        <Image Width="23"
+                               Height="23"
+                               Margin="0"
+                               HorizontalAlignment="Left"
+                               VerticalAlignment="Center"
+                               Source="Images/Defence.png" />
+                        <TextBlock x:Name="dechDef"
+                                   Height="23"
+                                   HorizontalAlignment="Right"
+                                   VerticalAlignment="Center"
+                                   FontSize="19"
+                                   FontWeight="Bold"
+                                   Foreground="#FF6B6BFF"
+                                   Text="{Binding MainDeck.TotalDefence,
+                                                  StringFormat=\{0:F1\}}"
+                                   TextAlignment="Right" />
+                    </Grid>
+                    <Grid>
+                        <TextBlock HorizontalAlignment="Left"
+                                   VerticalAlignment="Center"
+                                   Text="コス比"
+                                   TextWrapping="Wrap" />
+                        <TextBlock Margin="0"
+                                   HorizontalAlignment="Right"
+                                   VerticalAlignment="Center"
+                                   Text="{Binding MainDeck.TotalDefencePerCost,
+                                                  StringFormat=\{0:F1\}}"
+                                   TextAlignment="Right" />
+                    </Grid>
+                </StackPanel>
+            </StackPanel>
         </Grid>
-        <StackPanel x:Name="rarityPanel" Margin="0" Background="#FF3B3B3B" HorizontalAlignment="Left" VerticalAlignment="Top">
+        <StackPanel x:Name="rarityPanel"
+                    Margin="0"
+                    HorizontalAlignment="Left"
+                    VerticalAlignment="Top"
+                    Background="#FF3B3B3B">
             <RadioButton x:Name="ultraRare"
+                         Width="53"
                          Margin="0"
-                         Tag="Q"
                          VerticalAlignment="Top"
                          Command="{Binding ChangeRarityCommand}"
                          CommandParameter="天"
-                         Template="{StaticResource RarityButton}" Width="53">
-            		<Image Width="30"
-            			Height="30"
-            			Margin="2"
-            			Source="Images/UltraRare.png" />
+                         Tag="Q"
+                         Template="{StaticResource RarityButton}">
+                <Image Width="30"
+                       Height="30"
+                       Margin="2"
+                       Source="Images/UltraRare.png" />
             </RadioButton>
             <RadioButton x:Name="superRare"
+                         Width="53"
                          Margin="0"
                          VerticalAlignment="Top"
-                         Tag="W"
                          Command="{Binding ChangeRarityCommand}"
                          CommandParameter="極"
-                         Template="{StaticResource RarityButton}" Width="53">
+                         Tag="W"
+                         Template="{StaticResource RarityButton}">
                 <Image Width="30"
                        Height="30"
                        Margin="2"
                        Source="Images/SuperRare.png" />
             </RadioButton>
             <RadioButton x:Name="rare"
+                         Width="53"
                          Margin="0"
                          VerticalAlignment="Top"
-                         Tag="E"
                          Command="{Binding ChangeRarityCommand}"
                          CommandParameter="特"
-                         Template="{StaticResource RarityButton}" Width="53" IsChecked="True">
+                         IsChecked="True"
+                         Tag="E"
+                         Template="{StaticResource RarityButton}">
                 <Image Width="30"
                        Height="30"
                        Margin="2"
                        Source="Images/Rare.png" />
             </RadioButton>
             <RadioButton x:Name="uncommon"
+                         Width="53"
                          Margin="0"
                          VerticalAlignment="Top"
-                         Tag="R"
                          Command="{Binding ChangeRarityCommand}"
                          CommandParameter="上"
-                         Template="{StaticResource RarityButton}" Width="53">
+                         Tag="R"
+                         Template="{StaticResource RarityButton}">
                 <Image Width="30"
                        Height="30"
                        Margin="2"
@@ -365,12 +472,13 @@
 
             </RadioButton>
             <RadioButton x:Name="common"
+                         Width="53"
                          Margin="0"
                          VerticalAlignment="Top"
-                         Tag="T"
                          Command="{Binding ChangeRarityCommand}"
                          CommandParameter="序"
-                         Template="{StaticResource RarityButton}" Width="53">
+                         Tag="T"
+                         Template="{StaticResource RarityButton}">
 
                 <Image Width="30"
                        Height="30"
@@ -384,31 +492,35 @@
                     Margin="236,2,0,0"
                     HorizontalAlignment="Left"
                     VerticalAlignment="Top"
-                    Orientation="Horizontal" Background="#FF2F2F2F">
-            <RadioButton x:Name="SpearButton" ClickMode="Press"
+                    Background="#FF2F2F2F"
+                    Orientation="Horizontal">
+            <RadioButton x:Name="SpearButton"
+                         ClickMode="Press"
                          Command="{Binding ChangeSoldierCommand}"
                          CommandParameter="Spear"
-						 Tag="1"
-                         Template="{StaticResource ShortCutButton}" >
+                         Tag="1"
+                         Template="{StaticResource ShortCutButton}">
                 <Image Width="40"
                        Height="40"
                        Margin="2"
                        Source="Images/Spear.png" />
             </RadioButton>
-            <RadioButton x:Name="LongSpearButton" ClickMode="Press"
+            <RadioButton x:Name="LongSpearButton"
+                         ClickMode="Press"
                          Command="{Binding ChangeSoldierCommand}"
                          CommandParameter="LongSpear"
-						 Tag="2"
+                         Tag="2"
                          Template="{StaticResource ShortCutButton}">
                 <Image Width="40"
                        Height="40"
                        Margin="2"
                        Source="Images/LongSpear.png" />
             </RadioButton>
-            <RadioButton x:Name="SamuraiButton" ClickMode="Press"
+            <RadioButton x:Name="SamuraiButton"
+                         ClickMode="Press"
                          Command="{Binding ChangeSoldierCommand}"
                          CommandParameter="Samurai"
-						 Tag="3"
+                         Tag="3"
                          Template="{StaticResource ShortCutButton}">
                 <Image Width="40"
                        Height="40"
@@ -419,7 +531,7 @@
                          Command="{Binding ChangeSoldierCommand}"
                          CommandParameter="Bow"
                          IsChecked="{Binding IsChecked[Bow]}"
-						 Tag="4"
+                         Tag="4"
                          Template="{StaticResource ShortCutButton}">
                 <Image Width="40"
                        Height="40"
@@ -430,7 +542,7 @@
                          Command="{Binding ChangeSoldierCommand}"
                          CommandParameter="LongBow"
                          IsChecked="{Binding IsChecked[LongBow]}"
-						 Tag="5"
+                         Tag="5"
                          Template="{StaticResource ShortCutButton}">
                 <Image Width="40"
                        Height="40"
@@ -440,7 +552,7 @@
             <RadioButton ClickMode="Press"
                          Command="{Binding ChangeSoldierCommand}"
                          CommandParameter="MountArcher"
-						 Tag="6"
+                         Tag="6"
                          Template="{StaticResource ShortCutButton}">
                 <Image Width="40"
                        Height="40"
@@ -450,7 +562,7 @@
             <RadioButton ClickMode="Press"
                          Command="{Binding ChangeSoldierCommand}"
                          CommandParameter="Horse"
-						 Tag="7"
+                         Tag="7"
                          Template="{StaticResource ShortCutButton}">
                 <Image Width="40"
                        Height="40"
@@ -461,7 +573,7 @@
                          Command="{Binding ChangeSoldierCommand}"
                          CommandParameter="EliteHorse"
                          IsChecked="{Binding IsChecked[EliteHorse]}"
-						 Tag="8"
+                         Tag="8"
                          Template="{StaticResource ShortCutButton}">
                 <Image Width="40"
                        Height="40"
@@ -471,7 +583,7 @@
             <RadioButton ClickMode="Press"
                          Command="{Binding ChangeSoldierCommand}"
                          CommandParameter="RedArms"
-						 Tag="9"
+                         Tag="9"
                          Template="{StaticResource ShortCutButton}">
                 <Image Width="40"
                        Height="40"
@@ -481,7 +593,7 @@
             <RadioButton ClickMode="Press"
                          Command="{Binding ChangeSoldierCommand}"
                          CommandParameter="Gun"
-						 Tag="0"
+                         Tag="0"
                          Template="{StaticResource ShortCutButton}">
                 <Image Width="40"
                        Height="40"
@@ -491,7 +603,7 @@
             <RadioButton ClickMode="Press"
                          Command="{Binding ChangeSoldierCommand}"
                          CommandParameter="Dragoon"
-						 Tag="P"
+                         Tag="P"
                          Template="{StaticResource ShortCutButton}">
                 <Image Width="40"
                        Height="40"
@@ -499,42 +611,155 @@
                        Source="Images/Dragoon.png" />
             </RadioButton>
         </StackPanel>
-        <Border BorderThickness="1" Height="100" HorizontalAlignment="Left" Margin="830,2,0,0" Name="border1" VerticalAlignment="Top" Width="70" Background="#7A000000">
-            <TextBlock  Name="textBlock2" Text="DEL 削除    H ヘルプ      S サウンド" TextWrapping="Wrap" Margin="0" />
+        <Border Name="border1"
+                Width="70"
+                Height="100"
+                Margin="830,2,0,0"
+                HorizontalAlignment="Left"
+                VerticalAlignment="Top"
+                Background="#7A000000"
+                BorderThickness="1">
+            <TextBlock Name="textBlock2"
+                       Margin="0"
+                       Text="DEL 削除    H ヘルプ      S サウンド"
+                       TextWrapping="Wrap" />
         </Border>
-        <Grid x:Name="helpLayer" Margin="0" Background="#97000000" Visibility="Collapsed">
-        	<i:Interaction.Triggers>
-        		<i:EventTrigger EventName="MouseLeftButtonDown">
-        			<ei:ChangePropertyAction TargetName="helpLayer" PropertyName="Visibility">
-        				<ei:ChangePropertyAction.Value>
-        					<Visibility>Collapsed</Visibility>
-        				</ei:ChangePropertyAction.Value>
-        			</ei:ChangePropertyAction>
-        		</i:EventTrigger>
-        	</i:Interaction.Triggers>
-        	<Rectangle HorizontalAlignment="Left" Height="199" Stroke="#FF660000" VerticalAlignment="Top" Width="47" RadiusX="5" RadiusY="5" Margin="2,1,0,0" StrokeThickness="4"/>
-        	<Rectangle HorizontalAlignment="Left" Stroke="#FF660000" Width="173" RadiusX="5" RadiusY="5" Margin="62,0,0,0" StrokeThickness="4"/>
-        	<Border BorderBrush="Black" BorderThickness="1" HorizontalAlignment="Left" Margin="8,204,0,295" Width="91" Background="Black">
-        		<TextBlock Margin="7" TextWrapping="Wrap"><Run Text="表示する武将"/><Run Text="を絞り込みます。"/></TextBlock>
-        	</Border>
-        	<Border BorderBrush="Black" BorderThickness="1" HorizontalAlignment="Left" Margin="86,0,0,141" Width="149" Background="Black" Height="101" VerticalAlignment="Bottom">
-        		<TextBlock Margin="7" TextWrapping="Wrap" Text="デッキに入れる武将を左クリックで選択します。"/>
-        	</Border>
-        	<Border BorderBrush="Black" BorderThickness="1" HorizontalAlignment="Right" Margin="0,8,105,0" Width="149" Background="Black" Height="67" VerticalAlignment="Top">
-        		<TextBlock Margin="7" TextWrapping="Wrap" Text="部隊の兵種を選択します。（全武将が同じ兵種になります。）"/>
-        	</Border>
-        	<Rectangle Stroke="#FF660000" RadiusX="5" RadiusY="5" Margin="239,1,258,0" StrokeThickness="4" Height="58" VerticalAlignment="Top"/>
-        	<Border BorderBrush="Black" BorderThickness="1" Margin="420,178,283,295" Background="Black">
-        		<TextBlock Margin="7" TextWrapping="Wrap" Text="武将を左クリックでデッキから外せます。"/>
-        	</Border>
-        	<Border BorderBrush="Black" BorderThickness="1" Margin="0,224,21,249" Background="Black" HorizontalAlignment="Right" Width="139">
-        		<TextBlock Margin="7" TextWrapping="Wrap" Text="武将のランクアップを指定できます。"/>
-        	</Border>
+        <Grid x:Name="helpLayer"
+              Margin="0"
+              Background="#97000000"
+              Visibility="Collapsed">
+            <i:Interaction.Triggers>
+                <i:EventTrigger EventName="MouseLeftButtonDown">
+                    <ei:ChangePropertyAction PropertyName="Visibility" TargetName="helpLayer">
+                        <ei:ChangePropertyAction.Value>
+                            <Visibility>Collapsed</Visibility>
+                        </ei:ChangePropertyAction.Value>
+                    </ei:ChangePropertyAction>
+                </i:EventTrigger>
+            </i:Interaction.Triggers>
+            <Rectangle Width="47"
+                       Height="199"
+                       Margin="2,1,0,0"
+                       HorizontalAlignment="Left"
+                       VerticalAlignment="Top"
+                       RadiusX="5"
+                       RadiusY="5"
+                       Stroke="#FF660000"
+                       StrokeThickness="4" />
+            <Rectangle Width="173"
+                       Margin="62,0,0,0"
+                       HorizontalAlignment="Left"
+                       RadiusX="5"
+                       RadiusY="5"
+                       Stroke="#FF660000"
+                       StrokeThickness="4" />
+            <Border Width="91"
+                    Margin="8,204,0,295"
+                    HorizontalAlignment="Left"
+                    Background="Black"
+                    BorderBrush="Black"
+                    BorderThickness="1">
+                <TextBlock Margin="7" TextWrapping="Wrap"><Run Text="表示する武将" /><Run Text="を絞り込みます。" />
+                </TextBlock>
+            </Border>
+            <Border Width="149"
+                    Height="101"
+                    Margin="86,0,0,141"
+                    HorizontalAlignment="Left"
+                    VerticalAlignment="Bottom"
+                    Background="Black"
+                    BorderBrush="Black"
+                    BorderThickness="1">
+                <TextBlock Margin="7"
+                           Text="デッキに入れる武将を左クリックで選択します。"
+                           TextWrapping="Wrap" />
+            </Border>
+            <Border Width="149"
+                    Height="67"
+                    Margin="0,8,105,0"
+                    HorizontalAlignment="Right"
+                    VerticalAlignment="Top"
+                    Background="Black"
+                    BorderBrush="Black"
+                    BorderThickness="1">
+                <TextBlock Margin="7"
+                           Text="部隊の兵種を選択します。（全武将が同じ兵種になります。）"
+                           TextWrapping="Wrap" />
+            </Border>
+            <Rectangle Height="58"
+                       Margin="239,1,258,0"
+                       VerticalAlignment="Top"
+                       RadiusX="5"
+                       RadiusY="5"
+                       Stroke="#FF660000"
+                       StrokeThickness="4" />
+            <Border Margin="420,178,283,295"
+                    Background="Black"
+                    BorderBrush="Black"
+                    BorderThickness="1">
+                <TextBlock Margin="7"
+                           Text="武将を左クリックでデッキから外せます。"
+                           TextWrapping="Wrap" />
+            </Border>
+            <Border Width="139"
+                    Margin="0,224,21,249"
+                    HorizontalAlignment="Right"
+                    Background="Black"
+                    BorderBrush="Black"
+                    BorderThickness="1">
+                <TextBlock Margin="7"
+                           Text="武将のランクアップを指定できます。"
+                           TextWrapping="Wrap" />
+            </Border>
         </Grid>
-        <MediaElement x:Name="click_mp3" AutoPlay="False" HorizontalAlignment="Left" Height="0" Source="/Sounds/click.mp3" Stretch="Fill" VerticalAlignment="Top" Width="0"/>
-        <MediaElement x:Name="up_mp3" AutoPlay="False" HorizontalAlignment="Left" Height="0" Source="/Sounds/up.mp3" Stretch="Fill" VerticalAlignment="Top" Width="0"/>
-        <MediaElement x:Name="down_mp3" AutoPlay="False" HorizontalAlignment="Left" Height="0" Source="/Sounds/down.mp3" Stretch="Fill" VerticalAlignment="Top" Width="0"/>
-        <MediaElement x:Name="cancel_mp3" AutoPlay="False" HorizontalAlignment="Left" Height="0" Source="/Sounds/cancel.mp3" Stretch="Fill" VerticalAlignment="Top" Width="0"/>
-        <CheckBox x:Name="isSoundButton" Content="CheckBox" HorizontalAlignment="Right" Height="34" Margin="0,68,0,0" VerticalAlignment="Top" Width="26" Template="{StaticResource SoundButton}" ClickMode="Press"/>
+        <MediaElement x:Name="click_mp3"
+                      Width="0"
+                      Height="0"
+                      HorizontalAlignment="Left"
+                      VerticalAlignment="Top"
+                      AutoPlay="False"
+                      Source="/Sounds/click.mp3"
+                      Stretch="Fill" />
+        <MediaElement x:Name="up_mp3"
+                      Width="0"
+                      Height="0"
+                      HorizontalAlignment="Left"
+                      VerticalAlignment="Top"
+                      AutoPlay="False"
+                      Source="/Sounds/up.mp3"
+                      Stretch="Fill" />
+        <MediaElement x:Name="down_mp3"
+                      Width="0"
+                      Height="0"
+                      HorizontalAlignment="Left"
+                      VerticalAlignment="Top"
+                      AutoPlay="False"
+                      Source="/Sounds/down.mp3"
+                      Stretch="Fill" />
+        <MediaElement x:Name="cancel_mp3"
+                      Width="0"
+                      Height="0"
+                      HorizontalAlignment="Left"
+                      VerticalAlignment="Top"
+                      AutoPlay="False"
+                      Source="/Sounds/cancel.mp3"
+                      Stretch="Fill" />
+        <MediaElement x:Name="selchange_mp3"
+                      Width="0"
+                      Height="0"
+                      AutoPlay="False"
+                      HorizontalAlignment="Left"
+                      VerticalAlignment="Top"
+                      Source="/Sounds/selchange.mp3"
+                      Stretch="Fill" />
+        <CheckBox x:Name="isSoundButton"
+                  Width="26"
+                  Height="34"
+                  Margin="0,68,0,0"
+                  HorizontalAlignment="Right"
+                  VerticalAlignment="Top"
+                  ClickMode="Press"
+                  Content="CheckBox"
+                  Template="{StaticResource SoundButton}" />
     </Grid>
 </UserControl>

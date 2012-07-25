@@ -138,7 +138,7 @@ namespace IxaCalc.ViewModel
             var rarity = RankDictionary.rarity[raritystr];
             var list1 = from p in _allBushoList where p.Rarity == rarity orderby p.Id select p;
             BushoList = new ObservableCollection<Busho>(list1);
-            MessengerInstance.Send(new DialogMessage("click", result => { }));
+            MessengerInstance.Send(new DialogMessage("busholist", result => { }));
         }
 
         public RelayCommand<Busho> SetDeckCommand { get; private set; }
