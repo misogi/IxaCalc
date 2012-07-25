@@ -111,10 +111,9 @@
     <Grid x:Name="LayoutRoot" Background="#FF494949">
         <ListBox x:Name="bushoList"
                  Width="176"
-                 Height="598"
-                 Margin="60,0,0,0"
+                 Margin="0,37,0,0"
                  HorizontalAlignment="Left"
-                 VerticalAlignment="Top"
+                 VerticalAlignment="Stretch"
                  Background="#FF272727"
                  Foreground="White"
                  ItemsSource="{Binding BushoList}"
@@ -122,6 +121,12 @@
             <i:Interaction.Triggers>
                 <ei:KeyTrigger Key="Enter">
                     <cmd:EventToCommand Command="{Binding SetDeckCommand}" CommandParameter="{Binding SelectedItem, ElementName=bushoList}" />
+                </ei:KeyTrigger>
+                <ei:KeyTrigger Key="Right">
+                    <cmd:EventToCommand Command="{Binding NextRarityCommand}" CommandParameter="{Binding SelectedIndex, ElementName=bushoList}" />
+                </ei:KeyTrigger>
+                <ei:KeyTrigger Key="Left">
+                    <cmd:EventToCommand Command="{Binding PreviousRarityCommand}" CommandParameter="{Binding SelectedIndex, ElementName=bushoList}" />
                 </ei:KeyTrigger>
             </i:Interaction.Triggers>
             <ListBox.ItemContainerStyle>
@@ -419,9 +424,10 @@
                     Margin="0"
                     HorizontalAlignment="Left"
                     VerticalAlignment="Top"
+                    Orientation="Horizontal"
                     Background="#FF3B3B3B">
             <CheckBox x:Name="ultraRare"
-                      Width="53"
+                      Width="35"
                       Margin="0"
                       VerticalAlignment="Top"
                       Command="{Binding ChangeRarityCommand}"
@@ -438,7 +444,7 @@
                        Source="Images/UltraRare.png" />
             </CheckBox>
             <CheckBox x:Name="superRare"
-                      Width="53"
+                      Width="35"
                       Margin="0"
                       VerticalAlignment="Top"
                       Command="{Binding ChangeRarityCommand}"
@@ -455,7 +461,7 @@
                        Source="Images/SuperRare.png" />
             </CheckBox>
             <CheckBox x:Name="rare"
-                      Width="53"
+                      Width="35"
                       Margin="0"
                       VerticalAlignment="Top"
                       Command="{Binding ChangeRarityCommand}"
@@ -472,7 +478,7 @@
                        Source="Images/Rare.png" />
             </CheckBox>
             <CheckBox x:Name="uncommon"
-                      Width="53"
+                      Width="35"
                       Margin="0"
                       VerticalAlignment="Top"
                       Command="{Binding ChangeRarityCommand}"
@@ -490,7 +496,7 @@
 
             </CheckBox>
             <CheckBox x:Name="common"
-                      Width="53"
+                      Width="35"
                       Margin="0"
                       VerticalAlignment="Top"
                       Command="{Binding ChangeRarityCommand}"
@@ -684,11 +690,17 @@
                 BorderThickness="1">
             <TextBlock Name="textBlock2"
                        Margin="0"
-                       Text="Enter 追加
-DEL 削除
-H ヘルプ
-S サウンド"
-                       TextWrapping="Wrap" />
+                       TextWrapping="Wrap">
+                Enter 追加
+                <LineBreak />
+                DEL 削除
+                <LineBreak />
+                H ヘルプ
+                <LineBreak />
+                S サウンド
+                <LineBreak />
+
+            </TextBlock>
         </Border>
         <Grid x:Name="helpLayer"
               Margin="0"

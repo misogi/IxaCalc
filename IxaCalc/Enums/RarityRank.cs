@@ -8,26 +8,26 @@
         /// <summary>
         /// 序
         /// </summary>
-        Common,
+        Common = 0,
 
         /// <summary>
         /// 上
         /// </summary>
-        Uncommon,
+        Uncommon = 1,
 
         /// <summary>
         /// 特
         /// </summary>
-        Rare,
+        Rare= 2,
 
         /// <summary>
         /// 極
         /// </summary>
-        SuperRare,
+        SuperRare = 3,
 
         /// <summary>
         /// 天
         /// </summary>
-        UltraRare
+        UltraRare = 4
     }
 }

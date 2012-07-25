@@ -82,6 +82,10 @@ namespace IxaCalc.ViewModel
             
             ChangeRarityCommand = new RelayCommand<string>(this.Execute);
 
+            NextRarityCommand = new RelayCommand<int>(this.NextRarityExecute);
+
+            PreviousRarityCommand = new RelayCommand<int>(this.PreviousRarityExecute);
+
             RankUpCommand = new RelayCommand<int>(this.RankUpExecute);
             
             RankDownCommand = new RelayCommand<int>(this.RankDownExecute);
@@ -143,6 +147,28 @@ namespace IxaCalc.ViewModel
             MessengerInstance.Send(new DialogMessage("busholist", result => { }));
         }
 
+        public void NextRarityExecute(int index)
+        {
+            if ((int)CurrentRarity > 0)
+            {
+                CurrentRarity = CurrentRarity - 1;
+                var list1 = from p in _allBushoList where p.Rarity == CurrentRarity orderby p.Id select p;
+                BushoList = new ObservableCollection<Busho>(list1);
+                MessengerInstance.Send(new NotificationMessage<int>(index, "bushoList"));
+            }
+        }
+
+        public void PreviousRarityExecute(int index)
+        {
+            if (CurrentRarity < RarityRank.UltraRare)
+            {
+                CurrentRarity = CurrentRarity + 1;
+                var list1 = from p in _allBushoList where p.Rarity == CurrentRarity orderby p.Id select p;
+                BushoList = new ObservableCollection<Busho>(list1);
+                MessengerInstance.Send(new NotificationMessage<int>(index, "bushoList"));
+            }
+        }
+
         public RelayCommand<Busho> SetDeckCommand { get; private set; }
 
         public RelayCommand<int> RemoveDeckCommand { get; private set; }
@@ -150,6 +176,10 @@ namespace IxaCalc.ViewModel
         public RelayCommand<string> ChangeSoldierCommand { get; private set; }
 
         public RelayCommand<string> ChangeRarityCommand { get; private set; }
+
+        public RelayCommand<int> NextRarityCommand { get; private set; }
+
+        public RelayCommand<int> PreviousRarityCommand { get; private set; }
 
         public RelayCommand<int> RankUpCommand { get; private set; }
 

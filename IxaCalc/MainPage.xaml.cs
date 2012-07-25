@@ -19,6 +19,21 @@
         {
             InitializeComponent();
             Messenger.Default.Register(this, (Action<DialogMessage>)ShowMessage);
+            Messenger.Default.Register<NotificationMessage<int>>(this, (Action<NotificationMessage<int>>)SetBushoListSelection);
+        }
+
+        private void SetBushoListSelection(NotificationMessage<int> noti)
+        {
+            var index = noti.Content;
+            var count = this.bushoList.Items.Count;
+            if (index < count - 1)
+            {
+                this.bushoList.SelectedIndex = noti.Content;
+            }
+            else
+            {
+                this.bushoList.SelectedIndex = count - 1;
+            }
         }
 
         public void ToggleSoundButton()
@@ -81,7 +96,7 @@
         public void ChangeBushoListSelectionUp()
         {
             var index = this.bushoList.SelectedIndex;
-            if (index >= 0)
+            if (index > 0)
             {
                 this.bushoList.SelectedIndex = index - 1;
             }
