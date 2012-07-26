@@ -95,6 +95,10 @@ namespace IxaCalc.ViewModel
 
         public void SetDeckExecute(Busho busho)
         {
+            if (MainDeck.DeckedBushos.Count >= 4)
+            {
+                return;
+            }
 
             if(busho == null)
             {
@@ -123,7 +127,20 @@ namespace IxaCalc.ViewModel
         
         public void RemoveDeckExecute(int index)
         {
-            this._mainDeck.Remove(index);
+            if (MainDeck.DeckedBushos.Count <= 0)
+            {
+                return;
+            }
+
+            if (index < 0)
+            {
+                MainDeck.RemoveLast();
+            }
+            else
+            {
+                this.MainDeck.Remove(index);
+            }
+
             MessengerInstance.Send(new DialogMessage("cancel", result => { }));
             string[] keys = { "Busho1", "Busho2", "Busho3", "Busho4" };
             foreach (var key in keys)

@@ -69,6 +69,14 @@
             }
         }
 
+        public void RemoveLast()
+        {
+            if (DeckedBushos.Count > 0)
+            {
+                Remove(DeckedBushos.Count - 1);
+            }
+        }
+
         public void RankUp(int index)
         {
             DeckedBushos[index].RankUp();
