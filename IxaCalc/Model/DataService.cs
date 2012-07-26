@@ -12,7 +12,10 @@ namespace IxaCalc.Model
     /// </summary>
     public class DataService : IDataService
     {
-
+        /// <summary>
+        /// 初期兵種リストを取得
+        /// </summary>
+        /// <returns>兵種リスト</returns>
         public List<Soldier> GetSoldierTypes()
         {
             var list = new List<Soldier>();
@@ -25,7 +28,7 @@ namespace IxaCalc.Model
         }
 
         /// <summary>
-        /// データ取得
+        /// 武将リストを取得
         /// </summary>
         /// <param name="callback">コールバック</param>
         public void GetData(Action<ObservableCollection<Busho>, Exception> callback)

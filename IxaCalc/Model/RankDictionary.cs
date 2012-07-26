@@ -7,9 +7,14 @@
 
     using IxaCalc.Enums;
 
+    /// <summary>
+    /// マスタデータ辞書
+    /// </summary>
     public class RankDictionary
     {
-
+        /// <summary>
+        /// static武将データ辞書
+        /// </summary>
         static RankDictionary()
         {
             rarityImage = new Dictionary<RarityRank, ImageSource>();
@@ -35,6 +40,9 @@
             leadershipImage[LeadershipRank.Nothing] = null;
         }
 
+        /// <summary>
+        /// 文字列からランク値を取得
+        /// </summary>
         public static Dictionary<string, LeadershipRank> rank = new Dictionary<string, LeadershipRank>
             {
                 { "F", LeadershipRank.F },
@@ -48,6 +56,10 @@
                 { "SSS", LeadershipRank.SSS }
             };
 
+        /// <summary>
+        /// レアリティ文字列からレアリティを取得
+        /// TODO: 消す
+        /// </summary>
         public static Dictionary<string, RarityRank> rarity = new Dictionary<string, RarityRank>
             {
                 { "序", RarityRank.Common },
@@ -57,6 +69,9 @@
                 { "天", RarityRank.UltraRare }
             };
 
+        /// <summary>
+        /// 兵種から兵士ステータスと取得
+        /// </summary>
         public static Dictionary<SoldierTypes, Soldier> soldiers = new Dictionary<SoldierTypes, Soldier>
             {
                 { SoldierTypes.Spear, new Soldier("足軽", 11, 11, SoldierTypes.Spear)},
@@ -73,8 +88,14 @@
                 { SoldierTypes.Dragoon, new Soldier("騎馬鉄砲", 26, 18, SoldierTypes.Dragoon)}
             };
 
+        /// <summary>
+        /// レアリティから画像を取得
+        /// </summary>
         public static Dictionary<RarityRank, ImageSource> rarityImage;
 
+        /// <summary>
+        /// 統率力ランクから画像を取得
+        /// </summary>
         public static Dictionary<LeadershipRank, ImageSource> leadershipImage;
     }
 }

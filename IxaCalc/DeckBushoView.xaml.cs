@@ -12,6 +12,9 @@ using System.Windows.Shapes;
 
 namespace IxaCalc
 {
+    /// <summary>
+    /// デッキに入った武将の詳細を見る
+    /// </summary>
     public partial class DeckBushoView : UserControl
     {
         public DeckBushoView()

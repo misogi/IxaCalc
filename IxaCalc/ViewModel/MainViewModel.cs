@@ -27,11 +27,16 @@ namespace IxaCalc.ViewModel
     /// </summary>
     public class MainViewModel : ViewModelBase
     {
+        #region フィールド
+
         /// <summary>
         /// データ取得用オブジェクト
         /// </summary>
         private readonly IDataService _dataService;
 
+        /// <summary>
+        /// 現在のレアリティ
+        /// </summary>
         private RarityRank _currentRarity;
 
         /// <summary>
@@ -40,7 +45,7 @@ namespace IxaCalc.ViewModel
         private ObservableCollection<Busho> _allBushoList;
 
         /// <summary>
-        /// 
+        /// 表示する武将リスト
         /// </summary>
         private ObservableCollection<Busho> _bushoList;
 
@@ -49,13 +54,18 @@ namespace IxaCalc.ViewModel
         /// </summary>
         private Deck _mainDeck;
 
+        /// <summary>
+        /// 兵種リスト
+        /// </summary>
         private List<Soldier> _soldierTypes;
 
+        #endregion
+
         /// <summary>
-        /// Initializes a new instance of the MainViewModel class.
+        /// コンストラクタ
         /// </summary>
         /// <param name="dataService">
-        /// The data Service.
+        /// データ取得用オブジェクト
         /// </param>
         public MainViewModel(IDataService dataService)
         {
@@ -93,6 +103,10 @@ namespace IxaCalc.ViewModel
             this.Execute("特");
         }
 
+        /// <summary>
+        /// デッキ追加イベント実行
+        /// </summary>
+        /// <param name="busho">武将</param>
         public void SetDeckExecute(Busho busho)
         {
             if (MainDeck.DeckedBushos.Count >= 4)
@@ -113,18 +127,30 @@ namespace IxaCalc.ViewModel
             }
         }
 
+        /// <summary>
+        /// ランクアップコマンド用メソッド
+        /// </summary>
+        /// <param name="index">ランクアップする武将のデッキ上での位置</param>
         public void RankUpExecute(int index)
         {
             MainDeck.RankUp(index);
             MessengerInstance.Send(new DialogMessage("up", result => { }));
         }
 
+        /// <summary>
+        /// ランクダウンコマンド実行
+        /// </summary>
+        /// <param name="index">ランクダウンしたい武将のデッキ上での位置</param>
         public void RankDownExecute(int index)
         {
             MainDeck.RankDown(index);
             MessengerInstance.Send(new DialogMessage("down", result => { }));
         }
         
+        /// <summary>
+        /// デッキから削除する
+        /// </summary>
+        /// <param name="index">デッキ上での位置 負の値だとデッキの最後のものを削除</param>
         public void RemoveDeckExecute(int index)
         {
             if (MainDeck.DeckedBushos.Count <= 0)
@@ -149,14 +175,23 @@ namespace IxaCalc.ViewModel
             }
         }
 
-        public void ChangeSoldierExecute(string str)
+        #region メソッド
+        /// <summary>
+        /// 兵種を切り替える
+        /// </summary>
+        /// <param name="str">兵種名（enumに従う）</param>
+        private void ChangeSoldierExecute(string str)
         {
             var type = (SoldierTypes)Enum.Parse(typeof(SoldierTypes), str, false);
             MainDeck.SwitchSoldierType(type);
             MessengerInstance.Send(new DialogMessage("click", result => { }));
         }
 
-        public void Execute(string raritystr)
+        /// <summary>
+        /// レアリティを切り替える
+        /// </summary>
+        /// <param name="raritystr">レアリティ名(enumに従う) </param>
+        private void Execute(string raritystr)
         {
             CurrentRarity = RankDictionary.rarity[raritystr];
             var list1 = from p in _allBushoList where p.Rarity == CurrentRarity orderby p.Id select p;
@@ -164,7 +199,11 @@ namespace IxaCalc.ViewModel
             MessengerInstance.Send(new DialogMessage("busholist", result => { }));
         }
 
-        public void NextRarityExecute(int index)
+        /// <summary>
+        /// 次のレアリティに切り替えるコマンドの処理
+        /// </summary>
+        /// <param name="index">現在選択されているリスト上での位置</param>
+        private void NextRarityExecute(int index)
         {
             if ((int)CurrentRarity > 0)
             {
@@ -175,7 +214,11 @@ namespace IxaCalc.ViewModel
             }
         }
 
-        public void PreviousRarityExecute(int index)
+        /// <summary>
+        /// 手前のレアリティに切り替えるコマンドの処理
+        /// </summary>
+        /// <param name="index">現在選択されているリスト上での位置</param>
+        private void PreviousRarityExecute(int index)
         {
             if (CurrentRarity < RarityRank.UltraRare)
             {
@@ -185,26 +228,54 @@ namespace IxaCalc.ViewModel
                 MessengerInstance.Send(new NotificationMessage<int>(index, "bushoList"));
             }
         }
+        #endregion
 
-        public RelayCommand<Busho> SetDeckCommand { get; private set; }
 
-        public RelayCommand<int> RemoveDeckCommand { get; private set; }
-        
-        public RelayCommand<string> ChangeSoldierCommand { get; private set; }
-
-        public RelayCommand<string> ChangeRarityCommand { get; private set; }
-
-        public RelayCommand<int> NextRarityCommand { get; private set; }
-
-        public RelayCommand<int> PreviousRarityCommand { get; private set; }
-
-        public RelayCommand<int> RankUpCommand { get; private set; }
-
-        public RelayCommand<int> RankDownCommand { get; private set; }
+        #region プロパティ
 
         /// <summary>
-        /// Gets the WelcomeTitle property.
-        /// Changes to that property's value raise the PropertyChanged event. 
+        /// デッキにセットするイベント
+        /// </summary>
+        public RelayCommand<Busho> SetDeckCommand { get; private set; }
+
+        /// <summary>
+        /// デッキから削除するイベント
+        /// </summary>
+        public RelayCommand<int> RemoveDeckCommand { get; private set; }
+
+        /// <summary>
+        /// 兵種を切り替えるコマンド
+        /// </summary>
+        public RelayCommand<string> ChangeSoldierCommand { get; private set; }
+
+        /// <summary>
+        /// レアリティを任意のものに切り替えるコマンド
+        /// </summary>
+        public RelayCommand<string> ChangeRarityCommand { get; private set; }
+
+        /// <summary>
+        /// レアリティを次に切り替えるコマンド
+        /// </summary>
+        public RelayCommand<int> NextRarityCommand { get; private set; }
+
+        /// <summary>
+        /// レアリティを手前に切り替えるコマンド
+        /// </summary>
+        public RelayCommand<int> PreviousRarityCommand { get; private set; }
+
+        /// <summary>
+        /// 武将のランクアップコマンド
+        /// </summary>
+        public RelayCommand<int> RankUpCommand { get; private set; }
+
+        /// <summary>
+        /// 武将のランクダウンコマンド
+        /// </summary>
+        public RelayCommand<int> RankDownCommand { get; private set; }
+
+
+        /// <summary>
+        /// レアリティで指定された武将のリスト
         /// </summary>
         public ObservableCollection<Busho> BushoList
         {
@@ -221,7 +292,7 @@ namespace IxaCalc.ViewModel
         }
 
         /// <summary>
-        /// デッキに入った3番目の武将
+        /// 兵士のタイプ
         /// </summary>
         public List<Soldier> SoldierTypes
         {
@@ -241,7 +312,7 @@ namespace IxaCalc.ViewModel
         }
 
         /// <summary>
-        /// デッキに入った3番目の武将
+        /// 現在選択されている絞り込み用レアリティ
         /// </summary>
         public RarityRank CurrentRarity
         {
@@ -261,7 +332,7 @@ namespace IxaCalc.ViewModel
         }
 
         /// <summary>
-        /// デッキに入った3番目の武将
+        /// 部隊デッキ
         /// </summary>
         public Deck MainDeck
         {
@@ -270,6 +341,9 @@ namespace IxaCalc.ViewModel
                 return this._mainDeck;
             }
         }
+
+        #endregion
+
 
         ////public override void Cleanup()
         ////{

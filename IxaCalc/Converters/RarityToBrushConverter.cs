@@ -1,6 +1,4 @@
-﻿
-
-namespace IxaCalc.Converters
+﻿namespace IxaCalc.Converters
 {
     using System;
     using System.Windows.Data;
@@ -8,8 +6,19 @@ namespace IxaCalc.Converters
     using System.Globalization;
     using IxaCalc.Enums;
 
+    /// <summary>
+    /// レアリティを背景色に変換するコンバータ
+    /// </summary>
     public class RarityToBrushConverter : IValueConverter
     {
+        /// <summary>
+        /// レアリティを背景色に変換
+        /// </summary>
+        /// <param name="value">レアリティ RarityRank型</param>
+        /// <param name="targetType">タイプ</param>
+        /// <param name="parameter">パラメータ</param>
+        /// <param name="culture">カルチャ</param>
+        /// <returns>背景色用ブラシ</returns>
         public object Convert(object value, Type targetType, object parameter, CultureInfo culture)
         {
             if (value == null)
@@ -41,11 +50,17 @@ namespace IxaCalc.Converters
             return brush;
         }
 
+        /// <summary>
+        /// 未実装
+        /// </summary>
+        /// <param name="value">値</param>
+        /// <param name="targetType">タイプ</param>
+        /// <param name="parameter">パラメタ</param>
+        /// <param name="culture">カルチャ</param>
+        /// <returns>戻り値</returns>
         public object ConvertBack(object value, Type targetType, object parameter, CultureInfo culture)
         {
-
             throw new NotImplementedException();
-
         }
     }
 }

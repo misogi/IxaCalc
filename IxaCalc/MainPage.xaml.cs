@@ -18,10 +18,14 @@
         public MainPage()
         {
             InitializeComponent();
-            Messenger.Default.Register(this, (Action<DialogMessage>)ShowMessage);
+            Messenger.Default.Register(this, (Action<DialogMessage>)MakeSound);
             Messenger.Default.Register<NotificationMessage<int>>(this, (Action<NotificationMessage<int>>)SetBushoListSelection);
         }
 
+        /// <summary>
+        /// 武将リストの選択場所を変更
+        /// </summary>
+        /// <param name="noti">インデックス値を持つメッセージ</param>
         private void SetBushoListSelection(NotificationMessage<int> noti)
         {
             var index = noti.Content;
@@ -36,12 +40,19 @@
             }
         }
 
+        /// <summary>
+        /// サウンドOn/offボタンをトグルする
+        /// </summary>
         public void ToggleSoundButton()
         {
             this.isSoundButton.IsChecked = this.isSoundButton.IsChecked == true ? false : true;
         }
         
-        private void ShowMessage(DialogMessage msg)
+        /// <summary>
+        /// サウンドを鳴らす
+        /// </summary>
+        /// <param name="msg">メッセージ</param>
+        private void MakeSound(DialogMessage msg)
         {
             if (msg.Content == "busholist")
             {
@@ -81,6 +92,12 @@
             }
         }
 
+        /// <summary>
+        /// クリックイベント処理
+        /// 武将リストでダブルクリックした場合、デッキに入れる
+        /// </summary>
+        /// <param name="sender">送信オブジェクト</param>
+        /// <param name="e">引数</param>
         private void bushoList_MouseLeftButtonDown(object sender, System.Windows.Input.MouseButtonEventArgs e)
         {
             if (e.ClickCount == 2)
@@ -93,6 +110,9 @@
             }
         }
 
+        /// <summary>
+        /// 武将リストの選択を一つ上に変更
+        /// </summary>
         public void ChangeBushoListSelectionUp()
         {
             var index = this.bushoList.SelectedIndex;
@@ -102,6 +122,9 @@
             }
         }
 
+        /// <summary>
+        /// 武将リストの選択を一つ下に
+        /// </summary>
         public void ChangeBushoListSelectionDown()
         {
             var index = this.bushoList.SelectedIndex;
@@ -111,6 +134,11 @@
             }
         }
 
+        /// <summary>
+        /// 武将リストの選択が変わった時に実行されるイベントメソッド
+        /// </summary>
+        /// <param name="sender">送信オブジェクト</param>
+        /// <param name="e">引数</param>
         private void bushoList_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
             if (this.isSoundButton.IsChecked == true)
@@ -120,6 +148,10 @@
             }
         }
 
+        /// <summary>
+        /// 武将リストの選択を一番上にする 
+        /// TODO なくす
+        /// </summary>
         public void ResetBushoListSelection()
         {
             if (this.bushoList.Items.Count > 0)
@@ -127,6 +159,5 @@
                 this.bushoList.SelectedIndex = 0;
             }
         }
-
     }
 }

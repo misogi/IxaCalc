@@ -10,9 +10,11 @@
     /// <summary>
     /// 武将データクラス
     /// </summary>
-    public class Busho : INotifyPropertyChanged
+    public class Busho : ModelBase
     {
-
+        /// <summary>
+        /// カード画像
+        /// </summary>
         private ImageSource _image;
 
         /// <summary>
@@ -60,23 +62,54 @@
         /// </summary>
         public LeadershipRank Weapon { get; set; }
 
+        /// <summary>
+        /// 攻撃力
+        /// </summary>
         public int Attack { get; set; }
+        
+        /// <summary>
+        /// 防御力
+        /// </summary>
         public int Defence { get; set; }
+        
+        /// <summary>
+        /// 攻撃力成長
+        /// </summary>
         public int AttackGrowth { get; set; }
+        
+        /// <summary>
+        /// 防御力成長
+        /// </summary>
         public int DefenceGrowth { get; set; }
+        
+        /// <summary>
+        /// 兵法
+        /// </summary>
         public double Tactics { get; set; }
+        
+        /// <summary>
+        /// 兵法成長
+        /// </summary>
         public double TacticsGrowth { get; set; }
 
         /// <summary>
         /// コンストラクタ
         /// </summary>
-        /// <param name="name">武将名</param>
+        /// <param name="id">武将ID</param>
         /// <param name="rare">レアリティ</param>
+        /// <param name="name">武将名</param>
+        /// <param name="cost">コスト</param>
         /// <param name="soldiernum">指揮兵士数</param>
         /// <param name="lance">槍兵統率</param>
-        /// <param name="horse">馬兵統率</param>
         /// <param name="bow">弓兵統率</param>
+        /// <param name="horse">馬兵統率</param>
         /// <param name="weapon">兵器統率</param>
+        /// <param name="atk">攻撃力</param>
+        /// <param name="def">防御力</param>
+        /// <param name="tac">兵法</param>
+        /// <param name="atkgrow">攻撃成長</param>
+        /// <param name="defgrow">防御成長</param>
+        /// <param name="tacgrow">兵法成長</param>
         public Busho(int id, string rare, string name, double cost, int soldiernum, string lance, string bow, string horse, string weapon, int atk , int def, double tac, int atkgrow, int defgrow, double tacgrow)
         {
             Id = id;
@@ -97,6 +130,9 @@
             LoadImage();
         }
 
+        /// <summary>
+        /// カード画像
+        /// </summary>
         public ImageSource Image
         {
             get
@@ -105,6 +141,9 @@
             }
         }
 
+        /// <summary>
+        /// カード画像を読み込む
+        /// </summary>
         private void LoadImage()
         {
             if (Id != null)
@@ -116,13 +155,5 @@
             }
         }
 
-        public event PropertyChangedEventHandler PropertyChanged;
-
-        protected virtual void OnPropertyChanged(string propertyName)
-        {
-            PropertyChangedEventHandler handler = this.PropertyChanged;
-            if (handler != null)
-                handler(this, new PropertyChangedEventArgs(propertyName));
-        }
     }
 }

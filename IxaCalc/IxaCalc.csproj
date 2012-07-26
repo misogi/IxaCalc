@@ -104,6 +104,7 @@
     </Compile>
     <Compile Include="Model\Busho.cs" />
     <Compile Include="Model\DeckedBusho.cs" />
+    <Compile Include="Model\ModelBase.cs" />
     <Compile Include="Model\Soldier.cs" />
     <Compile Include="Model\DataItem.cs" />
     <Compile Include="Model\DataService.cs" />

@@ -17,7 +17,11 @@ namespace IxaCalc.Model
         /// エラー時に使うコールバック
         /// </param>
         void GetData(Action<ObservableCollection<Busho>, Exception> callback);
-
+        
+        /// <summary>
+        /// 初期兵種リストを取得
+        /// </summary>
+        /// <returns>兵種リスト</returns>
         List<Soldier> GetSoldierTypes();
     }
 }
