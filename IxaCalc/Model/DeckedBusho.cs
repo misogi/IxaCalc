@@ -106,189 +106,6 @@
             _rank = 0;
             this.UpdateDeckedInfo();
         }
-        #region メソッド
-        /// <summary>
-        /// デッキ上に表示する情報を更新
-        /// </summary>
-        private void UpdateDeckedInfo()
-        {
-            Percent = CalculatePercent(_originBusho);
-            BushoAttack = _originBusho.Attack + (_originBusho.AttackGrowth * RankToBonusPoint(Rank));
-            BushoDefence = _originBusho.Defence + (_originBusho.DefenceGrowth * RankToBonusPoint(Rank));
-            ActualAttack = (BushoAttack + (_originBusho.SoldierNumber * RankDictionary.soldiers[CurrentSoldierType].Attack)) * Percent;
-            ActualDefence = (BushoDefence + (_originBusho.SoldierNumber * RankDictionary.soldiers[CurrentSoldierType].Defence)) * Percent;
-            ActualDefencePerCost = ActualDefence / _originBusho.Cost;
-            ActualAttackBar = ActualAttack > 100000 ? 1.0 : ActualAttack / 100000;
-            ActualLeadershipAttack = ActualAttack / RankDictionary.soldiers[CurrentSoldierType].Attack;
-            ActualLeadershipDefence = ActualDefence / RankDictionary.soldiers[CurrentSoldierType].Defence;
-            PerCostAttack = ActualLeadershipAttack / _originBusho.Cost;
-            PerCostDefence = ActualLeadershipDefence / _originBusho.Cost;
-            ActualDefenceBar = ActualDefencePerCost > 40000 ? 1.0 : ActualDefencePerCost / 40000;
-        }
-
-        /// <summary>
-        /// 現在のランクでのステータス上昇値を計算
-        /// </summary>
-        /// <param name="rank">ランク</param>
-        /// <returns>ボーナス値</returns>
-        private int RankToBonusPoint(int rank)
-        {
-            int point = 80 * (Rank + 1);
-
-            if (Rank >= 2)
-            {
-                point += (Rank - 1) * 20;
-            }
-
-            if (Rank >= 4)
-            {
-                point += (Rank - 3) * 20;
-            }
-
-            return point;
-        }
-
-        /// <summary>
-        /// 統率力補正と該当兵種の統率を計算
-        /// TODO persentageを1st,2ndから計算
-        /// </summary>
-        /// <param name="busho">該当武将</param>
-        /// <returns>統率力補正</returns>
-        private double CalculatePercent(Busho busho)
-        {
-            var type = _currentSoldierType;
-            double percentage = 1.0;
-            if (type == SoldierTypes.Spear || type == SoldierTypes.LongSpear)
-            {
-                percentage = RankToPercentage(busho.Lance) + (Rank * 0.05);
-                ActualLeadershipFirst = AddRankLeadership(busho.Lance, Rank);
-                ActualLeadershipSecond = LeadershipRank.Nothing;
-            }
-            else if (type == SoldierTypes.Bow || type == SoldierTypes.LongBow)
-            {
-                percentage = RankToPercentage(busho.Bow) + (Rank * 0.05);
-                ActualLeadershipFirst = AddRankLeadership(busho.Bow, Rank);
-                ActualLeadershipSecond = LeadershipRank.Nothing;
-            }
-            else if (type == SoldierTypes.Horse || type == SoldierTypes.EliteHorse)
-            {
-                percentage = RankToPercentage(busho.Horse) + (Rank * 0.05);
-                ActualLeadershipFirst = AddRankLeadership(busho.Horse, Rank);
-                ActualLeadershipSecond = LeadershipRank.Nothing;
-            }
-            else if (type == SoldierTypes.Hammer)
-            {
-                percentage = RankToPercentage(busho.Weapon) + (Rank * 0.05);
-                ActualLeadershipFirst = AddRankLeadership(busho.Weapon, Rank);
-                ActualLeadershipSecond = LeadershipRank.Nothing;
-            }
-            else if (type == SoldierTypes.MountArcher)
-            {
-                percentage = (RankToPercentage(busho.Horse) + RankToPercentage(busho.Bow) + (Rank * 0.05)) / 2;
-                ActualLeadershipFirst = AddRankLeadership(busho.Bow, Rank);
-                ActualLeadershipSecond = busho.Horse;
-            }
-            else if (type == SoldierTypes.RedArms)
-            {
-                percentage = (RankToPercentage(busho.Horse) + RankToPercentage(busho.Lance) + (Rank * 0.05)) / 2;
-                ActualLeadershipFirst = AddRankLeadership(busho.Horse, Rank);
-                ActualLeadershipSecond = busho.Lance;
-            }
-            else if (type == SoldierTypes.Samurai)
-            {
-                percentage = (RankToPercentage(busho.Bow) + RankToPercentage(busho.Lance) + (Rank * 0.05)) / 2;
-                ActualLeadershipFirst = AddRankLeadership(busho.Lance, Rank);
-                ActualLeadershipSecond = busho.Bow;
-            }
-            else if (type == SoldierTypes.Gun)
-            {
-                percentage = (RankToPercentage(busho.Weapon) + RankToPercentage(busho.Lance) + (Rank * 0.05)) / 2;
-                ActualLeadershipFirst = AddRankLeadership(busho.Weapon, Rank);
-                ActualLeadershipSecond = busho.Lance;
-            }
-            else if (type == SoldierTypes.Dragoon)
-            {
-                percentage = (RankToPercentage(busho.Weapon) + RankToPercentage(busho.Horse) + (Rank * 0.05)) / 2;
-                ActualLeadershipFirst = AddRankLeadership(busho.Weapon, Rank);
-                ActualLeadershipSecond = busho.Horse;
-            }
-
-            if (percentage >= 1.20)
-            {
-                percentage = 1.20;
-            }
-
-            return percentage;
-        }
-
-        /// <summary>
-        /// 統率力をランクに従い足し算する
-        /// </summary>
-        /// <param name="rank">武将が持つ統率</param>
-        /// <param name="up">ランクアップ数</param>
-        /// <returns>ランクアップ後統率</returns>
-        private LeadershipRank AddRankLeadership(LeadershipRank rank, int up)
-        {
-            int upedRank = (int)rank + up;
-            return (LeadershipRank)upedRank > LeadershipRank.SSS ? LeadershipRank.SSS : (LeadershipRank)upedRank;
-        }
-
-        /// <summary>
-        /// ランクアップ
-        /// </summary>
-        public void RankUp()
-        {
-            if (_rank < 5)
-            {
-                Rank += 1;
-                this.UpdateDeckedInfo();
-            }
-        }
-
-        /// <summary>
-        /// ランクダウン
-        /// </summary>
-        public void RankDown()
-        {
-            if (_rank > 0)
-            {
-                Rank -= 1;
-                this.UpdateDeckedInfo();
-            }
-        }
-
-        /// <summary>
-        /// ランクを統率補正に変換
-        /// </summary>
-        /// <param name="rank">ランク</param>
-        /// <returns>統率補正 (倍)</returns>
-        private double RankToPercentage(LeadershipRank rank)
-        {
-            switch (rank)
-            {
-                case LeadershipRank.F:
-                    return 0.8;
-                case LeadershipRank.E:
-                    return 0.85;
-                case LeadershipRank.D:
-                    return 0.9;
-                case LeadershipRank.C:
-                    return 0.95;
-                case LeadershipRank.B:
-                    return 1.0;
-                case LeadershipRank.A:
-                    return 1.05;
-                case LeadershipRank.S:
-                    return 1.1;
-                case LeadershipRank.SS:
-                    return 1.15;
-                case LeadershipRank.SSS:
-                    return 1.20;
-                default:
-                    return 0;
-            }
-        }
-#endregion
 
         #region プロパティ
 
@@ -464,7 +281,6 @@
 
             set
             {
-
                 if (_actualLeadership1 != value)
                 {
                     _actualLeadership1 = value;
@@ -485,7 +301,6 @@
 
             set
             {
-
                 if (_actualLeadership2 != value)
                 {
                     _actualLeadership2 = value;
@@ -633,7 +448,192 @@
         {
             get
             {
-                return RankDictionary.rarityImage[OriginBusho.Rarity];
+                return RankDictionary.RarityImage[OriginBusho.Rarity];
+            }
+        }
+        #endregion
+
+        #region メソッド
+
+        /// <summary>
+        /// ランクアップ
+        /// </summary>
+        public void RankUp()
+        {
+            if (_rank < 5)
+            {
+                Rank += 1;
+                this.UpdateDeckedInfo();
+            }
+        }
+
+        /// <summary>
+        /// ランクダウン
+        /// </summary>
+        public void RankDown()
+        {
+            if (_rank > 0)
+            {
+                Rank -= 1;
+                this.UpdateDeckedInfo();
+            }
+        }
+
+        /// <summary>
+        /// デッキ上に表示する情報を更新
+        /// </summary>
+        private void UpdateDeckedInfo()
+        {
+            Percent = CalculatePercent(_originBusho);
+            BushoAttack = _originBusho.Attack + (_originBusho.AttackGrowth * RankToBonusPoint(Rank));
+            BushoDefence = _originBusho.Defence + (_originBusho.DefenceGrowth * RankToBonusPoint(Rank));
+            ActualAttack = (BushoAttack + (_originBusho.SoldierNumber * RankDictionary.Soldiers[CurrentSoldierType].Attack)) * Percent;
+            ActualDefence = (BushoDefence + (_originBusho.SoldierNumber * RankDictionary.Soldiers[CurrentSoldierType].Defence)) * Percent;
+            ActualDefencePerCost = ActualDefence / _originBusho.Cost;
+            ActualAttackBar = ActualAttack > 100000 ? 1.0 : ActualAttack / 100000;
+            ActualLeadershipAttack = ActualAttack / RankDictionary.Soldiers[CurrentSoldierType].Attack;
+            ActualLeadershipDefence = ActualDefence / RankDictionary.Soldiers[CurrentSoldierType].Defence;
+            PerCostAttack = ActualLeadershipAttack / _originBusho.Cost;
+            PerCostDefence = ActualLeadershipDefence / _originBusho.Cost;
+            ActualDefenceBar = ActualDefencePerCost > 40000 ? 1.0 : ActualDefencePerCost / 40000;
+        }
+
+        /// <summary>
+        /// 現在のランクでのステータス上昇値を計算
+        /// </summary>
+        /// <param name="rank">ランク</param>
+        /// <returns>ボーナス値</returns>
+        private int RankToBonusPoint(int rank)
+        {
+            int point = 80 * (Rank + 1);
+
+            if (Rank >= 2)
+            {
+                point += (Rank - 1) * 20;
+            }
+
+            if (Rank >= 4)
+            {
+                point += (Rank - 3) * 20;
+            }
+
+            return point;
+        }
+
+        /// <summary>
+        /// 統率力補正と該当兵種の統率を計算
+        /// TODO persentageを1st,2ndから計算
+        /// </summary>
+        /// <param name="busho">該当武将</param>
+        /// <returns>統率力補正</returns>
+        private double CalculatePercent(Busho busho)
+        {
+            var type = _currentSoldierType;
+            double percentage = 1.0;
+            if (type == SoldierTypes.Spear || type == SoldierTypes.LongSpear)
+            {
+                percentage = RankToPercentage(busho.Lance) + (Rank * 0.05);
+                ActualLeadershipFirst = AddRankLeadership(busho.Lance, Rank);
+                ActualLeadershipSecond = LeadershipRank.Nothing;
+            }
+            else if (type == SoldierTypes.Bow || type == SoldierTypes.LongBow)
+            {
+                percentage = RankToPercentage(busho.Bow) + (Rank * 0.05);
+                ActualLeadershipFirst = AddRankLeadership(busho.Bow, Rank);
+                ActualLeadershipSecond = LeadershipRank.Nothing;
+            }
+            else if (type == SoldierTypes.Horse || type == SoldierTypes.EliteHorse)
+            {
+                percentage = RankToPercentage(busho.Horse) + (Rank * 0.05);
+                ActualLeadershipFirst = AddRankLeadership(busho.Horse, Rank);
+                ActualLeadershipSecond = LeadershipRank.Nothing;
+            }
+            else if (type == SoldierTypes.Hammer)
+            {
+                percentage = RankToPercentage(busho.Weapon) + (Rank * 0.05);
+                ActualLeadershipFirst = AddRankLeadership(busho.Weapon, Rank);
+                ActualLeadershipSecond = LeadershipRank.Nothing;
+            }
+            else if (type == SoldierTypes.MountArcher)
+            {
+                percentage = (RankToPercentage(busho.Horse) + RankToPercentage(busho.Bow) + (Rank * 0.05)) / 2;
+                ActualLeadershipFirst = AddRankLeadership(busho.Bow, Rank);
+                ActualLeadershipSecond = busho.Horse;
+            }
+            else if (type == SoldierTypes.RedArms)
+            {
+                percentage = (RankToPercentage(busho.Horse) + RankToPercentage(busho.Lance) + (Rank * 0.05)) / 2;
+                ActualLeadershipFirst = AddRankLeadership(busho.Horse, Rank);
+                ActualLeadershipSecond = busho.Lance;
+            }
+            else if (type == SoldierTypes.Samurai)
+            {
+                percentage = (RankToPercentage(busho.Bow) + RankToPercentage(busho.Lance) + (Rank * 0.05)) / 2;
+                ActualLeadershipFirst = AddRankLeadership(busho.Lance, Rank);
+                ActualLeadershipSecond = busho.Bow;
+            }
+            else if (type == SoldierTypes.Gun)
+            {
+                percentage = (RankToPercentage(busho.Weapon) + RankToPercentage(busho.Lance) + (Rank * 0.05)) / 2;
+                ActualLeadershipFirst = AddRankLeadership(busho.Weapon, Rank);
+                ActualLeadershipSecond = busho.Lance;
+            }
+            else if (type == SoldierTypes.Dragoon)
+            {
+                percentage = (RankToPercentage(busho.Weapon) + RankToPercentage(busho.Horse) + (Rank * 0.05)) / 2;
+                ActualLeadershipFirst = AddRankLeadership(busho.Weapon, Rank);
+                ActualLeadershipSecond = busho.Horse;
+            }
+
+            if (percentage >= 1.20)
+            {
+                percentage = 1.20;
+            }
+
+            return percentage;
+        }
+
+        /// <summary>
+        /// 統率力をランクに従い足し算する
+        /// </summary>
+        /// <param name="rank">武将が持つ統率</param>
+        /// <param name="up">ランクアップ数</param>
+        /// <returns>ランクアップ後統率</returns>
+        private LeadershipRank AddRankLeadership(LeadershipRank rank, int up)
+        {
+            int upedRank = (int)rank + up;
+            return (LeadershipRank)upedRank > LeadershipRank.SSS ? LeadershipRank.SSS : (LeadershipRank)upedRank;
+        }
+
+        /// <summary>
+        /// ランクを統率補正に変換
+        /// </summary>
+        /// <param name="rank">ランク</param>
+        /// <returns>統率補正 (倍)</returns>
+        private double RankToPercentage(LeadershipRank rank)
+        {
+            switch (rank)
+            {
+                case LeadershipRank.F:
+                    return 0.8;
+                case LeadershipRank.E:
+                    return 0.85;
+                case LeadershipRank.D:
+                    return 0.9;
+                case LeadershipRank.C:
+                    return 0.95;
+                case LeadershipRank.B:
+                    return 1.0;
+                case LeadershipRank.A:
+                    return 1.05;
+                case LeadershipRank.S:
+                    return 1.1;
+                case LeadershipRank.SS:
+                    return 1.15;
+                case LeadershipRank.SSS:
+                    return 1.20;
+                default:
+                    return 0;
             }
         }
         #endregion

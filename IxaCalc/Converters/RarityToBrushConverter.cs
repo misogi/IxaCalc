@@ -1,9 +1,9 @@
 ﻿namespace IxaCalc.Converters
 {
     using System;
+    using System.Globalization;
     using System.Windows.Data;
     using System.Windows.Media;
-    using System.Globalization;
     using IxaCalc.Enums;
 
     /// <summary>
@@ -25,9 +25,10 @@
             {
                 return new SolidColorBrush(Color.FromArgb(255, 220, 220, 220));
             }
+
             var rarity = (RarityRank)value;
             Color col = Colors.Black;
-            switch(rarity)
+            switch (rarity)
             {
                 case RarityRank.Common:
                     col = Color.FromArgb(255, 40, 40, 100);

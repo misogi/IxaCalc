@@ -7,6 +7,21 @@
     /// </summary>
     public class Soldier
     {
+        /// <summary>
+        /// コンストラクタ
+        /// </summary>
+        /// <param name="name">兵種名</param>
+        /// <param name="atk">攻撃力</param>
+        /// <param name="def">防御力</param>
+        /// <param name="type">兵士タイプenum</param>
+        public Soldier(string name, int atk, int def, SoldierTypes type)
+        {
+            this.Attack = atk;
+            this.Defence = def;
+            this.Name = name;
+            this.SoldierType = type;
+        }
+
         #region プロパティ
 
         /// <summary>
@@ -30,20 +45,5 @@
         public string Name { get; set; }
 
         #endregion
-
-        /// <summary>
-        /// コンストラクタ
-        /// </summary>
-        /// <param name="name">兵種名</param>
-        /// <param name="atk">攻撃力</param>
-        /// <param name="def">防御力</param>
-        /// <param name="type">兵士タイプenum</param>
-        public Soldier(string name, int atk, int def, SoldierTypes type)
-        {
-            Attack = atk;
-            Defence = def;
-            Name = name;
-            SoldierType = type;
-        }
     }
 }

@@ -1,9 +1,9 @@
 ﻿namespace IxaCalc.Converters
 {
     using System;
+    using System.Globalization;
     using System.Windows.Data;
     using System.Windows.Media;
-    using System.Globalization;
     using IxaCalc.Enums;
 
     /// <summary>
@@ -22,7 +22,7 @@
         public object Convert(object value, Type targetType, object parameter, CultureInfo culture)
         {
             var rarity = (RarityRank)value;
-            var cmpRarity = (RarityRank)Enum.Parse(typeof(RarityRank),(string)parameter, false);
+            var cmpRarity = (RarityRank)Enum.Parse(typeof(RarityRank), (string)parameter, false);
             if (rarity.Equals(cmpRarity))
             {
                 return true;

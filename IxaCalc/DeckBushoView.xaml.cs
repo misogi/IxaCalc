@@ -17,6 +17,9 @@ namespace IxaCalc
     /// </summary>
     public partial class DeckBushoView : UserControl
     {
+        /// <summary>
+        /// インスタンスコンストラクタ
+        /// </summary>
         public DeckBushoView()
         {
             InitializeComponent();

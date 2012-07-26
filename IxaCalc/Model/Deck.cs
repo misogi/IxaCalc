@@ -1,8 +1,7 @@
 ﻿namespace IxaCalc.Model
 {
-    using System.Windows;
     using System.Collections.Generic;
-
+    using System.Windows;
     using IxaCalc.Enums;
 
     /// <summary>
@@ -81,147 +80,6 @@
             UpdateDeckVisibility();
         }
 
-        #region メソッド
-        /// <summary>
-        /// デッキに武将を入れる
-        /// </summary>
-        /// <param name="busho">追加する武将</param>
-        public void Add(Busho busho)
-        {
-            if (DeckedBushos.Count < 4 && !this.IsContain(busho))
-            {
-                var decked = new DeckedBusho(busho, _currentSoldierType);
-                DeckedBushos.Add(decked);
-                this.CalculateTotalStatus();
-                UpdateDeckVisibility();
-                OnPropertyChanged("DeckedBushos");
-            }
-        }
-
-        /// <summary>
-        /// デッキから武将を削除
-        /// </summary>
-        /// <param name="index">削除する武将の場所</param>
-        public void Remove(int index)
-        {
-            if (index < DeckedBushos.Count)
-            {
-                DeckedBushos.RemoveAt(index);
-                this.CalculateTotalStatus();
-                UpdateDeckVisibility();
-                OnPropertyChanged("DeckedBushos");
-            }
-        }
-
-        /// <summary>
-        /// デッキの最後の武将を削除
-        /// </summary>
-        public void RemoveLast()
-        {
-            if (DeckedBushos.Count > 0)
-            {
-                Remove(DeckedBushos.Count - 1);
-            }
-        }
-
-        /// <summary>
-        /// ランクアップ
-        /// </summary>
-        /// <param name="index">武将のデッキ上の位置</param>
-        public void RankUp(int index)
-        {
-            DeckedBushos[index].RankUp();
-            this.CalculateTotalStatus();
-        }
-
-        /// <summary>
-        /// ランクダウン
-        /// </summary>
-        /// <param name="index">武将のデッキ上の位置</param>
-        public void RankDown(int index)
-        {
-            DeckedBushos[index].RankDown();
-            this.CalculateTotalStatus();
-        }
-
-        /// <summary>
-        /// デッキ内コントロールのVisivilityを更新する
-        /// </summary>
-        private void UpdateDeckVisibility()
-        {
-            var bushonum = DeckedBushos.Count;
-            for (int i = 0; i < 4; i++)
-            {
-                _deckedVisibility[i] = i < bushonum ? Visibility.Visible : Visibility.Collapsed;
-            }
-            OnPropertyChanged("DeckedVisibility");
-        }
-
-        /// <summary>
-        /// 全ステータス値を更新する
-        /// </summary>
-        private void CalculateTotalStatus()
-        {
-            double totalAtk = 0;
-            double totalDef = 0;
-            double totalCost = 0;
-            int soldier = 0;
-            var type = CurrentSoldierType;
-            if (CurrentSoldierType != null)
-            {
-                foreach (var decked in DeckedBushos)
-                {
-                    soldier += decked.OriginBusho.SoldierNumber;
-                    totalAtk += decked.ActualAttack;
-                    totalDef += decked.ActualDefence;
-                    totalCost += decked.OriginBusho.Cost;
-                }
-            }
-            TotalAttack = totalAtk;
-            TotalDefence = totalDef;
-            TotalAttackBar = TotalAttack > 400000 ? 1.0 : TotalAttack / 400000;
-            TotalDefenceBar = TotalDefence > 400000 ? 1.0 : TotalDefence / 400000;
-            TotalCost = totalCost;
-            TotalSoldierNumber = soldier;
-            TotalSoldierNumberPerCost = TotalSoldierNumber / TotalCost;
-            TotalAttackPerCost = TotalAttack / TotalCost;
-            TotalDefencePerCost = TotalDefence / TotalCost;
-        }
-
-        /// <summary>
-        /// すでにデッキに武将が入っているかを調べる
-        /// </summary>
-        /// <param name="cmpBusho">調査対象武将</param>
-        /// <returns>入っていればtrue</returns>
-        private bool IsContain(Busho cmpBusho)
-        {
-            bool cond = false;
-            foreach (var decked in DeckedBushos)
-            {
-                if (decked.OriginBusho.Id == cmpBusho.Id)
-                {
-                    cond = true;
-                    break;
-                }
-            }
-            return cond;
-        }
-
-        /// <summary>
-        /// 現在の兵種を切り替える
-        /// </summary>
-        /// <param name="type">切り替え後の兵種</param>
-        public void SwitchSoldierType(SoldierTypes type)
-        {
-            CurrentSoldierType = type;
-            foreach (var decked in DeckedBushos)
-            {
-                decked.CurrentSoldierType = _currentSoldierType;
-            }
-            this.CalculateTotalStatus();
-        }
-        #endregion
-
         #region プロパティ
         /// <summary>
         /// デッキ内武将のリスト
@@ -280,7 +138,7 @@
         {
             get
             {
-                return RankDictionary.soldiers[_currentSoldierType].Name;
+                return RankDictionary.Soldiers[_currentSoldierType].Name;
             }
         }
 
@@ -432,5 +290,151 @@
         }
         #endregion
 
+        #region メソッド
+        #region public
+        /// <summary>
+        /// デッキに武将を入れる
+        /// </summary>
+        /// <param name="busho">追加する武将</param>
+        public void Add(Busho busho)
+        {
+            if (DeckedBushos.Count < 4 && !this.IsContain(busho))
+            {
+                var decked = new DeckedBusho(busho, _currentSoldierType);
+                DeckedBushos.Add(decked);
+                this.CalculateTotalStatus();
+                UpdateDeckVisibility();
+                OnPropertyChanged("DeckedBushos");
+            }
+        }
+
+        /// <summary>
+        /// デッキから武将を削除
+        /// </summary>
+        /// <param name="index">削除する武将の場所</param>
+        public void Remove(int index)
+        {
+            if (index < DeckedBushos.Count)
+            {
+                DeckedBushos.RemoveAt(index);
+                this.CalculateTotalStatus();
+                UpdateDeckVisibility();
+                OnPropertyChanged("DeckedBushos");
+            }
+        }
+
+        /// <summary>
+        /// デッキの最後の武将を削除
+        /// </summary>
+        public void RemoveLast()
+        {
+            if (DeckedBushos.Count > 0)
+            {
+                Remove(DeckedBushos.Count - 1);
+            }
+        }
+
+        /// <summary>
+        /// ランクアップ
+        /// </summary>
+        /// <param name="index">武将のデッキ上の位置</param>
+        public void RankUp(int index)
+        {
+            DeckedBushos[index].RankUp();
+            this.CalculateTotalStatus();
+        }
+
+        /// <summary>
+        /// ランクダウン
+        /// </summary>
+        /// <param name="index">武将のデッキ上の位置</param>
+        public void RankDown(int index)
+        {
+            DeckedBushos[index].RankDown();
+            this.CalculateTotalStatus();
+        }
+
+        /// <summary>
+        /// 現在の兵種を切り替える
+        /// </summary>
+        /// <param name="type">切り替え後の兵種</param>
+        public void SwitchSoldierType(SoldierTypes type)
+        {
+            CurrentSoldierType = type;
+            foreach (var decked in DeckedBushos)
+            {
+                decked.CurrentSoldierType = _currentSoldierType;
+            }
+
+            this.CalculateTotalStatus();
+        }
+        #endregion
+
+        #region private
+
+        /// <summary>
+        /// デッキ内コントロールのVisivilityを更新する
+        /// </summary>
+        private void UpdateDeckVisibility()
+        {
+            var bushonum = DeckedBushos.Count;
+            for (int i = 0; i < 4; i++)
+            {
+                _deckedVisibility[i] = i < bushonum ? Visibility.Visible : Visibility.Collapsed;
+            }
+
+            OnPropertyChanged("DeckedVisibility");
+        }
+
+        /// <summary>
+        /// 全ステータス値を更新する
+        /// </summary>
+        private void CalculateTotalStatus()
+        {
+            double totalAtk = 0;
+            double totalDef = 0;
+            double totalCost = 0;
+            int soldier = 0;
+            var type = CurrentSoldierType;
+            foreach (var decked in DeckedBushos)
+            {
+                soldier += decked.OriginBusho.SoldierNumber;
+                totalAtk += decked.ActualAttack;
+                totalDef += decked.ActualDefence;
+                totalCost += decked.OriginBusho.Cost;
+            }
+
+            TotalAttack = totalAtk;
+            TotalDefence = totalDef;
+            TotalAttackBar = TotalAttack > 400000 ? 1.0 : TotalAttack / 400000;
+            TotalDefenceBar = TotalDefence > 400000 ? 1.0 : TotalDefence / 400000;
+            TotalCost = totalCost;
+            TotalSoldierNumber = soldier;
+            TotalSoldierNumberPerCost = TotalSoldierNumber / TotalCost;
+            TotalAttackPerCost = TotalAttack / TotalCost;
+            TotalDefencePerCost = TotalDefence / TotalCost;
+        }
+
+        /// <summary>
+        /// すでにデッキに武将が入っているかを調べる
+        /// </summary>
+        /// <param name="cmpBusho">調査対象武将</param>
+        /// <returns>入っていればtrue</returns>
+        private bool IsContain(Busho cmpBusho)
+        {
+            bool cond = false;
+            foreach (var decked in DeckedBushos)
+            {
+                if (decked.OriginBusho.Id == cmpBusho.Id)
+                {
+                    cond = true;
+                    break;
+                }
+            }
+
+            return cond;
+        }
+        #endregion
+        #endregion
     }
 }

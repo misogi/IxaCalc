@@ -18,7 +18,7 @@
         /// <summary>
         /// 特
         /// </summary>
-        Rare= 2,
+        Rare = 2,
 
         /// <summary>
         /// 極

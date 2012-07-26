@@ -19,11 +19,12 @@ namespace IxaCalc.Model
         public List<Soldier> GetSoldierTypes()
         {
             var list = new List<Soldier>();
-            var items = RankDictionary.soldiers;
+            var items = RankDictionary.Soldiers;
             foreach (KeyValuePair<SoldierTypes, Soldier> pair in items)
             {
                 list.Add(pair.Value);
             }
+
             return list;
         }
 

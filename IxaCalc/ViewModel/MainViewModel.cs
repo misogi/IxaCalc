@@ -103,134 +103,6 @@ namespace IxaCalc.ViewModel
             this.Execute("特");
         }
 
-        /// <summary>
-        /// デッキ追加イベント実行
-        /// </summary>
-        /// <param name="busho">武将</param>
-        public void SetDeckExecute(Busho busho)
-        {
-            if (MainDeck.DeckedBushos.Count >= 4)
-            {
-                return;
-            }
-
-            if(busho == null)
-            {
-                return;
-            }
-            this._mainDeck.Add(busho);
-            MessengerInstance.Send(new DialogMessage("click", result => { }));
-            string[] keys = { "Busho1", "Busho2", "Busho3", "Busho4" };
-            foreach (var key in keys)
-            {
-                RaisePropertyChanged(key);
-            }
-        }
-
-        /// <summary>
-        /// ランクアップコマンド用メソッド
-        /// </summary>
-        /// <param name="index">ランクアップする武将のデッキ上での位置</param>
-        public void RankUpExecute(int index)
-        {
-            MainDeck.RankUp(index);
-            MessengerInstance.Send(new DialogMessage("up", result => { }));
-        }
-
-        /// <summary>
-        /// ランクダウンコマンド実行
-        /// </summary>
-        /// <param name="index">ランクダウンしたい武将のデッキ上での位置</param>
-        public void RankDownExecute(int index)
-        {
-            MainDeck.RankDown(index);
-            MessengerInstance.Send(new DialogMessage("down", result => { }));
-        }
-        
-        /// <summary>
-        /// デッキから削除する
-        /// </summary>
-        /// <param name="index">デッキ上での位置 負の値だとデッキの最後のものを削除</param>
-        public void RemoveDeckExecute(int index)
-        {
-            if (MainDeck.DeckedBushos.Count <= 0)
-            {
-                return;
-            }
-
-            if (index < 0)
-            {
-                MainDeck.RemoveLast();
-            }
-            else
-            {
-                this.MainDeck.Remove(index);
-            }
-
-            MessengerInstance.Send(new DialogMessage("cancel", result => { }));
-            string[] keys = { "Busho1", "Busho2", "Busho3", "Busho4" };
-            foreach (var key in keys)
-            {
-                RaisePropertyChanged(key);
-            }
-        }
-
-        #region メソッド
-        /// <summary>
-        /// 兵種を切り替える
-        /// </summary>
-        /// <param name="str">兵種名（enumに従う）</param>
-        private void ChangeSoldierExecute(string str)
-        {
-            var type = (SoldierTypes)Enum.Parse(typeof(SoldierTypes), str, false);
-            MainDeck.SwitchSoldierType(type);
-            MessengerInstance.Send(new DialogMessage("click", result => { }));
-        }
-
-        /// <summary>
-        /// レアリティを切り替える
-        /// </summary>
-        /// <param name="raritystr">レアリティ名(enumに従う) </param>
-        private void Execute(string raritystr)
-        {
-            CurrentRarity = RankDictionary.rarity[raritystr];
-            var list1 = from p in _allBushoList where p.Rarity == CurrentRarity orderby p.Id select p;
-            BushoList = new ObservableCollection<Busho>(list1);
-            MessengerInstance.Send(new DialogMessage("busholist", result => { }));
-        }
-
-        /// <summary>
-        /// 次のレアリティに切り替えるコマンドの処理
-        /// </summary>
-        /// <param name="index">現在選択されているリスト上での位置</param>
-        private void NextRarityExecute(int index)
-        {
-            if ((int)CurrentRarity > 0)
-            {
-                CurrentRarity = CurrentRarity - 1;
-                var list1 = from p in _allBushoList where p.Rarity == CurrentRarity orderby p.Id select p;
-                BushoList = new ObservableCollection<Busho>(list1);
-                MessengerInstance.Send(new NotificationMessage<int>(index, "bushoList"));
-            }
-        }
-
-        /// <summary>
-        /// 手前のレアリティに切り替えるコマンドの処理
-        /// </summary>
-        /// <param name="index">現在選択されているリスト上での位置</param>
-        private void PreviousRarityExecute(int index)
-        {
-            if (CurrentRarity < RarityRank.UltraRare)
-            {
-                CurrentRarity = CurrentRarity + 1;
-                var list1 = from p in _allBushoList where p.Rarity == CurrentRarity orderby p.Id select p;
-                BushoList = new ObservableCollection<Busho>(list1);
-                MessengerInstance.Send(new NotificationMessage<int>(index, "bushoList"));
-            }
-        }
-        #endregion
-
-
         #region プロパティ
 
         /// <summary>
@@ -272,7 +144,6 @@ namespace IxaCalc.ViewModel
         /// 武将のランクダウンコマンド
         /// </summary>
         public RelayCommand<int> RankDownCommand { get; private set; }
-
 
         /// <summary>
         /// レアリティで指定された武将のリスト
@@ -344,7 +215,137 @@ namespace IxaCalc.ViewModel
 
         #endregion
 
+        #region メソッド
 
+        /// <summary>
+        /// デッキ追加イベント実行
+        /// </summary>
+        /// <param name="busho">武将</param>
+        public void SetDeckExecute(Busho busho)
+        {
+            if (MainDeck.DeckedBushos.Count >= 4)
+            {
+                return;
+            }
+
+            if (busho == null)
+            {
+                return;
+            }
+
+            this._mainDeck.Add(busho);
+            MessengerInstance.Send(new DialogMessage("click", result => { }));
+            string[] keys = { "Busho1", "Busho2", "Busho3", "Busho4" };
+            foreach (var key in keys)
+            {
+                RaisePropertyChanged(key);
+            }
+        }
+
+        /// <summary>
+        /// ランクアップコマンド用メソッド
+        /// </summary>
+        /// <param name="index">ランクアップする武将のデッキ上での位置</param>
+        public void RankUpExecute(int index)
+        {
+            MainDeck.RankUp(index);
+            MessengerInstance.Send(new DialogMessage("up", result => { }));
+        }
+
+        /// <summary>
+        /// ランクダウンコマンド実行
+        /// </summary>
+        /// <param name="index">ランクダウンしたい武将のデッキ上での位置</param>
+        public void RankDownExecute(int index)
+        {
+            MainDeck.RankDown(index);
+            MessengerInstance.Send(new DialogMessage("down", result => { }));
+        }
+
+        /// <summary>
+        /// デッキから削除する
+        /// </summary>
+        /// <param name="index">デッキ上での位置 負の値だとデッキの最後のものを削除</param>
+        public void RemoveDeckExecute(int index)
+        {
+            if (MainDeck.DeckedBushos.Count <= 0)
+            {
+                return;
+            }
+
+            if (index < 0)
+            {
+                MainDeck.RemoveLast();
+            }
+            else
+            {
+                this.MainDeck.Remove(index);
+            }
+
+            MessengerInstance.Send(new DialogMessage("cancel", result => { }));
+            string[] keys = { "Busho1", "Busho2", "Busho3", "Busho4" };
+            foreach (var key in keys)
+            {
+                RaisePropertyChanged(key);
+            }
+        }
+
+        #region private
+
+        /// <summary>
+        /// 兵種を切り替える
+        /// </summary>
+        /// <param name="str">兵種名（enumに従う）</param>
+        private void ChangeSoldierExecute(string str)
+        {
+            var type = (SoldierTypes)Enum.Parse(typeof(SoldierTypes), str, false);
+            MainDeck.SwitchSoldierType(type);
+            MessengerInstance.Send(new DialogMessage("click", result => { }));
+        }
+
+        /// <summary>
+        /// レアリティを切り替える
+        /// </summary>
+        /// <param name="raritystr">レアリティ名(enumに従う) </param>
+        private void Execute(string raritystr)
+        {
+            CurrentRarity = RankDictionary.Rarity[raritystr];
+            var list1 = from p in _allBushoList where p.Rarity == CurrentRarity orderby p.Id select p;
+            BushoList = new ObservableCollection<Busho>(list1);
+            MessengerInstance.Send(new DialogMessage("busholist", result => { }));
+        }
+
+        /// <summary>
+        /// 次のレアリティに切り替えるコマンドの処理
+        /// </summary>
+        /// <param name="index">現在選択されているリスト上での位置</param>
+        private void NextRarityExecute(int index)
+        {
+            if ((int)CurrentRarity > 0)
+            {
+                CurrentRarity = CurrentRarity - 1;
+                var list1 = from p in _allBushoList where p.Rarity == CurrentRarity orderby p.Id select p;
+                BushoList = new ObservableCollection<Busho>(list1);
+                MessengerInstance.Send(new NotificationMessage<int>(index, "bushoList"));
+            }
+        }
+
+        /// <summary>
+        /// 手前のレアリティに切り替えるコマンドの処理
+        /// </summary>
+        /// <param name="index">現在選択されているリスト上での位置</param>
+        private void PreviousRarityExecute(int index)
+        {
+            if (CurrentRarity < RarityRank.UltraRare)
+            {
+                CurrentRarity = CurrentRarity + 1;
+                var list1 = from p in _allBushoList where p.Rarity == CurrentRarity orderby p.Id select p;
+                BushoList = new ObservableCollection<Busho>(list1);
+                MessengerInstance.Send(new NotificationMessage<int>(index, "bushoList"));
+            }
+        }
+        #endregion
+        #endregion
         ////public override void Cleanup()
         ////{
         ////    // Clean up if needed

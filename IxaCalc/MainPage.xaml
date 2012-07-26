@@ -119,7 +119,7 @@
                  Background="#FF272727"
                  Foreground="White"
                  ItemsSource="{Binding BushoList}"
-                 SelectionChanged="bushoList_SelectionChanged"
+                 SelectionChanged="BushoListSelectionChanged"
                  Template="{StaticResource BushoListBoxTemplate}">
             <i:Interaction.Triggers>
                 <ei:KeyTrigger Key="Enter">
@@ -167,7 +167,7 @@
                                           HorizontalAlignment="Stretch"
                                           VerticalAlignment="Stretch"
                                           Background="Black"
-                                          MouseLeftButtonDown="bushoList_MouseLeftButtonDown">
+                                          MouseLeftButtonDown="BushoListMouseLeftButtonDown">
                                         <ContentPresenter />
                                     </Grid>
                                 </Border>

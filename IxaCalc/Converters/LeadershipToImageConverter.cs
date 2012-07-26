@@ -1,11 +1,11 @@
 ﻿namespace IxaCalc.Converters
 {
     using System;
+    using System.Globalization;
     using System.Windows.Data;
     using System.Windows.Media;
-    using System.Globalization;
-    using IxaCalc.Model;
     using IxaCalc.Enums;
+    using IxaCalc.Model;
 
     /// <summary>
     /// 統率力を画像に変換する
@@ -23,7 +23,7 @@
         public object Convert(object value, Type targetType, object parameter, CultureInfo culture)
         {
             var rank = (LeadershipRank)value;
-            return RankDictionary.leadershipImage[rank];
+            return RankDictionary.LeadershipImage[rank];
         }
 
         /// <summary>
