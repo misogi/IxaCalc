@@ -1,10 +1,12 @@
 ﻿namespace IxaCalc.Model
 {
     using System.ComponentModel;
+    using System.Diagnostics.CodeAnalysis;
 
     /// <summary>
     /// モデルの基底クラス プロパティ変更に対応
     /// </summary>
+    [SuppressMessage("StyleCop.CSharp.DocumentationRules", "SA1650:ElementDocumentationMustBeSpelledCorrectly", Justification = "Reviewed. Suppression is OK here.")]
     public class ModelBase : INotifyPropertyChanged
     {
         /// <summary>

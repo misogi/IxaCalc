@@ -50,7 +50,7 @@
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\IxaCalc\IxaCalc.csproj">
-      <Project>{A448D968-FDEB-475C-954C-8444DA46E3AF}</Project>
+      <Project>{a448d968-fdeb-475c-954c-8444da46e3af}</Project>
       <Name>IxaCalc</Name>
     </ProjectReference>
   </ItemGroup>
