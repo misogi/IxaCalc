@@ -12,3 +12,5 @@ TraceAndTestImpact.testsettings
 *.vsmdi
 ~$*
 iranai/
+packages/
+IxaCalc.sln.DotSettings.user
