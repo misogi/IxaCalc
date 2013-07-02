@@ -83,7 +83,7 @@
                     <Image Width="18"
                            Height="18"
                            Source="Images/SoldierNumber.png" />
-                    <TextBlock Text="{Binding OriginBusho.SoldierNumber}" />
+                    <TextBlock Text="{Binding ActualSoldierNumber}" />
                 </StackPanel>
             </StackPanel>
             <StackPanel VerticalAlignment="Top" Width="70" Margin="0,8,0,0">

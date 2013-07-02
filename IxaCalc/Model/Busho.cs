@@ -1,7 +1,6 @@
 ﻿namespace IxaCalc.Model
 {
     using System;
-    using System.ComponentModel;
     using System.Windows.Media;
     using System.Windows.Media.Imaging;
 

@@ -13,48 +13,24 @@
     public class RankDictionary
     {
         /// <summary>
-        /// 文字列からランク値を取得
-        /// </summary>
-        public static Dictionary<string, LeadershipRank> Rank = new Dictionary<string, LeadershipRank>
-            {
-                { "F", LeadershipRank.F },
-                { "E", LeadershipRank.E },
-                { "D", LeadershipRank.D },
-                { "C", LeadershipRank.C },
-                { "B", LeadershipRank.B },
-                { "A", LeadershipRank.A },
-                { ".S", LeadershipRank.S },
-                { "SS", LeadershipRank.SS },
-                { "SSS", LeadershipRank.SSS }
-            };
-
-        /// <summary>
         /// レアリティ文字列からレアリティを取得
-        /// TODO: 消す
         /// </summary>
-        public static Dictionary<string, RarityRank> Rarity = new Dictionary<string, RarityRank>
-            {
-                { "序", RarityRank.Common },
-                { "上", RarityRank.Uncommon },
-                { "特", RarityRank.Rare },
-                { "極", RarityRank.SuperRare },
-                { "天", RarityRank.UltraRare }
-            };
+        private static Dictionary<string, RarityRank> rarity;
 
         /// <summary>
         /// レアリティから画像を取得
         /// </summary>
-        public static Dictionary<RarityRank, ImageSource> RarityImage;
+        private static Dictionary<RarityRank, ImageSource> rarityImage;
 
         /// <summary>
         /// 統率力ランクから画像を取得
         /// </summary>
-        public static Dictionary<LeadershipRank, ImageSource> LeadershipImage;
+        private static Dictionary<LeadershipRank, ImageSource> leadershipImage;
 
         /// <summary>
         /// 兵種から兵士ステータスと取得
         /// </summary>
-        private static Dictionary<SoldierTypes, Soldier> _soldiers = new Dictionary<SoldierTypes, Soldier>
+        private static Dictionary<SoldierTypes, Soldier> soldiers = new Dictionary<SoldierTypes, Soldier>
             {
                 { SoldierTypes.Spear, new Soldier("足軽", 11, 11, SoldierTypes.Spear) },
                 { SoldierTypes.Bow, new Soldier("弓足軽", 10, 12, SoldierTypes.Bow) },
@@ -71,20 +47,52 @@
             };
 
         /// <summary>
-        /// static武将データ辞書
+        /// The rank.
+        /// </summary>
+        private static Dictionary<string, LeadershipRank> rank;
+
+        /// <summary>
+        /// static武将データ辞書 コンストラクタ
         /// </summary>
         static RankDictionary()
         {
-            RarityImage = new Dictionary<RarityRank, ImageSource>();
-            LeadershipImage = new Dictionary<LeadershipRank, ImageSource>();
-            var strs = new string[] { "Common", "Uncommon", "Rare", "SuperRare", "UltraRare" };
+            rarityImage = new Dictionary<RarityRank, ImageSource>();
+            leadershipImage = new Dictionary<LeadershipRank, ImageSource>();
+
+
+            leadershipImage[LeadershipRank.Nothing] = null;
+
+            rank = new Dictionary<string, LeadershipRank>
+            {
+                { "F", LeadershipRank.F },
+                { "E", LeadershipRank.E },
+                { "D", LeadershipRank.D },
+                { "C", LeadershipRank.C },
+                { "B", LeadershipRank.B },
+                { "A", LeadershipRank.A },
+                { ".S", LeadershipRank.S },
+                { "SS", LeadershipRank.SS },
+                { "SSS", LeadershipRank.SSS }
+            };
+
+
+            rarity = new Dictionary<string, RarityRank>
+            {
+                { "序", RarityRank.Common },
+                { "上", RarityRank.Uncommon },
+                { "特", RarityRank.Rare },
+                { "極", RarityRank.SuperRare },
+                { "天", RarityRank.UltraRare }
+            };
+
+            var strs = new[] { "Common", "Uncommon", "Rare", "SuperRare", "UltraRare" };
             foreach (var str in strs)
             {
                 var urlstr = string.Format("Images/{0}.png", str);
                 var uri = new Uri(urlstr, UriKind.Relative);
                 var bmp = new BitmapImage(uri);
                 var type = (RarityRank)Enum.Parse(typeof(RarityRank), str, false);
-                RarityImage[type] = bmp;
+                rarityImage[type] = bmp;
             }
 
             foreach (KeyValuePair<string, LeadershipRank> r in Rank)
@@ -92,10 +100,8 @@
                 var urlstr = string.Format("Images/Leadership/{0}.png", r.Value.ToString());
                 var uri = new Uri(urlstr, UriKind.Relative);
                 var bmp = new BitmapImage(uri);
-                LeadershipImage[r.Value] = bmp;
+                leadershipImage[r.Value] = bmp;
             }
-
-            LeadershipImage[LeadershipRank.Nothing] = null;
         }
 
         /// <summary>
@@ -103,8 +109,53 @@
         /// </summary>
         public static Dictionary<SoldierTypes, Soldier> Soldiers
         {
-            get { return RankDictionary._soldiers; }
-            set { RankDictionary._soldiers = value; }
+            get { return RankDictionary.soldiers; }
+            set { RankDictionary.soldiers = value; }
+        }
+
+        /// <summary>
+        /// 文字列からランク値を取得
+        /// </summary>
+        public static Dictionary<string, LeadershipRank> Rank
+        {
+            get
+            {
+                return rank;
+            }
+        }
+
+        /// <summary>
+        /// レアリティ文字列からレアリティを取得
+        /// TODO: 消す
+        /// </summary>
+        public static Dictionary<string, RarityRank> Rarity
+        {
+            get
+            {
+                return rarity;
+            }
+        }
+
+        /// <summary>
+        /// レアリティから画像を取得
+        /// </summary>
+        public static Dictionary<RarityRank, ImageSource> RarityImage
+        {
+            get
+            {
+                return rarityImage;
+            }
+        }
+
+        /// <summary>
+        /// 統率力ランクから画像を取得
+        /// </summary>
+        public static Dictionary<LeadershipRank, ImageSource> LeadershipImage
+        {
+            get
+            {
+                return leadershipImage;
+            }
         }
     }
 }

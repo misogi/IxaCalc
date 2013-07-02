@@ -25,6 +25,11 @@
         private int _bushoDefence;
 
         /// <summary>
+        /// The actual soldier number.
+        /// </summary>
+        private int actualSoldierNumber;
+
+        /// <summary>
         /// 兵士含む攻撃力
         /// </summary>
         private double _actualAttack;
@@ -451,6 +456,24 @@
                 return RankDictionary.RarityImage[OriginBusho.Rarity];
             }
         }
+
+        /// <summary>
+        /// The actual soldier number.
+        /// </summary>
+        public int ActualSoldierNumber
+        {
+            get
+            {
+                return this.actualSoldierNumber;
+            }
+
+            set
+            {
+                this.actualSoldierNumber = value;
+                OnPropertyChanged("ActualSoldierNumber");
+            }
+        }
+
         #endregion
 
         #region メソッド
@@ -487,8 +510,9 @@
             Percent = CalculatePercent(_originBusho);
             BushoAttack = _originBusho.Attack + (_originBusho.AttackGrowth * RankToBonusPoint(Rank));
             BushoDefence = _originBusho.Defence + (_originBusho.DefenceGrowth * RankToBonusPoint(Rank));
-            ActualAttack = (BushoAttack + (_originBusho.SoldierNumber * RankDictionary.Soldiers[CurrentSoldierType].Attack)) * Percent;
-            ActualDefence = (BushoDefence + (_originBusho.SoldierNumber * RankDictionary.Soldiers[CurrentSoldierType].Defence)) * Percent;
+            ActualSoldierNumber = _originBusho.SoldierNumber + (this.Rank * 100);
+            ActualAttack = (BushoAttack + (this.ActualSoldierNumber * RankDictionary.Soldiers[CurrentSoldierType].Attack)) * Percent;
+            ActualDefence = (BushoDefence + (this.ActualSoldierNumber * RankDictionary.Soldiers[CurrentSoldierType].Defence)) * Percent;
             ActualDefencePerCost = ActualDefence / _originBusho.Cost;
             ActualAttackBar = ActualAttack > 100000 ? 1.0 : ActualAttack / 100000;
             ActualLeadershipAttack = ActualAttack / RankDictionary.Soldiers[CurrentSoldierType].Attack;
