@@ -852,5 +852,6 @@
                   ClickMode="Press"
                   Content="CheckBox"
                   Template="{StaticResource SoundButton}" />
+        <my:BushoList/>
     </Grid>
 </UserControl>

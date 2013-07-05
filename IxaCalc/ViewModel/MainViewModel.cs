@@ -1,5 +1,8 @@
-﻿using GalaSoft.MvvmLight;
-using IxaCalc.Model;
+﻿// --------------------------------------------------------------------------------------------------------------------
+// <copyright file="MainViewModel.cs" company="">
+//   
+// </copyright>
+// --------------------------------------------------------------------------------------------------------------------
 
 namespace IxaCalc.ViewModel
 {
@@ -7,59 +10,60 @@ namespace IxaCalc.ViewModel
     using System.Collections.Generic;
     using System.Collections.ObjectModel;
     using System.Linq;
-    using System.Windows;
-    using System.Windows.Controls;
-    using System.Windows.Input;
 
+    using GalaSoft.MvvmLight;
     using GalaSoft.MvvmLight.Command;
     using GalaSoft.MvvmLight.Messaging;
 
     using IxaCalc.Enums;
+    using IxaCalc.Model;
 
     /// <summary>
-    /// This class contains properties that the main View can data bind to.
-    /// <para>
-    /// Use the <strong>mvvminpc</strong> snippet to add bindable properties to this ViewModel.
-    /// </para>
-    /// <para>
-    /// See http://www.galasoft.ch/mvvm
-    /// </para>
+    ///     This class contains properties that the main View can data bind to.
+    ///     <para>
+    ///         Use the <strong>mvvminpc</strong> snippet to add bindable properties to this ViewModel.
+    ///     </para>
+    ///     <para>
+    ///         See http://www.galasoft.ch/mvvm
+    ///     </para>
     /// </summary>
     public class MainViewModel : ViewModelBase
     {
-        #region フィールド
+        #region Fields
 
         /// <summary>
-        /// データ取得用オブジェクト
+        ///     データ取得用オブジェクト
         /// </summary>
         private readonly IDataService _dataService;
 
         /// <summary>
-        /// 現在のレアリティ
+        ///     メインデッキ
         /// </summary>
-        private RarityRank _currentRarity;
+        private readonly Deck _mainDeck;
 
         /// <summary>
-        /// すべての武将リスト
+        ///     すべての武将リスト
         /// </summary>
         private ObservableCollection<Busho> _allBushoList;
 
         /// <summary>
-        /// 表示する武将リスト
+        ///     表示する武将リスト
         /// </summary>
         private ObservableCollection<Busho> _bushoList;
 
         /// <summary>
-        /// メインデッキ
+        ///     現在のレアリティ
         /// </summary>
-        private Deck _mainDeck;
+        private RarityRank _currentRarity;
 
         /// <summary>
-        /// 兵種リスト
+        ///     兵種リスト
         /// </summary>
         private List<Soldier> _soldierTypes;
 
         #endregion
+
+        #region Constructors and Destructors
 
         /// <summary>
         /// コンストラクタ
@@ -69,141 +73,100 @@ namespace IxaCalc.ViewModel
         /// </param>
         public MainViewModel(IDataService dataService)
         {
-            _dataService = dataService;
-            _dataService.GetData(
+            this._dataService = dataService;
+            this._dataService.GetData(
                 (items, error) =>
-                {
-                    if (error != null)
                     {
-                        // Report error here
-                        return;
-                    }
+                        if (error != null)
+                        {
+                            // Report error here
+                            return;
+                        }
 
-                    _allBushoList = items;
-                });
-            SoldierTypes = _dataService.GetSoldierTypes();
+                        this._allBushoList = items;
+                    });
+            this.SoldierTypes = this._dataService.GetSoldierTypes();
             this._mainDeck = new Deck();
 
-            SetDeckCommand = new RelayCommand<Busho>(this.SetDeckExecute);
+            this.BushoListRarityChangeCommand = new RelayCommand(this.BushoListRarityChangeExecute);
 
-            RemoveDeckCommand = new RelayCommand<int>(this.RemoveDeckExecute);
+            this.SetDeckCommand = new RelayCommand<Busho>(this.SetDeckExecute);
 
-            ChangeSoldierCommand = new RelayCommand<string>(this.ChangeSoldierExecute);
-            
-            ChangeRarityCommand = new RelayCommand<string>(this.Execute);
+            this.RemoveDeckCommand = new RelayCommand<int>(this.RemoveDeckExecute);
 
-            NextRarityCommand = new RelayCommand<int>(this.NextRarityExecute);
+            this.ChangeSoldierCommand = new RelayCommand<string>(this.ChangeSoldierExecute);
 
-            PreviousRarityCommand = new RelayCommand<int>(this.PreviousRarityExecute);
+            this.ChangeRarityCommand = new RelayCommand<string>(this.Execute);
 
-            RankUpCommand = new RelayCommand<int>(this.RankUpExecute);
-            
-            RankDownCommand = new RelayCommand<int>(this.RankDownExecute);
+            this.NextRarityCommand = new RelayCommand<int>(this.NextRarityExecute);
+
+            this.PreviousRarityCommand = new RelayCommand<int>(this.PreviousRarityExecute);
+
+            this.RankUpCommand = new RelayCommand<int>(this.RankUpExecute);
+
+            this.RankDownCommand = new RelayCommand<int>(this.RankDownExecute);
 
             this.Execute("特");
         }
 
-        #region プロパティ
+        #endregion
+
+        #region Public Properties
 
         /// <summary>
-        /// デッキにセットするイベント
-        /// </summary>
-        public RelayCommand<Busho> SetDeckCommand { get; private set; }
-
-        /// <summary>
-        /// デッキから削除するイベント
-        /// </summary>
-        public RelayCommand<int> RemoveDeckCommand { get; private set; }
-
-        /// <summary>
-        /// 兵種を切り替えるコマンド
-        /// </summary>
-        public RelayCommand<string> ChangeSoldierCommand { get; private set; }
-
-        /// <summary>
-        /// レアリティを任意のものに切り替えるコマンド
-        /// </summary>
-        public RelayCommand<string> ChangeRarityCommand { get; private set; }
-
-        /// <summary>
-        /// レアリティを次に切り替えるコマンド
-        /// </summary>
-        public RelayCommand<int> NextRarityCommand { get; private set; }
-
-        /// <summary>
-        /// レアリティを手前に切り替えるコマンド
-        /// </summary>
-        public RelayCommand<int> PreviousRarityCommand { get; private set; }
-
-        /// <summary>
-        /// 武将のランクアップコマンド
-        /// </summary>
-        public RelayCommand<int> RankUpCommand { get; private set; }
-
-        /// <summary>
-        /// 武将のランクダウンコマンド
-        /// </summary>
-        public RelayCommand<int> RankDownCommand { get; private set; }
-
-        /// <summary>
-        /// レアリティで指定された武将のリスト
+        ///     レアリティで指定された武将のリスト
         /// </summary>
         public ObservableCollection<Busho> BushoList
         {
             get
             {
-                return _bushoList;
+                return this._bushoList;
             }
 
             set
             {
-                _bushoList = value;
-                RaisePropertyChanged("BushoList");
+                this._bushoList = value;
+                this.RaisePropertyChanged("BushoList");
             }
         }
 
         /// <summary>
-        /// 兵士のタイプ
+        /// Gets the busho list rarity change command.
+        /// </summary>BushoListRarityChangeCommand
+        public RelayCommand BushoListRarityChangeCommand { get; private set; }
+
+        /// <summary>
+        ///     レアリティを任意のものに切り替えるコマンド
         /// </summary>
-        public List<Soldier> SoldierTypes
-        {
-            get
-            {
-                return _soldierTypes;
-            }
-
-            set
-            {
-                if (_soldierTypes != value)
-                {
-                    _soldierTypes = value;
-                    RaisePropertyChanged("SoldierTypes");
-                }
-            }
-        }
+        public RelayCommand<string> ChangeRarityCommand { get; private set; }
 
         /// <summary>
-        /// 現在選択されている絞り込み用レアリティ
+        ///     兵種を切り替えるコマンド
+        /// </summary>
+        public RelayCommand<string> ChangeSoldierCommand { get; private set; }
+
+        /// <summary>
+        ///     現在選択されている絞り込み用レアリティ
         /// </summary>
         public RarityRank CurrentRarity
         {
             get
             {
-                return _currentRarity;
+                return this._currentRarity;
             }
 
             set
             {
-                if (_currentRarity != value)
+                if (this._currentRarity != value)
                 {
-                    _currentRarity = value;
-                    RaisePropertyChanged("CurrentRarity");
+                    this._currentRarity = value;
+                    this.RaisePropertyChanged("CurrentRarity");
                 }
             }
         }
 
         /// <summary>
-        /// 部隊デッキ
+        ///     部隊デッキ
         /// </summary>
         public Deck MainDeck
         {
@@ -213,17 +176,135 @@ namespace IxaCalc.ViewModel
             }
         }
 
+        /// <summary>
+        ///     レアリティを次に切り替えるコマンド
+        /// </summary>
+        public RelayCommand<int> NextRarityCommand { get; private set; }
+
+        /// <summary>
+        ///     レアリティを手前に切り替えるコマンド
+        /// </summary>
+        public RelayCommand<int> PreviousRarityCommand { get; private set; }
+
+        /// <summary>
+        ///     武将のランクダウンコマンド
+        /// </summary>
+        public RelayCommand<int> RankDownCommand { get; private set; }
+
+        /// <summary>
+        ///     武将のランクアップコマンド
+        /// </summary>
+        public RelayCommand<int> RankUpCommand { get; private set; }
+
+        /// <summary>
+        ///     デッキから削除するイベント
+        /// </summary>
+        public RelayCommand<int> RemoveDeckCommand { get; private set; }
+
+        /// <summary>
+        ///     デッキにセットするイベント
+        /// </summary>
+        public RelayCommand<Busho> SetDeckCommand { get; private set; }
+
+        /// <summary>
+        ///     兵士のタイプ
+        /// </summary>
+        public List<Soldier> SoldierTypes
+        {
+            get
+            {
+                return this._soldierTypes;
+            }
+
+            set
+            {
+                if (this._soldierTypes != value)
+                {
+                    this._soldierTypes = value;
+                    this.RaisePropertyChanged("SoldierTypes");
+                }
+            }
+        }
+
         #endregion
 
-        #region メソッド
+        #region Public Methods and Operators
+
+        /// <summary>
+        /// The busho list rarity change execute.
+        /// </summary>
+        public void BushoListRarityChangeExecute()
+        {
+            List<Busho> l = new List<Busho>();
+            var b = new Busho(1001, "天", "織田にょぶにゃが", 3.5, 3500, "A", "B", "A", ".S", 745, 710, 465, 19, 19, 2.5);
+            l.Add(b);
+            this.BushoList = new ObservableCollection<Busho>(l);
+            this.RaisePropertyChanged("BushoList");
+        }
+
+        /// <summary>
+        /// ランクダウンコマンド実行
+        /// </summary>
+        /// <param name="index">
+        /// ランクダウンしたい武将のデッキ上での位置
+        /// </param>
+        public void RankDownExecute(int index)
+        {
+            this.MainDeck.RankDown(index);
+            this.MessengerInstance.Send(new DialogMessage("down", result => { }));
+        }
+
+        /// <summary>
+        /// ランクアップコマンド用メソッド
+        /// </summary>
+        /// <param name="index">
+        /// ランクアップする武将のデッキ上での位置
+        /// </param>
+        public void RankUpExecute(int index)
+        {
+            this.MainDeck.RankUp(index);
+            this.MessengerInstance.Send(new DialogMessage("up", result => { }));
+        }
+
+        /// <summary>
+        /// デッキから削除する
+        /// </summary>
+        /// <param name="index">
+        /// デッキ上での位置 負の値だとデッキの最後のものを削除
+        /// </param>
+        public void RemoveDeckExecute(int index)
+        {
+            if (this.MainDeck.DeckedBushos.Count <= 0)
+            {
+                return;
+            }
+
+            if (index < 0)
+            {
+                this.MainDeck.RemoveLast();
+            }
+            else
+            {
+                this.MainDeck.Remove(index);
+            }
+
+            this.MessengerInstance.Send(new DialogMessage("cancel", result => { }));
+            string[] keys = { "Busho1", "Busho2", "Busho3", "Busho4" };
+            foreach (string key in keys)
+            {
+                this.RaisePropertyChanged(key);
+            }
+        }
 
         /// <summary>
         /// デッキ追加イベント実行
         /// </summary>
-        /// <param name="busho">武将</param>
+        /// <param name="busho">
+        /// 武将
+        /// </param>
         public void SetDeckExecute(Busho busho)
         {
-            if (MainDeck.DeckedBushos.Count >= 4)
+            if (this.MainDeck.DeckedBushos.Count >= 4)
             {
                 return;
             }
@@ -234,118 +315,90 @@ namespace IxaCalc.ViewModel
             }
 
             this._mainDeck.Add(busho);
-            MessengerInstance.Send(new DialogMessage("click", result => { }));
+            this.MessengerInstance.Send(new DialogMessage("click", result => { }));
             string[] keys = { "Busho1", "Busho2", "Busho3", "Busho4" };
-            foreach (var key in keys)
+            foreach (string key in keys)
             {
-                RaisePropertyChanged(key);
+                this.RaisePropertyChanged(key);
             }
         }
 
-        /// <summary>
-        /// ランクアップコマンド用メソッド
-        /// </summary>
-        /// <param name="index">ランクアップする武将のデッキ上での位置</param>
-        public void RankUpExecute(int index)
-        {
-            MainDeck.RankUp(index);
-            MessengerInstance.Send(new DialogMessage("up", result => { }));
-        }
+        #endregion
 
-        /// <summary>
-        /// ランクダウンコマンド実行
-        /// </summary>
-        /// <param name="index">ランクダウンしたい武将のデッキ上での位置</param>
-        public void RankDownExecute(int index)
-        {
-            MainDeck.RankDown(index);
-            MessengerInstance.Send(new DialogMessage("down", result => { }));
-        }
-
-        /// <summary>
-        /// デッキから削除する
-        /// </summary>
-        /// <param name="index">デッキ上での位置 負の値だとデッキの最後のものを削除</param>
-        public void RemoveDeckExecute(int index)
-        {
-            if (MainDeck.DeckedBushos.Count <= 0)
-            {
-                return;
-            }
-
-            if (index < 0)
-            {
-                MainDeck.RemoveLast();
-            }
-            else
-            {
-                this.MainDeck.Remove(index);
-            }
-
-            MessengerInstance.Send(new DialogMessage("cancel", result => { }));
-            string[] keys = { "Busho1", "Busho2", "Busho3", "Busho4" };
-            foreach (var key in keys)
-            {
-                RaisePropertyChanged(key);
-            }
-        }
-
-        #region private
+        #region Methods
 
         /// <summary>
         /// 兵種を切り替える
         /// </summary>
-        /// <param name="str">兵種名（enumに従う）</param>
+        /// <param name="str">
+        /// 兵種名（enumに従う）
+        /// </param>
         private void ChangeSoldierExecute(string str)
         {
             var type = (SoldierTypes)Enum.Parse(typeof(SoldierTypes), str, false);
-            MainDeck.SwitchSoldierType(type);
-            MessengerInstance.Send(new DialogMessage("click", result => { }));
+            this.MainDeck.SwitchSoldierType(type);
+            this.MessengerInstance.Send(new DialogMessage("click", result => { }));
         }
 
         /// <summary>
         /// レアリティを切り替える
         /// </summary>
-        /// <param name="raritystr">レアリティ名(enumに従う) </param>
+        /// <param name="raritystr">
+        /// レアリティ名(enumに従う) 
+        /// </param>
         private void Execute(string raritystr)
         {
-            CurrentRarity = RankDictionary.Rarity[raritystr];
-            var list1 = from p in _allBushoList where p.Rarity == CurrentRarity orderby p.Id select p;
-            BushoList = new ObservableCollection<Busho>(list1);
-            MessengerInstance.Send(new DialogMessage("busholist", result => { }));
+            this.CurrentRarity = RankDictionary.Rarity[raritystr];
+            IOrderedEnumerable<Busho> list1 = from p in this._allBushoList
+                                              where p.Rarity == this.CurrentRarity
+                                              orderby p.Id
+                                              select p;
+            this.BushoList = new ObservableCollection<Busho>(list1);
+            this.MessengerInstance.Send(new DialogMessage("busholist", result => { }));
         }
 
         /// <summary>
         /// 次のレアリティに切り替えるコマンドの処理
         /// </summary>
-        /// <param name="index">現在選択されているリスト上での位置</param>
+        /// <param name="index">
+        /// 現在選択されているリスト上での位置
+        /// </param>
         private void NextRarityExecute(int index)
         {
-            if ((int)CurrentRarity > 0)
+            if ((int)this.CurrentRarity > 0)
             {
-                CurrentRarity = CurrentRarity - 1;
-                var list1 = from p in _allBushoList where p.Rarity == CurrentRarity orderby p.Id select p;
-                BushoList = new ObservableCollection<Busho>(list1);
-                MessengerInstance.Send(new NotificationMessage<int>(index, "bushoList"));
+                this.CurrentRarity = this.CurrentRarity - 1;
+                IOrderedEnumerable<Busho> list1 = from p in this._allBushoList
+                                                  where p.Rarity == this.CurrentRarity
+                                                  orderby p.Id
+                                                  select p;
+                this.BushoList = new ObservableCollection<Busho>(list1);
+                this.MessengerInstance.Send(new NotificationMessage<int>(index, "bushoList"));
             }
         }
 
         /// <summary>
         /// 手前のレアリティに切り替えるコマンドの処理
         /// </summary>
-        /// <param name="index">現在選択されているリスト上での位置</param>
+        /// <param name="index">
+        /// 現在選択されているリスト上での位置
+        /// </param>
         private void PreviousRarityExecute(int index)
         {
-            if (CurrentRarity < RarityRank.UltraRare)
+            if (this.CurrentRarity < RarityRank.UltraRare)
             {
-                CurrentRarity = CurrentRarity + 1;
-                var list1 = from p in _allBushoList where p.Rarity == CurrentRarity orderby p.Id select p;
-                BushoList = new ObservableCollection<Busho>(list1);
-                MessengerInstance.Send(new NotificationMessage<int>(index, "bushoList"));
+                this.CurrentRarity = this.CurrentRarity + 1;
+                IOrderedEnumerable<Busho> list1 = from p in this._allBushoList
+                                                  where p.Rarity == this.CurrentRarity
+                                                  orderby p.Id
+                                                  select p;
+                this.BushoList = new ObservableCollection<Busho>(list1);
+                this.MessengerInstance.Send(new NotificationMessage<int>(index, "bushoList"));
             }
         }
+
         #endregion
-        #endregion
+
         ////public override void Cleanup()
         ////{
         ////    // Clean up if needed
