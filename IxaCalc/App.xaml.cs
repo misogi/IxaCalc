@@ -8,7 +8,7 @@ namespace IxaCalc
     /// <summary>
     /// アプリケーションクラス
     /// </summary>
-    public partial class App : Application
+    public partial class App
     {
         /// <summary>
         /// Initializes a new instance of the <see cref="App"/> class. 

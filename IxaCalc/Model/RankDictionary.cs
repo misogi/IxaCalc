@@ -109,8 +109,8 @@
         /// </summary>
         public static Dictionary<SoldierTypes, Soldier> Soldiers
         {
-            get { return RankDictionary.soldiers; }
-            set { RankDictionary.soldiers = value; }
+            get { return soldiers; }
+            set { soldiers = value; }
         }
 
         /// <summary>

@@ -18,7 +18,7 @@
         {
             InitializeComponent();
             Messenger.Default.Register(this, (Action<DialogMessage>)this.MakeSound);
-            Messenger.Default.Register<NotificationMessage<int>>(this, (Action<NotificationMessage<int>>)this.SetBushoListSelection);
+            Messenger.Default.Register(this, (Action<NotificationMessage<int>>)this.SetBushoListSelection);
         }
 
         #region メソッド

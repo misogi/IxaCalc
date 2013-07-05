@@ -9,7 +9,6 @@
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
              xmlns:my="clr-namespace:IxaCalc"
              xmlns:myc="clr-namespace:IxaCalc.Converters"
-             xmlns:mye="clr-namespace:IxaCalc.Enums"
              x:Name="userControl"
              Width="900"
              Height="600"
