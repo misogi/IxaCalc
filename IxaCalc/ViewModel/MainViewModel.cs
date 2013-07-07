@@ -31,6 +31,7 @@ namespace IxaCalc.ViewModel
     {
         #region Fields
 
+
         /// <summary>
         ///     データ取得用オブジェクト
         /// </summary>
@@ -206,6 +207,7 @@ namespace IxaCalc.ViewModel
         /// </summary>
         public RelayCommand<Busho> SetDeckCommand { get; private set; }
 
+        public string SelectedRarity{get; set;}
         /// <summary>
         ///     兵士のタイプ
         /// </summary>
@@ -235,10 +237,12 @@ namespace IxaCalc.ViewModel
         /// </summary>
         public void BushoListRarityChangeExecute()
         {
-            List<Busho> l = new List<Busho>();
-            var b = new Busho(1001, "天", "織田にょぶにゃが", 3.5, 3500, "A", "B", "A", ".S", 745, 710, 465, 19, 19, 2.5);
-            l.Add(b);
-            this.BushoList = new ObservableCollection<Busho>(l);
+            this.CurrentRarity = RankDictionary.Rarity[this.SelectedRarity];
+            IOrderedEnumerable<Busho> filtered = from p in this._allBushoList
+                                              where p.Rarity == this.CurrentRarity
+                                              orderby p.Id
+                                              select p;
+            this.BushoList = new ObservableCollection<Busho>(filtered);
             this.RaisePropertyChanged("BushoList");
         }
 

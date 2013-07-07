@@ -9,10 +9,11 @@
              xmlns:ei="http://schemas.microsoft.com/expression/2010/interactions"
              xmlns:i="http://schemas.microsoft.com/expression/2010/interactivity"
 	x:Class="IxaCalc.BushoList"
+    Name="myBushoList"
 	d:DesignWidth="640" d:DesignHeight="480">
 
 	<Grid x:Name="LayoutRoot">
-        <ComboBox x:Name="RarityCombo" HorizontalAlignment="Left" Margin="27,38,0,0" VerticalAlignment="Top" Width="120" >
+        <ComboBox x:Name="RarityCombo" HorizontalAlignment="Left" Margin="27,38,0,0" VerticalAlignment="Top" Width="120" SelectedValuePath="Content" SelectedValue="{Binding Path=SelectedRarity, Mode=TwoWay}">
             <i:Interaction.Triggers>
                 <i:EventTrigger EventName="SelectionChanged">
                     <mvvm:EventToCommand Command="{Binding BushoListRarityChangeCommand, Mode=TwoWay}" PassEventArgsToCommand="True" MustToggleIsEnabledValue="True"></mvvm:EventToCommand>
