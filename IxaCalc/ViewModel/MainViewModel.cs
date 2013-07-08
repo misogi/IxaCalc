@@ -96,7 +96,7 @@ namespace IxaCalc.ViewModel
 
             this.RemoveDeckCommand = new RelayCommand<int>(this.RemoveDeckExecute);
 
-            this.ChangeSoldierCommand = new RelayCommand<string>(this.ChangeSoldierExecute);
+            this.ChangeSoldierCommand = new RelayCommand(this.ChangeSoldierExecute);
 
             this.ChangeRarityCommand = new RelayCommand<string>(this.Execute);
 
@@ -145,7 +145,7 @@ namespace IxaCalc.ViewModel
         /// <summary>
         ///     兵種を切り替えるコマンド
         /// </summary>
-        public RelayCommand<string> ChangeSoldierCommand { get; private set; }
+        public RelayCommand ChangeSoldierCommand { get; private set; }
 
         public RelayCommand DeckModeChangeCommand { get; private set; }
 
@@ -213,6 +213,8 @@ namespace IxaCalc.ViewModel
         public string SelectedRarity { get; set; }
         public string SelectedSort { get; set; }
         public string SelectedCost { get; set; }
+        public Soldier SelectedSoldier { get; set; }
+
         /// <summary>
         ///     兵士のタイプ
         /// </summary>
@@ -385,11 +387,13 @@ namespace IxaCalc.ViewModel
         /// <param name="str">
         /// 兵種名（enumに従う）
         /// </param>
-        private void ChangeSoldierExecute(string str)
+        private void ChangeSoldierExecute()
         {
-            var type = (SoldierTypes)Enum.Parse(typeof(SoldierTypes), str, false);
-            this.MainDeck.SwitchSoldierType(type);
-            this.MessengerInstance.Send(new DialogMessage("click", result => { }));
+            if (this.SelectedSoldier != null)
+            {
+                this.MainDeck.SwitchSoldierType(this.SelectedSoldier.SoldierType);
+                this.MessengerInstance.Send(new DialogMessage("click", result => { }));
+            }
         }
 
         /// <summary>

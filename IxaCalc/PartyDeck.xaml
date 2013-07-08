@@ -46,16 +46,12 @@
                 </ItemsPanelTemplate>
             </ListBox.ItemsPanel>
         </ListBox>
-        <ComboBox HorizontalAlignment="Left" Margin="3,-40,0,0" VerticalAlignment="Top" Width="120">
-            <ComboBoxItem>
-                <StackPanel Orientation="Horizontal">
-                    <Image Width="40"
-						Height="40"
-						Margin="2"
-						Source="Images/Samurai.png" />
-                    <TextBlock Name="TypeName" Text="侍" />
-                </StackPanel>
-            </ComboBoxItem>
+        <ComboBox HorizontalAlignment="Left" Margin="3,-40,0,0" VerticalAlignment="Top" Width="120" Name="SoldierType"  ItemsSource="{Binding SoldierTypes}" SelectedItem="{Binding SelectedSoldier, Mode=TwoWay}" DisplayMemberPath="Name">
+            <i:Interaction.Triggers>
+                <i:EventTrigger EventName="SelectionChanged">
+                    <mvvm:EventToCommand Command="{Binding ChangeSoldierCommand, Mode=TwoWay}" PassEventArgsToCommand="True" MustToggleIsEnabledValue="True" CommandParameter="{Binding SelectedItem}"></mvvm:EventToCommand>
+                </i:EventTrigger>
+            </i:Interaction.Triggers>
         </ComboBox>
         <ComboBox HorizontalAlignment="Left" Margin="168,-40,0,0" VerticalAlignment="Top" Width="120" SelectionChanged="ComboBox_SelectionChanged">
             <ComboBoxItem Content="Atk" />
