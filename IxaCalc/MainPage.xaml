@@ -9,7 +9,8 @@
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
              xmlns:my="clr-namespace:IxaCalc"
              xmlns:myc="clr-namespace:IxaCalc.Converters"
-             xmlns:sdk="http://schemas.microsoft.com/winfx/2006/xaml/presentation/sdk" x:Class="IxaCalc.MainPage"
+             xmlns:sdk="http://schemas.microsoft.com/winfx/2006/xaml/presentation/sdk" 
+             x:Class="IxaCalc.MainPage"
              x:Name="userControl"
              Width="1024"
              Height="600"
@@ -20,9 +21,6 @@
             <ResourceDictionary.MergedDictionaries>
                 <ResourceDictionary Source="Skins/MainSkin.xaml" />
             </ResourceDictionary.MergedDictionaries>
-            <Style TargetType="TextBlock">
-                <Setter Property="Foreground" Value="White" />
-            </Style>
             <myc:RarityToCheckedConverter x:Key="rarityConverter" />
             <myc:SoldierTypeToCheckedConverter x:Key="soldierConverter" />
         </ResourceDictionary>
@@ -800,6 +798,6 @@
 			Content="CheckBox"
 			Template="{StaticResource SoundButton}" />
         <my:BushoList Margin="202,48,31,-48" Grid.Column="1"/>
-        <my:PartyDeck HorizontalAlignment="Left" Margin="56,2,0,0" VerticalAlignment="Top" Grid.ColumnSpan="2"/>
+        <my:PartyDeck HorizontalAlignment="Left" Margin="56,2,0,0" VerticalAlignment="Top" Grid.ColumnSpan="2" />
     </Grid>
 </UserControl>

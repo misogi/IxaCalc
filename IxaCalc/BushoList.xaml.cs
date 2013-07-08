@@ -3,6 +3,7 @@
     using System.Windows.Controls;
     using GalaSoft.MvvmLight.Messaging;
     using IxaCalc.ViewModel;
+    using IxaCalc.Model;
 
     /// <summary>
     /// The busho list.
@@ -28,15 +29,15 @@
         /// </summary>
         /// <param name="sender">送信者</param>
         /// <param name="e">パラメータ</param>
-        private void FilteredListMouseLeftButtonDown(object sender, System.Windows.Input.MouseButtonEventArgs e)
+        private void FilteredBushoList_MouseLeftButtonUp(object sender, System.Windows.Input.MouseButtonEventArgs e)
         {
-            if (e.ClickCount == 2)
+        	// TODO: ここにイベント ハンドラーのコードを追加します。
+            var grid = sender as DataGrid;
+            var item = grid.SelectedItem as Busho;
+            var vm = this.DataContext as MainViewModel;
+            if (vm != null)
             {
-                var vm = this.DataContext as MainViewModel;
-                if (vm != null)
-                {
-                    vm.SetDeckCommand.Execute(this.FilteredBushoList.SelectedItem);
-                }
+                vm.SetDeckCommand.Execute(item);
             }
         }
     }
