@@ -1,9 +1,9 @@
 ﻿namespace IxaCalc.Model
 {
     using System.Collections.Generic;
+    using System.Collections.ObjectModel;
     using System.Windows;
     using IxaCalc.Enums;
-    using System.Collections.ObjectModel;
 
     /// <summary>
     /// 部隊

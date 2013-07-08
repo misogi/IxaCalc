@@ -1,10 +1,4 @@
-﻿// --------------------------------------------------------------------------------------------------------------------
-// <copyright file="MainViewModel.cs" company="">
-//   
-// </copyright>
-// --------------------------------------------------------------------------------------------------------------------
-
-namespace IxaCalc.ViewModel
+﻿namespace IxaCalc.ViewModel
 {
     using System;
     using System.Collections.Generic;
@@ -30,7 +24,6 @@ namespace IxaCalc.ViewModel
     public class MainViewModel : ViewModelBase
     {
         #region Fields
-
 
         /// <summary>
         ///     データ取得用オブジェクト
@@ -91,7 +84,6 @@ namespace IxaCalc.ViewModel
 
             this.BushoListRarityChangeCommand = new RelayCommand(this.BushoListRarityChangeExecute);
 
-
             this.SetDeckCommand = new RelayCommand<Busho>(this.SetDeckExecute);
 
             this.RemoveDeckCommand = new RelayCommand<int>(this.RemoveDeckExecute);
@@ -146,8 +138,6 @@ namespace IxaCalc.ViewModel
         ///     兵種を切り替えるコマンド
         /// </summary>
         public RelayCommand ChangeSoldierCommand { get; private set; }
-
-        public RelayCommand DeckModeChangeCommand { get; private set; }
 
         /// <summary>
         ///     現在選択されている絞り込み用レアリティ
@@ -210,9 +200,24 @@ namespace IxaCalc.ViewModel
         /// </summary>
         public RelayCommand<Busho> SetDeckCommand { get; private set; }
 
+        /// <summary>
+        ///     現在選択中のレア度
+        /// </summary>
         public string SelectedRarity { get; set; }
+
+        /// <summary>
+        ///     現在選択中のソート順
+        /// </summary>
         public string SelectedSort { get; set; }
+
+        /// <summary>
+        ///     現在選択中のコスト
+        /// </summary>
         public string SelectedCost { get; set; }
+
+        /// <summary>
+        ///     現在選択中の兵種
+        /// </summary>
         public Soldier SelectedSoldier { get; set; }
 
         /// <summary>
@@ -258,7 +263,6 @@ namespace IxaCalc.ViewModel
                 rareFiltered = new ObservableCollection<Busho>(list);
             }
 
-            
             ObservableCollection<Busho> costFiltered;
 
             if (this.SelectedCost == null)
@@ -283,7 +287,8 @@ namespace IxaCalc.ViewModel
                          select p;
                 sorted = new ObservableCollection<Busho>(list);
             }
-            else {
+            else 
+            {
                 var list = from p in rareFiltered.Intersect(costFiltered)
                          orderby p.Id
                          select p;
@@ -373,8 +378,8 @@ namespace IxaCalc.ViewModel
             {
                 this.RaisePropertyChanged(key);
             }
+
             this.RaisePropertyChanged("MainDeck");
-            
         }
 
         #endregion
@@ -384,9 +389,6 @@ namespace IxaCalc.ViewModel
         /// <summary>
         /// 兵種を切り替える
         /// </summary>
-        /// <param name="str">
-        /// 兵種名（enumに従う）
-        /// </param>
         private void ChangeSoldierExecute()
         {
             if (this.SelectedSoldier != null)

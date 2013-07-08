@@ -12,13 +12,24 @@ using System.Windows.Shapes;
 
 namespace IxaCalc
 {
+    /// <summary>
+    /// 部隊のデッキを表示するユーザーコントロール
+    /// </summary>
     public partial class PartyDeck : UserControl
     {
+        /// <summary>
+        /// コンストラクタ
+        /// </summary>
         public PartyDeck()
         {
             InitializeComponent();
         }
 
+        /// <summary>
+        ///  防御か攻撃かによって、デッキ済武将の表示テンプレートを切り替える。
+        /// </summary>
+        /// <param name="sender">送信者</param>
+        /// <param name="e">パラメータ</param>
         private void ComboBox_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
             var box = sender as ComboBox;

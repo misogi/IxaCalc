@@ -1,10 +1,4 @@
-﻿// --------------------------------------------------------------------------------------------------------------------
-// <copyright file="BushoList.xaml.cs" company="">
-//   
-// </copyright>
-// --------------------------------------------------------------------------------------------------------------------
-
-namespace IxaCalc
+﻿namespace IxaCalc
 {
     using System.Windows.Controls;
     using GalaSoft.MvvmLight.Messaging;
@@ -28,6 +22,12 @@ namespace IxaCalc
 
         #endregion
 
+        /// <summary>
+        ///  コンボボックスでダブルクリックを取得
+        ///  DoubleClickを拾ってくれないので、わざわざクリックを数える
+        /// </summary>
+        /// <param name="sender">送信者</param>
+        /// <param name="e">パラメータ</param>
         private void FilteredListMouseLeftButtonDown(object sender, System.Windows.Input.MouseButtonEventArgs e)
         {
             if (e.ClickCount == 2)
@@ -39,6 +39,5 @@ namespace IxaCalc
                 }
             }
         }
-
     }
 }

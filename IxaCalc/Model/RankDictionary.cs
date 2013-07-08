@@ -58,8 +58,6 @@
         {
             rarityImage = new Dictionary<RarityRank, ImageSource>();
             leadershipImage = new Dictionary<LeadershipRank, ImageSource>();
-
-
             leadershipImage[LeadershipRank.Nothing] = null;
 
             rank = new Dictionary<string, LeadershipRank>
@@ -74,7 +72,6 @@
                 { "SS", LeadershipRank.SS },
                 { "SSS", LeadershipRank.SSS }
             };
-
 
             rarity = new Dictionary<string, RarityRank>
             {

@@ -16,9 +16,9 @@ namespace IxaCalc
         /// </summary>
         public App()
         {
-            Startup += Application_Startup;
-            Exit += Application_Exit;
-            UnhandledException += Application_UnhandledException;
+            Startup += this.Application_Startup;
+            Exit += this.Application_Exit;
+            UnhandledException += this.Application_UnhandledException;
 
             InitializeComponent();
         }
@@ -63,7 +63,7 @@ namespace IxaCalc
                 e.Handled = true;
                 Deployment.Current.Dispatcher.BeginInvoke(delegate
                 {
-                    ReportErrorToDOM(e);
+                    this.ReportErrorToDOM(e);
                 });
             }
         }
