@@ -207,7 +207,9 @@ namespace IxaCalc.ViewModel
         /// </summary>
         public RelayCommand<Busho> SetDeckCommand { get; private set; }
 
-        public string SelectedRarity{get; set;}
+        public string SelectedRarity { get; set; }
+        public string SelectedSort { get; set; }
+        public string SelectedCost { get; set; }
         /// <summary>
         ///     兵士のタイプ
         /// </summary>
@@ -237,12 +239,53 @@ namespace IxaCalc.ViewModel
         /// </summary>
         public void BushoListRarityChangeExecute()
         {
-            this.CurrentRarity = RankDictionary.Rarity[this.SelectedRarity];
-            IOrderedEnumerable<Busho> filtered = from p in this._allBushoList
-                                              where p.Rarity == this.CurrentRarity
-                                              orderby p.Id
-                                              select p;
-            this.BushoList = new ObservableCollection<Busho>(filtered);
+            ObservableCollection<Busho> rareFiltered;
+            if (this.SelectedRarity == null)
+            {
+                rareFiltered = this._allBushoList;
+            }
+            else
+            {
+                this.CurrentRarity = RankDictionary.Rarity[this.SelectedRarity];
+                var list = from p in this._allBushoList
+                           where p.Rarity == this.CurrentRarity
+                           select p;
+                rareFiltered = new ObservableCollection<Busho>(list);
+            }
+
+            
+            ObservableCollection<Busho> costFiltered;
+
+            if (this.SelectedCost == null)
+            {
+                costFiltered = this._allBushoList;
+            }
+            else
+            {
+                var cost = float.Parse(this.SelectedCost);
+                var list = from p in this._allBushoList
+                            where p.Cost == cost
+                            select p;
+                costFiltered = new ObservableCollection<Busho>(list);
+            }
+
+            ObservableCollection<Busho> sorted;
+
+            if (this.SelectedSort == null)
+            {
+                var list = from p in rareFiltered.Intersect(costFiltered)
+                         orderby p.Id
+                         select p;
+                sorted = new ObservableCollection<Busho>(list);
+            }
+            else {
+                var list = from p in rareFiltered.Intersect(costFiltered)
+                         orderby p.Id
+                         select p;
+                sorted = new ObservableCollection<Busho>(list);
+            }
+
+            this.BushoList = new ObservableCollection<Busho>(sorted);
             this.RaisePropertyChanged("BushoList");
         }
 

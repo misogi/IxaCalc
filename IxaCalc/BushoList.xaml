@@ -12,44 +12,48 @@
     Name="myBushoList"
 	d:DesignWidth="640" d:DesignHeight="480">
 
-	<Grid x:Name="LayoutRoot">
-        <ComboBox x:Name="RarityCombo" HorizontalAlignment="Left" Margin="27,38,0,0" VerticalAlignment="Top" Width="120" SelectedValuePath="Content" SelectedValue="{Binding Path=SelectedRarity, Mode=TwoWay}">
+    <Grid x:Name="LayoutRoot">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="149*"/>
+            <RowDefinition Height="331*"/>
+        </Grid.RowDefinitions>
+        <ComboBox x:Name="RarityCombo" HorizontalAlignment="Left" Margin="27,56,0,0" VerticalAlignment="Top" Width="120" SelectedValuePath="Content" SelectedValue="{Binding Path=SelectedRarity, Mode=TwoWay}" IsSynchronizedWithCurrentItem="False" >
             <i:Interaction.Triggers>
                 <i:EventTrigger EventName="SelectionChanged">
                     <mvvm:EventToCommand Command="{Binding BushoListRarityChangeCommand, Mode=TwoWay}" PassEventArgsToCommand="True" MustToggleIsEnabledValue="True"></mvvm:EventToCommand>
                 </i:EventTrigger>
             </i:Interaction.Triggers>
-            <ListBoxItem Content="全て"/>
-            <ListBoxItem Content="天"/>
-            <ListBoxItem Content="極"/>
-            <ListBoxItem Content="特"/>
-            <ListBoxItem Content="上"/>
-            <ListBoxItem Content="序"/>
+            <ComboBoxItem Content="全て"/>
+            <ComboBoxItem Content="天"/>
+            <ComboBoxItem Content="極"/>
+            <ComboBoxItem Content="特"/>
+            <ComboBoxItem Content="上"/>
+            <ComboBoxItem Content="序"/>
         </ComboBox>
-        <ComboBox x:Name="SortCombo" HorizontalAlignment="Left" Margin="310,38,0,0" VerticalAlignment="Top" Width="120">
+        <ComboBox x:Name="SortCombo" HorizontalAlignment="Left" Margin="310,38,0,0" VerticalAlignment="Top" Width="120" SelectedValuePath="Content" SelectedValue="{Binding Path=SelectedSort, Mode=TwoWay}">
             <i:Interaction.Triggers>
                 <i:EventTrigger EventName="SelectionChanged">
                     <mvvm:EventToCommand Command="{Binding BushoListRarityChangeCommand, Mode=TwoWay}" PassEventArgsToCommand="True" MustToggleIsEnabledValue="True"></mvvm:EventToCommand>
                 </i:EventTrigger>
             </i:Interaction.Triggers>
-            <ListBoxItem Content="No"/>
-            <ListBoxItem Content="指揮力"/>
+            <ComboBoxItem Content="No"/>
+            <ComboBoxItem Content="指揮力"/>
         </ComboBox>
-        <ComboBox x:Name="CostCombo" HorizontalAlignment="Left" Margin="170,38,0,0" VerticalAlignment="Top" Width="120">
+        <ComboBox x:Name="CostCombo" HorizontalAlignment="Left" Margin="170,38,0,0" VerticalAlignment="Top" Width="120" SelectedValuePath="Content" SelectedValue="{Binding Path=SelectedCost, Mode=TwoWay}">
             <i:Interaction.Triggers>
                 <i:EventTrigger EventName="SelectionChanged">
                     <mvvm:EventToCommand Command="{Binding BushoListRarityChangeCommand, Mode=TwoWay}" PassEventArgsToCommand="True" MustToggleIsEnabledValue="True"></mvvm:EventToCommand>
                 </i:EventTrigger>
             </i:Interaction.Triggers>
-            <ListBoxItem Content="1.0"/>
-            <ListBoxItem Content="1.5"/>
-            <ListBoxItem Content="2.0"/>
-            <ListBoxItem Content="2.5"/>
-            <ListBoxItem Content="3.0"/>
-            <ListBoxItem Content="3.5"/>
-            <ListBoxItem Content="4.0"/>
+            <ComboBoxItem Content="1.0"/>
+            <ComboBoxItem Content="1.5"/>
+            <ComboBoxItem Content="2.0"/>
+            <ComboBoxItem Content="2.5"/>
+            <ComboBoxItem Content="3.0"/>
+            <ComboBoxItem Content="3.5"/>
+            <ComboBoxItem Content="4.0"/>
         </ComboBox>
-        <ListBox x:Name="FilteredBushoList" HorizontalAlignment="Left" Height="343" Margin="27,81,0,0" VerticalAlignment="Top" Width="550" ItemsSource="{Binding BushoList}">
+        <ListBox x:Name="FilteredBushoList" HorizontalAlignment="Left" Height="343" Margin="27,81,0,0" VerticalAlignment="Top" Width="550" ItemsSource="{Binding BushoList}" Grid.RowSpan="2">
             <ListBox.ItemTemplate>
                 <DataTemplate>
                     <Grid Name="grid">
@@ -57,11 +61,18 @@
                             <TextBlock Name="bushoId" Text="{Binding Id}" />
                             <TextBlock Text="{Binding Name}" />
                             <TextBlock Text="{Binding Cost}" />
+                            <TextBlock Text="{Binding SoldierNumber}" />
                         </StackPanel>
                     </Grid>
                 </DataTemplate>
             </ListBox.ItemTemplate>
         </ListBox>
         <Button Content="Button" HorizontalAlignment="Left" Margin="467,38,0,0" VerticalAlignment="Top" Width="75" />
+        <ComboBox HorizontalAlignment="Left" Margin="27,10,0,0" VerticalAlignment="Top" Width="120">
+            <ListBoxItem/>
+            <ListBoxItem/>
+            <ListBoxItem/>
+            <ListBoxItem/>
+        </ComboBox>
     </Grid>
 </UserControl>
