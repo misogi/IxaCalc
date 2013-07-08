@@ -94,7 +94,6 @@
     <Compile Include="App.xaml.cs">
       <DependentUpon>App.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Behaviors\DoubliClickTrigger.cs" />
     <Compile Include="BushoList.xaml.cs">
       <DependentUpon>BushoList.xaml</DependentUpon>
     </Compile>
@@ -145,10 +144,6 @@
     <Page Include="DeckBushoView.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
-    </Page>
-    <Page Include="DeckedBushoListItem.xaml">
-      <Generator>MSBuild:MarkupCompilePass1</Generator>
-      <SubType>Designer</SubType>
     </Page>
     <Page Include="MainPage.xaml">
       <SubType>Designer</SubType>
