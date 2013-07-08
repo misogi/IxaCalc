@@ -6,8 +6,13 @@
              x:Class="IxaCalc.App"
              mc:Ignorable="d">
     <Application.Resources>
-        <!--Global View Model Locator-->
-        <vm:ViewModelLocator x:Key="Locator"
-                             d:IsDataSource="True" />
+    	<ResourceDictionary>
+    		<ResourceDictionary.MergedDictionaries>
+    			<ResourceDictionary Source="DeckedBushoListItem.xaml"/>
+    		</ResourceDictionary.MergedDictionaries>
+    		<!--Global View Model Locator-->
+    		<vm:ViewModelLocator x:Key="Locator"
+    			d:IsDataSource="True" />
+    	</ResourceDictionary>
     </Application.Resources>
 </Application>

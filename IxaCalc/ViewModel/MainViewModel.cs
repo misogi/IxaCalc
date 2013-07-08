@@ -91,6 +91,7 @@ namespace IxaCalc.ViewModel
 
             this.BushoListRarityChangeCommand = new RelayCommand(this.BushoListRarityChangeExecute);
 
+
             this.SetDeckCommand = new RelayCommand<Busho>(this.SetDeckExecute);
 
             this.RemoveDeckCommand = new RelayCommand<int>(this.RemoveDeckExecute);
@@ -145,6 +146,8 @@ namespace IxaCalc.ViewModel
         ///     兵種を切り替えるコマンド
         /// </summary>
         public RelayCommand<string> ChangeSoldierCommand { get; private set; }
+
+        public RelayCommand DeckModeChangeCommand { get; private set; }
 
         /// <summary>
         ///     現在選択されている絞り込み用レアリティ

@@ -108,12 +108,12 @@
         <Binding Path="Main" Source="{StaticResource Locator}" />
     </UserControl.DataContext>
 
-	<Grid x:Name="LayoutRoot" Background="#FF494949">
-		<Grid.ColumnDefinitions>
-			<ColumnDefinition Width="0.207*" />
-			<ColumnDefinition Width="0.793*" />
-		</Grid.ColumnDefinitions>
-		<ListBox x:Name="bushoList"
+    <Grid x:Name="LayoutRoot" Background="#FF494949">
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="0.207*" />
+            <ColumnDefinition Width="0.793*" />
+        </Grid.ColumnDefinitions>
+        <ListBox x:Name="bushoList"
 			Margin="349,505,257,19"
 			VerticalAlignment="Stretch"
 			Background="#FF272727"
@@ -121,384 +121,384 @@
 			ItemsSource="{Binding BushoList}"
 			SelectionChanged="BushoListSelectionChanged"
 			Template="{StaticResource BushoListBoxTemplate}" Grid.Column="1">
-			<i:Interaction.Triggers>
-				<ei:KeyTrigger Key="Enter">
-					<cmd:EventToCommand Command="{Binding SetDeckCommand}" CommandParameter="{Binding SelectedItem, ElementName=bushoList}" />
-				</ei:KeyTrigger>
-				<ei:KeyTrigger Key="Right">
-					<cmd:EventToCommand Command="{Binding NextRarityCommand}" CommandParameter="{Binding SelectedIndex, ElementName=bushoList}" />
-				</ei:KeyTrigger>
-				<ei:KeyTrigger Key="Left">
-					<cmd:EventToCommand Command="{Binding PreviousRarityCommand}" CommandParameter="{Binding SelectedIndex, ElementName=bushoList}" />
-				</ei:KeyTrigger>
-			</i:Interaction.Triggers>
-			<ListBox.ItemContainerStyle>
-				<Style TargetType="ListBoxItem">
-					<Setter Property="Template">
-						<Setter.Value>
-							<ControlTemplate TargetType="ListBoxItem">
-								<Border BorderBrush="Gray" BorderThickness="0,0,0,1">
-									<VisualStateManager.VisualStateGroups>
-										<VisualStateGroup x:Name="SelectionStates">
-											<VisualState x:Name="SelectedUnfocused">
-												<Storyboard>
-													<ColorAnimation d:IsOptimized="True"
+            <i:Interaction.Triggers>
+                <ei:KeyTrigger Key="Enter">
+                    <cmd:EventToCommand Command="{Binding SetDeckCommand}" CommandParameter="{Binding SelectedItem, ElementName=bushoList}" />
+                </ei:KeyTrigger>
+                <ei:KeyTrigger Key="Right">
+                    <cmd:EventToCommand Command="{Binding NextRarityCommand}" CommandParameter="{Binding SelectedIndex, ElementName=bushoList}" />
+                </ei:KeyTrigger>
+                <ei:KeyTrigger Key="Left">
+                    <cmd:EventToCommand Command="{Binding PreviousRarityCommand}" CommandParameter="{Binding SelectedIndex, ElementName=bushoList}" />
+                </ei:KeyTrigger>
+            </i:Interaction.Triggers>
+            <ListBox.ItemContainerStyle>
+                <Style TargetType="ListBoxItem">
+                    <Setter Property="Template">
+                        <Setter.Value>
+                            <ControlTemplate TargetType="ListBoxItem">
+                                <Border BorderBrush="Gray" BorderThickness="0,0,0,1">
+                                    <VisualStateManager.VisualStateGroups>
+                                        <VisualStateGroup x:Name="SelectionStates">
+                                            <VisualState x:Name="SelectedUnfocused">
+                                                <Storyboard>
+                                                    <ColorAnimation d:IsOptimized="True"
 														Duration="0"
 														Storyboard.TargetName="grid"
 														Storyboard.TargetProperty="(Panel.Background).(SolidColorBrush.Color)"
 														To="#FFA3A3A3" />
-												</Storyboard>
-											</VisualState>
-											<VisualState x:Name="Unselected" />
-											<VisualState x:Name="Selected">
-												<Storyboard>
-													<ColorAnimation d:IsOptimized="True"
+                                                </Storyboard>
+                                            </VisualState>
+                                            <VisualState x:Name="Unselected" />
+                                            <VisualState x:Name="Selected">
+                                                <Storyboard>
+                                                    <ColorAnimation d:IsOptimized="True"
 														Duration="0"
 														Storyboard.TargetName="grid"
 														Storyboard.TargetProperty="(Panel.Background).(SolidColorBrush.Color)"
 														To="#FF939393" />
-												</Storyboard>
-											</VisualState>
-										</VisualStateGroup>
-									</VisualStateManager.VisualStateGroups>
-									<Grid x:Name="grid"
+                                                </Storyboard>
+                                            </VisualState>
+                                        </VisualStateGroup>
+                                    </VisualStateManager.VisualStateGroups>
+                                    <Grid x:Name="grid"
 										Width="Auto"
 										Height="Auto"
 										HorizontalAlignment="Stretch"
 										VerticalAlignment="Stretch"
 										Background="Black"
 										MouseLeftButtonDown="BushoListMouseLeftButtonDown">
-										<ContentPresenter />
-									</Grid>
-								</Border>
-							</ControlTemplate>
-						</Setter.Value>
+                                        <ContentPresenter />
+                                    </Grid>
+                                </Border>
+                            </ControlTemplate>
+                        </Setter.Value>
 
-					</Setter>
-				</Style>
-			</ListBox.ItemContainerStyle>
-			<ListBox.ItemTemplate>
-				<DataTemplate>
-					<Grid x:Name="grid">
-						<StackPanel Orientation="Horizontal">
-							<Image Width="20"
+                    </Setter>
+                </Style>
+            </ListBox.ItemContainerStyle>
+            <ListBox.ItemTemplate>
+                <DataTemplate>
+                    <Grid x:Name="grid">
+                        <StackPanel Orientation="Horizontal">
+                            <Image Width="20"
 								Height="20"
 								Source="{Binding Image}" />
-							<TextBlock x:Name="bushoId" Text="{Binding Id}" />
-							<TextBlock Text="{Binding Name}" />
-						</StackPanel>
-					</Grid>
-				</DataTemplate>
-			</ListBox.ItemTemplate>
-		</ListBox>
-		<StackPanel x:Name="deckPanel"
+                            <TextBlock x:Name="bushoId" Text="{Binding Id}" />
+                            <TextBlock Text="{Binding Name}" />
+                        </StackPanel>
+                    </Grid>
+                </DataTemplate>
+            </ListBox.ItemTemplate>
+        </ListBox>
+        <StackPanel x:Name="deckPanel"
 			Margin="0,1,217,0"
 			VerticalAlignment="Top" Grid.ColumnSpan="2">
-			<StackPanel x:Name="soldierType"
+            <StackPanel x:Name="soldierType"
 				Width="Auto"
 				Height="57"
 				HorizontalAlignment="Left"
 				Background="#FF2F2F2F"
 				Orientation="Horizontal">
-				<CheckBox x:Name="SpearButton"
+                <CheckBox x:Name="SpearButton"
 					ClickMode="Press"
 					Command="{Binding ChangeSoldierCommand}"
 					CommandParameter="Spear"
 					IsChecked="{Binding MainDeck.CurrentSoldierType, ConverterParameter=Spear, Converter={StaticResource soldierConverter}, Mode=TwoWay}"
 					Tag="1"
 					Template="{StaticResource ShortCutButton}">
-					<Image Width="40"
+                    <Image Width="40"
 						Height="40"
 						Margin="2"
 						Source="Images/Spear.png" />
-				</CheckBox>
-				<CheckBox x:Name="LongSpearButton"
+                </CheckBox>
+                <CheckBox x:Name="LongSpearButton"
 					ClickMode="Press"
 					Command="{Binding ChangeSoldierCommand}"
 					CommandParameter="LongSpear"
 					IsChecked="{Binding MainDeck.CurrentSoldierType, ConverterParameter=LongSpear, Converter={StaticResource soldierConverter}, Mode=TwoWay}"
 					Tag="2"
 					Template="{StaticResource ShortCutButton}">
-					<Image Width="40"
+                    <Image Width="40"
 						Height="40"
 						Margin="2"
 						Source="Images/LongSpear.png" />
-				</CheckBox>
-				<CheckBox x:Name="SamuraiButton"
+                </CheckBox>
+                <CheckBox x:Name="SamuraiButton"
 					ClickMode="Press"
 					Command="{Binding ChangeSoldierCommand}"
 					CommandParameter="Samurai"
 					IsChecked="{Binding MainDeck.CurrentSoldierType, ConverterParameter=Samurai, Converter={StaticResource soldierConverter}, Mode=TwoWay}"
 					Tag="3"
 					Template="{StaticResource ShortCutButton}">
-					<Image Width="40"
+                    <Image Width="40"
 						Height="40"
 						Margin="2"
 						Source="Images/Samurai.png" />
-				</CheckBox>
-				<CheckBox ClickMode="Press"
+                </CheckBox>
+                <CheckBox ClickMode="Press"
 					Command="{Binding ChangeSoldierCommand}"
 					CommandParameter="Bow"
 					IsChecked="{Binding MainDeck.CurrentSoldierType, ConverterParameter=Bow, Converter={StaticResource soldierConverter}, Mode=TwoWay}"
 					Tag="4"
 					Template="{StaticResource ShortCutButton}">
-					<Image Width="40"
+                    <Image Width="40"
 						Height="40"
 						Margin="2"
 						Source="Images/Bow.png" />
-				</CheckBox>
-				<CheckBox ClickMode="Press"
+                </CheckBox>
+                <CheckBox ClickMode="Press"
 					Command="{Binding ChangeSoldierCommand}"
 					CommandParameter="LongBow"
 					IsChecked="{Binding MainDeck.CurrentSoldierType, ConverterParameter=LongBow, Converter={StaticResource soldierConverter}, Mode=TwoWay}"
 					Tag="5"
 					Template="{StaticResource ShortCutButton}">
-					<Image Width="40"
+                    <Image Width="40"
 						Height="40"
 						Margin="2"
 						Source="Images/LongBow.png" />
-				</CheckBox>
-				<CheckBox ClickMode="Press"
+                </CheckBox>
+                <CheckBox ClickMode="Press"
 					Command="{Binding ChangeSoldierCommand}"
 					CommandParameter="MountArcher"
 					IsChecked="{Binding MainDeck.CurrentSoldierType, ConverterParameter=MountArcher, Converter={StaticResource soldierConverter}, Mode=TwoWay}"
 					Tag="6"
 					Template="{StaticResource ShortCutButton}">
-					<Image Width="40"
+                    <Image Width="40"
 						Height="40"
 						Margin="2"
 						Source="Images/MountArcher.png" />
-				</CheckBox>
-				<CheckBox ClickMode="Press"
+                </CheckBox>
+                <CheckBox ClickMode="Press"
 					Command="{Binding ChangeSoldierCommand}"
 					CommandParameter="Horse"
 					IsChecked="{Binding MainDeck.CurrentSoldierType, ConverterParameter=Horse, Converter={StaticResource soldierConverter}, Mode=TwoWay}"
 					Tag="7"
 					Template="{StaticResource ShortCutButton}">
-					<Image Width="40"
+                    <Image Width="40"
 						Height="40"
 						Margin="2"
 						Source="Images/Horse.png" />
-				</CheckBox>
-				<CheckBox ClickMode="Press"
+                </CheckBox>
+                <CheckBox ClickMode="Press"
 					Command="{Binding ChangeSoldierCommand}"
 					CommandParameter="EliteHorse"
 					IsChecked="{Binding MainDeck.CurrentSoldierType, ConverterParameter=EliteHorse, Converter={StaticResource soldierConverter}, Mode=TwoWay}"
 					Tag="8"
 					Template="{StaticResource ShortCutButton}">
-					<Image Width="40"
+                    <Image Width="40"
 						Height="40"
 						Margin="2"
 						Source="Images/EliteHorse.png" />
-				</CheckBox>
-				<CheckBox ClickMode="Press"
+                </CheckBox>
+                <CheckBox ClickMode="Press"
 					Command="{Binding ChangeSoldierCommand}"
 					CommandParameter="RedArms"
 					IsChecked="{Binding MainDeck.CurrentSoldierType, ConverterParameter=RedArms, Converter={StaticResource soldierConverter}, Mode=TwoWay}"
 					Tag="9"
 					Template="{StaticResource ShortCutButton}">
-					<Image Width="40"
+                    <Image Width="40"
 						Height="40"
 						Margin="2"
 						Source="Images/RedArms.png" />
-				</CheckBox>
-				<CheckBox ClickMode="Press"
+                </CheckBox>
+                <CheckBox ClickMode="Press"
 					Command="{Binding ChangeSoldierCommand}"
 					CommandParameter="Gun"
 					IsChecked="{Binding MainDeck.CurrentSoldierType, ConverterParameter=Gun, Converter={StaticResource soldierConverter}, Mode=TwoWay}"
 					Tag="0"
 					Template="{StaticResource ShortCutButton}">
-					<Image Width="40"
+                    <Image Width="40"
 						Height="40"
 						Margin="2"
 						Source="Images/Gun.png" />
-				</CheckBox>
-				<CheckBox ClickMode="Press"
+                </CheckBox>
+                <CheckBox ClickMode="Press"
 					Command="{Binding ChangeSoldierCommand}"
 					CommandParameter="Dragoon"
 					IsChecked="{Binding MainDeck.CurrentSoldierType, ConverterParameter=Dragoon, Converter={StaticResource soldierConverter}, Mode=TwoWay}"
 					Tag="P"
 					Template="{StaticResource ShortCutButton}">
-					<Image Width="40"
+                    <Image Width="40"
 						Height="40"
 						Margin="2"
 						Source="Images/Dragoon.png" />
-				</CheckBox>
-			</StackPanel>
-			<Grid Height="440">
-				<StackPanel VerticalAlignment="Top"
+                </CheckBox>
+            </StackPanel>
+            <Grid Height="440">
+                <StackPanel VerticalAlignment="Top"
 					Orientation="Horizontal"
 					Visibility="{Binding MainDeck.DeckedVisibility[0]}">
-					<Grid>
-						<my:DeckBushoView DataContext="{Binding MainDeck.DeckedBushos[0]}" />
-						<Button ClickMode="Press"
+                    <Grid>
+                        <my:DeckBushoView DataContext="{Binding MainDeck.DeckedBushos[0]}" />
+                        <Button ClickMode="Press"
 							Command="{Binding RemoveDeckCommand}"
 							CommandParameter="0"
 							Opacity="0" />
-					</Grid>
-					<StackPanel>
-						<Button ClickMode="Press"
+                    </Grid>
+                    <StackPanel>
+                        <Button ClickMode="Press"
 							Command="{Binding RankUpCommand}"
 							CommandParameter="0"
 							Content="★↑"
 							Style="{StaticResource RankButtonStyle}" />
-						<Button ClickMode="Press"
+                        <Button ClickMode="Press"
 							Command="{Binding RankDownCommand}"
 							CommandParameter="0"
 							Content="★↓"
 							Style="{StaticResource RankButtonStyle}" />
-					</StackPanel>
-				</StackPanel>
-				<StackPanel Margin="0,110,0,0"
+                    </StackPanel>
+                </StackPanel>
+                <StackPanel Margin="0,110,0,0"
 					VerticalAlignment="Top"
 					Orientation="Horizontal"
 					Visibility="{Binding MainDeck.DeckedVisibility[1]}">
-					<Grid>
-						<my:DeckBushoView DataContext="{Binding MainDeck.DeckedBushos[1]}" />
-						<Button ClickMode="Press"
+                    <Grid>
+                        <my:DeckBushoView DataContext="{Binding MainDeck.DeckedBushos[1]}" />
+                        <Button ClickMode="Press"
 							Command="{Binding RemoveDeckCommand}"
 							CommandParameter="1"
 							Opacity="0" />
-					</Grid>
-					<StackPanel>
-						<Button ClickMode="Press"
+                    </Grid>
+                    <StackPanel>
+                        <Button ClickMode="Press"
 							Command="{Binding RankUpCommand}"
 							CommandParameter="1"
 							Content="★↑"
 							Style="{StaticResource RankButtonStyle}" />
-						<Button ClickMode="Press"
+                        <Button ClickMode="Press"
 							Command="{Binding RankDownCommand}"
 							CommandParameter="1"
 							Content="★↓"
 							Style="{StaticResource RankButtonStyle}" />
-					</StackPanel>
-				</StackPanel>
-				<StackPanel Margin="0,0,0,110"
+                    </StackPanel>
+                </StackPanel>
+                <StackPanel Margin="0,0,0,110"
 					VerticalAlignment="Bottom"
 					Orientation="Horizontal"
 					Visibility="{Binding MainDeck.DeckedVisibility[2]}">
-					<Grid>
-						<my:DeckBushoView DataContext="{Binding MainDeck.DeckedBushos[2]}" />
-						<Button ClickMode="Press"
+                    <Grid>
+                        <my:DeckBushoView DataContext="{Binding MainDeck.DeckedBushos[2]}" />
+                        <Button ClickMode="Press"
 							Command="{Binding RemoveDeckCommand}"
 							CommandParameter="2"
 							Opacity="0" />
-					</Grid>
-					<StackPanel>
-						<Button ClickMode="Press"
+                    </Grid>
+                    <StackPanel>
+                        <Button ClickMode="Press"
 							Command="{Binding RankUpCommand}"
 							CommandParameter="2"
 							Content="★↑"
 							Style="{StaticResource RankButtonStyle}" />
-						<Button ClickMode="Press"
+                        <Button ClickMode="Press"
 							Command="{Binding RankDownCommand}"
 							CommandParameter="2"
 							Content="★↓"
 							Style="{StaticResource RankButtonStyle}" />
-					</StackPanel>
-				</StackPanel>
-				<StackPanel VerticalAlignment="Bottom"
+                    </StackPanel>
+                </StackPanel>
+                <StackPanel VerticalAlignment="Bottom"
 					Orientation="Horizontal"
 					Visibility="{Binding MainDeck.DeckedVisibility[3]}">
-					<Grid>
-						<my:DeckBushoView DataContext="{Binding MainDeck.DeckedBushos[3]}" />
-						<Button ClickMode="Press"
+                    <Grid>
+                        <my:DeckBushoView DataContext="{Binding MainDeck.DeckedBushos[3]}" />
+                        <Button ClickMode="Press"
 							Command="{Binding RemoveDeckCommand}"
 							CommandParameter="3"
 							Opacity="0" />
-					</Grid>
-					<StackPanel>
-						<Button ClickMode="Press"
+                    </Grid>
+                    <StackPanel>
+                        <Button ClickMode="Press"
 							Command="{Binding RankUpCommand}"
 							CommandParameter="3"
 							Content="★↑"
 							Style="{StaticResource RankButtonStyle}" />
-						<Button ClickMode="Press"
+                        <Button ClickMode="Press"
 							Command="{Binding RankDownCommand}"
 							CommandParameter="3"
 							Content="★↓"
 							Style="{StaticResource RankButtonStyle}" />
-					</StackPanel>
-				</StackPanel>
-			</Grid>
-			<Grid x:Name="resultGrid"
+                    </StackPanel>
+                </StackPanel>
+            </Grid>
+            <Grid x:Name="resultGrid"
 				Height="100"
 				Background="#FF272727">
-				<Grid Height="Auto" Margin="0">
-					<Grid.RowDefinitions>
-						<RowDefinition Height="0.5*" />
-						<RowDefinition Height="0.5*" />
-					</Grid.RowDefinitions>
-					<Border Grid.RowSpan="1"
+                <Grid Height="Auto" Margin="0">
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="0.5*" />
+                        <RowDefinition Height="0.5*" />
+                    </Grid.RowDefinitions>
+                    <Border Grid.RowSpan="1"
 						Margin="0"
 						Background="#FF4D1111"
 						BorderThickness="1"
 						RenderTransformOrigin="1,0.5">
-						<Border.RenderTransform>
-							<CompositeTransform ScaleX="{Binding MainDeck.TotalAttackBar}" />
-						</Border.RenderTransform>
-					</Border>
-					<Border Grid.Row="1"
+                        <Border.RenderTransform>
+                            <CompositeTransform ScaleX="{Binding MainDeck.TotalAttackBar}" />
+                        </Border.RenderTransform>
+                    </Border>
+                    <Border Grid.Row="1"
 						Grid.RowSpan="1"
 						Margin="0"
 						Background="#FF171635"
 						BorderThickness="1"
 						RenderTransformOrigin="1,0.5">
-						<Border.RenderTransform>
-							<CompositeTransform ScaleX="{Binding MainDeck.TotalDefenceBar}" />
-						</Border.RenderTransform>
-					</Border>
-				</Grid>
-				<StackPanel Orientation="Horizontal" d:LayoutOverrides="Height">
-					<StackPanel Width="96" Margin="180,5,23,5">
-						<Grid Height="16">
-							<TextBlock VerticalAlignment="Top"
+                        <Border.RenderTransform>
+                            <CompositeTransform ScaleX="{Binding MainDeck.TotalDefenceBar}" />
+                        </Border.RenderTransform>
+                    </Border>
+                </Grid>
+                <StackPanel Orientation="Horizontal" d:LayoutOverrides="Height">
+                    <StackPanel Width="96" Margin="180,5,23,5">
+                        <Grid Height="16">
+                            <TextBlock VerticalAlignment="Top"
 								Text="総兵数 "
 								TextWrapping="Wrap"
 								d:LayoutOverrides="Width" />
-							<TextBlock x:Name="textBlock1"
+                            <TextBlock x:Name="textBlock1"
 								Margin="37,0,0,0"
 								HorizontalAlignment="Right"
 								VerticalAlignment="Top"
 								Text="{Binding MainDeck.TotalSoldierNumber}"
 								TextAlignment="Right" />
-						</Grid>
-						<Grid Height="16">
-							<TextBlock VerticalAlignment="Top"
+                        </Grid>
+                        <Grid Height="16">
+                            <TextBlock VerticalAlignment="Top"
 								Text="総コスト"
 								TextWrapping="Wrap" />
-							<TextBlock x:Name="deckCost"
+                            <TextBlock x:Name="deckCost"
 								Margin="29,0,0,0"
 								HorizontalAlignment="Right"
 								VerticalAlignment="Top"
 								Text="{Binding MainDeck.TotalCost}"
 								TextAlignment="Right" />
-						</Grid>
-						<Grid Height="16">
-							<TextBlock VerticalAlignment="Center"
+                        </Grid>
+                        <Grid Height="16">
+                            <TextBlock VerticalAlignment="Center"
 								Text="コス比"
 								TextWrapping="Wrap"
 								d:LayoutOverrides="Width, Height" />
-							<TextBlock Margin="0"
+                            <TextBlock Margin="0"
 								HorizontalAlignment="Right"
 								VerticalAlignment="Center"
 								Text="{Binding MainDeck.TotalSoldierNumberPerCost, StringFormat=\{0:F1\}}" />
-						</Grid>
-						<TextBlock Margin="0"
+                        </Grid>
+                        <TextBlock Margin="0"
 							HorizontalAlignment="Right"
 							VerticalAlignment="Center"
 							Text="{Binding MainDeck.CurrentSoldierTypeName}" />
-					</StackPanel>
-					<StackPanel x:Name="TotalAtk"
+                    </StackPanel>
+                    <StackPanel x:Name="TotalAtk"
 						Width="126"
 						Margin="0,5,5,5"
 						HorizontalAlignment="Right">
-						<Grid Height="23">
-							<Image Margin="0"
+                        <Grid Height="23">
+                            <Image Margin="0"
 								HorizontalAlignment="Left"
 								VerticalAlignment="Center"
 								Source="Images/Attack.png" />
-							<TextBlock x:Name="deckAtk"
+                            <TextBlock x:Name="deckAtk"
 								Height="23"
 								HorizontalAlignment="Right"
 								VerticalAlignment="Center"
@@ -507,32 +507,32 @@
 								Foreground="#FFFF6767"
 								Text="{Binding MainDeck.TotalAttack, StringFormat=\{0:F1\}}"
 								TextAlignment="Right" />
-						</Grid>
-						<Grid Height="16">
-							<TextBlock HorizontalAlignment="Left"
+                        </Grid>
+                        <Grid Height="16">
+                            <TextBlock HorizontalAlignment="Left"
 								Text="コス比"
 								TextWrapping="Wrap"
 								d:LayoutOverrides="Height" />
-							<TextBlock Margin="52,0,0,0"
+                            <TextBlock Margin="52,0,0,0"
 								HorizontalAlignment="Right"
 								VerticalAlignment="Top"
 								Text="{Binding MainDeck.TotalAttackPerCost, StringFormat=\{0:F1\}}"
 								TextAlignment="Right" />
-						</Grid>
-					</StackPanel>
-					<StackPanel x:Name="TotalDef"
+                        </Grid>
+                    </StackPanel>
+                    <StackPanel x:Name="TotalDef"
 						Width="137"
 						Margin="0,5,5,5"
 						VerticalAlignment="Top"
 						Orientation="Vertical">
-						<Grid>
-							<Image Width="23"
+                        <Grid>
+                            <Image Width="23"
 								Height="23"
 								Margin="0"
 								HorizontalAlignment="Left"
 								VerticalAlignment="Center"
 								Source="Images/Defence.png" />
-							<TextBlock x:Name="dechDef"
+                            <TextBlock x:Name="dechDef"
 								Height="23"
 								HorizontalAlignment="Right"
 								VerticalAlignment="Center"
@@ -541,29 +541,29 @@
 								Foreground="#FF6B6BFF"
 								Text="{Binding MainDeck.TotalDefence, StringFormat=\{0:F1\}}"
 								TextAlignment="Right" />
-						</Grid>
-						<Grid>
-							<TextBlock HorizontalAlignment="Left"
+                        </Grid>
+                        <Grid>
+                            <TextBlock HorizontalAlignment="Left"
 								VerticalAlignment="Center"
 								Text="コス比"
 								TextWrapping="Wrap" />
-							<TextBlock Margin="0"
+                            <TextBlock Margin="0"
 								HorizontalAlignment="Right"
 								VerticalAlignment="Center"
 								Text="{Binding MainDeck.TotalDefencePerCost, StringFormat=\{0:F1\}}"
 								TextAlignment="Right" />
-						</Grid>
-					</StackPanel>
-				</StackPanel>
-			</Grid>
-		</StackPanel>
-		<StackPanel x:Name="rarityPanel"
+                        </Grid>
+                    </StackPanel>
+                </StackPanel>
+            </Grid>
+        </StackPanel>
+        <StackPanel x:Name="rarityPanel"
 			Margin="3,3,7,0"
 			VerticalAlignment="Top"
 			Background="#FF3B3B3B"
 			Orientation="Horizontal"
 			d:LayoutOverrides="Width">
-			<CheckBox x:Name="ultraRare"
+            <CheckBox x:Name="ultraRare"
 				Width="35"
 				Margin="0"
 				VerticalAlignment="Top"
@@ -572,12 +572,12 @@
 				IsChecked="{Binding CurrentRarity, ConverterParameter=UltraRare, Converter={StaticResource rarityConverter}, Mode=TwoWay}"
 				Tag="Q"
 				Template="{StaticResource RarityButton}">
-				<Image Width="30"
+                <Image Width="30"
 					Height="30"
 					Margin="2"
 					Source="Images/UltraRare.png" />
-			</CheckBox>
-			<CheckBox x:Name="superRare"
+            </CheckBox>
+            <CheckBox x:Name="superRare"
 				Width="35"
 				Margin="0"
 				VerticalAlignment="Top"
@@ -586,12 +586,12 @@
 				IsChecked="{Binding CurrentRarity, ConverterParameter=SuperRare, Converter={StaticResource rarityConverter}, Mode=TwoWay}"
 				Tag="W"
 				Template="{StaticResource RarityButton}">
-				<Image Width="30"
+                <Image Width="30"
 					Height="30"
 					Margin="2"
 					Source="Images/SuperRare.png" />
-			</CheckBox>
-			<CheckBox x:Name="rare"
+            </CheckBox>
+            <CheckBox x:Name="rare"
 				Width="35"
 				Margin="0"
 				VerticalAlignment="Top"
@@ -600,12 +600,12 @@
 				IsChecked="{Binding CurrentRarity, ConverterParameter=Rare, Converter={StaticResource rarityConverter}, Mode=TwoWay}"
 				Tag="E"
 				Template="{StaticResource RarityButton}">
-				<Image Width="30"
+                <Image Width="30"
 					Height="30"
 					Margin="2"
 					Source="Images/Rare.png" />
-			</CheckBox>
-			<CheckBox x:Name="uncommon"
+            </CheckBox>
+            <CheckBox x:Name="uncommon"
 				Width="35"
 				Margin="0"
 				VerticalAlignment="Top"
@@ -614,13 +614,13 @@
 				IsChecked="{Binding CurrentRarity, ConverterParameter=Uncommon, Converter={StaticResource rarityConverter}, Mode=TwoWay}"
 				Tag="R"
 				Template="{StaticResource RarityButton}">
-				<Image Width="30"
+                <Image Width="30"
 					Height="30"
 					Margin="2"
 					Source="Images/Uncommon.png" />
 
-			</CheckBox>
-			<CheckBox x:Name="common"
+            </CheckBox>
+            <CheckBox x:Name="common"
 				Width="35"
 				Margin="0"
 				VerticalAlignment="Top"
@@ -630,13 +630,13 @@
 				Tag="T"
 				Template="{StaticResource RarityButton}">
 
-				<Image Width="30"
+                <Image Width="30"
 					Height="30"
 					Margin="2"
 					Source="Images/Common.png" />
-			</CheckBox>
-		</StackPanel>
-		<Border x:Name="border1"
+            </CheckBox>
+        </StackPanel>
+        <Border x:Name="border1"
 			Grid.Column="1"
 			Width="70"
 			Height="100"
@@ -646,7 +646,7 @@
 			Background="#7A000000"
 			BorderThickness="1"
 			IsHitTestVisible="False">
-			<TextBlock x:Name="textBlock2"
+            <TextBlock x:Name="textBlock2"
 				Margin="0"
 				TextWrapping="Wrap">
 				<Run Text="Enter 追加 "/>
@@ -658,23 +658,23 @@
 				<Run Text=" S サウンド "/>
 				<LineBreak />
 
-			</TextBlock>
-		</Border>
-		<Grid x:Name="helpLayer"
+            </TextBlock>
+        </Border>
+        <Grid x:Name="helpLayer"
 			Grid.ColumnSpan="2"
 			Margin="0"
 			Background="#97000000"
 			Visibility="Collapsed">
-			<i:Interaction.Triggers>
-				<i:EventTrigger EventName="MouseLeftButtonDown">
-					<ei:ChangePropertyAction PropertyName="Visibility" TargetName="helpLayer">
-						<ei:ChangePropertyAction.Value>
-							<Visibility>Collapsed</Visibility>
-						</ei:ChangePropertyAction.Value>
-					</ei:ChangePropertyAction>
-				</i:EventTrigger>
-			</i:Interaction.Triggers>
-			<Rectangle Width="47"
+            <i:Interaction.Triggers>
+                <i:EventTrigger EventName="MouseLeftButtonDown">
+                    <ei:ChangePropertyAction PropertyName="Visibility" TargetName="helpLayer">
+                        <ei:ChangePropertyAction.Value>
+                            <Visibility>Collapsed</Visibility>
+                        </ei:ChangePropertyAction.Value>
+                    </ei:ChangePropertyAction>
+                </i:EventTrigger>
+            </i:Interaction.Triggers>
+            <Rectangle Width="47"
 				Height="199"
 				Margin="2,1,0,0"
 				HorizontalAlignment="Left"
@@ -683,23 +683,23 @@
 				RadiusY="5"
 				Stroke="#FF660000"
 				StrokeThickness="4" />
-			<Rectangle Width="173"
+            <Rectangle Width="173"
 				Margin="62,0,0,0"
 				HorizontalAlignment="Left"
 				RadiusX="5"
 				RadiusY="5"
 				Stroke="#FF660000"
 				StrokeThickness="4" />
-			<Border Width="91"
+            <Border Width="91"
 				Margin="8,204,0,295"
 				HorizontalAlignment="Left"
 				Background="Black"
 				BorderBrush="Black"
 				BorderThickness="1">
-				<TextBlock Margin="7" TextWrapping="Wrap"><Run Text="表示する武将" /><Run Text="を絞り込みます。" />
-				</TextBlock>
-			</Border>
-			<Border Width="149"
+                <TextBlock Margin="7" TextWrapping="Wrap"><Run Text="表示する武将" /><Run Text="を絞り込みます。" />
+                </TextBlock>
+            </Border>
+            <Border Width="149"
 				Height="101"
 				Margin="86,0,0,141"
 				HorizontalAlignment="Left"
@@ -707,11 +707,11 @@
 				Background="Black"
 				BorderBrush="Black"
 				BorderThickness="1">
-				<TextBlock Margin="7"
+                <TextBlock Margin="7"
 					Text="デッキに入れる武将を左クリックで選択します。"
 					TextWrapping="Wrap" />
-			</Border>
-			<Border Width="149"
+            </Border>
+            <Border Width="149"
 				Height="67"
 				Margin="0,8,105,0"
 				HorizontalAlignment="Right"
@@ -719,37 +719,37 @@
 				Background="Black"
 				BorderBrush="Black"
 				BorderThickness="1">
-				<TextBlock Margin="7"
+                <TextBlock Margin="7"
 					Text="部隊の兵種を選択します。（全武将が同じ兵種になります。）"
 					TextWrapping="Wrap" />
-			</Border>
-			<Rectangle Height="58"
+            </Border>
+            <Rectangle Height="58"
 				Margin="239,1,258,0"
 				VerticalAlignment="Top"
 				RadiusX="5"
 				RadiusY="5"
 				Stroke="#FF660000"
 				StrokeThickness="4" />
-			<Border Margin="420,178,283,295"
+            <Border Margin="420,178,283,295"
 				Background="Black"
 				BorderBrush="Black"
 				BorderThickness="1">
-				<TextBlock Margin="7"
+                <TextBlock Margin="7"
 					Text="武将を左クリックでデッキから外せます。"
 					TextWrapping="Wrap" />
-			</Border>
-			<Border Width="139"
+            </Border>
+            <Border Width="139"
 				Margin="0,224,21,249"
 				HorizontalAlignment="Right"
 				Background="Black"
 				BorderBrush="Black"
 				BorderThickness="1">
-				<TextBlock Margin="7"
+                <TextBlock Margin="7"
 					Text="武将のランクアップを指定できます。"
 					TextWrapping="Wrap" />
-			</Border>
-		</Grid>
-		<MediaElement x:Name="click_mp3"
+            </Border>
+        </Grid>
+        <MediaElement x:Name="click_mp3"
 			Width="0"
 			Height="0"
 			HorizontalAlignment="Left"
@@ -757,7 +757,7 @@
 			AutoPlay="False"
 			Source="/Sounds/click.mp3"
 			Stretch="Fill" />
-		<MediaElement x:Name="up_mp3"
+        <MediaElement x:Name="up_mp3"
 			Width="0"
 			Height="0"
 			HorizontalAlignment="Left"
@@ -765,7 +765,7 @@
 			AutoPlay="False"
 			Source="/Sounds/up.mp3"
 			Stretch="Fill" />
-		<MediaElement x:Name="down_mp3"
+        <MediaElement x:Name="down_mp3"
 			Width="0"
 			Height="0"
 			HorizontalAlignment="Left"
@@ -773,7 +773,7 @@
 			AutoPlay="False"
 			Source="/Sounds/down.mp3"
 			Stretch="Fill" />
-		<MediaElement x:Name="cancel_mp3"
+        <MediaElement x:Name="cancel_mp3"
 			Width="0"
 			Height="0"
 			HorizontalAlignment="Left"
@@ -781,7 +781,7 @@
 			AutoPlay="False"
 			Source="/Sounds/cancel.mp3"
 			Stretch="Fill" />
-		<MediaElement x:Name="selchange_mp3"
+        <MediaElement x:Name="selchange_mp3"
 			Width="0"
 			Height="0"
 			HorizontalAlignment="Left"
@@ -789,7 +789,7 @@
 			AutoPlay="False"
 			Source="/Sounds/selchange.mp3"
 			Stretch="Fill" />
-		<CheckBox x:Name="isSoundButton"
+        <CheckBox x:Name="isSoundButton"
 			Grid.Column="1"
 			Width="26"
 			Height="34"
@@ -799,7 +799,7 @@
 			ClickMode="Press"
 			Content="CheckBox"
 			Template="{StaticResource SoundButton}" />
-		<my:BushoList Margin="139,56,94,-56" Grid.Column="1"/>
-		<sdk:DataGrid HorizontalAlignment="Left" Height="367" Margin="-5,49,0,0" VerticalAlignment="Top" Width="365" ItemsSource="{Binding MainDeck.DeckedBushos, Mode=TwoWay}"/>
-	</Grid>
+        <my:BushoList Margin="202,48,31,-48" Grid.Column="1"/>
+        <my:PartyDeck HorizontalAlignment="Left" Margin="56,2,0,0" VerticalAlignment="Top" Grid.ColumnSpan="2"/>
+    </Grid>
 </UserControl>
