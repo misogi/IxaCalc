@@ -39,7 +39,7 @@
     
     <Grid x:Name="LayoutRoot" Background="White" Margin="0,67,0,0">
 
-        <ListBox HorizontalAlignment="Left" Height="462" Margin="3,56,0,0" VerticalAlignment="Top" Width="348" Name="DeckedBushos" ItemsSource="{Binding MainDeck.DeckedBushos, Mode=TwoWay}" Grid.ColumnSpan="2" ItemTemplate="{StaticResource AtkTemplate}">
+        <ListBox HorizontalAlignment="Left" Height="462" Margin="3,56,0,0" VerticalAlignment="Top" Width="348" Name="DeckedBushos" ItemsSource="{Binding MainDeck.DeckedBushos, Mode=TwoWay}" Grid.ColumnSpan="2" ItemTemplate="{StaticResource AtkTemplate}" SelectedIndex="{Binding SelectedPartyMemberIndex, Mode=TwoWay}">
             <ListBox.ItemsPanel>
                 <ItemsPanelTemplate>
                     <StackPanel Orientation="Horizontal" />

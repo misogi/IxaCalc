@@ -81,6 +81,7 @@
                     });
             this.SoldierTypes = this._dataService.GetSoldierTypes();
             this._mainDeck = new Deck();
+            this.SelectedPartyMemberIndex = -1;
 
             this.BushoListRarityChangeCommand = new RelayCommand(this.BushoListRarityChangeExecute);
 
@@ -219,6 +220,8 @@
         ///     現在選択中の兵種
         /// </summary>
         public Soldier SelectedSoldier { get; set; }
+
+        public int SelectedPartyMemberIndex { get; set; }
 
         /// <summary>
         ///     兵士のタイプ
@@ -363,7 +366,10 @@
         {
             if (this.MainDeck.DeckedBushos.Count >= 4)
             {
-                return;
+                if (this.SelectedPartyMemberIndex >= 0)
+                {
+                    this.MainDeck.Remove(this.SelectedPartyMemberIndex);   
+                }
             }
 
             if (busho == null)
@@ -372,7 +378,7 @@
             }
 
             this._mainDeck.Add(busho);
-            this.MessengerInstance.Send(new DialogMessage("click", result => { }));
+            //this.MessengerInstance.Send(new DialogMessage("click", result => { }));
             string[] keys = { "Busho1", "Busho2", "Busho3", "Busho4" };
             foreach (string key in keys)
             {
