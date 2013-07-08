@@ -94,6 +94,7 @@
     <Compile Include="App.xaml.cs">
       <DependentUpon>App.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Behaviors\DoubliClickTrigger.cs" />
     <Compile Include="BushoList.xaml.cs">
       <DependentUpon>BushoList.xaml</DependentUpon>
     </Compile>

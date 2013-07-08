@@ -368,6 +368,8 @@ namespace IxaCalc.ViewModel
             {
                 this.RaisePropertyChanged(key);
             }
+            this.RaisePropertyChanged("MainDeck");
+            
         }
 
         #endregion

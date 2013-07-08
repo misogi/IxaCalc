@@ -3,6 +3,7 @@
     using System.Collections.Generic;
     using System.Windows;
     using IxaCalc.Enums;
+    using System.Collections.ObjectModel;
 
     /// <summary>
     /// 部隊
@@ -13,7 +14,7 @@
         /// <summary>
         /// デッキ上の武将リスト
         /// </summary>
-        private List<DeckedBusho> _deckedBushos;
+        private ObservableCollection<DeckedBusho> _deckedBushos;
 
         /// <summary>
         /// 現在の兵種
@@ -76,7 +77,8 @@
         /// </summary>
         public Deck()
         {
-            _deckedBushos = new List<DeckedBusho>(4);
+            var list = new List<DeckedBusho>(4);
+            _deckedBushos = new ObservableCollection<DeckedBusho>(list);
             UpdateDeckVisibility();
         }
 
@@ -84,7 +86,7 @@
         /// <summary>
         /// デッキ内武将のリスト
         /// </summary>
-        public List<DeckedBusho> DeckedBushos
+        public ObservableCollection<DeckedBusho> DeckedBushos
         {
             get
             {

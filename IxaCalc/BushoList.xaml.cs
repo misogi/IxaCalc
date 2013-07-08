@@ -7,6 +7,8 @@
 namespace IxaCalc
 {
     using System.Windows.Controls;
+    using GalaSoft.MvvmLight.Messaging;
+    using IxaCalc.ViewModel;
 
     /// <summary>
     /// The busho list.
@@ -25,6 +27,18 @@ namespace IxaCalc
         }
 
         #endregion
+
+        private void FilteredListMouseLeftButtonDown(object sender, System.Windows.Input.MouseButtonEventArgs e)
+        {
+            if (e.ClickCount == 2)
+            {
+                var vm = this.DataContext as MainViewModel;
+                if (vm != null)
+                {
+                    vm.SetDeckCommand.Execute(this.FilteredBushoList.SelectedItem);
+                }
+            }
+        }
 
     }
 }

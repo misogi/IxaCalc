@@ -4,6 +4,7 @@
 	xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
 	xmlns:mvvm="clr-namespace:GalaSoft.MvvmLight.Command;assembly=GalaSoft.MvvmLight.Extras.SL5"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    xmlns:cx="clr-namespace:Behaviors"
 	mc:Ignorable="d"
     
              xmlns:ei="http://schemas.microsoft.com/expression/2010/interactions"
@@ -54,25 +55,27 @@
             <ComboBoxItem Content="4.0"/>
         </ComboBox>
         <ListBox x:Name="FilteredBushoList" HorizontalAlignment="Left" Height="343" Margin="27,81,0,0" VerticalAlignment="Top" Width="550" ItemsSource="{Binding BushoList}" Grid.RowSpan="2">
+            <ListBox.ItemContainerStyle>
+                <Style TargetType="ListBoxItem">
+                    <Setter Property="Template">
+                        <Setter.Value>
+                            <ControlTemplate TargetType="ListBoxItem">
+                                <Grid x:Name="grid"	MouseLeftButtonDown="FilteredListMouseLeftButtonDown">
+                                    <ContentPresenter />
+                                </Grid>
+                            </ControlTemplate>
+                        </Setter.Value>
+                    </Setter>
+                </Style>
+            </ListBox.ItemContainerStyle>
             <ListBox.ItemTemplate>
                 <DataTemplate>
-                    <Grid Name="grid">
-                        <StackPanel Orientation="Horizontal">
-                            <TextBlock Name="bushoId" Text="{Binding Id}" />
-                            <TextBlock Text="{Binding Name}" />
-                            <TextBlock Text="{Binding Cost}" />
-                            <TextBlock Text="{Binding SoldierNumber}" />
-                        </StackPanel>
+                    <Grid>
+                        <TextBlock Name="grid" Text="{Binding Name}">
+                        </TextBlock>
                     </Grid>
                 </DataTemplate>
             </ListBox.ItemTemplate>
         </ListBox>
-        <Button Content="Button" HorizontalAlignment="Left" Margin="467,38,0,0" VerticalAlignment="Top" Width="75" />
-        <ComboBox HorizontalAlignment="Left" Margin="27,10,0,0" VerticalAlignment="Top" Width="120">
-            <ListBoxItem/>
-            <ListBoxItem/>
-            <ListBoxItem/>
-            <ListBoxItem/>
-        </ComboBox>
     </Grid>
 </UserControl>
