@@ -15,10 +15,14 @@
                     <Image Width="71" Height="100" Margin="0" Source="{Binding OriginBusho.Image}" />
                     <TextBlock x:Name="bushoId" Text="{Binding OriginBusho.Id}" />
                     <TextBlock Text="{Binding OriginBusho.Name}" />
-                    <TextBlock Text="{Binding OriginBusho.Attack}" />
-                    <TextBlock Text="{Binding ActualLeadershipAttack, StringFormat=\{0:F1\}}" TextAlignment="Right" />
-                    <TextBlock Text="{Binding PerCostAttack, StringFormat=\{0:F1\}}" TextAlignment="Right" />
-                    <TextBlock Text="{Binding ActualAttack, StringFormat=\{0:F1\}}" TextAlignment="Right" />
+                    <TextBlock Text="{Binding ActualAttack, StringFormat=\{0:F1\}}" TextAlignment="Right" Foreground="#FFAC0000" FontSize="16" FontWeight="Bold" />
+                    <TextBlock Text="{Binding BushoAttack, StringFormat=\{0:F1\}}" TextAlignment="Right"/>
+
+                        <TextBlock Text="{Binding ActualSoldierNumber, StringFormat=\{0:F1\}}" TextAlignment="Right" />
+                    <TextBlock Text="{Binding CurrentSoldierAttack, StringFormat=\{0:F1\}}" TextAlignment="Right" />
+                    <TextBlock Text="{Binding CurrentAllSoldierAttack, StringFormat=\{0:F1\}}" TextAlignment="Right" />
+                    <TextBlock Text="{Binding OriginBusho.Cost, StringFormat=\{0:F\}}" TextAlignment="Right" />
+                    <TextBlock Text="{Binding Percent, StringFormat=\{0:F2\}}" TextAlignment="Right" />
                 </StackPanel>
             </Grid>
         </DataTemplate>
@@ -36,7 +40,7 @@
             </Grid>
         </DataTemplate>
     </UserControl.Resources>
-    
+
     <Grid x:Name="LayoutRoot" Background="White" Margin="0,67,0,0">
 
         <ListBox HorizontalAlignment="Left" Height="462" Margin="3,56,0,0" VerticalAlignment="Top" Width="348" Name="DeckedBushos" ItemsSource="{Binding MainDeck.DeckedBushos, Mode=TwoWay}" Grid.ColumnSpan="2" ItemTemplate="{StaticResource AtkTemplate}" SelectedIndex="{Binding SelectedPartyMemberIndex, Mode=TwoWay}">

@@ -431,6 +431,8 @@
                     _currentSoldierType = value;
                     this.UpdateDeckedInfo();
                     OnPropertyChanged("CurrentSoldierType");
+                    OnPropertyChanged("CurrentSoldierAttack");
+                    OnPropertyChanged("CurrentAllSoldierAttack");
                 }
             }
         }
@@ -474,6 +476,28 @@
             }
         }
 
+        /// <summary>
+        /// The actual soldier number.
+        /// </summary>
+        public int CurrentSoldierAttack
+        {
+            get
+            {
+                return RankDictionary.Soldiers[this.CurrentSoldierType].Attack;
+            }
+        }
+
+        /// <summary>
+        /// The actual soldier number.
+        /// </summary>
+        public double CurrentAllSoldierAttack
+        {
+            get
+            {
+                return this.ActualSoldierNumber * this.CurrentSoldierAttack;
+            }
+        }
+
         #endregion
 
         #region メソッド
@@ -511,7 +535,7 @@
             BushoAttack = _originBusho.Attack + (_originBusho.AttackGrowth * RankToBonusPoint(Rank));
             BushoDefence = _originBusho.Defence + (_originBusho.DefenceGrowth * RankToBonusPoint(Rank));
             ActualSoldierNumber = _originBusho.SoldierNumber + (this.Rank * 100);
-            ActualAttack = (BushoAttack + (this.ActualSoldierNumber * RankDictionary.Soldiers[CurrentSoldierType].Attack)) * Percent;
+            ActualAttack = (BushoAttack + this.CurrentAllSoldierAttack) * Percent;
             ActualDefence = (BushoDefence + (this.ActualSoldierNumber * RankDictionary.Soldiers[CurrentSoldierType].Defence)) * Percent;
             ActualDefencePerCost = ActualDefence / _originBusho.Cost;
             ActualAttackBar = ActualAttack > 100000 ? 1.0 : ActualAttack / 100000;
