@@ -1,5 +1,9 @@
 ﻿namespace IxaCalc.Model
 {
+    using System;
+    using System.Windows.Media;
+    using System.Windows.Media.Imaging;
+
     using IxaCalc.Enums;
 
     /// <summary>
@@ -20,6 +24,7 @@
             this.Defence = def;
             this.Name = name;
             this.SoldierType = type;
+            this.Icon = this.LoadImage();
         }
 
         #region プロパティ
@@ -44,6 +49,21 @@
         /// </summary>
         public string Name { get; set; }
 
+        public ImageSource Icon { get; private set; }
+
         #endregion
+
+        /// <summary>
+        /// カード画像を読み込む
+        /// </summary>
+        private ImageSource LoadImage()
+        {
+            var typeName = this.SoldierType.ToString();
+            var urlstr = string.Format("Images/{0}.png", typeName);
+            var uri = new Uri(urlstr, UriKind.Relative);
+            var bmp = new BitmapImage(uri);
+
+            return bmp;
+        }
     }
 }

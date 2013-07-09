@@ -66,6 +66,11 @@
         Gun,
 
         /// <summary>
+        /// 焙烙火矢
+        /// </summary>
+        Grenade,
+
+        /// <summary>
         /// 鉄砲騎馬
         /// </summary>
         Dragoon

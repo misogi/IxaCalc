@@ -41,8 +41,8 @@
                 { SoldierTypes.Samurai, new Soldier("武士", 18, 18, SoldierTypes.Samurai) },
                 { SoldierTypes.MountArcher, new Soldier("弓騎馬", 17, 19, SoldierTypes.MountArcher) },
                 { SoldierTypes.RedArms, new Soldier("赤備え", 21, 20, SoldierTypes.RedArms) },
-                { SoldierTypes.Hammer, new Soldier("破壊槌", 8, 3, SoldierTypes.Hammer) },
                 { SoldierTypes.Gun, new Soldier("鉄砲足軽", 18, 26, SoldierTypes.Gun) },
+                { SoldierTypes.Grenade, new Soldier("炮烙火矢", 23, 23, SoldierTypes.Grenade) },
                 { SoldierTypes.Dragoon, new Soldier("騎馬鉄砲", 26, 18, SoldierTypes.Dragoon) }
             };
 

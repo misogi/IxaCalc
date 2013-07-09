@@ -46,12 +46,20 @@
                 </ItemsPanelTemplate>
             </ListBox.ItemsPanel>
         </ListBox>
-        <ComboBox HorizontalAlignment="Left" Margin="3,-40,0,0" VerticalAlignment="Top" Width="120" Name="SoldierType"  ItemsSource="{Binding SoldierTypes}" SelectedItem="{Binding SelectedSoldier, Mode=TwoWay}" DisplayMemberPath="Name">
+        <ComboBox HorizontalAlignment="Left" Margin="3,-40,0,0" VerticalAlignment="Top" Width="120" Name="SoldierType"  ItemsSource="{Binding SoldierTypes}" SelectedItem="{Binding SelectedSoldier, Mode=TwoWay}">
             <i:Interaction.Triggers>
                 <i:EventTrigger EventName="SelectionChanged">
                     <mvvm:EventToCommand Command="{Binding ChangeSoldierCommand, Mode=TwoWay}" PassEventArgsToCommand="True" MustToggleIsEnabledValue="True" CommandParameter="{Binding SelectedItem}"></mvvm:EventToCommand>
                 </i:EventTrigger>
             </i:Interaction.Triggers>
+            <ComboBox.ItemTemplate>
+                <DataTemplate>
+                    <StackPanel Orientation="Horizontal" >
+                        <Image Source="{Binding Icon}" Width="32" Height="32" />
+                        <TextBlock Text="{Binding Name}" VerticalAlignment="Center" />
+                    </StackPanel>
+                </DataTemplate>
+            </ComboBox.ItemTemplate>
         </ComboBox>
         <ComboBox HorizontalAlignment="Left" Margin="168,-40,0,0" VerticalAlignment="Top" Width="120" SelectionChanged="ComboBox_SelectionChanged">
             <ComboBoxItem Content="Atk" />

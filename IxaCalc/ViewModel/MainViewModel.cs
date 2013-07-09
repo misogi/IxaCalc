@@ -79,6 +79,7 @@
 
                         this._allBushoList = items;
                     });
+
             this.SoldierTypes = this._dataService.GetSoldierTypes();
             this._mainDeck = new Deck();
             this.SelectedPartyMemberIndex = -1;

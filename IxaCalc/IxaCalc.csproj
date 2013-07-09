@@ -739,6 +739,7 @@
     <Resource Include="Images\3708.jpg" />
     <Resource Include="Images\3709.jpg" />
     <Resource Include="Images\3710.jpg" />
+    <Resource Include="Images\Grenade.png" />
     <Content Include="Sounds\cancel.mp3">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
