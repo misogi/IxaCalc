@@ -430,7 +430,7 @@
         /// </summary>
         /// <param name="cmpBusho">調査対象武将</param>
         /// <returns>入っていればtrue</returns>
-        private bool IsContain(Busho cmpBusho)
+        public bool IsContain(Busho cmpBusho)
         {
             bool cond = false;
             foreach (var decked in DeckedBushos)

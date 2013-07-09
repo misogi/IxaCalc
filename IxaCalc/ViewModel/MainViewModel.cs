@@ -256,7 +256,7 @@
         public void BushoListRarityChangeExecute()
         {
             ObservableCollection<Busho> rareFiltered;
-            if (this.SelectedRarity == null)
+            if (this.SelectedRarity == null || this.SelectedRarity == "全て")
             {
                 rareFiltered = this._allBushoList;
             }
@@ -369,7 +369,7 @@
         {
             if (this.MainDeck.DeckedBushos.Count >= 4)
             {
-                if (this.SelectedPartyMemberIndex >= 0)
+                if (this.SelectedPartyMemberIndex >= 0 && !this.MainDeck.IsContain(busho))
                 {
                     int index = this.SelectedPartyMemberIndex;
                     this.MainDeck.Remove(this.SelectedPartyMemberIndex);
