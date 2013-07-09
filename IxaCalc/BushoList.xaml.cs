@@ -2,8 +2,8 @@
 {
     using System.Windows.Controls;
     using GalaSoft.MvvmLight.Messaging;
-    using IxaCalc.ViewModel;
     using IxaCalc.Model;
+    using IxaCalc.ViewModel;
 
     /// <summary>
     /// The busho list.
@@ -31,7 +31,7 @@
         /// <param name="e">パラメータ</param>
         private void FilteredBushoList_MouseLeftButtonUp(object sender, System.Windows.Input.MouseButtonEventArgs e)
         {
-        	// TODO: ここにイベント ハンドラーのコードを追加します。
+            // TODO: ここにイベント ハンドラーのコードを追加します。
             var grid = sender as DataGrid;
             var item = grid.SelectedItem as Busho;
             var vm = this.DataContext as MainViewModel;

@@ -298,12 +298,20 @@
         /// デッキに武将を入れる
         /// </summary>
         /// <param name="busho">追加する武将</param>
-        public void Add(Busho busho)
+        public void Add(Busho busho, int index = -1)
         {
             if (DeckedBushos.Count < 4 && !this.IsContain(busho))
             {
                 var decked = new DeckedBusho(busho, _currentSoldierType);
-                DeckedBushos.Add(decked);
+                if (index >= 0)
+                {
+                    DeckedBushos.Insert(index, decked);
+                }
+                else
+                {
+                    DeckedBushos.Add(decked);
+                }
+
                 this.CalculateTotalStatus();
                 UpdateDeckVisibility();
                 OnPropertyChanged("DeckedBushos");

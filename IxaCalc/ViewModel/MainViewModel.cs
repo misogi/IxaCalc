@@ -221,6 +221,9 @@
         /// </summary>
         public Soldier SelectedSoldier { get; set; }
 
+        /// <summary>
+        /// 部隊の中で選択中の武将の通し番号
+        /// </summary>
         public int SelectedPartyMemberIndex { get; set; }
 
         /// <summary>
@@ -368,8 +371,13 @@
             {
                 if (this.SelectedPartyMemberIndex >= 0)
                 {
-                    this.MainDeck.Remove(this.SelectedPartyMemberIndex);   
+                    int index = this.SelectedPartyMemberIndex;
+                    this.MainDeck.Remove(this.SelectedPartyMemberIndex);
+                    this.MainDeck.Add(busho, index);
+                    this.SelectedPartyMemberIndex = index;
+                    this.RaisePropertyChanged("SelectedPartyMemberIndex");
                 }
+                return;
             }
 
             if (busho == null)
@@ -378,7 +386,6 @@
             }
 
             this._mainDeck.Add(busho);
-            //this.MessengerInstance.Send(new DialogMessage("click", result => { }));
             string[] keys = { "Busho1", "Busho2", "Busho3", "Busho4" };
             foreach (string key in keys)
             {
