@@ -41,6 +41,7 @@
             SoldierNumber = soldiernum;
             Cost = cost;
             Rarity = RankDictionary.Rarity[rare];
+            this.RarityImage = RankDictionary.RarityImage[this.Rarity];
             Bow = RankDictionary.Rank[bow];
             Weapon = RankDictionary.Rank[weapon];
             Horse = RankDictionary.Rank[horse];
@@ -69,6 +70,8 @@
         /// レア度
         /// </summary>
         public RarityRank Rarity { get; set; }
+
+        public ImageSource RarityImage {get; set;}
 
         /// <summary>
         /// 指揮兵士数
