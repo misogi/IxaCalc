@@ -53,12 +53,12 @@
             <ComboBoxItem Content="3.5"/>
             <ComboBoxItem Content="4.0"/>
         </ComboBox>
-        <sdk:DataGrid x:Name="FilteredBushoList" HorizontalAlignment="Left" Height="343" Margin="27,81,0,0" VerticalAlignment="Top" Width="550" ItemsSource="{Binding BushoList}" Grid.RowSpan="2" IsReadOnly="True" MouseLeftButtonUp="FilteredBushoList_MouseLeftButtonUp">
+        <sdk:DataGrid x:Name="FilteredBushoList" HorizontalAlignment="Left" Height="343" Margin="27,81,0,0" VerticalAlignment="Top" Width="550" ItemsSource="{Binding BushoList}" Grid.RowSpan="2" IsReadOnly="True" MouseLeftButtonUp="FilteredBushoList_MouseLeftButtonUp" AutoGenerateColumns="False">
             <sdk:DataGrid.Columns>
                 <sdk:DataGridTemplateColumn Header="絵">
                     <sdk:DataGridTemplateColumn.CellTemplate>
                         <DataTemplate>
-                            <Image Source="{Binding Image}" Width="20" Height="30" />
+                            <Image Source="{Binding Image}" Width="20" Height="25" />
                         </DataTemplate>
                     </sdk:DataGridTemplateColumn.CellTemplate>
                 </sdk:DataGridTemplateColumn>
@@ -69,6 +69,10 @@
                         </DataTemplate>
                     </sdk:DataGridTemplateColumn.CellTemplate>
                 </sdk:DataGridTemplateColumn>
+                <sdk:DataGridTextColumn Header="ID" Binding="{Binding Id}" />
+                <sdk:DataGridTextColumn Header="名前" Binding="{Binding Name}" />
+                <sdk:DataGridTextColumn Header="C" Binding="{Binding Cost}" />
+                <sdk:DataGridTextColumn Header="指揮" Binding="{Binding SoldierNumber}" />
             </sdk:DataGrid.Columns>
         </sdk:DataGrid>
     </Grid>
