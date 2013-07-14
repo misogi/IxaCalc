@@ -12,9 +12,6 @@
     x:Class="IxaCalc.BushoList"
     Name="myBushoList"
     d:DesignWidth="640" d:DesignHeight="480">
-    <UserControl.Resources>
-        <conv:RarityToCheckedConverter x:Key="rarityConverter" />
-    </UserControl.Resources>
 
     <Grid x:Name="LayoutRoot">
         <Grid.RowDefinitions>
