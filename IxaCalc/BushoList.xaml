@@ -9,8 +9,12 @@
     xmlns:i="http://schemas.microsoft.com/expression/2010/interactivity"
     mc:Ignorable="d"
     x:Class="IxaCalc.BushoList"
+    xmlns:myc="clr-namespace:IxaCalc.Converters"
     Name="myBushoList"
     d:DesignWidth="640" d:DesignHeight="480">
+    <UserControl.Resources>
+        <myc:LeadershipToImageConverter x:Key="leadershipConverter" />
+    </UserControl.Resources>
 
     <Grid x:Name="LayoutRoot">
         <Grid.RowDefinitions>
@@ -73,6 +77,34 @@
                 <sdk:DataGridTextColumn Header="名前" Binding="{Binding Name}" />
                 <sdk:DataGridTextColumn Header="C" Binding="{Binding Cost}" />
                 <sdk:DataGridTextColumn Header="指揮" Binding="{Binding SoldierNumber}" />
+                <sdk:DataGridTemplateColumn Header="槍" SortMemberPath="Lance">
+                    <sdk:DataGridTemplateColumn.CellTemplate>
+                        <DataTemplate>
+                            <Image Source="{Binding Lance, Converter={StaticResource leadershipConverter}}" Width="18" Height="18" />
+                        </DataTemplate>
+                    </sdk:DataGridTemplateColumn.CellTemplate>
+                </sdk:DataGridTemplateColumn>
+                <sdk:DataGridTemplateColumn Header="弓" SortMemberPath="Bow">
+                    <sdk:DataGridTemplateColumn.CellTemplate>
+                        <DataTemplate>
+                            <Image Source="{Binding Bow, Converter={StaticResource leadershipConverter}}" Width="18" Height="18" />
+                        </DataTemplate>
+                    </sdk:DataGridTemplateColumn.CellTemplate>
+                </sdk:DataGridTemplateColumn>
+                <sdk:DataGridTemplateColumn Header="馬" SortMemberPath="Horse">
+                    <sdk:DataGridTemplateColumn.CellTemplate>
+                        <DataTemplate>
+                            <Image Source="{Binding Horse, Converter={StaticResource leadershipConverter}}" Width="18" Height="18" />
+                        </DataTemplate>
+                    </sdk:DataGridTemplateColumn.CellTemplate>
+                </sdk:DataGridTemplateColumn>
+                <sdk:DataGridTemplateColumn Header="器" SortMemberPath="Weapon">
+                    <sdk:DataGridTemplateColumn.CellTemplate>
+                        <DataTemplate>
+                            <Image Source="{Binding Weapon, Converter={StaticResource leadershipConverter}}" Width="18" Height="18" />
+                        </DataTemplate>
+                    </sdk:DataGridTemplateColumn.CellTemplate>
+                </sdk:DataGridTemplateColumn>
             </sdk:DataGrid.Columns>
         </sdk:DataGrid>
     </Grid>
