@@ -90,7 +90,7 @@
 
             this.RemoveDeckCommand = new RelayCommand<int>(this.RemoveDeckExecute);
 
-            this.ChangeSoldierCommand = new RelayCommand(this.ChangeSoldierExecute);
+            this.ChangeSoldierCommand = new RelayCommand<string>(this.ChangeSoldierExecute);
 
             this.ChangeRarityCommand = new RelayCommand<string>(this.Execute);
 
@@ -139,7 +139,7 @@
         /// <summary>
         ///     兵種を切り替えるコマンド
         /// </summary>
-        public RelayCommand ChangeSoldierCommand { get; private set; }
+        public RelayCommand<string> ChangeSoldierCommand { get; private set; }
 
         /// <summary>
         ///     現在選択されている絞り込み用レアリティ
@@ -272,7 +272,7 @@
 
             ObservableCollection<Busho> costFiltered;
 
-            if (this.SelectedCost == null)
+            if (this.SelectedCost == null || this.SelectedCost == "全て")
             {
                 costFiltered = this._allBushoList;
             }
@@ -403,8 +403,15 @@
         /// <summary>
         /// 兵種を切り替える
         /// </summary>
-        private void ChangeSoldierExecute()
+        private void ChangeSoldierExecute(string soldierTypeStr)
         {
+            if (soldierTypeStr != null)
+            {
+                SoldierTypes type = (SoldierTypes)Enum.Parse(typeof(SoldierTypes), soldierTypeStr, true);
+                var soldier = RankDictionary.Soldiers[type];
+                this.SelectedSoldier = soldier;
+            }
+
             if (this.SelectedSoldier != null)
             {
                 this.MainDeck.SwitchSoldierType(this.SelectedSoldier.SoldierType);

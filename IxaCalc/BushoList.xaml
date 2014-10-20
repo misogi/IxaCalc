@@ -18,10 +18,10 @@
 
     <Grid x:Name="LayoutRoot">
         <Grid.RowDefinitions>
-            <RowDefinition Height="149*"/>
-            <RowDefinition Height="331*"/>
+            <RowDefinition Height="11*"/>
+            <RowDefinition Height="69*"/>
         </Grid.RowDefinitions>
-        <ComboBox x:Name="RarityCombo" HorizontalAlignment="Left" Margin="27,56,0,0" VerticalAlignment="Top" Width="120" SelectedValuePath="Content" SelectedValue="{Binding Path=SelectedRarity, Mode=TwoWay}" IsSynchronizedWithCurrentItem="False" >
+        <ComboBox x:Name="RarityCombo" HorizontalAlignment="Left" Margin="10,31,0,0" VerticalAlignment="Top" Width="100" SelectedValuePath="Content" SelectedValue="{Binding Path=SelectedRarity, Mode=TwoWay}" IsSynchronizedWithCurrentItem="False" Height="20" >
             <i:Interaction.Triggers>
                 <i:EventTrigger EventName="SelectionChanged">
                     <mvvm:EventToCommand Command="{Binding BushoListRarityChangeCommand, Mode=TwoWay}" PassEventArgsToCommand="True" MustToggleIsEnabledValue="True"></mvvm:EventToCommand>
@@ -34,21 +34,13 @@
             <ComboBoxItem Content="上"/>
             <ComboBoxItem Content="序"/>
         </ComboBox>
-        <ComboBox x:Name="SortCombo" HorizontalAlignment="Left" Margin="310,38,0,0" VerticalAlignment="Top" Width="120" SelectedValuePath="Content" SelectedValue="{Binding Path=SelectedSort, Mode=TwoWay}">
+        <ComboBox x:Name="CostCombo" HorizontalAlignment="Left" Margin="115,31,0,0" VerticalAlignment="Top" Width="100" SelectedValuePath="Content" SelectedValue="{Binding Path=SelectedCost, Mode=TwoWay}" Height="20">
             <i:Interaction.Triggers>
                 <i:EventTrigger EventName="SelectionChanged">
                     <mvvm:EventToCommand Command="{Binding BushoListRarityChangeCommand, Mode=TwoWay}" PassEventArgsToCommand="True" MustToggleIsEnabledValue="True"></mvvm:EventToCommand>
                 </i:EventTrigger>
             </i:Interaction.Triggers>
-            <ComboBoxItem Content="No"/>
-            <ComboBoxItem Content="指揮力"/>
-        </ComboBox>
-        <ComboBox x:Name="CostCombo" HorizontalAlignment="Left" Margin="170,38,0,0" VerticalAlignment="Top" Width="120" SelectedValuePath="Content" SelectedValue="{Binding Path=SelectedCost, Mode=TwoWay}">
-            <i:Interaction.Triggers>
-                <i:EventTrigger EventName="SelectionChanged">
-                    <mvvm:EventToCommand Command="{Binding BushoListRarityChangeCommand, Mode=TwoWay}" PassEventArgsToCommand="True" MustToggleIsEnabledValue="True"></mvvm:EventToCommand>
-                </i:EventTrigger>
-            </i:Interaction.Triggers>
+            <ComboBoxItem Content="全て"/>
             <ComboBoxItem Content="1.0"/>
             <ComboBoxItem Content="1.5"/>
             <ComboBoxItem Content="2.0"/>
@@ -57,7 +49,7 @@
             <ComboBoxItem Content="3.5"/>
             <ComboBoxItem Content="4.0"/>
         </ComboBox>
-        <sdk:DataGrid x:Name="FilteredBushoList" HorizontalAlignment="Left" Height="343" Margin="27,81,0,0" VerticalAlignment="Top" Width="550" ItemsSource="{Binding BushoList}" Grid.RowSpan="2" IsReadOnly="True" MouseLeftButtonUp="FilteredBushoList_MouseLeftButtonUp" AutoGenerateColumns="False">
+        <sdk:DataGrid x:Name="FilteredBushoList" HorizontalAlignment="Center" Margin="0,0,0,48" Width="410" ItemsSource="{Binding BushoList}" IsReadOnly="True" MouseLeftButtonUp="FilteredBushoList_MouseLeftButtonUp" AutoGenerateColumns="False" Grid.Row="1">
             <sdk:DataGrid.Columns>
                 <sdk:DataGridTemplateColumn Header="絵">
                     <sdk:DataGridTemplateColumn.CellTemplate>
@@ -107,5 +99,7 @@
                 </sdk:DataGridTemplateColumn>
             </sdk:DataGrid.Columns>
         </sdk:DataGrid>
+        <TextBlock HorizontalAlignment="Left" Margin="10,10,0,0" TextWrapping="Wrap" Text="ランク" VerticalAlignment="Top" Foreground="White" Height="16" Width="36"/>
+        <TextBlock HorizontalAlignment="Left" Margin="115,10,0,0" TextWrapping="Wrap" Text="コスト" VerticalAlignment="Top" Foreground="White" Height="16" Width="48"/>
     </Grid>
 </UserControl>

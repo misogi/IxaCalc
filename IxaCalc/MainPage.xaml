@@ -12,7 +12,7 @@
              xmlns:sdk="http://schemas.microsoft.com/winfx/2006/xaml/presentation/sdk" 
              x:Class="IxaCalc.MainPage"
              x:Name="userControl"
-             Width="1024"
+             Width="1200"
              Height="600"
              mc:Ignorable="d ignore">
 
@@ -448,6 +448,15 @@
                     </Border>
                 </Grid>
                 <StackPanel Orientation="Horizontal" d:LayoutOverrides="Height">
+                    <StackPanel.Resources>
+                        <Style TargetType="TextBlock">
+                            <Setter Property="Foreground" >
+                                <Setter.Value>
+                                    <SolidColorBrush Color="White" />
+                                </Setter.Value>
+                            </Setter>
+                        </Style>
+                    </StackPanel.Resources>
                     <StackPanel Width="96" Margin="180,5,23,5">
                         <Grid Height="16">
                             <TextBlock VerticalAlignment="Top"
@@ -554,85 +563,6 @@
                     </StackPanel>
                 </StackPanel>
             </Grid>
-        </StackPanel>
-        <StackPanel x:Name="rarityPanel"
-            Margin="3,3,7,0"
-            VerticalAlignment="Top"
-            Background="#FF3B3B3B"
-            Orientation="Horizontal"
-            d:LayoutOverrides="Width">
-            <CheckBox x:Name="ultraRare"
-                Width="35"
-                Margin="0"
-                VerticalAlignment="Top"
-                Command="{Binding ChangeRarityCommand}"
-                CommandParameter="天"
-                IsChecked="{Binding CurrentRarity, ConverterParameter=UltraRare, Converter={StaticResource rarityConverter}, Mode=TwoWay}"
-                Tag="Q"
-                Template="{StaticResource RarityButton}">
-                <Image Width="30"
-                    Height="30"
-                    Margin="2"
-                    Source="Images/UltraRare.png" />
-            </CheckBox>
-            <CheckBox x:Name="superRare"
-                Width="35"
-                Margin="0"
-                VerticalAlignment="Top"
-                Command="{Binding ChangeRarityCommand}"
-                CommandParameter="極"
-                IsChecked="{Binding CurrentRarity, ConverterParameter=SuperRare, Converter={StaticResource rarityConverter}, Mode=TwoWay}"
-                Tag="W"
-                Template="{StaticResource RarityButton}">
-                <Image Width="30"
-                    Height="30"
-                    Margin="2"
-                    Source="Images/SuperRare.png" />
-            </CheckBox>
-            <CheckBox x:Name="rare"
-                Width="35"
-                Margin="0"
-                VerticalAlignment="Top"
-                Command="{Binding ChangeRarityCommand}"
-                CommandParameter="特"
-                IsChecked="{Binding CurrentRarity, ConverterParameter=Rare, Converter={StaticResource rarityConverter}, Mode=TwoWay}"
-                Tag="E"
-                Template="{StaticResource RarityButton}">
-                <Image Width="30"
-                    Height="30"
-                    Margin="2"
-                    Source="Images/Rare.png" />
-            </CheckBox>
-            <CheckBox x:Name="uncommon"
-                Width="35"
-                Margin="0"
-                VerticalAlignment="Top"
-                Command="{Binding ChangeRarityCommand}"
-                CommandParameter="上"
-                IsChecked="{Binding CurrentRarity, ConverterParameter=Uncommon, Converter={StaticResource rarityConverter}, Mode=TwoWay}"
-                Tag="R"
-                Template="{StaticResource RarityButton}">
-                <Image Width="30"
-                    Height="30"
-                    Margin="2"
-                    Source="Images/Uncommon.png" />
-
-            </CheckBox>
-            <CheckBox x:Name="common"
-                Width="35"
-                Margin="0"
-                VerticalAlignment="Top"
-                Command="{Binding ChangeRarityCommand}"
-                CommandParameter="序"
-                IsChecked="{Binding CurrentRarity, ConverterParameter=Common, Converter={StaticResource rarityConverter}, Mode=TwoWay}"
-                Tag="T"
-                Template="{StaticResource RarityButton}">
-
-                <Image Width="30"
-                    Height="30"
-                    Margin="2"
-                    Source="Images/Common.png" />
-            </CheckBox>
         </StackPanel>
         <Border x:Name="border1"
             Grid.Column="1"
@@ -797,7 +727,6 @@
             ClickMode="Press"
             Content="CheckBox"
             Template="{StaticResource SoundButton}" />
-        <my:BushoList Margin="202,48,31,-48" Grid.Column="1"/>
-        <my:PartyDeck HorizontalAlignment="Left" Margin="56,2,0,0" VerticalAlignment="Top" Grid.ColumnSpan="2" />
+        <my:BushoList Margin="426,-2,0,2" Grid.Column="1"/>
     </Grid>
 </UserControl>
