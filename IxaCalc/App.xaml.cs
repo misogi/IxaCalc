@@ -8,7 +8,7 @@ namespace IxaCalc
     /// <summary>
     /// アプリケーションクラス
     /// </summary>
-    public partial class App
+    public partial class App : Application
     {
         /// <summary>
         /// Initializes a new instance of the <see cref="App"/> class. 
@@ -16,11 +16,9 @@ namespace IxaCalc
         /// </summary>
         public App()
         {
-            Startup += this.Application_Startup;
-            Exit += this.Application_Exit;
-            UnhandledException += this.Application_UnhandledException;
-
-            InitializeComponent();
+            this.Startup += this.Application_Startup;
+            this.Exit += this.Application_Exit;
+            this.UnhandledException += this.Application_UnhandledException;
         }
 
         /// <summary>
@@ -41,7 +39,6 @@ namespace IxaCalc
         /// <param name="e">引数</param>
         private void Application_Exit(object sender, EventArgs e)
         {
-            ViewModelLocator.Cleanup();
         }
 
         /// <summary>
@@ -51,20 +48,15 @@ namespace IxaCalc
         /// <param name="e">パラメータ</param>
         private void Application_UnhandledException(object sender, ApplicationUnhandledExceptionEventArgs e)
         {
-            // If the app is running outside of the debugger then report the exception using
-            // the browser's exception mechanism. On IE this will display it a yellow alert 
-            // icon in the status bar and Firefox will display a script error.
             if (!System.Diagnostics.Debugger.IsAttached)
             {
-                // NOTE: This will allow the application to continue running after an exception has been thrown
-                // but not handled. 
-                // For production applications this error handling should be replaced with something that will 
-                // report the error to the website and stop the application.
+
+                // メモ : これにより、アプリケーションは例外がスローされた後も実行され続け、例外は
+                // ハンドルされません。
+                // 実稼動アプリケーションでは、このエラー処理は、Web サイトにエラーを報告し、
+                // アプリケーションを停止させるものに置換される必要があります。
                 e.Handled = true;
-                Deployment.Current.Dispatcher.BeginInvoke(delegate
-                {
-                    this.ReportErrorToDOM(e);
-                });
+                Deployment.Current.Dispatcher.BeginInvoke(delegate { ReportErrorToDOM(e); });
             }
         }
 

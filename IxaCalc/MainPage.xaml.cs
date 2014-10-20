@@ -17,7 +17,7 @@
         public MainPage()
         {
             InitializeComponent();
-            Messenger.Default.Register(this, (Action<DialogMessage>)this.MakeSound);
+            Messenger.Default.Register(this, (Action<NotificationMessage<string>>)this.MakeSound);
             Messenger.Default.Register(this, (Action<NotificationMessage<int>>)this.SetBushoListSelection);
         }
 
@@ -124,7 +124,7 @@
         /// サウンドを鳴らす
         /// </summary>
         /// <param name="msg">メッセージ</param>
-        private void MakeSound(DialogMessage msg)
+        private void MakeSound(NotificationMessage<string> msg)
         {
             if (msg.Content == "busholist")
             {
@@ -160,8 +160,6 @@
                         this.click_mp3.Play();
                         break;
                 }
-
-                msg.Callback(System.Windows.MessageBoxResult.OK);
             }
         }
         #endregion

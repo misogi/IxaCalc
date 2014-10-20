@@ -315,7 +315,7 @@
         public void RankDownExecute(int index)
         {
             this.MainDeck.RankDown(index);
-            this.MessengerInstance.Send(new DialogMessage("down", result => { }));
+            this.MessengerInstance.Send(new NotificationMessage<string>("down", "sound"));
         }
 
         /// <summary>
@@ -327,7 +327,7 @@
         public void RankUpExecute(int index)
         {
             this.MainDeck.RankUp(index);
-            this.MessengerInstance.Send(new DialogMessage("up", result => { }));
+            this.MessengerInstance.Send(new NotificationMessage<string>("up", "sound"));
         }
 
         /// <summary>
@@ -352,7 +352,8 @@
                 this.MainDeck.Remove(index);
             }
 
-            this.MessengerInstance.Send(new DialogMessage("cancel", result => { }));
+
+            this.MessengerInstance.Send(new NotificationMessage<string>("cancel", "sound"));
             string[] keys = { "Busho1", "Busho2", "Busho3", "Busho4" };
             foreach (string key in keys)
             {
@@ -415,7 +416,7 @@
             if (this.SelectedSoldier != null)
             {
                 this.MainDeck.SwitchSoldierType(this.SelectedSoldier.SoldierType);
-                this.MessengerInstance.Send(new DialogMessage("click", result => { }));
+                this.MessengerInstance.Send(new NotificationMessage<string>("click", "sound"));
             }
         }
 
@@ -433,7 +434,7 @@
                                               orderby p.Id
                                               select p;
             this.BushoList = new ObservableCollection<Busho>(list1);
-            this.MessengerInstance.Send(new DialogMessage("busholist", result => { }));
+            this.MessengerInstance.Send(new NotificationMessage<string>("busholist", "sound"));
         }
 
         /// <summary>
